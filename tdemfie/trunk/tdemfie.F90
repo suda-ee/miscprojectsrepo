@@ -22,8 +22,10 @@ real, allocatable :: point(:,:), z(:), alpha(:), out_cni(:,:,:)
 num_dir=ubound(k_uvec_wave, 2)
 open(unit=1445,file=nrmfile,form="unformatted",status='old', action='read')
 read(1445) num_points, num_edges
+close(1445)
 allocate(point(3,num_points),edge(4,num_edges))
-read(1445) point, edge
+open(unit=1445,file=nrmfile,form="unformatted",status='old', action='read')
+read(1445) num_points, num_edges, point, edge
 close(1445)
 max_r=max(abs(maxval(point)),abs(minval(point)))
 ! z if packed stored.
