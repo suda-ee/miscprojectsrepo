@@ -9,7 +9,7 @@ subroutine tdemfie(freq, k_uvec_wave, scaling_s, max_rank, nrmfile, &
     outfile)
 implicit none
 ! subroutine arguments
-! nrmfile for: å·²é…å¯¹è½¬æ¢å®Œæ¯•çš„æ•°æ®ï¼Œæˆ–è€…æœ¬æ¬¡è½¬æ¢è¦å­˜å‚¨çš„æ–‡ä»¶å
+! nrmfile for: ÒÑÅä¶Ô×ª»»Íê±ÏµÄÊı¾İ£¬»òÕß±¾´Î×ª»»Òª´æ´¢µÄÎÄ¼şÃû
 integer max_rank
 real freq, k_uvec_wave(:,:), scaling_s
 character*64 nrmfile, outfile
@@ -44,7 +44,7 @@ do i_rank=1,max_r
         num_edges, info)
 end do
 deallocate(point, edge, z, alpha)
-! å°†æ‰€æœ‰ç³»æ•° c_{nj} å†™å…¥æ–‡ä»¶
+! ½«ËùÓĞÏµÊı c_{nj} Ğ´ÈëÎÄ¼ş
 open(unit=1552,file=outfile,form="unformatted",status='unknown', action='write')
 write(1552) out_cni
 close(1552)

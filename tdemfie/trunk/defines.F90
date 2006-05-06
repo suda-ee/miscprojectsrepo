@@ -30,7 +30,7 @@
 #define EPSILON_0 8.854187818e-12
 ! the permeability of vacuum
 #define MU_0 4e-7*PI
-! Gaussian pulse åŠå®½åº¦ç§¯åˆ†æ—¶åˆ’åˆ†çš„æ®µæ•°
+! Gaussian pulse °ë¿í¶È»ı·ÖÊ±»®·ÖµÄ¶ÎÊı
 #define NUM_SEG 16
 ! TIME_STEP is used in the FFT
 #define TIME_STEP 128

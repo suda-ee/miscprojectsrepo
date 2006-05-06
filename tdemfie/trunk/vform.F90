@@ -9,7 +9,7 @@ subroutine vform(dim_z, edge, point, scaling_s, out_cni, num_dir, alpha, &
     v_rhs, i_rank, freq, max_r, k_uvec_wave)
 implicit none
 ! subroutine arguments
-! out_cni(dim_z, 2*num_dir, :) æœ€åä¸€ç»´ä¸º Laguerre å¤šé¡¹å¼é˜¶æ•°
+! out_cni(dim_z, 2*num_dir, :) ×îºóÒ»Î¬Îª Laguerre ¶àÏîÊ½½×Êı
 integer dim_z, edge(:,:), num_dir, i_rank
 real point(:,:), scaling_s, out_cni(:, :, :), alpha(:), &
     v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)

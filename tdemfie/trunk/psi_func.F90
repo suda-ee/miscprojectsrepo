@@ -12,7 +12,7 @@ integer i_rank
 real t, psi_func
 ! local variables
 integer j
-real laguerre_t(-1:i_rank) ! -1 闃舵槸涓轰簡鏂逛究浣跨敤
+real laguerre_t(-1:i_rank) ! -1 阶是为了方便使用
 ! Excutives
 laguerre_t(-1)=0; laguerre_t(0)=1; laguerre_t(1)=1-t
 do j=2, i_rank

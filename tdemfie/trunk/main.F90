@@ -13,7 +13,7 @@ real freq, scaling_s, s_thi, dthi, s_phi, dphi, s_ths, dths, s_phs, dphs, s_fri,
     dfri
 character*64 trifile, nrmfile, coeffile, resultfile
 logical re_tran, re_cal
-! k_uvec_wave(3, num_dir) 鍏ュ皠鏂瑰悜鍗曚綅鐭㈤噺
+! k_uvec_wave(3, num_dir) 入射方向单位矢量
 real, allocatable :: k_uvec_wave(:, :), this(:), phis(:)
 ! Excutives
 open(unit=1602,file=CONF,status='old', action='read')
