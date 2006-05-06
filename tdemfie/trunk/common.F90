@@ -6,6 +6,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !多对多叉乘, 规一化矢量
 function multicrossuni(x1, x2, nums)
+implicit none
 integer nums
 real x1(3, nums), x2(3, nums), multicrossuni(3, nums)
 ! local variables
