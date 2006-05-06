@@ -1,5 +1,5 @@
-# $URL:  $
-# $Id: Makefile,v 1.4 2004/07/06 11:53:55 i Exp $
+# $URL$
+# $Id$
 F90	=	ifort
 LARGS	=	-L/opt/intel/cmkl/8.0/lib/32 -lmkl_lapack -lmkl_ia32
 CARGS	=	-warn all -debug extended -g #-fast#-O3 -align -tpp7 -xW
