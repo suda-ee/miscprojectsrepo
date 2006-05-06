@@ -14,11 +14,19 @@ implicit none
 integer i_rank, num_dir
 real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
     k_uvec_wave(3,num_dir)
+! interfaces
+interface
+    function multicrossuni(x1, x2, nums)
+        integer nums
+        real x1(3, nums), x2(3, nums), multicrossuni(3, nums)
+    end function
+end interface
 ! local variables
 integer int_inc, dir
 real r, omegav, tpr, bwr, tv, time_cut, t0_delay, delta ! in dB
 real time_step, hight1, hight2, current_pos, v_scalar(num_dir)
-real theta_vec(3,num_dir), phi_vec(3,num_dir), DOT, psi_func, multicrossuni
+real theta_vec(3,num_dir), phi_vec(3,num_dir), DOT, psi_func, &
+    zunivec(3, num_dir)
 ! Excutives
 tpr = -60; bwr= -6
 ! Determine Gaussian mean and variance in the
@@ -33,7 +41,6 @@ delta = 10.**(tpr/20);        ! Ref level (fraction of max peak)
 time_cut = sqrt(-2*tv*log(delta)); ! Pulse cutoff time
 t0_delay = time_cut + max_r/VECL_C
 ! Compute time-domain pulse envelope, normalized by sqrt(2*pi*tv):
-
 time_step=time_cut/NUM_SEG
 do dir=1, num_dir
     current_pos=t0_delay-DOT(3,k_uvec_wave(:,dir),1,point,1)/VECL_C-time_cut
@@ -47,7 +54,8 @@ do dir=1, num_dir
     end do
 end do
 v_scalar=v_scalar*scaling_s
-phi_vec=multicrossuni(k_uvec_wave, (/((/0,0,1/),dir=1,num_dir)/),num_dir)
+zunivec=reshape((/((/0,0,1/),dir=1,num_dir)/),(/3,num_dir/))
+phi_vec=multicrossuni(k_uvec_wave, zunivec, num_dir)
 theta_vec=multicrossuni(phi_vec, k_uvec_wave, num_dir)
 v_wave_gen(1,1:num_dir)=theta_vec(1,:)*v_scalar
 v_wave_gen(2,1:num_dir)=theta_vec(2,:)*v_scalar
