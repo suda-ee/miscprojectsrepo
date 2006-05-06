@@ -13,6 +13,19 @@ implicit none
 integer max_rank
 real freq, k_uvec_wave(:,:), scaling_s
 character*64 nrmfile, outfile
+! interfaces
+interface
+    subroutine zform(z, alpha, dim_z, edge, point, scaling_s)
+        real z(:), alpha(:), point(:, :), scaling_s
+        integer dim_z, edge(:, :)
+    end subroutine zform
+    subroutine vform(dim_z, edge, point, scaling_s, out_cni, num_dir, alpha, &
+        v_rhs, i_rank, freq, max_r, k_uvec_wave)
+        integer dim_z, edge(:,:), num_dir, i_rank
+        real point(:,:), scaling_s, out_cni(:, :, :), alpha(:), &
+            v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
+    end subroutine vform
+end interface
 ! Local variables
 integer num_dir, num_points, num_edges, info, i_rank
 real max_r

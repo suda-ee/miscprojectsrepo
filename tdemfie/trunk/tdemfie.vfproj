@@ -9,7 +9,7 @@
 				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" Preprocess="preprocessYes" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtSingleThreadedDebug" CompileOnly="true"/>
 				<Tool Name="VFPostBuildEventTool"/>
 				<Tool Name="VFCustomBuildTool"/>
-				<Tool Name="VFLinkerTool" SwitchesHaveChanged="true" OutputFile="$(OUTDIR)/tdemfie.exe" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" AdditionalLibraryDirectories="E:\Program Files\Intel\MKL\8.0.1\ia32\lib" GenerateDebugInformation="true" ProgramDatabaseFile="$(OUTDIR)/tdemfie.pdb" SubSystem="subSystemConsole" AdditionalDependencies="mkl_c.lib libguide.lib"/>
+				<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/tdemfie.exe" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" AdditionalLibraryDirectories="E:\Program Files\Intel\MKL\8.0.1\ia32\lib" GenerateDebugInformation="true" ProgramDatabaseFile="$(OUTDIR)/tdemfie.pdb" SubSystem="subSystemConsole" AdditionalDependencies="mkl_c.lib"/>
 				<Tool Name="VFResourceCompilerTool" ResourceOutputFileName="$(IntDir)/$(InputName).res"/>
 				<Tool Name="VFPreLinkEventTool"/></Configuration>
 		<Configuration Name="Release|Win32" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" MustRebuild="true" Command="$(TargetPath)">
@@ -25,17 +25,27 @@
 		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
 		<File RelativePath="amnij_func.F90"/>
 		<File RelativePath="bmnij_func.F90"/>
-		<File RelativePath="common.F90"/>
+		<File RelativePath="common.F90">
+			<FileConfiguration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool"/></FileConfiguration></File>
 		<File RelativePath="I_ij_func.F90"/>
 		<File RelativePath="Is_Same_Triangle.F90"/>
-		<File RelativePath="main.F90"/>
+		<File RelativePath="main.F90">
+			<FileConfiguration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool"/></FileConfiguration></File>
 		<File RelativePath="ome_gen.F90"/>
 		<File RelativePath="psi_func.F90">
 			<FileConfiguration Name="Debug|Win32">
 				<Tool Name="VFFortranCompilerTool"/></FileConfiguration></File>
-		<File RelativePath="seg_triangle_pair.F90"/>
-		<File RelativePath="tdemfie.F90"/>
-		<File RelativePath="tran.F90"/>
+		<File RelativePath="seg_triangle_pair.F90">
+			<FileConfiguration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool"/></FileConfiguration></File>
+		<File RelativePath="tdemfie.F90">
+			<FileConfiguration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool"/></FileConfiguration></File>
+		<File RelativePath="tran.F90">
+			<FileConfiguration Name="Debug|Win32">
+				<Tool Name="VFFortranCompilerTool"/></FileConfiguration></File>
 		<File RelativePath="v_wave_gen.F90"/>
 		<File RelativePath="vform.F90"/>
 		<File RelativePath="zform.F90"/></Filter></Files>

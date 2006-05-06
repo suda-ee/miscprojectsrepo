@@ -7,6 +7,15 @@
 ! to find if they are the same triangle
 program main
 implicit none
+! interfaces
+interface
+    subroutine tdemfie(freq, k_uvec_wave, scaling_s, max_rank, nrmfile, &
+        outfile)
+        integer max_rank
+        real freq, k_uvec_wave(:,:), scaling_s
+        character*64 nrmfile, outfile
+    end subroutine tdemfie
+end interface
 ! Local variables
 integer nthi, nphi, nths, nphs, nfri, max_rank, dir_p, dir_t
 real freq, scaling_s, s_thi, dthi, s_phi, dphi, s_ths, dths, s_phs, dphs, s_fri, &

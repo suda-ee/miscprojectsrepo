@@ -13,10 +13,19 @@ implicit none
 integer dim_z, edge(:,:), num_dir, i_rank
 real point(:,:), scaling_s, out_cni(:, :, :), alpha(:), &
     v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
+! interfaces
+interface
+    function ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, &
+        edge, point, scaling_s)
+        integer dim_z, i_rank, edge(:,:), num_dir
+        real ome_gen(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3,num_dir), &
+            point(:,:), scaling_s
+    end function ome_gen
+    end interface
 ! Local variables
 ! temp for: \sum_{k=0}^{j-1}(j-k)c_{nk} + \frac{\mu s^2}{4}c_{nj}
 integer n_var, k_var, j_var, row, col_offset
-real temp(2*num_dir), amnij, bmnij, amnij_func, bmnij_func, ome_gen
+real temp(2*num_dir), amnij, bmnij, amnij_func, bmnij_func
 ! Excutives
 v_rhs=ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, edge, &
     point, scaling_s)
