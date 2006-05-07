@@ -11,7 +11,7 @@ implicit none
 ! subroutine arguments
 ! out_cni(dim_z, 2*num_dir, :) 最后一维为 Laguerre 多项式阶数
 integer dim_z, edge(:,:), num_dir, i_rank
-real point(:,:), scaling_s, out_cni(:, :, :), alpha(:), &
+real point(:,:), scaling_s, out_cni(:, :, 0:), alpha(:), &
     v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
 ! interfaces
 interface
@@ -21,11 +21,21 @@ interface
         real ome_gen(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3,num_dir), &
             point(:,:), scaling_s
     end function ome_gen
-    end interface
+    function amnij_func(m, n, i, j, edge, point, scaling_s)
+        real amnij_func
+        integer m, n, i, j, edge(:,:)
+        real point(:,:), scaling_s
+    end function amnij_func
+    function bmnij_func(m, n, i, j, edge, point, scaling_s)
+        real bmnij_func
+        integer m, n, i, j, edge(:,:)
+        real point(:,:), scaling_s
+    end function bmnij_func
+end interface
 ! Local variables
 ! temp for: \sum_{k=0}^{j-1}(j-k)c_{nk} + \frac{\mu s^2}{4}c_{nj}
 integer n_var, k_var, j_var, row, col_offset
-real temp(2*num_dir), amnij, bmnij, amnij_func, bmnij_func
+real temp(2*num_dir), amnij, bmnij
 ! Excutives
 v_rhs=ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, edge, &
     point, scaling_s)

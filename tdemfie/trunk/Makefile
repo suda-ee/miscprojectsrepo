@@ -2,9 +2,9 @@
 # $Id$
 F90	=	ifort
 LARGS	=	-L/opt/intel/cmkl/8.0/lib/32 -lmkl_lapack -lmkl_ia32
-CARGS	=	-warn all -debug extended -g #-fast#-O3 -align -tpp7 -xW
+CARGS	=	-u -warn all -debug extended -g #-fast#-O3 -align -tpp7 -xW
 DEFS	=	define.F90
-OBJS	=	common.o ome_gen.o psi_func.o seg_triangle_pair.o tran.o vform.o v_wave_gen.o zform.o I_ij_func.o amnij_func.o bmnij_func.o Is_Same_Triangle.o tdemfie.o main.o
+OBJS	=	common.o ome_gen.o psi_func.o seg_triangle_pair.o tran.o vform.o v_wave_gen.o zform.o I_ij_func.o amnij_func.o bmnij_func.o Is_Same_Triangle.o tdemfie.o main.o rcs_cal.o
 EXES	=	tdemfie
 
 RM	=	rm -f

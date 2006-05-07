@@ -29,7 +29,9 @@
 ! the permittivity of vacuum
 #define EPSILON_0 8.854187818e-12
 ! the permeability of vacuum
-#define MU_0 4e-7*PI
+#define MU_0 0.1256637061435917e-4
+! eta
+#define ETA_0 376.9911184307752
 ! Gaussian pulse 半宽度积分时划分的段数
 #define NUM_SEG 16
 ! TIME_STEP is used in the FFT

@@ -11,6 +11,14 @@ implicit none
 real amnij_func
 integer m, n, i, j, edge(:,:)
 real point(:,:), scaling_s
+! interfaces
+interface
+    subroutine seg_triangle_pair(num, edge, point, triangle, tri_point, rho, &
+        area, len_seg)
+        integer num, edge(:,:), triangle(3,2)
+        real point(:,:), tri_point(3,3,2), rho(3,3,2), area(2), len_seg, NRM2
+    end subroutine seg_triangle_pair
+end interface
 ! Local variables
 integer triangle_m(3,2), triangle_n(3,2), p, q, p_p, p_q
 real tri_point_m(3,3,2), tri_point_n(3,3,2), rho_m(3,3,2), rho_n(3,3,2), &

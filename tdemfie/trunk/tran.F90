@@ -4,7 +4,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include "defines.F90"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! transform the Hypermesh data to point(:, 3) and edge(:, 4), then save
+! transform the Hypermesh data to point(3, :) and edge(4, :), then save
 ! them in a file.
 subroutine tran(dataname, outfilename)
 implicit none

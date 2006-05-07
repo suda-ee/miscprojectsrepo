@@ -4,7 +4,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include "defines.F90"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! to find if they are the same triangle
+! to calculate the coefficients c_{nj}
 subroutine tdemfie(freq, k_uvec_wave, scaling_s, max_rank, nrmfile, &
     outfile)
 implicit none
@@ -22,7 +22,7 @@ interface
     subroutine vform(dim_z, edge, point, scaling_s, out_cni, num_dir, alpha, &
         v_rhs, i_rank, freq, max_r, k_uvec_wave)
         integer dim_z, edge(:,:), num_dir, i_rank
-        real point(:,:), scaling_s, out_cni(:, :, :), alpha(:), &
+        real point(:,:), scaling_s, out_cni(:, :, 0:), alpha(:), &
             v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
     end subroutine vform
 end interface
@@ -59,9 +59,9 @@ do i_rank=1,max_r
         num_edges, info)
 end do
 deallocate(point, edge, z, alpha)
-! 将所有系数 c_{nj} 写入文件
+! 将一些信息与所有系数 c_{nj} 写入文件
 open(unit=1552,file=outfile,form="unformatted",status='unknown', action='write')
-write(1552) out_cni
+write(1552) freq, scaling_s, max_rank, max_r, out_cni
 close(1552)
 deallocate(out_cni)
 end subroutine tdemfie

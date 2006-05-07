@@ -14,10 +14,10 @@ implicit none
 ! points
 ! in the second dimension: 1 for plus, 2 for minus
 integer num, edge(:,:), triangle(3,2)
-real point(:,:), tri_point(3,3,2), rho(3,3,2), area(2), len_seg, NRM2
+real point(:,:), tri_point(3,3,2), rho(3,3,2), area(2), len_seg
 ! local variables
 integer info
-real weight_center(3,2)
+real weight_center(3,2), NRM2
 ! Excutives
 weight_center(:,1)=(point(:,edge(1,num))+point(:,edge(2,num))+point(:,edge(3,num)))/3
 weight_center(:,2)=(point(:,edge(1,num))+point(:,edge(3,num))+point(:,edge(4,num)))/3
