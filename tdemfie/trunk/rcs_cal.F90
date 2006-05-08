@@ -16,7 +16,7 @@ character*64 nrmfile, coeffile, resultfile
 interface
     function cal_est(direction, i_dir, polar, out_cni, scaling_s, max_rank, &
         maxtime, point, edge)
-        real cal_est(3,0:TIME_STEP), direction(3), out_cni(:,:,:), scaling_s, point(:,:), &
+        real cal_est(3,0:TIME_STEP), direction(3), out_cni(:,:,0:), scaling_s, point(:,:), &
             maxtime
         integer i_dir, edge(:,:), polar, max_rank
     end function cal_est
@@ -78,7 +78,7 @@ function cal_est(direction, i_dir, polar, out_cni, scaling_s, max_rank, &
     maxtime, point, edge)
 implicit none
 ! arguments
-real cal_est(3,0:TIME_STEP), direction(3), out_cni(:,:,:), scaling_s, point(:,:), &
+real cal_est(3,0:TIME_STEP), direction(3), out_cni(:,:,0:), scaling_s, point(:,:), &
     maxtime
 integer i_dir, edge(:,:), polar, max_rank
 ! interfaces

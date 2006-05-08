@@ -15,6 +15,12 @@ interface
         real freq, k_uvec_wave(:,:), scaling_s
         character*64 nrmfile, outfile
     end subroutine tdemfie
+    subroutine rcs_cal(mono, frqs, this, phis, thss, phss, &
+        nrmfile, coeffile, resultfile)
+        logical mono
+        real frqs(:), this(:), phis(:), thss(:), phss(:)
+        character*64 nrmfile, coeffile, resultfile
+    end subroutine rcs_cal
 end interface
 ! Local variables
 integer nthi, nphi, nths, nphs, nfri, max_rank, dir_p, dir_t
@@ -59,7 +65,6 @@ allocate(frqs(nfri), thss(nths*nphs), phss(nths*nphs))
 frqs = (/ (s_fri+dir_t*dfri, dir_t=0, nfri-1) /)
 thss = (/ ((s_ths+dir_t*dths, dir_p=0, nphs-1), dir_t=0,nths-1) /)
 phss = (/ ((s_phs+dir_p*dphs, dir_p=0, nphs-1), dir_t=0,nths-1) /)
-call rcs_cal(mono, frqs, this, phis, thss, phss, freq, scaling_s, &
-    max_rank, nrmfile, coeffile, resultfile)
+call rcs_cal(mono, frqs, this, phis, thss, phss, nrmfile, coeffile, resultfile)
 deallocate(this, phis)
 end program main
