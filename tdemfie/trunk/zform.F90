@@ -22,7 +22,7 @@ interface
     subroutine seg_triangle_pair(num, edge, point, triangle, tri_point, rho, &
         area, len_seg)
         integer num, edge(:,:), triangle(3,2)
-        real point(:,:), tri_point(3,3,2), rho(3,3,2), area(2), len_seg, NRM2
+        real point(:,:), tri_point(3,3,2), rho(3,3,2), area(2), len_seg
     end subroutine seg_triangle_pair
 end interface
 ! Local variables
