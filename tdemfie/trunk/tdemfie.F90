@@ -25,7 +25,8 @@ character*64 nrmfile, outfile
             alpha, v_rhs, i_rank, freq, max_r, k_uvec_wave)
             integer dim_z, edge(:,:), n_i_dir, i_rank
             real point(:,:), scaling_s, out_cni(:, :, 0:), alpha(:), &
-                v_rhs(dim_z, 2*n_i_dir), freq, max_r, k_uvec_wave(3, n_i_dir)
+                v_rhs(dim_z, 2*n_i_dir), freq, max_r, &
+                k_uvec_wave(3, n_i_dir)
         end subroutine vform
         function cal_est(num_time, step, direction, i_dir, polar, out_cni, &
             scaling_s, max_rank, point, edge)
@@ -132,32 +133,33 @@ character*64 nrmfile, outfile
     deallocate(out_cni, point, edge, e_s_rt)
     ! 写入时域 RCS 信号
     open(unit=1552,file=outfile,status='unknown', action='write')
-    write(1552,*) 0.,(/(1, time=1,n_i_dir*n_s_dir)/), &
+    write(1552,163) 0.,(/(1, time=1,n_i_dir*n_s_dir)/), &
         (/(2, time=1,n_i_dir*n_s_dir)/)
-    write(1552,*) 0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+    write(1552,163) 0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/)
-    write(1552,*) 0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+    write(1552,163) 0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/)
     if (mono) then
-        write(1552,*) 0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        write(1552,163) 0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/)
-        write(1552,*) 0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        write(1552,163) 0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/)
     else
-        write(1552,*) 0.,(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
+        write(1552,163) 0.,(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/)
-        write(1552,*) 0.,(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
+        write(1552,163) 0.,(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/)
     end if
     do time=0, num_time
-        write(1552,*) time*step*1e9,rcs(time, :, :, :) ! 时间输出单位为 ns
+        write(1552,163) time*step*1e9,rcs(time, :, :, :) ! 时间输出单位为 ns
     end do
     close(1552)
     deallocate(rcs)
+163 format(<2*n_i_dir*n_s_dir+1>g)
 end subroutine tdemfie

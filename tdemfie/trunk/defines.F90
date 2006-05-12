@@ -11,13 +11,13 @@
 #define complex complex(8)
 #define DOT ddot
 #define NRM2 dnrm2
-#define SORT dlasrt
+#define LASRT dlasrt
 #define SPTRF dsptrf
 #define SPTRS dsptrs
 #else
 #define DOT sdot
 #define NRM2 snrm2
-#define SORT slasrt
+#define LASRT slasrt
 #define SPTRF ssptrf
 #define SPTRS ssptrs
 #endif
