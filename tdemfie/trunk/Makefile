@@ -1,25 +1,29 @@
 # $URL$
 # $Id$
 F90	=	ifort
-LARGS	=	-L/opt/intel/cmkl/8.0/lib/32 -lmkl_lapack -lmkl_ia32
-CARGS	=	-u -warn all -debug extended -g #-fast#-O3 -align -tpp7 -xW
+LARGS	=	-L/opt/intel/cmkl/8.0/lib/32 -lmkl_lapack -lmkl_ia32 -lsvml
+#CARGS	=	-u -warn all -debug extended -inline-debug-info -g
+CARGS	=	-ftz -ip -ipo -O3 -xW
 DEFS	=	define.F90
-OBJS	=	common.o ome_gen.o psi_func.o seg_triangle_pair.o tran.o vform.o v_wave_gen.o zform.o I_ij_func.o amnij_func.o bmnij_func.o Is_Same_Triangle.o tdemfie.o main.o rcs_cal.o
+OBJS	=	common.o ome_gen.o psi_func.o seg_triangle_pair.o tran.o vform.o v_wave_gen.o zform.o I_ij_func.o amnij_func.o bmnij_func.o Is_Same_Triangle.o tdemfie.o main.o rcs_cal.o cal_est.o mymod.o
+MODS	=	mymod.mod
 EXES	=	tdemfie
 
 RM	=	rm -f
 
-.SUFFIXES: .o .f90 .F90 .for
+.SUFFIXES: .o .f90 .F90 .for .mod
 
 all:	${EXES}
 
-${EXES}	:	${OBJS}
+${EXES}	:	mod obj
 	${F90} -o ${.TARGET} ${OBJS} ${LARGS}
 
-obj:	${OBJS} ${DEFS}
+mod:	${MODS}
 
-.F90.o .f90.o .for.o:
+obj:	${OBJS}
+
+.F90.o .f90.o .for.o .F90.mod .f90.mod:
 	${F90} -c ${.IMPSRC} ${CARGS}
 
 clean:
-	${RM} ${EXES} ${OBJS}
+	${RM} ${EXES} ${OBJS} ${MODS}

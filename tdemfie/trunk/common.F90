@@ -4,6 +4,22 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include "defines.F90"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!叉乘, 规一化矢量
+function crossuni(x1, x2)
+implicit none
+real x1(3), x2(3), crossuni(3)
+! local variables
+real norms
+! Excutives
+crossuni(1)=x1(2)*x2(3)-x1(3)*x2(2)
+crossuni(2)=x1(3)*x2(1)-x1(1)*x2(3)
+crossuni(3)=x1(1)*x2(2)-x1(2)*x2(1)
+norms=sqrt(crossuni(1)**2+crossuni(2)**2+crossuni(3)**2)
+crossuni(1)=crossuni(1)/norms
+crossuni(2)=crossuni(2)/norms
+crossuni(3)=crossuni(3)/norms
+end function crossuni
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !多对多叉乘, 规一化矢量
 function multicrossuni(x1, x2, nums)
 implicit none
@@ -30,7 +46,7 @@ real one_multi_dot(num), one(dimen), multi(dimen, num), DOT
 ! local variables
 integer column
 do column=1, num
-    one_multi_dot(column)=DOT(dimen, one, 1, multi(:, num), 1)
+    one_multi_dot(column)=DOT(dimen, one, 1, multi(:, column), 1)
 end do
 end function
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
