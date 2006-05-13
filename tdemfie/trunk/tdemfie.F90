@@ -156,9 +156,8 @@ character*64 nrmfile, outfile
             i_dir=1,n_i_dir)/),(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/)
     end if
-    do time=0, num_time
-        write(1552,163) time*step*1e9,rcs(time, :, :, :) ! 时间输出单位为 ns
-    end do
+    write(1552,163) (time*step*1e9,rcs(time, :, :, :), &
+        time=0,num_time) ! 时间输出单位为 ns
     close(1552)
     deallocate(rcs)
 163 format(<2*n_i_dir*n_s_dir+1>g)
