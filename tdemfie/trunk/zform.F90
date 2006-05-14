@@ -6,7 +6,8 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! This subroutine is to generate the big Z_{mn} matrix which is the sum
 ! of \frac{\mu s^2}{4}\alpha_{mn} + \frac{1}{\epsilon}\beta_{mn}
-subroutine zform(z, alpha, dim_z, edge, point, scaling_s)
+subroutine zform(z, alpha, edge, triangle, scaling_s)
+use mymod
 implicit none
 ! subroutine arguments
 ! z: the matrix will be generated, packed by columns in a 1-d array (U).
@@ -15,80 +16,74 @@ implicit none
 ! edge: an integer matrix edge(4, num_edges)
 ! point: a real matrix point(3, num_points)
 ! scaling_s: the scaling factor for time.
-real z(:), alpha(:), point(:, :), scaling_s
-integer dim_z, edge(:, :)
-! interfaces
-interface
-    subroutine seg_triangle_pair(num, edge, point, triangle, tri_point, rho, &
-        area, len_seg)
-        integer num, edge(:,:), triangle(3,2)
-        real point(:,:), tri_point(3,3,2), rho(3,3,2), area(2), len_seg
-    end subroutine seg_triangle_pair
-end interface
-! Local variables
-integer row, col, col_offset, pack_position, triangle_row(3,2), &
-    triangle_col(3,2), p, q, p_p, p_q
-real beta, tri_point_row(3,3,2), tri_point_col(3,3,2), rho_row(3,3,2), &
-    rho_col(3,3,2), len_seg_row, len_seg_col, area_row(2), area_col(2), &
-    rho_center_row(3), rho_center_col(3), R, DOT, dist
-logical Is_Same_Triangle
-! Excutives
-do col=1, dim_z
-    col_offset=col*(col-1)/2
-    do row=1, col
-        pack_position=row+col_offset
-! 计算三角面元对有关数据
-        call seg_triangle_pair(row, edge, point, triangle_row, &
-            tri_point_row, rho_row, area_row, len_seg_row)
-        call seg_triangle_pair(col, edge, point, triangle_col, &
-            tri_point_col, rho_col, area_col, len_seg_col)
-! compute the alpha_{mn}, \iint \vec{f}_m (\vec{r})\dot\vec{f}_n(\vec{r}') 
-! \Delta S'_n\Delta S_m
-        alpha(pack_position)=0.; beta=0.
-        do q=1, 2 ! col 对的两个三角形
-        do p=1, 2 ! row 对的两个三角形
-        If (Is_Same_Triangle(triangle_row(:, p), triangle_col(:, q))) then
-            do p_q=1, 3 ! q 三角形中的三点
-            do p_p=1, 3 ! p 三角形中的三点
-            if (p_p==p_q) then
-                alpha(pack_position)=alpha(pack_position)-DOT( &
-                    3, rho_row(:, p_p, p), 1, rho_col(:, p_q, q), 1)* &
-                    scaling_s/2./VECL_C
-                beta=beta-scaling_s/2./VECL_C
-            else
-                R=dist(tri_point_row(:,p_p,p), tri_point_col(:,p_q,q))
-                alpha(pack_position)=alpha(pack_position)-DOT( &
-                    3, rho_row(:, p_p, p), 1, rho_col(:, p_q, q), 1)* &
-                    (exp(-scaling_s*R/2./VECL_C)-1.)/R
-                beta=beta-(exp(-scaling_s*R/2./VECL_C)-1.)/R
-            end if
-            end do
-            end do
-            rho_center_row=(rho_row(:,1,p)+rho_row(:,2,p)+rho_row(:,3,p))/3.
-            rho_center_col=(rho_col(:,1,q)+rho_col(:,2,q)+rho_col(:,3,q))/3.
-            alpha(pack_position)=alpha(pack_position)+DOT(3, &
-                rho_center_row, 1, rho_center_col, 1)*3.545/ &
-                sqrt(area_row(p))
-            beta=beta+3.545/sqrt(area_row(p))
-        else
-            do p_q=1,3
-            do p_p=1,3
-                R=dist(tri_point_row(:,p_p,p), tri_point_col(:,p_q,q))
+real z(:), alpha(:), scaling_s
+type(t_edge) edge(:)
+type(t_triangle) triangle(:)
+    ! interfaces
+    ! Local variables
+    integer dim_z, row, col, col_offset, pack_position, p, q, p_p, p_q
+    real beta, rho_center_row(3), rho_center_col(3), R, DOT, dist
+    logical Is_Same_Triangle
+    ! Excutives
+    dim_z=ubound(edge, 1)
+    do col=1, dim_z
+        col_offset=col*(col-1)/2
+        do row=1, col
+            pack_position=row+col_offset
+    ! compute the alpha_{mn}, \iint \vec{f}_m (\vec{r})\dot\vec{f}_n(\vec{r}') 
+    ! \Delta S'_n\Delta S_m
+            alpha(pack_position)=0.; beta=0.
+            do q=1, 2 ! col 对的两个三角形
+            do p=1, 2 ! row 对的两个三角形
+            If (Is_Same_Triangle(triangle(edge(row)%tri(p))%poi, &
+                triangle(edge(col)%tri(q))%poi)) then
+                do p_q=1, 3 ! q 三角形中的三点
+                do p_p=1, 3 ! p 三角形中的三点
+                if (p_p==p_q) then
+                    alpha(pack_position)=alpha(pack_position)-DOT( &
+                        3, edge(row)%rho(:, p_p, p), 1, &
+                            edge(col)%rho(:, p_q, q), 1)* &
+                        scaling_s/2./VECL_C
+                    beta=beta-scaling_s/2./VECL_C
+                else
+                    R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
+                        triangle(edge(col)%tri(q))%tri_point(:,p_q))
+                    alpha(pack_position)=alpha(pack_position)-DOT( &
+                        3, edge(row)%rho(:, p_p, p), 1, &
+                        edge(col)%rho(:, p_q, q), 1)* &
+                        (exp(-scaling_s*R/2./VECL_C)-1.)/R
+                    beta=beta-(exp(-scaling_s*R/2./VECL_C)-1.)/R
+                end if
+                end do
+                end do
+                rho_center_row=(edge(row)%rho(:,1,p)+edge(row)%rho(:,2,p)+ &
+                    edge(row)%rho(:,3,p))/3.
+                rho_center_col=(edge(col)%rho(:,1,q)+edge(col)%rho(:,2,q)+ &
+                    edge(col)%rho(:,3,q))/3.
                 alpha(pack_position)=alpha(pack_position)+DOT(3, &
-                    rho_row(:, p_p, p), 1, rho_col(:, p_q, q), &
-                    1)*exp(-scaling_s*R/2./VECL_C)/R
-                beta=beta+exp(-scaling_s*R/2./VECL_C)/R
+                    rho_center_row, 1, rho_center_col, 1)*3.545/ &
+                    sqrt(triangle(edge(row)%tri(p))%area)
+                beta=beta+3.545/sqrt(triangle(edge(row)%tri(p))%area)
+            else
+                do p_q=1,3
+                do p_p=1,3
+                    R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
+                        triangle(edge(col)%tri(q))%tri_point(:,p_q))
+                    alpha(pack_position)=alpha(pack_position)+DOT(3, &
+                        edge(row)%rho(:, p_p, p), 1, edge(col)%rho(:, p_q, q), &
+                        1)*exp(-scaling_s*R/2./VECL_C)/R
+                    beta=beta+exp(-scaling_s*R/2./VECL_C)/R
+                end do
+                end do
+            end if
+            alpha(pack_position)=alpha(pack_position)*edge(row)%len*edge(col)%len* &
+                (3-2*p)*(3-2*q)/144./PI
+            beta=beta*edge(row)%len*edge(col)%len*(3-2*p)*(3-2*q)/36./PI
             end do
             end do
-        end if
-        alpha(pack_position)=alpha(pack_position)*len_seg_row*len_seg_col* &
-            (3-2*p)*(3-2*q)/144./PI
-        beta=beta*len_seg_row*len_seg_col*(3-2*p)*(3-2*q)/36./PI
+    ! now the z_mn is get.
+            z(pack_position)=MU_0*scaling_s*scaling_s*alpha(pack_position) &
+                                             + beta/EPSILON_0
         end do
-        end do
-! now the z_mn is get.
-        z(pack_position)=MU_0*scaling_s*scaling_s*alpha(pack_position) &
-                                         + beta/EPSILON_0
     end do
-end do
 end subroutine zform

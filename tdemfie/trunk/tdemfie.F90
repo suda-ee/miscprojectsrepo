@@ -17,22 +17,29 @@ real freq, scaling_s, this(:), phis(:), thss(:), phss(:)
 character*64 nrmfile, outfile
     ! interfaces
     interface
-        subroutine zform(z, alpha, dim_z, edge, point, scaling_s)
-            real z(:), alpha(:), point(:, :), scaling_s
-            integer dim_z, edge(:, :)
+        subroutine zform(z, alpha, edge, triangle, scaling_s)
+            use mymod
+            real z(:), alpha(:), scaling_s
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
         end subroutine zform
-        subroutine vform(dim_z, edge, point, scaling_s, out_cni, n_i_dir, &
-            alpha, v_rhs, i_rank, freq, max_r, k_uvec_wave)
-            integer dim_z, edge(:,:), n_i_dir, i_rank
-            real point(:,:), scaling_s, out_cni(:, :, 0:), alpha(:), &
-                v_rhs(dim_z, 2*n_i_dir), freq, max_r, &
-                k_uvec_wave(3, n_i_dir)
+        subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, &
+            num_dir, alpha, v_rhs, i_rank, freq, max_r, k_uvec_wave)
+            use mymod
+            integer dim_z, num_dir, i_rank
+            real scaling_s, out_cni(:, :, 0:), alpha(:), &
+                v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
         end subroutine vform
         function cal_est(num_time, step, direction, i_dir, polar, out_cni, &
-            scaling_s, max_rank, point, edge)
-            integer i_dir, edge(:,:), polar, max_rank, num_time
+            scaling_s, max_rank, triangle, edge)
+            use mymod
+            integer i_dir, polar, max_rank, num_time
             real cal_est(3,0:num_time), direction(3), out_cni(:,:,0:), &
-                scaling_s, point(:,:), step
+                scaling_s, step
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
         end function cal_est
         function crossuni(x1, x2)
             real x1(3), x2(3), crossuni(3)
@@ -43,27 +50,30 @@ character*64 nrmfile, outfile
         end function one_multi_dot
     end interface
     ! Local variables
-    integer num_points, num_edges, info, i_rank, num_time
+    integer num_triangles, num_points, num_edges, info, i_rank, num_time
     real max_r, maxtime, p_dir(3), step, t0_delay, time_cut
-    integer, allocatable :: edge(:,:), ipiv(:)
+    integer, allocatable :: ipiv(:)
     real, allocatable :: point(:,:), z(:), alpha(:), out_cni(:,:,:), &
         k_uvec_wave(:,:), s_direction(:,:)
     integer i_dir, s_dir, n_i_dir, n_s_dir, polar, time
     real, allocatable :: e_s_rt(:,:), rcs(:,:,:,:)
     real z_uni(3)
+    type(t_edge), allocatable :: edge(:)
+    type(t_triangle), allocatable :: triangle(:)
     ! Excutives
     n_i_dir=ubound(phis, 1)
     open(unit=1445,file=nrmfile,form="unformatted",status='old', action='read')
-    read(1445) num_points, num_edges
+    read(1445) num_edges, num_triangles, num_points
     close(1445)
-    allocate(point(3,num_points),edge(4,num_edges))
+    allocate(point(3,num_points),edge(num_edges), triangle(num_triangles))
     open(unit=1445,file=nrmfile,form="unformatted",status='old', action='read')
-    read(1445) num_points, num_edges, point, edge
+    read(1445) num_edges, num_triangles, num_points, edge, triangle, point
     close(1445)
     max_r=max(abs(maxval(point)),abs(minval(point)))
+    deallocate(point)
     ! z if packed stored.
     allocate(z(num_edges*(num_edges+1)/2),alpha(num_edges*(num_edges+1)/2))
-    call zform(z, alpha, num_edges, edge, point, scaling_s)
+    call zform(z, alpha, edge, triangle, scaling_s)
     allocate(ipiv(num_edges))
     ! Computes the Bunch-Kaufman factorization of a symmetric matrix using
     ! packed storage.
@@ -73,12 +83,12 @@ character*64 nrmfile, outfile
     k_uvec_wave(1,:)= -sin(this)*cos(phis)
     k_uvec_wave(2,:)= -sin(this)*sin(phis)
     k_uvec_wave(3,:)= -cos(this)
-    call vform(num_edges, edge, point, scaling_s, out_cni, n_i_dir, alpha, &
+    call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, alpha, &
         out_cni(:,:,0), 0, freq, max_r, k_uvec_wave)
     call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,0), &
         num_edges, info)
     do i_rank=1,max_rank
-        call vform(num_edges, edge, point, scaling_s, out_cni, n_i_dir, alpha, &
+        call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, alpha, &
             out_cni(:,:,i_rank), i_rank, freq, max_r, k_uvec_wave)
         call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,i_rank), &
             num_edges, info)
@@ -110,7 +120,7 @@ character*64 nrmfile, outfile
     do i_dir=1, n_i_dir
     if (mono) then
         e_s_rt=cal_est(num_time, step, -k_uvec_wave(:,i_dir), i_dir, &
-            polar, out_cni, scaling_s, max_rank, point, edge)
+            polar, out_cni, scaling_s, max_rank, triangle, edge)
         p_dir= crossuni(k_uvec_wave(:,i_dir),z_uni)
         if (polar==1) then
             p_dir=crossuni(p_dir,k_uvec_wave(:,i_dir))
@@ -119,7 +129,7 @@ character*64 nrmfile, outfile
     else
         do s_dir=1, n_s_dir
             e_s_rt=cal_est(num_time, step, s_direction(:,s_dir), i_dir, &
-                polar, out_cni, scaling_s, max_rank, point, edge)
+                polar, out_cni, scaling_s, max_rank, triangle, edge)
             p_dir= crossuni(z_uni,s_direction(:,s_dir))
             if (polar==1) then
                 p_dir=crossuni(s_direction(:,s_dir),p_dir)
@@ -130,7 +140,7 @@ character*64 nrmfile, outfile
     end if
     end do
     end do
-    deallocate(out_cni, point, edge, e_s_rt)
+    deallocate(out_cni, triangle, edge, e_s_rt)
     ! –¥»Î ±”Ú RCS –≈∫≈
     open(unit=1552,file=outfile,form='unformatted')
     if (mono) then

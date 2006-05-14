@@ -58,6 +58,10 @@ implicit none
     dths=dths*PI/180.; dphs=dphs*PI/180.
     if (re_tran) then
         call tran(trifile, nrmfile)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_time, ': tran data Finished!'
+#endif
     end if
     allocate(this(nthi*nphi), phis(nthi*nphi), thss(nths*nphs), &
         phss(nths*nphs))
