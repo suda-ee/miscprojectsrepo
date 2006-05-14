@@ -5,7 +5,7 @@ LARGS	=	-L/opt/intel/cmkl/8.0/lib/32 -lmkl_lapack -lmkl_ia32 -lsvml
 #CARGS	=	-u -warn all -debug extended -inline-debug-info -g
 CARGS	=	-ftz -ip -ipo -O3 -xW -align all
 DEFS	=	define.F90
-OBJS	=	common.o ome_gen.o psi_func.o seg_triangle_pair.o tran.o vform.o v_wave_gen.o zform.o I_ij_func.o amnij_func.o bmnij_func.o Is_Same_Triangle.o tdemfie.o main.o rcs_cal.o cal_est.o mymod.o ilasrt.o
+OBJS	=	common.o ome_gen.o psi_func.o tran.o vform.o v_wave_gen.o zform.o I_ij_func.o amnij_func.o bmnij_func.o Is_Same_Triangle.o tdemfie.o main.o rcs_cal.o cal_est.o mymod.o ilasrt.o
 MODS	=	mymod.mod
 EXES	=	tdemfie
 
