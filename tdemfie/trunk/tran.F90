@@ -24,12 +24,8 @@ character :: dataname*64, outfilename*64;
     read(10,*) bujianming ! 颜色索引跳过
     read(10,*) bujianming ! 部件最后面元的总序号，跳过
     allocate(rp(3,mn),ntri(3,mt),nedge1(4,4*mt),nedge(4,2*mt),nflag(4*mt))
-    do k=1,mn
-        read(10,*) n,rp(:,k)
-    end do
-    do k=1,mt
-        read(10,*) n,ntri(:,k)
-    end do
+    read(10,*) n,rp
+    read(10,*) n,ntri
     close(10)
     !先两两配对
     nq=1    
@@ -93,7 +89,7 @@ character :: dataname*64, outfilename*64;
     ! 取其中的一半即可
     do k=1,nq0
         mn0=1
-        ndk(:)=nedge1(:,k)
+        ndk=nedge1(:,k)
         mnk2=ndk(1)+ndk(3)+ndk(2)+ndk(4)
         nflag(k)=0
         j=1
@@ -101,7 +97,7 @@ character :: dataname*64, outfilename*64;
             if(j==k) then
                 mg=0
             else
-                ndj(:)=nedge1(:,j)
+                ndj=nedge1(:,j)
                 mnj2=ndj(1)+ndj(3)+ndj(2)+ndj(4)
                 mn0=abs(mnk2-mnj2)
                 jflag=0

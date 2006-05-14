@@ -52,10 +52,10 @@ implicit none
     read(1602,*) resultfile
     close(1602)
     freq=freq*1e9; s_fri=s_fri*1e9; dfri=dfri*1e9 ! 配置文件中频率单位为 GHz
-    s_thi=s_thi*PI/180; s_phi=s_phi*PI/180 ! 转为弧度，文件中为度
-    dthi=dthi*PI/180; dphi=dphi*PI/180
-    s_ths=s_ths*PI/180; s_phs=s_phs*PI/180
-    dths=dths*PI/180; dphs=dphs*PI/180
+    s_thi=s_thi*PI/180.; s_phi=s_phi*PI/180. ! 转为弧度，文件中为度
+    dthi=dthi*PI/180.; dphi=dphi*PI/180.
+    s_ths=s_ths*PI/180.; s_phs=s_phs*PI/180.
+    dths=dths*PI/180.; dphs=dphs*PI/180.
     if (re_tran) then
         call tran(trifile, nrmfile)
     end if
@@ -73,4 +73,8 @@ implicit none
     frqs = (/ (s_fri+dir_t*dfri, dir_t=0, nfri-1) /)
     !call rcs_cal()
     deallocate(this, phis)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_date, my_time, ': Finished!'
+#endif
 end program main

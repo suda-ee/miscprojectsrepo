@@ -39,7 +39,7 @@ real tri_point(3,3,2), rho(3,3,2), len_seg, area(2)
 integer m_row, a_point, triangle(3,2)
 ! Excutives
 ! 
-ome_gen=0
+ome_gen=0.
 do m_row=1, dim_z
     call seg_triangle_pair(m_row, edge, point, triangle, tri_point, rho, &
         area, len_seg)
@@ -54,6 +54,6 @@ do m_row=1, dim_z
                 scaling_s, freq, max_r, k_uvec_wave, num_dir), &
                 2*num_dir)
     end do
-    ome_gen(m_row,:)=ome_gen(m_row,:)*len_seg/6
+    ome_gen(m_row,:)=ome_gen(m_row,:)*len_seg/6.
 end do
 end function ome_gen

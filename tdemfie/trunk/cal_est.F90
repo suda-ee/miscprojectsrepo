@@ -31,28 +31,28 @@ integer i_dir, edge(:,:), polar, max_rank, num_time
     else
         dir_index=i_dir+ubound(out_cni, 2)/2
     end if
-    cal_est=0
+    cal_est=0.
     do time=0, num_time
     do n_var=1, ubound(edge, 2)
     call seg_triangle_pair(n_var, edge, point, triangle, &
                 tri_point, rho, area, len_seg)
     do j_var=0, max_rank
-        temp=out_cni(n_var,dir_index,j_var)/4
+        temp=out_cni(n_var,dir_index,j_var)/4.
         do k_var=0, j_var-1
             temp=temp+(j_var-k_var)*out_cni(n_var,dir_index,k_var)
         end do
-        s_integral=0
+        s_integral=0.
         do tri_idx=1,2
             do p_idx=1,3
                 s_integral=s_integral+rho(:,p_idx,tri_idx)* &
                     psi_func(j_var, scaling_s*(time*step + &
                         DOT(3,tri_point(:,p_idx,tri_idx),1,direction,1)/VECL_C))
             end do
-            s_integral=s_integral*len_seg*(-1)**(tri_idx-1)/6
+            s_integral=s_integral*len_seg*(3-2*tri_idx)/6
         end do
         cal_est(:,time)=cal_est(:,time)+temp*s_integral
     end do
     end do
     end do
-    cal_est=cal_est*scaling_s**2*ETA_0/4/PI/VECL_C
+    cal_est=cal_est*scaling_s*scaling_s*ETA_0/4./PI/VECL_C
 end function cal_est

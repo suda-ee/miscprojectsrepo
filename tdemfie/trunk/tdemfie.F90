@@ -97,7 +97,7 @@ character*64 nrmfile, outfile
     step=1/freq/TIME_STEP
     time_cut=0.695324/freq
     t0_delay = time_cut + max_r/VECL_C
-    maxtime=t0_delay+max_r/VECL_C+time_cut+WAIT_TIMES*2*time_cut
+    maxtime=t0_delay+max_r/VECL_C+time_cut+WAIT_TIMES*2.*time_cut
     num_time=maxtime/step
     allocate(s_direction(3, n_s_dir))
     s_direction(1,:)= sin(thss)*cos(phss)
@@ -105,7 +105,7 @@ character*64 nrmfile, outfile
     s_direction(3,:)= cos(thss)
     allocate(e_s_rt(3,0:num_time))
     allocate(rcs(0:num_time, n_s_dir, n_i_dir, 2))
-    z_uni=(/0,0,1/)
+    z_uni=(/0.,0.,1./)
     do polar=1, 2 ! ploar 1 for theta polarization, 2 for phi.
     do i_dir=1, n_i_dir
     if (mono) then
@@ -132,33 +132,46 @@ character*64 nrmfile, outfile
     end do
     deallocate(out_cni, point, edge, e_s_rt)
     ! 写入时域 RCS 信号
-    open(unit=1552,file=outfile,status='unknown', action='write')
-    write(1552,163) 0.,(/(1, time=1,n_i_dir*n_s_dir)/), &
-        (/(2, time=1,n_i_dir*n_s_dir)/)
-    write(1552,163) 0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/)
-    write(1552,163) 0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/)
+    open(unit=1552,file=outfile,form='unformatted')
     if (mono) then
-        write(1552,163) 0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+    ! 头：列数；垂直极化；水平极化
+    write(1552) 2*n_i_dir*n_s_dir+1, &
+        (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
+        ! 0; 入射角 theta. 0; 入射角phi
+        0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/), &
+        0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/), &
+        ! 散射角theta, phi
+        0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/)
-        write(1552,163) 0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+            i_dir=1,n_i_dir)/), &
+        0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/)
+            i_dir=1,n_i_dir)/), &
+        (time*step*1e9,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     else
-        write(1552,163) 0.,(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
+    ! 头：列数；垂直极化；水平极化
+    write(1552) 2*n_i_dir*n_s_dir+1, &
+        (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
+        ! 0; 入射角 theta. 0; 入射角phi
+        0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/), &
+        0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/), &
+        ! 散射角theta, phi
+        0.,(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/)
-        write(1552,163) 0.,(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
+            i_dir=1,n_i_dir)/), &
+        0.,(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/)
+            i_dir=1,n_i_dir)/), &
+        (time*step*1e9,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     end if
-    write(1552,163) (time*step*1e9,rcs(time, :, :, :), &
-        time=0,num_time) ! 时间输出单位为 ns
     close(1552)
     deallocate(rcs)
-163 format(<2*n_i_dir*n_s_dir+1>g)
 end subroutine tdemfie

@@ -16,8 +16,8 @@ real t, I_ij_func
     if (j<i) then
         I_ij_func = psi_func(i-j, t) - psi_func(i-j-1, t)
     else if (j==i) then
-        I_ij_func = exp(-t/2)
+        I_ij_func = exp(-t/2.)
     else
-        I_ij_func = 0
+        I_ij_func = 0.
     end if
 end function I_ij_func
