@@ -9,7 +9,7 @@
 				<Tool Name="VFPostBuildEventTool"/>
 				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" Preprocess="preprocessYes" Diagnostics="diagnosticsShowAll" WarnDeclarations="true" WarnUnusedVariables="true" WarnIgnoreLOC="true" WarnTruncateSource="true" WarnInterfaces="true" ExternalNameInterpretation="extNameLowerCase" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtSingleThreadedDebug" CompileOnly="true"/>
 				<Tool Name="VFCustomBuildTool"/>
-				<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/tdemfie.exe" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" AdditionalLibraryDirectories="E:\Program Files\Intel\MKL\8.0.1\ia32\lib" GenerateDebugInformation="true" ProgramDatabaseFile="$(OUTDIR)/tdemfie.pdb" SubSystem="subSystemConsole" AdditionalDependencies="mkl_c.lib"/>
+				<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/tdemfie.exe" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" ProgramDatabaseFile="$(OUTDIR)/tdemfie.pdb" SubSystem="subSystemConsole" AdditionalDependencies="mkl_c.lib"/>
 				<Tool Name="VFPreLinkEventTool"/>
 				<Tool Name="VFResourceCompilerTool" ResourceOutputFileName="$(IntDir)/$(InputName).res"/></Configuration>
 		<Configuration Name="Release|Win32" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" Command="$(TargetPath)">
@@ -18,7 +18,7 @@
 				<Tool Name="VFPostBuildEventTool"/>
 				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" Optimization="optimizeFull" InlineFunctionExpansion="expandAnySuitable" RequireProcessorExtensions="codeExclusivelyPentium4" Preprocess="preprocessYes" Diagnostics="diagnosticsShowAll" WarnDeclarations="true" WarnUnusedVariables="true" WarnIgnoreLOC="true" WarnTruncateSource="true" WarnInterfaces="true" FlushDenormalResultsToZero="true" ExternalNameInterpretation="extNameLowerCase" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" CompileOnly="true"/>
 				<Tool Name="VFCustomBuildTool"/>
-				<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/tdemfie.exe" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" AdditionalLibraryDirectories="E:\Program Files\Intel\MKL\8.0.1\ia32\lib" SubSystem="subSystemConsole" OptimizeReferences="optReferences" OptimizeForWindows98="optWin98No" AdditionalDependencies="mkl_c.lib"/>
+				<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/tdemfie.exe" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" SubSystem="subSystemConsole" OptimizeReferences="optReferences" OptimizeForWindows98="optWin98No" AdditionalDependencies="mkl_c.lib"/>
 				<Tool Name="VFPreLinkEventTool"/>
 				<Tool Name="VFResourceCompilerTool" ResourceOutputFileName="$(IntDir)/$(InputName).res"/></Configuration></Configurations>
 	<Files>

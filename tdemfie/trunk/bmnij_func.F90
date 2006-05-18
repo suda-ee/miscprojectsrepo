@@ -28,11 +28,12 @@ type(t_triangle) triangle(:)
         do p_q=1,3
         do p_p=1,3
         if (p_p==p_q) then
-            bmnij_func=bmnij_func-scaling_s/VECL_C
+            bmnij_func=bmnij_func-scaling_s*(3-2*p)*(3-2*q)/VECL_C
         else
             R=dist(triangle(edge(m)%tri(p))%tri_point(:,p_p), &
                 triangle(edge(n)%tri(q))%tri_point(:,p_q))
-            bmnij_func=bmnij_func+I_ij_func(i, j, scaling_s*R/VECL_C)/R
+            bmnij_func=bmnij_func+I_ij_func(i, j, scaling_s*R/VECL_C)* &
+                (3-2*p)*(3-2*q)/R
         end if
         end do
         end do
@@ -41,11 +42,12 @@ type(t_triangle) triangle(:)
         do p_p=1,3
             R=dist(triangle(edge(m)%tri(p))%tri_point(:,p_p), &
                 triangle(edge(n)%tri(q))%tri_point(:,p_q))
-            bmnij_func=bmnij_func+I_ij_func(i, j, scaling_s*R/VECL_C)/R
+            bmnij_func=bmnij_func+I_ij_func(i, j, scaling_s*R/VECL_C)* &
+                (3-2*p)*(3-2*q)/R
         end do
         end do
     end if
-    bmnij_func=bmnij_func*edge(m)%len*edge(n)%len*(3-2*p)*(3-2*q)/144./PI
     end do
     end do
+    bmnij_func=bmnij_func*edge(m)%len*edge(n)%len/(36.*PI)
 end function bmnij_func
