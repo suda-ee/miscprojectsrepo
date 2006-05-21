@@ -52,6 +52,7 @@ real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
         ub=delay+time_cut
         time_step=1; c = abs(lb) + abs(ub); q = 0.; flag = -1
         do while(flag==-1)
+            v_scalar(dir)=0.
             h=(ub-lb)/time_step
             do i=1,time_step
                 rg=lb+h*(i-1)
