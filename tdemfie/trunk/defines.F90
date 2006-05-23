@@ -9,12 +9,14 @@
 #ifdef DOUBLE
 #define real real(8)
 #define complex complex(8)
+#define DKIND 8
 #define DOT ddot
 #define NRM2 dnrm2
 #define LASRT dlasrt
 #define SPTRF dsptrf
 #define SPTRS dsptrs
 #else
+#define DKIND 4
 #define DOT sdot
 #define NRM2 snrm2
 #define LASRT slasrt
@@ -23,7 +25,7 @@
 #endif
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Constants macros
-#define PI 3.1415926535897932
+#define PI 3.1415926535897932_DKIND
 ! the velocity of light in vacuum
 #define VECL_C 299792458.
 ! the permittivity of vacuum
@@ -32,10 +34,8 @@
 #define MU_0 0.1256637061435917e-4
 ! eta
 #define ETA_0 376.9911184307752
-! Gaussian 积分时的精度
-#define EPS 1.e-6
-! Gaussian 积分时的最大迭代步数
-#define MAX_STP 1000
+! 积分时的最大迭代步数
+#define MAX_STP 250
 ! TIME_STEP is used in the DFT, 最高频率信号周期划分几步
 #define TIME_STEP 20.
 ! 脉冲结束后的在等几个脉冲的时间

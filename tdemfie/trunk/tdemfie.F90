@@ -148,39 +148,39 @@ character*64 nrmfile, outfile
     write(1552) 2*n_i_dir*n_s_dir+1, &
         (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
         ! 0; 入射角 theta. 0; 入射角phi
-        0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
-        0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
         ! 散射角theta, phi
-        0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+            i_dir=1,n_i_dir)/),(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+            i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        (time*step*1e9,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
+        (time*step*1e9_DKIND,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     else
     ! 头：列数；垂直极化；水平极化
     write(1552) 2*n_i_dir*n_s_dir+1, &
         (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
         ! 0; 入射角 theta. 0; 入射角phi
-        0.,(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/),(/((this(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
-        0.,(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
-        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
         ! 散射角theta, phi
-        0.,(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/),(/((thss(s_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((thss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+            i_dir=1,n_i_dir)/),(/((thss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        0.,(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
-            i_dir=1,n_i_dir)/),(/((phss(s_dir)*180/PI,s_dir=1,n_s_dir), &
+        0._DKIND,(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+            i_dir=1,n_i_dir)/),(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        (time*step*1e9,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
+        (time*step*1e9_DKIND,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     end if
     close(1552)
     deallocate(rcs)
