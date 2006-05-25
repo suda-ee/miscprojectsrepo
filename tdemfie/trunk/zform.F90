@@ -43,16 +43,16 @@ type(t_triangle) triangle(:)
                     alpha(pack_position)=alpha(pack_position)-DOT( &
                         3, edge(row)%rho(:, p_p, p), 1, &
                             edge(col)%rho(:, p_q, q), 1)*(3-2*p)*(3-2*q)* &
-                        scaling_s/2./VECL_C
-                    beta=beta-scaling_s*(3-2*p)*(3-2*q)/2./VECL_C
+                        scaling_s/2.
+                    beta=beta-scaling_s*(3-2*p)*(3-2*q)/2.
                 else
                     R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
                         triangle(edge(col)%tri(q))%tri_point(:,p_q))
                     alpha(pack_position)=alpha(pack_position)-DOT( &
                         3, edge(row)%rho(:, p_p, p), 1, &
                         edge(col)%rho(:, p_q, q), 1)* &
-                        (exp(-scaling_s*R/2./VECL_C)-1.)*(3-2*p)*(3-2*q)/R
-                    beta=beta-(exp(-scaling_s*R/2./VECL_C)-1.)*(3-2*p)*(3-2*q)/R
+                        (exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
+                    beta=beta-(exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
                 end if
                 end do
                 end do
@@ -61,8 +61,8 @@ type(t_triangle) triangle(:)
                 rho_center_col=(edge(col)%rho(:,1,q)+edge(col)%rho(:,2,q)+ &
                     edge(col)%rho(:,3,q))/3.
                 alpha(pack_position)=alpha(pack_position)+DOT(3, &
-                    rho_center_row, 1, rho_center_col, 1)*(3-2*p)*(3-2*q)*3.545/ &
-                    sqrt(triangle(edge(row)%tri(p))%area)
+                    rho_center_row, 1, rho_center_col, 1)*(3-2*p)*(3-2*q)* &
+                    3.545/sqrt(triangle(edge(row)%tri(p))%area)
                 beta=beta+3.545*(3-2*p)*(3-2*q)/sqrt(triangle(edge(row)%tri(p))%area)
             else
                 do p_q=1,3
@@ -71,8 +71,8 @@ type(t_triangle) triangle(:)
                         triangle(edge(col)%tri(q))%tri_point(:,p_q))
                     alpha(pack_position)=alpha(pack_position)+DOT(3, &
                         edge(row)%rho(:, p_p, p), 1, edge(col)%rho(:, p_q, q), &
-                        1)*exp(-scaling_s*R/2./VECL_C)*(3-2*p)*(3-2*q)/R
-                    beta=beta+exp(-scaling_s*R/2./VECL_C)*(3-2*p)*(3-2*q)/R
+                        1)*exp(-scaling_s*R/2.)*(3-2*p)*(3-2*q)/R
+                    beta=beta+exp(-scaling_s*R/2.)*(3-2*p)*(3-2*q)/R
                 end do
                 end do
             end if
@@ -82,8 +82,8 @@ type(t_triangle) triangle(:)
                 edge(col)%len/(144.*PI)
             beta=beta*edge(row)%len*edge(col)%len/(36.*PI)
     ! now the z_mn is get.
-            z(pack_position)=MU_0*scaling_s*scaling_s*alpha(pack_position) &
-                                             + beta/EPSILON_0
+            z(pack_position)=MU_0*scaling_s*scaling_s*CC_0*CC_0* &
+                alpha(pack_position) + beta/EPSILON_0
         end do
     end do
 end subroutine zform

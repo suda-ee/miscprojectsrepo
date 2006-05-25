@@ -88,8 +88,8 @@ character*64 nrmfile, outfile
     call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,0), &
         num_edges, info)
     do i_rank=1,max_rank
-        call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, alpha, &
-            out_cni(:,:,i_rank), i_rank, freq, max_r, k_uvec_wave)
+        call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, &
+            alpha, out_cni(:,:,i_rank), i_rank, freq, max_r, k_uvec_wave)
         call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,i_rank), &
             num_edges, info)
 #ifdef VERBOSE
@@ -104,10 +104,10 @@ character*64 nrmfile, outfile
     else
         n_s_dir=ubound(phss,1)
     end if
-    step=1/freq/TIME_STEP
-    time_cut=0.695324/freq
-    t0_delay = time_cut + max_r/VECL_C
-    maxtime=t0_delay+max_r/VECL_C+time_cut+WAIT_TIMES*2.*time_cut
+    step=CC_0/freq/TIME_STEP
+    time_cut=CC_0*0.695324/freq
+    t0_delay = time_cut + max_r
+    maxtime=t0_delay+max_r+time_cut+WAIT_TIMES*2.*time_cut
     num_time=maxtime/step
     allocate(s_direction(3, n_s_dir))
     s_direction(1,:)= sin(thss)*cos(phss)
@@ -161,7 +161,7 @@ character*64 nrmfile, outfile
         0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        (time*step*1e9_DKIND,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
+        (time*step/CC_0,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     else
     ! 头：列数；垂直极化；水平极化
     write(1552) 2*n_i_dir*n_s_dir+1, &
@@ -180,7 +180,7 @@ character*64 nrmfile, outfile
         0._DKIND,(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        (time*step*1e9_DKIND,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
+        (time*step/CC_0,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     end if
     close(1552)
     deallocate(rcs)

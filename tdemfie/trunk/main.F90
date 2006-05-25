@@ -51,7 +51,6 @@ implicit none
     read(1602,*) re_cal, trcsffile
     read(1602,*) resultfile
     close(1602)
-    freq=freq*1e9; s_fri=s_fri*1e9; dfri=dfri*1e9 ! 配置文件中频率单位为 GHz
     s_thi=s_thi*PI/180.; s_phi=s_phi*PI/180. ! 转为弧度，文件中为度
     dthi=dthi*PI/180.; dphi=dphi*PI/180.
     s_ths=s_ths*PI/180.; s_phs=s_phs*PI/180.

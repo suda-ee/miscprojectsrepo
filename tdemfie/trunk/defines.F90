@@ -26,16 +26,16 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Constants macros
 #define PI 3.1415926535897932_DKIND
-! the velocity of light in vacuum
-#define VECL_C 299792458.
+! the velocity of light in vacuum, 频率单位GHz, 所以这里除以 1e9
+#define CC_0 .299792458_DKIND
 ! the permittivity of vacuum
-#define EPSILON_0 8.854187818e-12
+#define EPSILON_0 8.854187817e-12_DKIND
 ! the permeability of vacuum
-#define MU_0 0.1256637061435917e-4
+#define MU_0 12.566370614e-7_DKIND
 ! eta
-#define ETA_0 376.9911184307752
+#define ETA_0 376.730313461_DKIND
 ! 积分时的最大迭代步数
-#define MAX_STP 250
+#define MAX_STP 100
 ! TIME_STEP is used in the DFT, 最高频率信号周期划分几步
 #define TIME_STEP 20.
 ! 脉冲结束后的在等几个脉冲的时间

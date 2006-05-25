@@ -34,19 +34,19 @@ real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
     r = 10.**(bwr/20.);             ! Ref level (fraction of max peak)
     !omegav = -(2.*PI*freq)*(2.*PI*freq)/(2.*log(r)); ! variance is fv
     ! Determine corresponding time-domain parameters:
-    tv = -log(r)/(2.*PI*freq)/(PI*freq);  ! variance is tv, mean is 0
+    tv = -log(r)/(2.*PI*freq)/(PI*freq)*CC_0*CC_0;  ! variance is tv, mean is 0
 
     ! Determine extent (pulse length) of time-domain envelope:
     delta = 10.**(tpr/20.);        ! Ref level (fraction of max peak)
     time_cut = sqrt(-2.*tv*log(delta)); ! Pulse cutoff time
-    t0_delay = time_cut + max_r/VECL_C
+    t0_delay = time_cut + max_r
     ! Compute time-domain pulse envelope, normalized by sqrt(2*pi*tv):
     v_scalar = 0.
     do dir=1, num_dir
-        delay = t0_delay+DOT(3,k_uvec_wave(:,dir),1,point,1)/VECL_C
+        delay = t0_delay+DOT(3,k_uvec_wave(:,dir),1,point,1)
         lb=delay-time_cut
         ub=delay+time_cut
-        h=(ub-lb)/(2.*MAX_STP)
+        h=time_cut/MAX_STP
         v_scalar(dir)=0.5*(exp(-(lb-delay)*(lb-delay)/(2.*tv))* &
                     psi_func(i_rank, scaling_s*lb)- &
                     exp(-(ub-delay)*(ub-delay)/(2.*tv))* &

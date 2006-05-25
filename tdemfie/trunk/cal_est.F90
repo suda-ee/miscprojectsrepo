@@ -40,9 +40,9 @@ type(t_triangle) triangle(:)
         do tri_idx=1,2
             do p_idx=1,3
                 s_integral=s_integral+edge(n_var)%rho(:,p_idx,tri_idx)* &
-                    psi_func(j_var, scaling_s*(time*step + &
-                        DOT(3,triangle(edge(n_var)%tri(tri_idx))% &
-                            tri_point(:,p_idx),1,direction,1)/VECL_C)) &
+                    psi_func(j_var, scaling_s*time*step + &
+                        scaling_s*DOT(3,triangle(edge(n_var)%tri(tri_idx))% &
+                            tri_point(:,p_idx),1,direction,1)) &
                         *(3-2*tri_idx)
             end do
         end do
@@ -51,5 +51,5 @@ type(t_triangle) triangle(:)
     end do
     end do
     end do
-    cal_est=cal_est*scaling_s*scaling_s*ETA_0/(-4.*PI*VECL_C)
+    cal_est=cal_est*scaling_s*scaling_s*CC_0*ETA_0/(-4.*PI)
 end function cal_est

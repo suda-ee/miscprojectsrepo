@@ -29,13 +29,13 @@ type(t_triangle) triangle(:)
         do p_p=1,3
         if (p_p==p_q) then
             amnij_func=amnij_func-DOT(3,edge(m)%rho(:,p_p,p),1, &
-                edge(n)%rho(:,p_q,q),1)*scaling_s*(3-2*p)*(3-2*q)/VECL_C
+                edge(n)%rho(:,p_q,q),1)*scaling_s*(3-2*p)*(3-2*q)
         else
             R=dist(triangle(edge(m)%tri(p))%tri_point(:,p_p), &
                 triangle(edge(n)%tri(q))%tri_point(:,p_q))
             amnij_func=amnij_func+DOT(3,edge(m)%rho(:,p_p,p),1, &
                 edge(n)%rho(:,p_q,q),1)* &
-                I_ij_func(i, j, scaling_s*R/VECL_C)*(3-2*p)*(3-2*q)/R
+                I_ij_func(i, j, scaling_s*R)*(3-2*p)*(3-2*q)/R
         end if
         end do
         end do
@@ -46,7 +46,7 @@ type(t_triangle) triangle(:)
                 triangle(edge(n)%tri(q))%tri_point(:,p_q))
             amnij_func=amnij_func+DOT(3,edge(m)%rho(:,p_p,p),1, &
                 edge(n)%rho(:,p_q,q),1)* &
-                I_ij_func(i, j, scaling_s*R/VECL_C)*(3-2*p)*(3-2*q)/R
+                I_ij_func(i, j, scaling_s*R)*(3-2*p)*(3-2*q)/R
         end do
         end do
     end if
