@@ -28,11 +28,9 @@
 #define PI 3.1415926535897932_DKIND
 ! the velocity of light in vacuum, 频率单位GHz, 所以这里除以 1e9
 #define CC_0 .299792458_DKIND
-! the permittivity of vacuum
-#define EPSILON_0 8.854187817e-12_DKIND
-! the permeability of vacuum
-#define MU_0 12.566370614e-7_DKIND
-! eta
+! the relative permittivity of vacuum
+#define EPSILON_R 1._DKIND
+! eta of vacuum
 #define ETA_0 376.730313461_DKIND
 ! 积分时的最大迭代步数
 #define MAX_STP 100

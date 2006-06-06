@@ -60,16 +60,17 @@ type(t_triangle) triangle(:)
     col_offset=n_var*(n_var-1)/2
     do j_var=0, i_rank-1
         v_rhs(row, :)=v_rhs(row, :)-(i_rank-j_var)*out_cni(row,:,j_var)* &
-            alpha(row+col_offset)*MU_0*scaling_s*scaling_s*CC_0*CC_0
+            alpha(row+col_offset)*ETA_0*scaling_s*scaling_s
         temp=0.
         do k_var=0, j_var-1
             temp=temp+(j_var-k_var)*out_cni(n_var,:,k_var)
         end do
-        temp=temp+out_cni(n_var,:,j_var)*MU_0*scaling_s*scaling_s*CC_0*CC_0/4.
+        temp=temp*ETA_0*scaling_s*scaling_s
+        temp=temp+out_cni(n_var,:,j_var)*ETA_0*scaling_s*scaling_s*.25
         amnij = amnij_func(row, n_var, i_rank, j_var, edge, triangle, scaling_s)
         bmnij = bmnij_func(row, n_var, i_rank, j_var, edge, triangle, scaling_s)
         v_rhs(row, :)=v_rhs(row, :) - temp*amnij - out_cni(n_var,:,j_var)* &
-            bmnij/EPSILON_0
+            bmnij/sqrt(EPSILON_R)*ETA_0
     end do
     end do
     end do

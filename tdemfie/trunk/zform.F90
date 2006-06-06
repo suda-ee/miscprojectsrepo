@@ -82,8 +82,9 @@ type(t_triangle) triangle(:)
                 edge(col)%len/(144.*PI)
             beta=beta*edge(row)%len*edge(col)%len/(36.*PI)
     ! now the z_mn is get.
-            z(pack_position)=MU_0*scaling_s*scaling_s*CC_0*CC_0* &
-                alpha(pack_position) + beta/EPSILON_0
+            z(pack_position)=.25*scaling_s*scaling_s* &
+                alpha(pack_position) + beta/sqrt(EPSILON_R)
+            z(pack_position) = ETA_0 * z(pack_position)
         end do
     end do
 end subroutine zform
