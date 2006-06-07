@@ -23,12 +23,34 @@ character*64 nrmfile, outfile
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
         end subroutine zform
+        subroutine amnij_sub(dim_z, max_rank, edge, triangle, scaling_s, amnij)
+            use mymod
+            ! subroutine arguments
+            integer dim_z, max_rank
+            ! (j, i, n, m) packed storage
+            real amnij(max_rank*(max_rank+1)/2, dim_z*(dim_z+1)/2)
+            real scaling_s
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
+        end subroutine amnij_sub
+        subroutine bmnij_sub(dim_z, max_rank, edge, triangle, scaling_s, bmnij)
+            use mymod
+            ! subroutine arguments
+            integer dim_z, max_rank
+            ! (j, i, n, m) packed storage
+            real bmnij(max_rank*(max_rank+1)/2, dim_z*(dim_z+1)/2)
+            real scaling_s
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
+        end subroutine bmnij_sub
         subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, &
-            num_dir, alpha, v_rhs, i_rank, freq, max_r, k_uvec_wave)
+            num_dir, alpha, amnij, bmnij, v_rhs, i_rank, freq, max_r, &
+            k_uvec_wave)
             use mymod
             integer dim_z, num_dir, i_rank
-            real scaling_s, out_cni(:, :, 0:), alpha(:), &
-                v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
+            real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(:,:), &
+                bmnij(:,:), v_rhs(dim_z, 2*num_dir), freq, max_r, &
+                k_uvec_wave(3, num_dir)
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
         end subroutine vform
@@ -54,7 +76,7 @@ character*64 nrmfile, outfile
     real max_r, maxtime, p_dir(3), step, t0_delay, time_cut
     integer, allocatable :: ipiv(:)
     real, allocatable :: point(:,:), z(:), alpha(:), out_cni(:,:,:), &
-        k_uvec_wave(:,:), s_direction(:,:)
+        k_uvec_wave(:,:), s_direction(:,:), amnij(:, :), bmnij(:, :)
     integer i_dir, s_dir, n_i_dir, n_s_dir, polar, time
     real, allocatable :: e_s_rt(:,:), rcs(:,:,:,:)
     real z_uni(3)
@@ -74,30 +96,56 @@ character*64 nrmfile, outfile
     ! z if packed stored.
     allocate(z(num_edges*(num_edges+1)/2),alpha(num_edges*(num_edges+1)/2))
     call zform(z, alpha, edge, triangle, scaling_s)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_time, ': zform have done.'
+#endif
     allocate(ipiv(num_edges))
     ! Computes the Bunch-Kaufman factorization of a symmetric matrix using
     ! packed storage.
     call SPTRF('U', num_edges, z, ipiv, info)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_time, ': The matrix have been factorized.'
+#endif
+    ! a, b if packed stored.
+    allocate(amnij(max_rank*(max_rank+1)/2, num_edges*(num_edges+1)/2), &
+        bmnij(max_rank*(max_rank+1)/2, num_edges*(num_edges+1)/2))
+    call amnij_sub(num_edges, max_rank, edge, triangle, scaling_s, amnij)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_time, ': amnij have done.'
+#endif
+    call bmnij_sub(num_edges, max_rank, edge, triangle, scaling_s, bmnij)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_time, ': bmnij have done.'
+#endif
     allocate(out_cni(num_edges, 2*n_i_dir, 0:max_rank))
     allocate(k_uvec_wave(3, n_i_dir))
     k_uvec_wave(1,:)= -sin(this)*cos(phis)
     k_uvec_wave(2,:)= -sin(this)*sin(phis)
     k_uvec_wave(3,:)= -cos(this)
     call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, alpha, &
-        out_cni(:,:,0), 0, freq, max_r, k_uvec_wave)
+        amnij, bmnij, out_cni(:,:,0), 0, freq, max_r, k_uvec_wave)
     call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,0), &
         num_edges, info)
     do i_rank=1,max_rank
         call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, &
-            alpha, out_cni(:,:,i_rank), i_rank, freq, max_r, k_uvec_wave)
+            alpha, amnij, bmnij, out_cni(:,:,i_rank), i_rank, freq, max_r, &
+            k_uvec_wave)
+#ifdef VERBOSE
+        call date_and_time(my_date, my_time)
+        write(*,*) my_time, ': vform i_rank', i_rank, 'have done.'
+#endif
         call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,i_rank), &
             num_edges, info)
 #ifdef VERBOSE
         call date_and_time(my_date, my_time)
-        write(*,*) my_time, ': vform SPTRS i_rank', i_rank, 'have done.'
+        write(*,*) my_time, ': The solver i_rank', i_rank, 'have done.'
 #endif
     end do
-    deallocate(z, alpha)
+    deallocate(z, alpha, amnij, bmnij)
     ! 下面开始计算时域的 RCS 信号
     if (mono) then
         n_s_dir=1
