@@ -48,11 +48,11 @@ type(t_triangle) triangle(:)
                 else
                     R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
                         triangle(edge(col)%tri(q))%tri_point(:,p_q))
-                    alpha(pack_position)=alpha(pack_position)-DOT( &
+                    alpha(pack_position)=alpha(pack_position)+DOT( &
                         3, edge(row)%rho(:, p_p, p), 1, &
                         edge(col)%rho(:, p_q, q), 1)* &
                         (exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
-                    beta=beta-(exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
+                    beta=beta+(exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
                 end if
                 end do
                 end do
@@ -62,8 +62,8 @@ type(t_triangle) triangle(:)
                     edge(col)%rho(:,3,q))/3.
                 alpha(pack_position)=alpha(pack_position)+DOT(3, &
                     rho_center_row, 1, rho_center_col, 1)*(3-2*p)*(3-2*q)* &
-                    3.545/sqrt(triangle(edge(row)%tri(p))%area)
-                beta=beta+3.545*(3-2*p)*(3-2*q)/sqrt(triangle(edge(row)%tri(p))%area)
+                    3.545/sqrt(triangle(edge(row)%tri(p))%area)*9.
+                beta=beta+3.545*(3-2*p)*(3-2*q)/sqrt(triangle(edge(row)%tri(p))%area)*9.
             else
                 do p_q=1,3
                 do p_p=1,3
