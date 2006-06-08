@@ -31,14 +31,12 @@ type(t_triangle) triangle(:)
     end interface
     ! Local variables
     ! temp for: \sum_{k=0}^{j-1}(j-k)c_{nk} + \frac{\mu s^2}{4}c_{nj}
-    integer n_var, k_var, j_var, row, col_offset, m_offset, mn_pos, &
-        ij_pos, i_offset
+    integer n_var, k_var, j_var, row, col_offset, m_offset, mn_pos
     real temp(2*num_dir)
     ! Excutives
     v_rhs=ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, edge, &
         triangle, scaling_s)
     if (i_rank/=0) then
-    i_offset=i_rank*(i_rank-1)/2
     do row=1, dim_z
     m_offset=row*(row-1)/2
     do n_var=1, dim_z
@@ -49,7 +47,6 @@ type(t_triangle) triangle(:)
         mn_pos = n_var + m_offset
     end if
     do j_var=0, i_rank-1
-        ij_pos = i_offset + j_var + 1
         v_rhs(row, :)=v_rhs(row, :)-(i_rank-j_var)*out_cni(row,:,j_var)* &
             alpha(mn_pos)*ETA_0*scaling_s*scaling_s
         temp=0.
@@ -58,9 +55,9 @@ type(t_triangle) triangle(:)
         end do
         temp=temp*ETA_0*scaling_s*scaling_s
         temp=temp+out_cni(n_var,:,j_var)*ETA_0*scaling_s*scaling_s*.25
-        v_rhs(row, :)=v_rhs(row, :) - temp*amnij(ij_pos, mn_pos) - &
+        v_rhs(row, :)=v_rhs(row, :) - temp*amnij(i_rank-j_var, mn_pos) - &
             out_cni(n_var,:,j_var)* &
-            bmnij(ij_pos, mn_pos)/sqrt(EPSILON_R)*ETA_0
+            bmnij(i_rank-j_var, mn_pos)/sqrt(EPSILON_R)*ETA_0
     end do
     end do
     end do

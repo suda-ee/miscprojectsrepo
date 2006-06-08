@@ -28,7 +28,7 @@ character*64 nrmfile, outfile
             ! subroutine arguments
             integer dim_z, max_rank
             ! (j, i, n, m) packed storage
-            real amnij(max_rank*(max_rank+1)/2, dim_z*(dim_z+1)/2)
+            real amnij(max_rank, dim_z*(dim_z+1)/2)
             real scaling_s
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
@@ -38,7 +38,7 @@ character*64 nrmfile, outfile
             ! subroutine arguments
             integer dim_z, max_rank
             ! (j, i, n, m) packed storage
-            real bmnij(max_rank*(max_rank+1)/2, dim_z*(dim_z+1)/2)
+            real bmnij(max_rank, dim_z*(dim_z+1)/2)
             real scaling_s
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
@@ -109,8 +109,8 @@ character*64 nrmfile, outfile
     write(*,*) my_time, ': The matrix have been factorized.'
 #endif
     ! a, b if packed stored.
-    allocate(amnij(max_rank*(max_rank+1)/2, num_edges*(num_edges+1)/2), &
-        bmnij(max_rank*(max_rank+1)/2, num_edges*(num_edges+1)/2))
+    allocate(amnij(max_rank, num_edges*(num_edges+1)/2), &
+        bmnij(max_rank, num_edges*(num_edges+1)/2))
     call amnij_sub(num_edges, max_rank, edge, triangle, scaling_s, amnij)
 #ifdef VERBOSE
     call date_and_time(my_date, my_time)
