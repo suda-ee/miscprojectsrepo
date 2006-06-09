@@ -23,7 +23,6 @@ type(t_triangle) triangle(:)
     ! Local variables
     integer dim_z, row, col, col_offset, pack_position, p, q, p_p, p_q
     real beta, rho_center_row(3), rho_center_col(3), R, DOT, dist
-    logical Is_Same_Triangle
     ! Excutives
     dim_z=ubound(edge, 1)
     do col=1, dim_z
@@ -35,8 +34,7 @@ type(t_triangle) triangle(:)
             alpha(pack_position)=0.; beta=0.
             do q=1, 2 ! col 对的两个三角形
             do p=1, 2 ! row 对的两个三角形
-            If (Is_Same_Triangle(triangle(edge(row)%tri(p))%poi, &
-                triangle(edge(col)%tri(q))%poi)) then
+            If (edge(row)%tri(p)==edge(col)%tri(q)) then
                 do p_q=1, 3 ! q 三角形中的三点
                 do p_p=1, 3 ! p 三角形中的三点
                 if (p_p==p_q) then
@@ -44,7 +42,7 @@ type(t_triangle) triangle(:)
                         3, edge(row)%rho(:, p_p, p), 1, &
                             edge(col)%rho(:, p_q, q), 1)*(3-2*p)*(3-2*q)* &
                         scaling_s/2.
-                    beta=beta-scaling_s*(3-2*p)*(3-2*q)/2.
+                    beta=beta-scaling_s/2.
                 else
                     R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
                         triangle(edge(col)%tri(q))%tri_point(:,p_q))
@@ -52,7 +50,7 @@ type(t_triangle) triangle(:)
                         3, edge(row)%rho(:, p_p, p), 1, &
                         edge(col)%rho(:, p_q, q), 1)* &
                         (exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
-                    beta=beta+(exp(-scaling_s*R/2.)-1.)*(3-2*p)*(3-2*q)/R
+                    beta=beta+(exp(-scaling_s*R/2.)-1.)/R
                 end if
                 end do
                 end do
@@ -63,7 +61,7 @@ type(t_triangle) triangle(:)
                 alpha(pack_position)=alpha(pack_position)+DOT(3, &
                     rho_center_row, 1, rho_center_col, 1)*(3-2*p)*(3-2*q)* &
                     3.545/sqrt(triangle(edge(row)%tri(p))%area)*9.
-                beta=beta+3.545*(3-2*p)*(3-2*q)/sqrt(triangle(edge(row)%tri(p))%area)*9.
+                beta=beta+3.545/sqrt(triangle(edge(row)%tri(p))%area)*9.
             else
                 do p_q=1,3
                 do p_p=1,3
@@ -72,7 +70,7 @@ type(t_triangle) triangle(:)
                     alpha(pack_position)=alpha(pack_position)+DOT(3, &
                         edge(row)%rho(:, p_p, p), 1, edge(col)%rho(:, p_q, q), &
                         1)*exp(-scaling_s*R/2.)*(3-2*p)*(3-2*q)/R
-                    beta=beta+exp(-scaling_s*R/2.)*(3-2*p)*(3-2*q)/R
+                    beta=beta+exp(-scaling_s*R/2.)/R
                 end do
                 end do
             end if

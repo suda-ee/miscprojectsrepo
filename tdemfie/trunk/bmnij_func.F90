@@ -35,13 +35,12 @@ type(t_triangle) triangle(:)
             do p_p=1,3
             if (p_p==p_q) then
                 bmnij(ij_pos, mn_pos)=bmnij(ij_pos, mn_pos)- &
-                    scaling_s*(3-2*p)*(3-2*q)
+                    scaling_s
             else
                 R=dist(triangle(edge(m)%tri(p))%tri_point(:,p_p), &
                     triangle(edge(n)%tri(q))%tri_point(:,p_q))
                 bmnij(ij_pos, mn_pos)=bmnij(ij_pos, mn_pos)+ &
-                    I_ij_func(ij_pos, scaling_s*R)* &
-                    (3-2*p)*(3-2*q)/R
+                    I_ij_func(ij_pos, scaling_s*R)/R
             end if
             end do
             end do
@@ -51,8 +50,7 @@ type(t_triangle) triangle(:)
                 R=dist(triangle(edge(m)%tri(p))%tri_point(:,p_p), &
                     triangle(edge(n)%tri(q))%tri_point(:,p_q))
                 bmnij(ij_pos, mn_pos)=bmnij(ij_pos, mn_pos)+ &
-                    I_ij_func(ij_pos, scaling_s*R)* &
-                    (3-2*p)*(3-2*q)/R
+                    I_ij_func(ij_pos, scaling_s*R)/R
             end do
             end do
         end if
