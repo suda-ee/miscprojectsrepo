@@ -16,7 +16,7 @@ real t, psi_func
     ! Excutives
     laguerre_t(0)=exp(-t/2._DKIND)
     if (i_rank>=1) then
-        laguerre_t(1)=(1._DKIND-t)*exp(-t/2._DKIND)
+        laguerre_t(1)=(1._DKIND-t)*laguerre_t(0)
     end if
     do j=2, i_rank
         laguerre_t(j)=((2*j-1-t)*laguerre_t(j-1)-(j-1)*laguerre_t(j-2))/j

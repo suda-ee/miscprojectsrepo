@@ -12,7 +12,7 @@ implicit none
 ! subroutine arguments
 ! out_cni(dim_z, 2*num_dir, :) 最后一维为 Laguerre 多项式阶数
 integer dim_z, num_dir, i_rank
-real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(:,:), bmnij(:,:), &
+real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(0:,:), bmnij(0:,:), &
     v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
 type(t_edge) edge(:)
 type(t_triangle) triangle(:)

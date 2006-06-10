@@ -17,32 +17,15 @@ real freq, scaling_s, this(:), phis(:), thss(:), phss(:)
 character*64 nrmfile, outfile
     ! interfaces
     interface
-        subroutine zform(z, alpha, edge, triangle, scaling_s)
+        subroutine zform(z, alpha, amnij, bmnij, edge, triangle, scaling_s, &
+            max_rank)
             use mymod
+            integer max_rank
             real z(:), alpha(:), scaling_s
+            real amnij(0:, :), bmnij(0:, :)
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
         end subroutine zform
-        subroutine amnij_sub(dim_z, max_rank, edge, triangle, scaling_s, amnij)
-            use mymod
-            ! subroutine arguments
-            integer dim_z, max_rank
-            ! (j, i, n, m) packed storage
-            real amnij(max_rank, dim_z*(dim_z+1)/2)
-            real scaling_s
-            type(t_edge) edge(:)
-            type(t_triangle) triangle(:)
-        end subroutine amnij_sub
-        subroutine bmnij_sub(dim_z, max_rank, edge, triangle, scaling_s, bmnij)
-            use mymod
-            ! subroutine arguments
-            integer dim_z, max_rank
-            ! (j, i, n, m) packed storage
-            real bmnij(max_rank, dim_z*(dim_z+1)/2)
-            real scaling_s
-            type(t_edge) edge(:)
-            type(t_triangle) triangle(:)
-        end subroutine bmnij_sub
         subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, &
             num_dir, alpha, amnij, bmnij, v_rhs, i_rank, freq, max_r, &
             k_uvec_wave)
@@ -95,7 +78,9 @@ character*64 nrmfile, outfile
     deallocate(point)
     ! z if packed stored.
     allocate(z(num_edges*(num_edges+1)/2),alpha(num_edges*(num_edges+1)/2))
-    call zform(z, alpha, edge, triangle, scaling_s)
+    allocate(amnij(0:max_rank, num_edges*(num_edges+1)/2), &
+        bmnij(0:max_rank, num_edges*(num_edges+1)/2))
+    call zform(z, alpha, amnij, bmnij, edge, triangle, scaling_s, max_rank)
 #ifdef VERBOSE
     call date_and_time(my_date, my_time)
     write(*,*) my_time, ': zform have done.'
@@ -107,19 +92,6 @@ character*64 nrmfile, outfile
 #ifdef VERBOSE
     call date_and_time(my_date, my_time)
     write(*,*) my_time, ': The matrix have been factorized.'
-#endif
-    ! a, b if packed stored.
-    allocate(amnij(max_rank, num_edges*(num_edges+1)/2), &
-        bmnij(max_rank, num_edges*(num_edges+1)/2))
-    call amnij_sub(num_edges, max_rank, edge, triangle, scaling_s, amnij)
-#ifdef VERBOSE
-    call date_and_time(my_date, my_time)
-    write(*,*) my_time, ': amnij have done.'
-#endif
-    call bmnij_sub(num_edges, max_rank, edge, triangle, scaling_s, bmnij)
-#ifdef VERBOSE
-    call date_and_time(my_date, my_time)
-    write(*,*) my_time, ': bmnij have done.'
 #endif
     allocate(out_cni(num_edges, 2*n_i_dir, 0:max_rank))
     allocate(k_uvec_wave(3, n_i_dir))

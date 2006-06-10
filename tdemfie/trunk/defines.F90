@@ -4,7 +4,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define VERBOSE
 ! define macro 'DOUBLE' if you want double precision default.
-#undef DOUBLE
+#define DOUBLE
 ! Please always use lower-case letters in your source files but macros.
 #ifdef DOUBLE
 #define real real(8)
