@@ -21,7 +21,7 @@ type(t_triangle) triangle(:)
     ! local variables
     integer n_var, time, dir_index, j_var, k_var, tri_idx, &
         p_idx
-    real temp, s_integral(3), DOT, psi_func
+    real temp, s_integral(3), DOT, psi_val(3, 2, 0:2), t_cal(3, 2)
     ! Excutives
     if (polar==1) then
         dir_index=i_dir
@@ -36,14 +36,33 @@ type(t_triangle) triangle(:)
         do k_var=0, j_var-1
             temp=temp+(j_var-k_var)*out_cni(n_var,dir_index,k_var)
         end do
+        if (j_var<1) then
+            do tri_idx=1,2
+            do p_idx=1,3
+                t_cal(p_idx, tri_idx)=scaling_s*time*step + &
+                        scaling_s*DOT(3,triangle(edge(n_var)%tri(tri_idx))% &
+                            tri_point(:,p_idx),1,direction,1)
+            end do
+            end do
+            psi_val(:, :, 0)=exp(-t_cal(:, :)/2._DKIND)
+            psi_val(:, :, 1)=(1._DKIND-t_cal(:, :))*psi_val(:, :, 0)
+        end if
+        if (j_var==0) then
+            psi_val(:, :, 2)=psi_val(:, :, 0)
+        elseif (j_var==1) then
+            psi_val(:, :, 2)=psi_val(:, :, 1)
+        else
+            psi_val(:, :, 2)=((2*j_var-1-t_cal(:, :))* &
+                psi_val(:, :, 1)-(j_var-1)* &
+                        psi_val(:, :, 0))/j_var
+            psi_val(:, :, 0)=psi_val(:, :, 1)
+            psi_val(:, :, 1)=psi_val(:, :, 2)
+        end if
         s_integral=0.
         do tri_idx=1,2
             do p_idx=1,3
                 s_integral=s_integral+edge(n_var)%rho(:,p_idx,tri_idx)* &
-                    psi_func(j_var, scaling_s*time*step + &
-                        scaling_s*DOT(3,triangle(edge(n_var)%tri(tri_idx))% &
-                            tri_point(:,p_idx),1,direction,1)) &
-                        *(3-2*tri_idx)
+                    psi_val(p_idx, tri_idx, 2)*(3-2*tri_idx)
             end do
         end do
         s_integral=s_integral*edge(n_var)%len/6
