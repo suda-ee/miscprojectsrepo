@@ -1,1 +1,0 @@
-../qimo/figbegin.mp

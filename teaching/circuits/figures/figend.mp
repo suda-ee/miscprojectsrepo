@@ -1,1 +1,0 @@
-../qimo/figend.mp
