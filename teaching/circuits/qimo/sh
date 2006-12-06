@@ -1,0 +1,13 @@
+#!/bin/sh
+m4 cct.m4 | dpic -s > cct.mp
+cp figbegin.mp fig.mp
+cat cct.mp >> fig.mp
+cat figend.mp >> fig.mp
+mpost fig.mp
+for epsbympost in fig.*; do
+    destfile=fig`expr $epsbympost : 'fig.\([0-9]\+\)'`.mps
+    if (test $destfile != fig.mps); then
+        mv $epsbympost $destfile
+    fi
+done
+pdflatex form

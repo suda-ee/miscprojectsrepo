@@ -1,0 +1,252 @@
+\documentclass[a4paper,12pt]{exam}
+\usepackage{mathtime}
+\usepackage{mathrsfs,pifont}
+\usepackage{amsmath}
+\usepackage[thinqspace,thinqspace]{SIunits}
+\usepackage[scale={.8,.85},footskip=12pt]{geometry}
+\usepackage{lastpage,float}
+\NumberOfVersions{1}
+\usepackage{CJK}
+\ifx\pdfoutput\undefined
+\usepackage[dvipdfm]{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\fi
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{indentfirst}
+%\usepackage{floatflt}
+\newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
+\newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+\newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
+\newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+\newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}
+\newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
+
+\def\Varangle#1{\kern.75pt\vtop{\hbox{\kern-.75pt$/{#1}$}\kern-.35pt\hrule}}
+
+\begin{document}
+\begin{CJK*}{GBK}{song}
+\CJKtilde
+%\CJKcaption{GB}
+\DeclareGraphicsExtensions{.mps, .pdf}
+\renewcommand\figurename{图}
+\newcommand\AnswerLeading{解}
+\SectionPrefix{}
+% \NoKey
+\NoRearrange
+\ShortKey
+\SectionFont{\large\bfseries}
+\examname{电路分析}
+\DefineAnswerWrapper{\begin{description}\item [\AnswerLeading:]}{\end{description}}
+\def\namedata{学号：\underline{\hspace{51pt}}\hspace{17pt}姓名：\underline{\hspace{51pt}}\hspace{17pt}成绩：\underline{\hspace{51pt}}}
+\class{院系：\underline{\hspace{51pt}}\hspace{17pt}年级：\underline{\hspace{51pt}}\hspace{17pt}专业：\underline{\hspace{51pt}}}
+\begin{examtop}
+\setcounter{version}{2}
+\begin{center}
+\begin{tabular}{r}
+{\Large \bf苏州大学\underline{\examtype}课程试卷
+}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~6~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2007~年~1~月
+\end{tabular}
+\\\bigskip
+\classdata\\ \namedata
+\end{center}
+\bigskip
+\end{examtop}
+\begin{keytop}
+\begin{center}
+{\bf\Large 苏州大学\underline{\examtype}课程}\hspace{17pt}(\textsf{\Alph{version}})~卷参考答案\hspace{17pt}共~\pageref{LastPage}~页\bigskip\\
+院系：\underline{\hspace{51pt}}\hspace{17pt}专业：\underline{\hspace{51pt}}
+\end{center}
+\bigskip
+\end{keytop}
+
+\begin{shortanswer}[title={\begin{description}\item[一、]简单计算题~(每
+题~6~分，共~24~分)\end{description}}]
+\begin{question}
+    按元件的~VAR~直接填写图旁的未知量。
+    分别求当~$i_L =\unit{1}{\ampere}$~和
+    ~$i_L=\mathrm{e}^{-t}\unit{}{\ampere}$~时的~$i$。
+    \examvspace{12pt}\\
+    \includegraphics{fig1}
+    \examvspace*{3cm}
+    \begin{answer}
+    \unit{1}{\ampere} ($3'$)、$-17\mathrm{e}^{-t}\unit{}{\ampere}$ ($3'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    求图示电路中各元件的功率，并说明是发出功率还是吸收功率。
+    \examvspace{12pt}\\
+    \includegraphics{fig2}
+    \examvspace*{3cm}
+    \begin{answer}
+    电压源上的电流：$I_1=2-I_2=\unit{-8}{\ampere}$，
+    电阻吸收的功率~$P_1=U^2/R=\unit{100}{\watt}$ ($2'$)，
+    电压源的功率~$P_2=10I_1=\unit{-80}{\watt}$，发出~($2'$)。
+    电流源的功率~$P_3=10\times 2=\unit{20}{\watt}$，发出~($2'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    若已知两个同频正弦电压的相量分别为
+    ~$\dot{U}_1=-50\Varangle{30\degree}\unit{}{\volt}$，
+    $\dot{U}_2=100\Varangle{150\degree}\unit{}{\volt}$，其频率
+    ~$f=\unit{100}{\hertz}$。求：(1)~写出~$u_1$、$u_2$~的时域形式；(2)
+    $u_1$~与~$u_2$~的相位差。
+    \examvspace{12pt}\\
+    \examvspace*{3cm}
+    \begin{answer}
+    $u_1=50\sqrt{2}\cos(628t-150\degree)$ ($2'$)，
+    $u_2=100\sqrt{2}\cos(628t+150\degree)$。($3'$)\\相位差
+    ~$\varphi=180\degree$ ($1'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    求图示电路中电压~$U_1$，$U_2$~和电流~$I$。
+    \examvspace{12pt}\\
+    \includegraphics{fig3}
+    \examvspace*{3cm}
+    \begin{answer}
+    根据~KVL，$U_1=1\times 1+10=\unit{11}{\volt}$，$U_2=-1\times
+    2+10=\unit{8}{\volt}$ ($3'$)，
+    根据~KCL，$-1+10/2+I+2=0$，$I=\unit{-6}{\ampere}$ ($3'$)。
+    \end{answer}
+\end{question}
+\end{shortanswer}
+
+\begin{shortanswer}[title={\begin{description}\item[二、]计算题~(每
+题~10~分，共~50~分)\end{description}}]
+\begin{question}
+    求下图的戴维南等效电路。
+    \examvspace{12pt}\\
+    \includegraphics{fig4}
+    \examvspace*{7cm}
+    \begin{answer}
+    求开路电压~$U_{\mathrm{OC}}$：
+    $U_{\mathrm{OC}}=U_{\mathrm{ab}}=\unit{12}{\volt}$ ($4'$)；
+    求短路电流~$I_{\mathrm{SC}}$：$I_{\mathrm{SC}}=-I$；得到：
+    $I_{\mathrm{SC}}=\unit{0.375}{\ampere}$ ($3'$)；
+    求等效电阻~$R_0$：$R_0=
+    U_{\mathrm{OC}}/I_{\mathrm{SC}}=\unit{32}{\ohm}$ ($3'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    求图示电路的结点电压~$U_{n1}$、$U_{n2}$、$U_{n3}$。
+    \begin{figure}[H]
+    \hfill\includegraphics{fig5}
+    \end{figure}
+    \examvspace*{6cm}
+    \begin{answer}
+    \[
+    \begin{aligned}
+    (1/10+1/10)U_{n1}-1/10 U_{n2} & =-2 \\
+    -1/30 U_{n2}+(1/10+1/30)U_{n3} & =2 \\
+    U_{n2} & = 4
+    \end{aligned}
+    \]
+    解得：$U_{n1}=\unit{-8}{\volt}$、$U_{n2}=\unit{4}{\volt}$、
+    $U_{n3}=\unit{16}{\volt}$ (每式~$3'$，给出结果~$1'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    图示电路中，$R_1=\unit{15}{\ohm}$，$R_2=\unit{10}{\ohm}$，
+    $C=\unit{50}{\micro\farad}$，$t = 0$~时将开关~$S$~闭合，并且
+    ~$u_C(0_-) =\unit{9}{\volt}$，求电路的零输入响应~$u_C(t)$。
+    \examvspace{12pt}\\
+    \includegraphics{fig6}
+    \examvspace*{11cm}
+    \begin{answer}
+    由换路定则可得：$u_C(0_+)=u_C(0_-)=\unit{9}{\volt}$ ($2'$)，
+    开关s闭合后的等效电路图为：(略)。
+    可解得：$R_{\mathrm{i}}=\unit{3.6}{\ohm}$ ($5'$)，
+    $\tau=R_{\mathrm{i}}C=1.8\times 10^{-4}\unit{}{\second}$。
+    $u_C(t)=u_C(0_+)\mathrm{e}^{-t/\tau}=9\mathrm{e}^{-5555.56t}\unit{}{\volt}\;(t>0)$
+    ($3'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    电路如图所示，$\dot{I}_{\rm S}=2\Varangle{0\degree}\unit{}{\ampere}$。求最佳匹配时~$Z$~获得的最大功率及其此时的功率因数。
+    \begin{figure}[H]
+    \hfill\includegraphics{fig7}
+    \end{figure}
+    \examvspace*{9cm}
+    \begin{answer}
+    先求得一端口的诺顿等效电路，其中~($4'$)
+    \[
+    \dot{I}_{\rm SC}=\dot{I}_{\rm S}/2=1\Varangle{0\degree}\;\;Y_{\rm eq}=(0.25-{\rm j}0.25)\unit{}{\siemens}
+    \]
+    最大匹配时有：$Y=Y_{\rm eq}^*=(0.25+{\rm j}0.25)\unit{}{\siemens}$，
+    此时获得的最大功率为~$P_{\rm max}=(0.5)^2/0.25=\unit{1}{\watt}$ ($3'$)；复
+    功率
+    ~$\dot{S}=\dot{U}\dot{I}^*=\sqrt{2}\Varangle{-45\degree}\unit{}{\volt\usk\ampere}$，故功率因数~$\lambda=P/S=1/\sqrt{2}$
+    ($3'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    电路如下图所示，试求节点~A~的电位和电流源供给电路的有功功率、无功功率。
+    \begin{figure}[H]
+    \hfill\includegraphics{fig8}
+    \end{figure}
+    \examvspace*{7cm}
+    \begin{answer}
+    $(\frac{1}{4}+\frac{1}{-\mathrm{j}4})\dot{U}_{\mathrm{A}}=\mathrm{j}10+20/4$，解得：$\dot{U}_{\mathrm{A}}=30+\mathrm{j}10=1031.62\Varangle{18.43\degree}\unit{}{\volt}$
+    ($4'$)，
+    $\dot{U}_1=-\dot{U}_{\mathrm{A}}-2\dot{I}_{\mathrm{S}}=-30-\mathrm{j}30\unit{}{\volt}$
+    ($3'$)，电流源的复功率
+    ~$\bar{S}=\dot{U}_1\dot{I}_{\mathrm{S}}^*=-300+\mathrm{j}300\unit{}{\volt\usk\ampere}$，电流源供给电路的有功功率为~$\unit{300}{\watt}$；无功功率为
+    ~$\unit{300}{var}$（感性）($3'$)。
+    \end{answer}
+\end{question}
+\end{shortanswer}
+
+\begin{shortanswer}[title={\begin{description}\item[三、]计算分析题~(每
+题~13~分，共~26~分)\end{description}}]
+\begin{question}
+    图示电路中，开关合在~1~时已达稳态。$t=0$~时开关由~1~合向~2，求
+    ~$t>0$~时的~$u_L(t)$。
+    \begin{figure}[H]
+    \hfill\includegraphics{fig9}
+    \end{figure}
+    \examvspace*{15cm}
+    \begin{answer}
+    $i_L(0_+)=i_L(0_-)=\unit{-4}{\ampere}$ ($2'$)，换路后用叠加定理得到
+    ~$u_{\mathrm{OC}}=\unit{12}{\volt}$，
+    $R_{\mathrm{eq}}=\unit{10}{\ohm}$ ($3'$)。求得
+    ~$i_L(\infty)=\unit{1.2}{\ampere}$ ($2'$)，
+    $\tau=L/R_{\mathrm{eq}}=\unit{0.01}{\second}$ ($1'$)，所以
+    ~$i_L=[1.2+(-4-1.2)\mathrm{e}^{-100t}]\unit{}{\ampere}$，$u_L=L
+    \mathrm{d}i_L/\mathrm{d}t=52\mathrm{e}^{-100t}\unit{}{\volt}$ ($5'$)。
+    \end{answer}
+\end{question}
+\begin{question}
+    附图电路是阻容移相电路。(1)~如果要求~$\dot{U}_C$~滞后
+    ~$\dot{U}_{\mathrm{S}}$~的角度为~$\pi$，即反相，$R$、$C$~应如何选择
+    ？(2)~如果将~$R$、$C$~位置互换，又如何选择~$R$、$C$？
+    \begin{figure}[H]
+    \hfill\includegraphics{fig10}
+    \end{figure}
+    \examvspace*{9cm}
+    \begin{answer}
+    (1)~原图可看做三个~$RC$~串联结构级联，则每级移相为
+    \[
+    \varphi=\arg \frac{1/\mathrm{j}\omega C}{1+1/\mathrm{j}\omega
+    C}=\arg \frac{1}{1+\mathrm{j}\omega RC}=-\tan^{-1}\omega RC
+    \]
+    要使~$\dot{U}_C$~与~$\dot{U}_{\mathrm{S}}$~反相，须有~$\omega
+    RC=\tan \pi/3=\sqrt{3}$ ($7'$)。
+    (2)~原图可看做三个~$RC$~串联结构级联，则每级移相为
+    \[
+    \varphi=\arg \frac{R}{1+1/\mathrm{j}\omega
+    C}=\arg \frac{\mathrm{j}\omega RC}{1+\mathrm{j}\omega RC}=\pi/2-\tan^{-1}\omega RC
+    \]
+    要使~$\dot{U}_C$~与~$\dot{U}_{\mathrm{S}}$~反相，须有~$\omega
+    RC=\tan \pi/6=\sqrt{3}/3$ ($6'$)。
+    \end{answer}
+\end{question}
+\end{shortanswer}
+\end{document}
+\end{CJK*}

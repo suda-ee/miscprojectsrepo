@@ -1,0 +1,56 @@
+#!/bin/sh
+case "$1" in
+    test)
+        cat ccthead.m4 > test.m4
+        cat one.m4 >> test.m4
+        m4 test.m4 | dpic -s > test.mp
+        cp figbegin.mp tstfig.mp
+        cat test.mp >> tstfig.mp
+        cat figend.mp >> tstfig.mp
+        mpost tstfig.mp
+        for epsbympost in tstfig.*; do
+            destfile=tstfig`expr $epsbympost : 'tstfig.\([0-9]\+\)'`.mps
+            if (test $destfile != tstfig.mps); then
+                mv $epsbympost $destfile
+            fi
+        done
+        echo "\input figrlsbg.tex" > figrls.tex
+        for name in tstfig*mps; do
+            echo "\includegraphics{$name} \newpage" >> figrls.tex
+        done
+        echo "\input figrlsed.tex" >> figrls.tex
+        pdflatex figrls
+        pdfcrop figrls.pdf figures.pdf
+        acroread figures.pdf
+        ;;
+    out)
+        cat one.m4 >> work.m4
+        ;;
+    *)
+        m4 cct.m4 | dpic -s > cct.mp
+        cp figbegin.mp fig.mp
+        cat cct.mp >> fig.mp
+        cat figend.mp >> fig.mp
+        mpost fig.mp
+        for epsbympost in fig.?; do
+            destfile=fig0`expr $epsbympost : 'fig.\([1-9]\)'`.mps
+            if (test $destfile != fig0.mps); then
+                mv $epsbympost $destfile
+            fi
+        done
+        for epsbympost in fig.*; do
+            destfile=fig`expr $epsbympost : 'fig.\([1-9][0-9]\+\)'`.mps
+            if (test $destfile != fig.mps); then
+                mv $epsbympost $destfile
+            fi
+        done
+        echo "\input figrlsbg.tex" > figrls.tex
+        for name in fig*mps; do
+            echo "\includegraphics{$name}" >> figrls.tex
+            echo "\newpage" >> figrls.tex
+        done
+        echo "\input figrlsed.tex" >> figrls.tex
+        pdflatex figrls
+        pdfcrop figrls.pdf figures.pdf
+        ;;
+esac
