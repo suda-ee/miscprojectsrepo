@@ -135,7 +135,7 @@ define(`elen_', (elen_*1.25))
         inductor(down_ elen*.8); llabel(,\unit{j10}{\ohm},); dot
     }
     line right_ elen*.8
-    resistor(down_ elen*.8, E); llabel(,Z_\mathrm{L},)
+    resistor(down_ elen*.8, E); variable(,A,,dimen_*.6); llabel(,Z_\mathrm{L},)
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
