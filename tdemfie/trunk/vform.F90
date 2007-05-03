@@ -6,25 +6,25 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! This subroutine is to generate the right-hand side
 subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, num_dir, alpha, &
-    amnij, bmnij, v_rhs, i_rank, freq, max_r, k_uvec_wave)
+    amnij, bmnij, v_rhs, i_rank, freq, max_r, inc_wave)
 use mymod
 implicit none
 ! subroutine arguments
 ! out_cni(dim_z, 2*num_dir, :) 最后一维为 Laguerre 多项式阶数
 integer dim_z, num_dir, i_rank
 real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(0:,:), bmnij(0:,:), &
-    v_rhs(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3, num_dir)
+    v_rhs(dim_z, 2*num_dir), freq, max_r, inc_wave(3, 3, num_dir)
 type(t_edge) edge(:)
 type(t_triangle) triangle(:)
     ! interfaces
     interface
-            function ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, &
+            function ome_gen(dim_z, i_rank, freq, max_r, inc_wave, num_dir, &
                 edge, triangle, scaling_s)
                 use mymod
                 implicit none
                 integer dim_z, i_rank, num_dir
                 real ome_gen(dim_z, 2*num_dir), freq, max_r, &
-                    k_uvec_wave(3,num_dir), scaling_s
+                    inc_wave(3,3,num_dir), scaling_s
                 type(t_edge) edge(:)
                 type(t_triangle) triangle(:)
         end function ome_gen
@@ -34,7 +34,7 @@ type(t_triangle) triangle(:)
     integer n_var, k_var, j_var, row, col_offset, m_offset, mn_pos
     real temp(2*num_dir)
     ! Excutives
-    v_rhs=ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, edge, &
+    v_rhs=ome_gen(dim_z, i_rank, freq, max_r, inc_wave, num_dir, edge, &
         triangle, scaling_s)
     if (i_rank/=0) then
     do row=1, dim_z

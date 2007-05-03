@@ -6,27 +6,19 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! solve the \vec{V}_i(\vec{r}) integration.
 function v_wave_gen(point, i_rank, scaling_s, freq, &
-            max_r, k_uvec_wave, num_dir)
+            max_r, inc_wave, num_dir)
 implicit none
 ! arguments
 ! max_r is the maxmium Abs(r)
 ! v_wave_gen(3, 1:num_dir) for theta polarization
 integer i_rank, num_dir
 real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
-    k_uvec_wave(3,num_dir)
-    ! interfaces
-    interface
-        function multicrossuni(x1, x2, nums)
-            integer nums
-            real x1(3, nums), x2(3, nums), multicrossuni(3, nums)
-        end function
-    end interface
+    inc_wave(3,3,num_dir)
     ! local variables
     integer dir, i
     real r, tpr, bwr, tv, time_cut, t0_delay, delta ! in dB
     real v_scalar(num_dir), lb, ub, h, delay
-    real theta_vec(3,num_dir), phi_vec(3,num_dir), DOT, psi_func, &
-        zunivec(3, num_dir)
+    real theta_vec(3,num_dir), phi_vec(3,num_dir), DOT, psi_func
     ! Excutives
     tpr = -60.; bwr= -6.
     ! Determine Gaussian mean and variance in the
@@ -43,7 +35,7 @@ real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
     ! Compute time-domain pulse envelope, normalized by sqrt(2*pi*tv):
     v_scalar = 0.
     do dir=1, num_dir
-        delay = t0_delay+DOT(3,k_uvec_wave(:,dir),1,point,1)
+        delay = t0_delay+DOT(3,inc_wave(:,1,dir),1,point,1)
         lb=delay-time_cut
         ub=delay+time_cut
         h=time_cut/MAX_STP
@@ -61,13 +53,10 @@ real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
         v_scalar(dir)=(ub-lb)*v_scalar(dir)/(3.*MAX_STP)
     end do
     v_scalar=v_scalar*scaling_s
-    zunivec=reshape((/((/0.,0.,1./),dir=1,num_dir)/),(/3,num_dir/))
-    phi_vec=multicrossuni(k_uvec_wave, zunivec, num_dir)
-    theta_vec=multicrossuni(phi_vec, k_uvec_wave, num_dir)
-    v_wave_gen(1,1:num_dir)=theta_vec(1,:)*v_scalar
-    v_wave_gen(2,1:num_dir)=theta_vec(2,:)*v_scalar
-    v_wave_gen(3,1:num_dir)=theta_vec(3,:)*v_scalar
-    v_wave_gen(1,num_dir+1:2*num_dir)=phi_vec(1,:)*v_scalar
-    v_wave_gen(2,num_dir+1:2*num_dir)=phi_vec(2,:)*v_scalar
-    v_wave_gen(3,num_dir+1:2*num_dir)=phi_vec(3,:)*v_scalar
+    v_wave_gen(1,1:num_dir)=inc_wave(1,2,:)*v_scalar
+    v_wave_gen(2,1:num_dir)=inc_wave(2,2,:)*v_scalar
+    v_wave_gen(3,1:num_dir)=inc_wave(3,2,:)*v_scalar
+    v_wave_gen(1,num_dir+1:2*num_dir)=inc_wave(1,3,:)*v_scalar
+    v_wave_gen(2,num_dir+1:2*num_dir)=inc_wave(2,3,:)*v_scalar
+    v_wave_gen(3,num_dir+1:2*num_dir)=inc_wave(3,3,:)*v_scalar
 end function v_wave_gen

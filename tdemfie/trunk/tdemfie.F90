@@ -28,12 +28,12 @@ character*64 nrmfile, outfile
         end subroutine zform
         subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, &
             num_dir, alpha, amnij, bmnij, v_rhs, i_rank, freq, max_r, &
-            k_uvec_wave)
+            inc_wave)
             use mymod
             integer dim_z, num_dir, i_rank
             real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(:,:), &
                 bmnij(:,:), v_rhs(dim_z, 2*num_dir), freq, max_r, &
-                k_uvec_wave(3, num_dir)
+                inc_wave(3, 3, num_dir)
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
         end subroutine vform
@@ -46,9 +46,6 @@ character*64 nrmfile, outfile
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
         end function cal_est
-        function crossuni(x1, x2)
-            real x1(3), x2(3), crossuni(3)
-        end function crossuni
         function one_multi_dot(dimen, one, multi, num)
             integer dimen, num
             real one_multi_dot(num), one(dimen), multi(dimen, num)
@@ -59,10 +56,9 @@ character*64 nrmfile, outfile
     real max_r, maxtime, p_dir(3), step, t0_delay, time_cut
     integer, allocatable :: ipiv(:)
     real, allocatable :: point(:,:), z(:), alpha(:), out_cni(:,:,:), &
-        k_uvec_wave(:,:), s_direction(:,:), amnij(:, :), bmnij(:, :)
+        inc_wave(:,:,:), s_direction(:,:), amnij(:, :), bmnij(:, :)
     integer i_dir, s_dir, n_i_dir, n_s_dir, polar, time
     real, allocatable :: e_s_rt(:,:), rcs(:,:,:,:)
-    real z_uni(3)
     type(t_edge), allocatable :: edge(:)
     type(t_triangle), allocatable :: triangle(:)
     ! Excutives
@@ -94,18 +90,24 @@ character*64 nrmfile, outfile
     write(*,*) my_time, ': The matrix have been factorized.'
 #endif
     allocate(out_cni(num_edges, 2*n_i_dir, 0:max_rank))
-    allocate(k_uvec_wave(3, n_i_dir))
-    k_uvec_wave(1,:)= -sin(this)*cos(phis)
-    k_uvec_wave(2,:)= -sin(this)*sin(phis)
-    k_uvec_wave(3,:)= -cos(this)
+    allocate(inc_wave(3, 3, n_i_dir))
+    inc_wave(1,1,:)= -sin(this)*cos(phis) ! 入射波矢量 k
+    inc_wave(2,1,:)= -sin(this)*sin(phis)
+    inc_wave(3,1,:)= -cos(this)
+    inc_wave(1,2,:)= cos(this)*cos(phis) ! 入射波 theta 极化方向矢量
+    inc_wave(2,2,:)= cos(this)*sin(phis)
+    inc_wave(3,2,:)= -sin(this)
+    inc_wave(1,3,:)= -sin(phis) ! 入射波 phi 极化方向矢量
+    inc_wave(2,3,:)= cos(phis)
+    inc_wave(3,3,:)= 0._DKIND
     call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, alpha, &
-        amnij, bmnij, out_cni(:,:,0), 0, freq, max_r, k_uvec_wave)
+        amnij, bmnij, out_cni(:,:,0), 0, freq, max_r, inc_wave)
     call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,0), &
         num_edges, info)
     do i_rank=1,max_rank
         call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, &
             alpha, amnij, bmnij, out_cni(:,:,i_rank), i_rank, freq, max_r, &
-            k_uvec_wave)
+            inc_wave)
 #ifdef VERBOSE
         call date_and_time(my_date, my_time)
         write(*,*) my_time, ': vform i_rank', i_rank, 'have done.'
@@ -135,31 +137,40 @@ character*64 nrmfile, outfile
     s_direction(3,:)= cos(thss)
     allocate(e_s_rt(3,0:num_time))
     allocate(rcs(0:num_time, n_s_dir, n_i_dir, 2))
-    z_uni=(/0.,0.,1./)
-    do polar=1, 2 ! ploar 1 for theta polarization, 2 for phi.
-    do i_dir=1, n_i_dir
     if (mono) then
-        e_s_rt=cal_est(num_time, step, -k_uvec_wave(:,i_dir), i_dir, &
-            polar, out_cni, scaling_s, max_rank, triangle, edge)
-        p_dir= crossuni(k_uvec_wave(:,i_dir),z_uni)
-        if (polar==1) then
-            p_dir=crossuni(p_dir,k_uvec_wave(:,i_dir))
-        end if
-        rcs(:, 1, i_dir,polar)=one_multi_dot(3, p_dir, e_s_rt, num_time+1)
+        do i_dir=1, n_i_dir
+        do polar=1, 2 ! ploar 1 for theta polarization, 2 for phi.
+            e_s_rt=cal_est(num_time, step, -inc_wave(:,1,i_dir), i_dir, &
+                polar, out_cni, scaling_s, max_rank, triangle, edge)
+            if (polar==1) then
+                p_dir=inc_wave(:,2,i_dir)
+            else
+                p_dir=inc_wave(:,3,i_dir)
+            end if
+            rcs(:, 1, i_dir,polar)=one_multi_dot(3, p_dir, e_s_rt, num_time+1)
+        end do
+        end do
     else
+        do i_dir=1, n_i_dir
         do s_dir=1, n_s_dir
+        do polar=1, 2 ! ploar 1 for theta polarization, 2 for phi.
             e_s_rt=cal_est(num_time, step, s_direction(:,s_dir), i_dir, &
                 polar, out_cni, scaling_s, max_rank, triangle, edge)
-            p_dir= crossuni(z_uni,s_direction(:,s_dir))
             if (polar==1) then
-                p_dir=crossuni(s_direction(:,s_dir),p_dir)
+                p_dir(1)=cos(thss(s_dir))*cos(phss(s_dir))
+                p_dir(2)=cos(thss(s_dir))*sin(phss(s_dir))
+                p_dir(3)=-sin(thss(s_dir))
+            else
+                p_dir(1)=-sin(phss(s_dir))
+                p_dir(2)=cos(phss(s_dir))
+                p_dir(3)=0._DKIND
             end if
             rcs(:, s_dir, i_dir,polar)=one_multi_dot(3, p_dir, &
                 e_s_rt, num_time+1)
         end do
+        end do
+        end do
     end if
-    end do
-    end do
     deallocate(out_cni, triangle, edge, e_s_rt)
     ! 写入时域 RCS 信号
     open(unit=1552,file=outfile,form='unformatted')

@@ -5,15 +5,15 @@
 #include "defines.F90"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! this function generates the \Omega_{mi} of the right-hand side.
-function ome_gen(dim_z, i_rank, freq, max_r, k_uvec_wave, num_dir, edge, triangle, scaling_s)
+function ome_gen(dim_z, i_rank, freq, max_r, inc_wave, num_dir, edge, triangle, scaling_s)
 use mymod
 implicit none
 ! subroutine arguments
-! k_uvec_wave(:,3): the unit vector in the direction of wave progation.
+! inc_wave(3,3,num_dir): the unit vector in the direction of wave progation.
 ! (multiple angles)
 ! fld_stren(2): the field strength of theta and phi polarization.
 integer dim_z, i_rank, num_dir
-real ome_gen(dim_z, 2*num_dir), freq, max_r, k_uvec_wave(3,num_dir), scaling_s
+real ome_gen(dim_z, 2*num_dir), freq, max_r, inc_wave(3,3,num_dir), scaling_s
 type(t_edge) edge(:)
 type(t_triangle) triangle(:)
 ! interfaces
@@ -24,10 +24,10 @@ interface
          multiarray(dimen,dim_multi)
     end function
     function v_wave_gen(point, i_rank, scaling_s, freq, &
-                max_r, k_uvec_wave, num_dir)
+                max_r, inc_wave, num_dir)
     integer i_rank, num_dir
     real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
-        k_uvec_wave(3,num_dir)
+        inc_wave(3,3,num_dir)
     end function v_wave_gen
 end interface
 ! Local variables
@@ -41,11 +41,11 @@ do m_row=1, dim_z
         ome_gen(m_row,:)=ome_gen(m_row,:)+ &
             one_multi_dot(3,edge(m_row)%rho(:,a_point,1), &
                 v_wave_gen(triangle(edge(m_row)%tri(1))%tri_point(:,a_point), &
-                i_rank, scaling_s, freq, max_r, k_uvec_wave, num_dir), &
+                i_rank, scaling_s, freq, max_r, inc_wave, num_dir), &
                 2*num_dir) &
             -one_multi_dot(3,edge(m_row)%rho(:,a_point,2), &
                 v_wave_gen(triangle(edge(m_row)%tri(2))%tri_point(:,a_point), &
-                i_rank, scaling_s, freq, max_r, k_uvec_wave, num_dir), &
+                i_rank, scaling_s, freq, max_r, inc_wave, num_dir), &
                 2*num_dir)
     end do
     ome_gen(m_row,:)=ome_gen(m_row,:)*edge(m_row)%len/6.
