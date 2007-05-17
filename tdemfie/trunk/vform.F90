@@ -57,7 +57,7 @@ type(t_triangle) triangle(:)
         temp=temp+out_cni(n_var,:,j_var)*ETA_0*scaling_s*scaling_s*.25
         v_rhs(row, :)=v_rhs(row, :) - temp*amnij(i_rank-j_var, mn_pos) - &
             out_cni(n_var,:,j_var)* &
-            bmnij(i_rank-j_var, mn_pos)/sqrt(EPSILON_R)*ETA_0
+            bmnij(i_rank-j_var, mn_pos)/EPSILON_R*ETA_0
     end do
     end do
     end do
