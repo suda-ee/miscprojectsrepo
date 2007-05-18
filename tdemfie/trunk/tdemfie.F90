@@ -17,21 +17,21 @@ real freq, scaling_s, this(:), phis(:), thss(:), phss(:)
 character*64 nrmfile, outfile
     ! interfaces
     interface
-        subroutine zform(z, alpha, amnij, bmnij, edge, triangle, scaling_s, &
+        subroutine zform(z, amnij, bmnij, edge, triangle, scaling_s, &
             max_rank)
             use mymod
             integer max_rank
-            real z(:), alpha(:), scaling_s
+            real z(:), scaling_s
             real amnij(0:, :), bmnij(0:, :)
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
         end subroutine zform
         subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, &
-            num_dir, alpha, amnij, bmnij, v_rhs, i_rank, freq, max_r, &
+            num_dir, amnij, bmnij, v_rhs, i_rank, freq, max_r, &
             inc_wave)
             use mymod
             integer dim_z, num_dir, i_rank
-            real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(:,:), &
+            real scaling_s, out_cni(:, :, 0:), amnij(:,:), &
                 bmnij(:,:), v_rhs(dim_z, 2*num_dir), freq, max_r, &
                 inc_wave(3, 3, num_dir)
             type(t_edge) edge(:)
@@ -55,7 +55,7 @@ character*64 nrmfile, outfile
     integer num_triangles, num_points, num_edges, info, i_rank, num_time
     real max_r, maxtime, p_dir(3), step, t0_delay, time_cut
     integer, allocatable :: ipiv(:)
-    real, allocatable :: point(:,:), z(:), alpha(:), out_cni(:,:,:), &
+    real, allocatable :: point(:,:), z(:), out_cni(:,:,:), &
         inc_wave(:,:,:), s_direction(:,:), amnij(:, :), bmnij(:, :)
     integer i_dir, s_dir, n_i_dir, n_s_dir, polar, time
     real, allocatable :: e_s_rt(:,:), rcs(:,:,:,:)
@@ -73,10 +73,10 @@ character*64 nrmfile, outfile
     max_r=max(abs(maxval(point)),abs(minval(point)))
     deallocate(point)
     ! z if packed stored.
-    allocate(z(num_edges*(num_edges+1)/2),alpha(num_edges*(num_edges+1)/2))
+    allocate(z(num_edges*(num_edges+1)/2))
     allocate(amnij(0:max_rank, num_edges*(num_edges+1)/2), &
         bmnij(0:max_rank, num_edges*(num_edges+1)/2))
-    call zform(z, alpha, amnij, bmnij, edge, triangle, scaling_s, max_rank)
+    call zform(z, amnij, bmnij, edge, triangle, scaling_s, max_rank)
 #ifdef VERBOSE
     call date_and_time(my_date, my_time)
     write(*,*) my_time, ': zform have done.'
@@ -100,13 +100,13 @@ character*64 nrmfile, outfile
     inc_wave(1,3,:)= -sin(phis) ! 入射波 phi 极化方向矢量
     inc_wave(2,3,:)= cos(phis)
     inc_wave(3,3,:)= 0._DKIND
-    call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, alpha, &
+    call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, &
         amnij, bmnij, out_cni(:,:,0), 0, freq, max_r, inc_wave)
     call SPTRS('U', num_edges, 2*n_i_dir, z, ipiv, out_cni(:,:,0), &
         num_edges, info)
     do i_rank=1,max_rank
         call vform(num_edges, edge, triangle, scaling_s, out_cni, n_i_dir, &
-            alpha, amnij, bmnij, out_cni(:,:,i_rank), i_rank, freq, max_r, &
+            amnij, bmnij, out_cni(:,:,i_rank), i_rank, freq, max_r, &
             inc_wave)
 #ifdef VERBOSE
         call date_and_time(my_date, my_time)
@@ -119,7 +119,7 @@ character*64 nrmfile, outfile
         write(*,*) my_time, ': The solver i_rank', i_rank, 'have done.'
 #endif
     end do
-    deallocate(z, alpha, amnij, bmnij)
+    deallocate(z, amnij, bmnij)
     ! 下面开始计算时域的 RCS 信号
     if (mono) then
         n_s_dir=1
@@ -173,10 +173,10 @@ character*64 nrmfile, outfile
     end if
     deallocate(out_cni, triangle, edge, e_s_rt)
     ! 写入时域 RCS 信号
-    open(unit=1552,file=outfile,form='unformatted')
+    open(unit=1552,file=outfile,form='formatted')
     if (mono) then
     ! 头：列数；垂直极化；水平极化
-    write(1552) 2*n_i_dir*n_s_dir+1, &
+    write(1552,1937) 2*n_i_dir*n_s_dir+1, &
         (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
         ! 0; 入射角 theta. 0; 入射角phi
         0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
@@ -195,7 +195,7 @@ character*64 nrmfile, outfile
         (time*step/CC_0,rcs(time, :, :, :), time=0,num_time) ! 时间输出单位为 ns
     else
     ! 头：列数；垂直极化；水平极化
-    write(1552) 2*n_i_dir*n_s_dir+1, &
+    write(1552,1937) 2*n_i_dir*n_s_dir+1, &
         (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
         ! 0; 入射角 theta. 0; 入射角phi
         0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
@@ -215,4 +215,5 @@ character*64 nrmfile, outfile
     end if
     close(1552)
     deallocate(rcs)
+1937    format(<2*n_i_dir*n_s_dir+1>G15.7)
 end subroutine tdemfie

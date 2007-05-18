@@ -5,14 +5,14 @@
 #include "defines.F90"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! This subroutine is to generate the right-hand side
-subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, num_dir, alpha, &
+subroutine vform(dim_z, edge, triangle, scaling_s, out_cni, num_dir, &
     amnij, bmnij, v_rhs, i_rank, freq, max_r, inc_wave)
 use mymod
 implicit none
 ! subroutine arguments
 ! out_cni(dim_z, 2*num_dir, :) 最后一维为 Laguerre 多项式阶数
 integer dim_z, num_dir, i_rank
-real scaling_s, out_cni(:, :, 0:), alpha(:), amnij(0:,:), bmnij(0:,:), &
+real scaling_s, out_cni(:, :, 0:), amnij(0:,:), bmnij(0:,:), &
     v_rhs(dim_z, 2*num_dir), freq, max_r, inc_wave(3, 3, num_dir)
 type(t_edge) edge(:)
 type(t_triangle) triangle(:)
@@ -41,14 +41,14 @@ type(t_triangle) triangle(:)
     m_offset=row*(row-1)/2
     do n_var=1, dim_z
     col_offset=n_var*(n_var-1)/2
-    if (n_var>row) then
+    if (n_var>=row) then
         mn_pos = row + col_offset
     else
         mn_pos = n_var + m_offset
     end if
     do j_var=0, i_rank-1
-        v_rhs(row, :)=v_rhs(row, :)-(i_rank-j_var)*out_cni(row,:,j_var)* &
-            alpha(mn_pos)*ETA_0*scaling_s*scaling_s
+        v_rhs(row, :)=v_rhs(row, :)-(i_rank-j_var)*out_cni(n_var,:,j_var)* &
+            amnij(0,mn_pos)*ETA_0*scaling_s*scaling_s
         temp=0.
         do k_var=0, j_var-1
             temp=temp+(j_var-k_var)*out_cni(n_var,:,k_var)

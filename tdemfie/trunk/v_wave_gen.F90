@@ -18,7 +18,7 @@ real v_wave_gen(3,2*num_dir), point(3), scaling_s, freq, max_r, &
     integer dir, i
     real r, tpr, bwr, tv, time_cut, t0_delay, delta ! in dB
     real v_scalar(num_dir), lb, ub, h, delay
-    real theta_vec(3,num_dir), phi_vec(3,num_dir), DOT, psi_func
+    real DOT, psi_func
     ! Excutives
     tpr = -60.; bwr= -6.
     ! Determine Gaussian mean and variance in the
