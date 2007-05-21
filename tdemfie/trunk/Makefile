@@ -1,7 +1,7 @@
 # $URL$
 # $Id$
 F90	=	ifort
-LARGS	=	-L/opt/intel/cmkl/8.0/lib/32 -lmkl_lapack -lmkl_ia32 -lsvml
+LARGS	=	-L/opt/intel/cmkl/9.0/lib/32 -lmkl_lapack -lmkl_ia32 -lmkl_lapack32 -lmkl -lvml
 #CARGS	=	-u -warn all -debug extended -inline-debug-info -g
 CARGS	=	-warn all -ftz -ip -ipo -O3 -xW -align all -prof-use #-prof-genx
 DEFS	=	define.F90
