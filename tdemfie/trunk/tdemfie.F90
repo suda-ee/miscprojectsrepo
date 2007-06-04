@@ -31,8 +31,8 @@ character*64 nrmfile, outfile
             inc_wave)
             use mymod
             integer dim_z, num_dir, i_rank
-            real scaling_s, out_cni(:, :, 0:), amnij(:,:), &
-                bmnij(:,:), v_rhs(dim_z, 2*num_dir), freq, max_r, &
+            real scaling_s, out_cni(:, :, 0:), amnij(0:,:), &
+                bmnij(0:,:), v_rhs(dim_z, 2*num_dir), freq, max_r, &
                 inc_wave(3, 3, num_dir)
             type(t_edge) edge(:)
             type(t_triangle) triangle(:)
