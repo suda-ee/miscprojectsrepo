@@ -57,7 +57,7 @@ character*64 nrmfile, outfile
     integer, allocatable :: ipiv(:)
     real, allocatable :: point(:,:), z(:), out_cni(:,:,:), &
         inc_wave(:,:,:), s_direction(:,:), amnij(:, :), bmnij(:, :)
-    integer i_dir, s_dir, n_i_dir, n_s_dir, polar, time
+    integer i_dir, s_dir, n_i_dir, n_s_dir, polar, time, k_var
     real, allocatable :: e_s_rt(:,:), rcs(:,:,:,:)
     type(t_edge), allocatable :: edge(:)
     type(t_triangle), allocatable :: triangle(:)
@@ -137,6 +137,13 @@ character*64 nrmfile, outfile
     s_direction(3,:)= cos(thss)
     allocate(e_s_rt(3,0:num_time))
     allocate(rcs(0:num_time, n_s_dir, n_i_dir, 2))
+    do i_rank=max_rank, 0, -1
+        out_cni(:,:,i_rank)=out_cni(:,:,i_rank)*.25_DKIND
+        do k_var=0, i_rank-1
+            out_cni(:,:,i_rank)=out_cni(:,:,i_rank)+(i_rank-k_var)* &
+                out_cni(:,:,k_var)
+        end do
+    end do
     if (mono) then
         do i_dir=1, n_i_dir
         do polar=1, 2 ! ploar 1 for theta polarization, 2 for phi.
