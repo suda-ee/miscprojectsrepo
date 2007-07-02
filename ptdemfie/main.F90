@@ -17,22 +17,15 @@ implicit none
             real freq, scaling_s, this(:), phis(:), thss(:), phss(:)
             character*64 nrmfile, outfile
         end subroutine ptdemfie
-        subroutine prcs_cal(mono, frqs, this, phis, thss, phss, &
-            nrmfile, coeffile, resultfile, ictxt)
-            logical mono
-            integer ictxt
-            real frqs(:), this(:), phis(:), thss(:), phss(:)
-            character*64 nrmfile, coeffile, resultfile
-        end subroutine prcs_cal
     end interface
     ! Local variables
-    integer nthi, nphi, nths, nphs, nfri, max_rank, dir_p, dir_t
+    integer nthi, nphi, nths, nphs, max_rank, dir_p, dir_t
     real freq, scaling_s, s_thi, dthi, s_phi, dphi, s_ths, dths, s_phs, &
-        dphs, s_fri, dfri
-    character*64 trifile, nrmfile, trcsffile, resultfile
-    logical re_tran, re_cal, mono
+        dphs
+    character*64 trifile, nrmfile, trcsffile
+    logical re_tran, mono
     ! k_uvec_wave(3, num_dir) 入射方向单位矢量
-    real, allocatable :: this(:), phis(:), frqs(:), &
+    real, allocatable :: this(:), phis(:), &
         thss(:), phss(:)
     ! needed for parallel computing
     integer iam, nprocs, nprow, npcol, ictxt, myrow, mycol
@@ -48,7 +41,6 @@ implicit none
     open(unit=1602+iam,file=CONF,status='old', action='read')
     read(1602+iam,*) nprow, npcol
     read(1602+iam,*) freq, scaling_s, max_rank
-    read(1602+iam,*) s_fri, nfri, dfri
     read(1602+iam,*) s_thi, nthi, dthi
     read(1602+iam,*) s_phi, nphi, dphi
     read(1602+iam,*) s_ths, nths, dths
@@ -56,8 +48,7 @@ implicit none
     read(1602+iam,*) mono
     read(1602+iam,*) trifile
     read(1602+iam,*) re_tran, nrmfile
-    read(1602+iam,*) re_cal, trcsffile
-    read(1602+iam,*) resultfile
+    read(1602+iam,*) trcsffile
     close(1602+iam)
 !
 !   define process grid
@@ -84,13 +75,8 @@ implicit none
     phis = (/ ((s_phi+dir_p*dphi, dir_p=0, nphi-1), dir_t=0,nthi-1) /)
     thss = (/ ((s_ths+dir_t*dths, dir_p=0, nphs-1), dir_t=0,nths-1) /)
     phss = (/ ((s_phs+dir_p*dphs, dir_p=0, nphs-1), dir_t=0,nths-1) /)
-    if (re_cal) then
-        call ptdemfie(freq, this, phis, scaling_s, max_rank, nrmfile, &
-            mono, thss, phss, trcsffile, ictxt)
-    end if
-    allocate(frqs(nfri))
-    frqs = (/ (s_fri+dir_t*dfri, dir_t=0, nfri-1) /)
-    !call rcs_cal()
+    call ptdemfie(freq, this, phis, scaling_s, max_rank, nrmfile, &
+        mono, thss, phss, trcsffile, ictxt)
     deallocate(this, phis)
 !
 #ifdef VERBOSE

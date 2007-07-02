@@ -26,6 +26,7 @@ real v_wave_gen(3,dimcol), point(3), scaling_s, freq, max_r, &
     call blacs_gridinfo( ictxt, nprow, npcol, myrow, mycol )
     tpr = -60.; bwr= -6.
     ! Determine Gaussian mean and variance in the
+    ! exp(-t**2 /tv/2) -> sqrt(tv)*exp(-omega**2 *tv/2)
     ! frequency domain to match specifications:
     r = 10.**(bwr/20.);             ! Ref level (fraction of max peak)
     !omegav = -(2.*PI*freq)*(2.*PI*freq)/(2.*log(r)); ! variance is fv

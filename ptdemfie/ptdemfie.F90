@@ -162,7 +162,7 @@ character*64 nrmfile, outfile
     else
         n_s_dir=ubound(phss,1)
     end if
-    step=CC_0/freq/TIME_STEP
+    step=CC_0/(2.55234*freq)/TIME_STEP
     time_cut=CC_0*0.695324/freq
     t0_delay = time_cut + max_r
     maxtime=t0_delay+max_r+time_cut+WAIT_TIMES*2.*time_cut
@@ -210,7 +210,6 @@ character*64 nrmfile, outfile
             rcs(time, s_dir, :), 1, 1, descrcs, 0, 0)
     end do
     end do
-    deallocate(rcs)
     ! –¥»Î ±”Ú RCS –≈∫≈
     if (iam==0) then
     open(unit=1552,file=outfile,form='formatted')
@@ -256,4 +255,6 @@ character*64 nrmfile, outfile
     close(1552)
 1937    format(<2*n_i_dir*n_s_dir+1>G15.7)
     end if
+    deallocate(rcs)
+    call blacs_barrier( ictxt, 'All' )
 end subroutine ptdemfie

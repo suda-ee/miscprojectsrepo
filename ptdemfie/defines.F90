@@ -39,7 +39,7 @@
 #define ETA_0 376.730313461_DKIND
 ! 积分时的最大迭代步数
 #define MAX_STP 100
-! TIME_STEP is used in the DFT, 最高频率信号周期划分几步
+! TIME_STEP is used in the DFT, 最高频率信号周期划分几步(3*sigma)
 #define TIME_STEP 20.
 ! 脉冲结束后的在等几个脉冲的时间
 #define WAIT_TIMES 5._DKIND
