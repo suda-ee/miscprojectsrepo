@@ -231,12 +231,11 @@
 \usepackage{mathrsfs}
 \usepackage{multirow}
 % \IEEEoverridecommandlockouts
-%\usepackage[garamond]{mathdesign}
-%\usepackage[garamond]{wrisym}
+%\usepackage{mt11p}
 \begin{document}
 
 % paper title
-\title{Weighted Laguerre Polynomials and its Applications in Transient
+\title{Weighted Laguerre Polynomials and its Applications in Transient RCS
 Analysis}
 
 % author names and affiliations
@@ -267,10 +266,10 @@ Analysis}
 % for over three affiliations, or if they all won't fit within the width
 % of the page, use this alternative format:
 % 
-\author{\authorblockN{Xueguan Liu, Wenfeng Cai, Huiping Guo and Da Xu}
+\author{\authorblockN{Wenfeng Cai, Xueguan Liu, Huiping Guo and Honglong Cao }
 \authorblockA{School of Electronics and Information Engineering\\
 Soochow University, Suzhou, Jiangsu, P. R. China\hspace{1em}215021\\
-Email: txdzlxg@suda.edu.cn}
+Email: caiwenfeng@suda.edu.cn}
 }
 
 
@@ -284,14 +283,13 @@ Email: txdzlxg@suda.edu.cn}
 \begin{abstract}
 Weighted Laguerre polynomial is a set of self-contained orthogonal
 causal functions. In this paper, the properties of weighted Laguerre
-polynomials are discussed. As a set of temporal basis functions, the
-effects and choice of the time scaling parameter are also analysed. The
-relations among the expansion coefficients over weighted Laguerre
-polynomials of the excitation, response and impulse response when a
-linear system is excited by an arbitrary causal signal are derived. The
-application of weighted Laguerre polynomials, which can be one of the
+polynomials are summarized. As a set of temporal basis functions, the
+influence and choice of the time scaling factor are discussed in detail.
+And then the choise principle for the time scaling factor is obtained.The
+application of weighted Laguerre polynomials, which are  the temporal
 basis of transient scattering analysis for arbitrary shaped structures,
-is illustrated with the transient analysis of a low-pass system.
+is illustrated for transient RCS calculation. The examples show that the choice
+principle proposed here is effective.
 \end{abstract}
 % \vspace{1.34ex}
 %\begin{keywords}
@@ -318,17 +316,14 @@ Sarkar {\em et al.} present a marching on in order method, which
 reduces the late-time instability of marching on in time (MOT) related
 methods \cite{jizhong:solving:2006,jung:accurate:2002,jung:analysis:2004,jung:time:2003}. In these algorithms the time-domain integral equations
 are expressed in terms of weighted Laguerre polynomials with a time
-scaling parameter. The scaling parameters are chosen in above references
+scaling factor. The scaling parameters are chosen in above references
 without given a general principle for choosing an optimal one. In this
 paper, based on the analysis to the characteristics of weighted Laguerre
-polynomials, the effects of the scaling parameter are discussed and the
-principle of choosing an optimal one is proposed. Further, by Fourier
-analysis, the relations among the expansion coefficients over weighted Laguerre
-polynomials of the excitation, response and impulse response when a
-linear system is excited by an arbitrary causal signal can be obtained,
-which is valuable for solving the response of a linear system on
-multiple excitation.
-
+polynomials, the effects of the time scaling factor are discussed and the
+principle of choosing an optimal one is proposed. Further, transient scattering analysis for arbitrary shaped structures is studied using the 
+weighted Laguerre polynomials as temporal basis. The calculation examples show that the choice
+principle for time scaling factor proposed here is effective.
+ 
 % Reminder: the "draftcls" or "draftclsnofoot", not "draft", class option
 % should be used if it is desired that the figures are to be displayed while
 % in draft mode.
@@ -426,7 +421,7 @@ expanded as
 \begin{equation}
 e_n(t)=\sum _{k=0}^{\infty}c_{n,k}\phi _k(st),
 \end{equation}
-where $s>0$ is a time scale factor. By controlling the time scale
+where $s>0$ is a time scaling factor. By controlling the time scaling
 factor, the support provided by the expansion can be increased or
 decreased.
 
@@ -459,7 +454,7 @@ _0^{\infty}\phi_i(st)\phi_k(st-st_0)\mathrm{d}(st) \\
 \end{equation}
 \end{enumerate}
 
-\section{Choice of the Scaling Parameter $s$}
+\section{Choice of the Scaling Factor $s$}
 
 The Fourier transform of order $k$ weighted Laguerre polynomial is
 \begin{equation}
@@ -472,7 +467,7 @@ which is shown in Fig.~\ref{fig1}. Its $\unit{-20}{\deci\bel}$
 bandwidth is about $\unit{0.8}{\hertz}$. As the basis functions for a
 $\unit{}{\mega\hertz}\sim\unit{}{\giga\hertz}$ signal, this scale is very
 small. In order to use the above basis functions in an appropriate
-fashion, one should transform the interval using an appropriate scale
+fashion, one should transform the interval using an appropriate scaling 
 factor $s$. Since the Fourier transform obeys a similarity theorem,
 changing temporal scale inversely affects frequency and amplitude, that is,
 \begin{equation}
@@ -485,7 +480,7 @@ changing temporal scale inversely affects frequency and amplitude, that is,
     \label{fig1}
 \end{figure}
 
-Let's take a look at the principles to choose an optimal time scale factor
+Let's take a look at the principles to choose an optimal time scaling factor
 $s$. Consider an arbitrary causal signal $f(t)$ with time duration of $T_f$
 and approximately band limited on $B$, which can be expressed by the
 orthogonal weighted Laguerre polynomials as
@@ -498,7 +493,7 @@ $B$, Ref.~\cite{jung:time:2003} proposes the minimum number of temporal basis
 functions is $2BT_f+1$. If the number of basis functions is less than
 this minimum number, the results will be unacceptable.
 
-It's important to search for a better value of time scale factor $s$ to
+It's important to search for a better value of time scaling factor $s$ to
 expand an causal signal correctly. If $s$ is too small, the spectrum of
 basis functions will not cover the one of original signal; and if $s$ is
 too big, the original signal can not either be expressed by the weighted
@@ -521,7 +516,7 @@ and the original signal as follows:
 a_k\phi_k(st)\right | ^2\mathrm{d}t}.\label{error-eq}
 \end{equation}
 Fig.~\ref{error} plot the error given by (\ref{error-eq}) as a function of
-the time scaling parameter $s$. As can be seen the appropriate $s$ can
+the time scaling factor $s$. As can be seen the appropriate $s$ can
 give more accurate results. In our example, the optimal $s=nB,\;\;(n=2\sim 5)$.
 \begin{figure}
     \centering
@@ -531,112 +526,38 @@ give more accurate results. In our example, the optimal $s=nB,\;\;(n=2\sim 5)$.
 \end{figure}
 
 \section{The Application of Weighted Laguerre Polynomials in Transient
-Analysis}
-
-Consider a linear causal system with an excitation $x(t)$, its response
-in time domain is
-\begin{equation}
-y(t)=x(t)*h(t),
-\end{equation}
-where $h(t)$ is the impulse response of the system. $a_n$, $b_n$ and
-$c_n$ are expansion coefficients of $x(t)$, $y(t)$ and $h(t)$ using
-weighted Laguerre polynomials. The following relationship can be
-obtained:
-\begin{equation}
-b_m=\sum_{n=0}^\infty\frac{a_n}{s}(c_{m-n}-c_{m-n-1})\;\;\;m\ge n.
-\end{equation}
-Also, it can be written in matrix form as
-\begin{equation}
-\frac{1}{s}
-    \begin{bmatrix}
-    c_0 & 0 & \dots & 0 \\
-    c_1-c_0 & \ddots & \ddots & \vdots \\
-    \vdots & \ddots & \ddots & 0 \\
-    c_n-c_{n-1} & \dots & c_1-c_0 & c_0
-    \end{bmatrix}
-    \begin{bmatrix}
-    a_0 \\ a_1 \\ \vdots \\ a_n
-    \end{bmatrix}=
-    \begin{bmatrix}
-    b_0 \\ b_1 \\ \vdots \\b_n
-    \end{bmatrix}\label{xhtoy}
-\end{equation}
-and
-\begin{equation}
-\frac{1}{s}
-    \begin{bmatrix}
-    a_0 & 0 & \dots & 0 \\
-    a_1-a_0 & \ddots & \ddots & \vdots \\
-    \vdots & \ddots & \ddots & 0 \\
-    a_n-a_{n-1} & \dots & a_1-a_0 & a_0
-    \end{bmatrix}
-    \begin{bmatrix}
-    c_0 \\ c_1 \\ \vdots \\ c_n
-    \end{bmatrix}=
-    \begin{bmatrix}
-    b_0 \\ b_1 \\ \vdots \\b_n
-    \end{bmatrix}.
-\end{equation}
-Hence the solving of time domain formulations can be done in a more
-efficient way by matrix manipulations.
-
-Take a $RL$ low-pass filter as an example shown in Fig.~\ref{rlfilter}.
-Its transfer function is
-\begin{equation}
-H(\mathrm{j}\omega)=\frac{1}{1+\mathrm{j}\omega L/R},
-\end{equation}
-and impulse response can be expressed as
-\begin{equation}
-h(t)=\frac{R}{L}\mathrm{e}^{-Rt/L}u(t).
-\end{equation}
-We use $L=\unit{10}{\henry}$, $R=\unit{100}{\ohm}$ and
-\begin{equation}
-x(t)=\mathrm{e}^{-(10t-3)^2}
-\end{equation}
-as excitation. Expand $h(t)$ and $x(t)$ using the weighted Laguerre
-polynomials as basis kernel and compute with (\ref{xhtoy}), the response
-$y(t)$ can be obtained as shown in Fig.~\ref{figy}. As can be seen the
-response is virtually indistinguishable from the convolution result
-shown by circles. Fig.~\ref{figy1} shows the response $y_1(t)$ with excitation
-$x_1(t)=\mathrm{e}^{-(t-3)^2}$, and the results are also perfect.
+RCS Analysis}
+The scattering from a conducting sphere is simulated with the 
+marching-on-in-order method \cite{jizhong:solving:2006}, in which the integral equation is
+solved by expressing the transient bebaviors in terms of the Laguerre
+functions. The sphere is with a spatial discretization of 909 common
+edges and has a radius of \unit{0.45}{\meter}. The scattering from this
+sphere have been simulated when the excitation is the Gaussian pluse
+with $T=99.7(\mathrm{lm})$, $ct_0=100.5(\mathrm{lm})$.
+Fig.~\ref{scatter} shows the backward scattered farfield from the sphere
+when the scaling factor $s$ are $0.40c$, $0.80c$, $0.16c$, $1.60c$,
+respectively, where $0.40c$ and $0.80c$ are in the range obtained from
+the above principles for searching optimal $s$ scaling factor, $0.16c$ and
+$1.60c$ is out of that range. The results gotten with $s=0.40c$ and $s=0.80c$ agree well
+with the theoretical results for the same object. The other two curves
+then is not very accurate. 
 \begin{figure}
     \centering
-    \includegraphics{rlfilter.mps}
-    \caption{$RL$ low-pass filter.}
-    \label{rlfilter}
+    \includegraphics[scale=.75]{scatter.pdf}
+    \caption{Backward farfield of a sphere excited by a Gaussian pulse
+    expressed in terms of the Laguerre functions with different time
+    scaling factor $s$.}
+    \label{scatter}
 \end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[scale=.5]{fig4.pdf}
-    \caption{The response $y(t)$ computed with different computing
-    technique (generated using weighted Laguerre polynomials: solid
-    line, convolution result: circles).}
-    \label{figy}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[scale=.5]{fig5.pdf}
-    \caption{The response $y_1(t)$ computed with different computing
-    technique (generated using weighted Laguerre polynomials: solid
-    line, convolution result: circles).}
-    \label{figy1}
-\end{figure}
-
-It's been shown that weighted Laguerre polynomials perform good in
-extraction of linear system response, which is similar to Fourier
-analysis. That provides a new way to analyse the response of linear
-systems in transient excitation.
 
 \section{Conclusion}
 
 It's worthy to research thoroughly the properties of weighted Laguerre
 polynomials for transient electromagnetic scattering problems. In this
 paper, the time domain characteristics of weighted Laguerre polynomials are
-studied. The influence of the time scale factor and its choice
-principles are also discussed. 
-The relations among the expansion coefficients over weighted Laguerre
-polynomials of the excitation, response and impulse response in linear
-systems are derived, which established the basis of transient
+studied. The influence of the time scaling factor and its choice
+principles are also discussed,
+which establish the basis of transient
 electromagnetic scattering analysis and should be further researched.
 
 % conference papers do not normally have an appendix
@@ -654,7 +575,7 @@ electromagnetic scattering analysis and should be further researched.
 % \IEEEtriggeratref{3}
 % The "triggered" command can be changed if desired:
 %\IEEEtriggercmd{\enlargethispage{-5in}}
-%\enlargethispage{-0cm}
+\enlargethispage{-12.5cm}
 %\nocite{mittr73}
 % references section
 % NOTE: BibTeX documentation can be easily obtained at:
