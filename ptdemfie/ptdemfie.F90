@@ -88,10 +88,10 @@ character*64 nrmfile, outfile
     deallocate(point)
     lcrow= numroc( num_edges, BLOCKSIZE, myrow, 0, nprow )
     lccol= numroc( num_edges, BLOCKSIZE, mycol, 0, npcol )
-    nqrhs= numroc( 2*n_i_dir, 2*n_i_dir/npcol, mycol, 0, npcol )
+    nqrhs= numroc( 2*n_i_dir, max(int(2*n_i_dir/npcol),1), mycol, 0, npcol )
     call descinit( descz, num_edges, num_edges, BLOCKSIZE, BLOCKSIZE, 0, &
         0, ictxt, lcrow,  info )
-    call descinit( descv, num_edges, 2*n_i_dir, BLOCKSIZE, 2*n_i_dir/npcol, &
+    call descinit( descv, num_edges, 2*n_i_dir, BLOCKSIZE, max(int(2*n_i_dir/npcol),1), &
         0, 0, ictxt, lcrow, info )
     ! z is generally distributed stored.
     allocate(z(lcrow, lccol))
@@ -171,7 +171,7 @@ character*64 nrmfile, outfile
     s_direction(1,:)= sin(thss)*cos(phss)
     s_direction(2,:)= sin(thss)*sin(phss)
     s_direction(3,:)= cos(thss)
-    call descinit( descrcs, 1, 2*n_i_dir, BLOCKSIZE, 2*n_i_dir/npcol, &
+    call descinit( descrcs, 1, 2*n_i_dir, BLOCKSIZE, max(int(2*n_i_dir/npcol),1), &
         0, 0, ictxt, 1, info )
     allocate(e_s_rt(3,0:num_time,nqrhs), p_dir(3,nqrhs))
     allocate(rcs(0:num_time, n_s_dir, nqrhs))
