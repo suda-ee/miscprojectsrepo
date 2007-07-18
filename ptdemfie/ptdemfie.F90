@@ -84,7 +84,8 @@ character*64 nrmfile, outfile
     open(unit=1445+iam,file=nrmfile,form="unformatted",status='old', action='read')
     read(1445+iam) num_edges, num_triangles, num_points, edge, triangle, point
     close(1445+iam)
-    max_r=max(abs(maxval(point)),abs(minval(point)))
+    max_r=maxval(sqrt(point(1,:)*point(1,:)+point(2,:)*point(2,:)+ &
+        point(3,:)*point(3,:)))
     deallocate(point)
     lcrow= numroc( num_edges, BLOCKSIZE, myrow, 0, nprow )
     lccol= numroc( num_edges, BLOCKSIZE, mycol, 0, npcol )
