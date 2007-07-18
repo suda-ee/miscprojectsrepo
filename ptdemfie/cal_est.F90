@@ -36,7 +36,7 @@ type(t_triangle) triangle(:)
     call blacs_gridinfo( ictxt, nprow, npcol, myrow, mycol )
     itlcrow= numroc( descv(M_), BLOCKSIZE, myrow, 0, nprow )
     call descinit( descit, descv(M_), 1, BLOCKSIZE, descv(NB_), &
-        0, 0, ictxt, itlcrow, info )
+        0, 0, ictxt, max(itlcrow,1), info )
     cal_est=0.
     allocate(itmat(itlcrow, 3))
     do j_var=0,max_rank

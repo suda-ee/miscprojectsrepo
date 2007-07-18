@@ -90,9 +90,9 @@ character*64 nrmfile, outfile
     lccol= numroc( num_edges, BLOCKSIZE, mycol, 0, npcol )
     nqrhs= numroc( 2*n_i_dir, max(int(2*n_i_dir/npcol),1), mycol, 0, npcol )
     call descinit( descz, num_edges, num_edges, BLOCKSIZE, BLOCKSIZE, 0, &
-        0, ictxt, lcrow,  info )
+        0, ictxt, max(lcrow,1),  info )
     call descinit( descv, num_edges, 2*n_i_dir, BLOCKSIZE, max(int(2*n_i_dir/npcol),1), &
-        0, 0, ictxt, lcrow, info )
+        0, 0, ictxt, max(lcrow,1), info )
     ! z is generally distributed stored.
     allocate(z(lcrow, lccol))
     allocate(amnij(lcrow, lccol, 0:max_rank), &
