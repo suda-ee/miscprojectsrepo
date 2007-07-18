@@ -1,5 +1,5 @@
-# $URL: svn://172.16.1.1/projects/tdemfie/trunk/Makefile $
-# $Id: Makefile 57 2007-05-21 08:08:11Z cai $
+# $URL$
+# $Id$
 F90	=	mpiifort
 LARGS	=	-L/opt/intel/cmkl/9.0/lib/32 -lmkl_scalapack -lmkl_blacs_intelmpi20 -lmkl_lapack -lmkl_ia32 -lmkl_lapack32 -lmkl -lsvml
 #CARGS	=	-u -warn all -debug extended -inline-debug-info -g
