@@ -1,5 +1,6 @@
-\documentclass[a4paper,12pt]{exam}
-\usepackage{times}
+\documentclass[a4paper,12pt]{examdesign}
+\usepackage{ccmap}
+\usepackage{mathptmx}
 \usepackage{mathrsfs,pifont}
 \usepackage{stmaryrd}
 \usepackage{amsmath}
@@ -35,12 +36,12 @@
 \begin{CJK*}{GBK}{song}
 \CJKtilde
 %\CJKcaption{GB}
-\DeclareGraphicsExtensions{.pdf}
+\DeclareGraphicsExtensions{.mps, .pdf}
 \renewcommand\figurename{图}
 \newcommand\AnswerLeading{解}
 \SectionPrefix{}
 % \NoKey
-%\NoRearrange
+\NoRearrange
 \ShortKey
 \SectionFont{\large\em}
 \examname{电路分析期中考试}
@@ -51,7 +52,7 @@
 \begin{center}
 \begin{tabular}{r}
 {\Large \bf苏州大学\underline{\examtype}课程试卷
-}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~6~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2006~年~11~月
+}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~5~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2007~年~11~月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -66,205 +67,93 @@
 \bigskip
 \end{keytop}
 
-\begin{shortanswer}[title={\begin{description}\item[一、]简单计算题~(每
-题~4~分，共~20~分)\end{description}}]
+\begin{shortanswer}[title={\begin{description}\item[一、]计算题~(每
+题~10~分，共~70~分)\end{description}}]
 \begin{question}
-写出图中~\ding{172}、\ding{173}、\ding{174}~三结点的~KCL~方程。
-    \examvspace{12pt}\\
-    \includegraphics{fig-1.pdf}
-
-    \examvspace*{0cm}
-    \begin{answer}
-    可写出~KCL~方程如下：
-    \begin{align*}
-    i_1+i_4-i_6&=0\\
-    -i_2-i_4+i_5&=0\\
-    i_3-i_5+i_6&=0
-    \end{align*}
-    (每式~1~分，全部写出得~4~分。)
-    \end{answer}
-\end{question}
-\begin{question}
-写出图中三个网孔的~KVL~方程。
-    \examvspace{12pt}\\
-    \includegraphics{fig-2.pdf}
-
-    \examvspace*{0cm}
-    \begin{answer}
-    可写出~KVL~方程如下~(仅给出按顺时针的写法)：
-    \begin{align*}
-    u_5-u_1&=0\\
-    u_1+u_2-u_3+u_4&=0\\
-    u_6-u_2&=0
-    \end{align*}
-    (每式~1~分，全部写出得~4~分。)
-    \end{answer}
-\end{question}
-\begin{question}
-    试给出以下电路的最简等效电路。
-
-    \examvspace{12pt}
-    \includegraphics{fig-3.pdf}
-
-    \examvspace*{0cm}
-    \begin{answer}
-    可简化为~$\unit{5}{\ohm}$~和~\unit{30}{\volt}~电压源串联，正极向下。
-    或等效的电阻与电流源的并联。(图略)
-    \end{answer}
-\end{question}
-\begin{question}
-    给出以下电路的最简等效电路。
-    \examvspace{12pt}\\
-    \includegraphics{fig-4.pdf}
-
-    \examvspace*{0cm}
-    \begin{answer}
-    可简化为~$\unit{5}{\ohm}$~和~$\unit{1}{\ampere}$~电流源的并联，电流
-    源方向向上。或等效的电阻与电压源的串联。(图略)
-    \end{answer}
-\end{question}
-    \begin{question}
-    求下图中各元件的功率，并说明是发出还是吸收功率。
-    \examvspace{12pt}\\
-    \includegraphics{fig12.mps}
-
-    \examvspace*{0cm}
-    \begin{answer}
-    电阻吸收功率~\unit{200}{\watt}，电压源发出功率~\unit{120}{\watt}，电流源吸收功率~\unit{20}{\watt}。
-    求出功率得~2~分，指出吸收还是发出得~2~分。
-    \end{answer}
-    \end{question}
-\end{shortanswer}
-\begin{shortanswer}[title={\begin{description}\item[二、]计算题~(每
-题~10~分，共~50~分)\end{description}}]
-\begin{question}
-用网孔电流法求解图中的电流~$I_2$。
-    \examvspace{12pt}\\
-    \includegraphics{fig-5.pdf}
-
-    \examvspace*{5cm}
-    \begin{answer}
-    设网孔电流都按顺时针方向，分别为~$I_\mathrm{m1}$、$I_\mathrm{m2}$。可列出网孔方程
-    如下：
-    \begin{align*}
-    4I_\mathrm{m1}-I_\mathrm{m2}&=7\\
-    -I_\mathrm{m1}+4I_\mathrm{m2}&=2
-    \end{align*}
-    (每式~3~分)~解得：
-    $I_\mathrm{m1}=\unit{2}{\ampere},\,I_\mathrm{m2}=\unit{1}{\ampere}$。(2~分)~于是
-    ~$I_2=I_\mathrm{m2}-I_\mathrm{m1}=\unit{-1}{\ampere}$。(2~分)
-    \end{answer}
-\end{question}
-\begin{question}
-    用结点电压法求图中~a、b~两点的电压。
-    \examvspace{12pt}\\
-    \includegraphics{fig-6.pdf}
-
-    \examvspace*{5cm}
-    \begin{answer}
-    设~a、b~两点的电压分别是~$U_\mathrm{a}$、$U_\mathrm{b}$，可列结点方程如下：
-    \begin{align*}
-    \frac{4}{3}U_\mathrm{a}-U_\mathrm{b}&=2\\
-    -U_\mathrm{a}+\frac{3}{2}U_\mathrm{b}&=0
-    \end{align*}
-    (每式~3~分)~解得~$U_\mathrm{a}=\unit{3}{\volt}$，$U_\mathrm{b}=\unit{2}{\volt}$。(每结
-结果~2~分)
-    \end{answer}
-\end{question}
-\begin{question}
-    如下图所示电路，利用叠加定理求电压~$U$。
-    \examvspace{12pt}\\
-    \includegraphics{fig-7.pdf}
-
-    \examvspace*{5cm}
-    \begin{answer}
-    电压源单独作用时，电流源置零相当于开路~(2~分)，可用串联分压得到
-    ~$U^{(1)}=12\times 3/(3+9)=\unit{-4}{\volt}$(2~分)；电流源单独作用时，电压
-    源置零相当于短路~(2~分)，可用串联分流得到：$U^{(2)}=3\times
-    6/(6+3)\times 3=\unit{6}{\volt}$(2~分)。可得总的
-    ~$U=U^{(1)}+U^{(2)}=\unit{2}{\volt}$。(2~分)
-    \end{answer}
-\end{question}
-\begin{question}
-    求图示电路的戴维宁或诺顿等效电路。
+求下图中受控源的功率。
+    %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig-8.pdf}
+    \includegraphics{fig1}
+    \end{figure}
+    \examvspace*{5cm}
+\end{question}
+\begin{question}
+图示电路中，已知~$U=\unit{3}{\volt}$，求~$R$。
+    %\examvspace{12pt}\\
+    \begin{figure}[H]
+    \hfill
+    \includegraphics{fig2}
     \end{figure}
 
-    \examvspace*{5cm}
-    \begin{answer}
-    利用简单的串并连等效容易求得等效内阻为~$R_{\rm eq}=\unit{2}{\ohm}$(3~分)；
-    再利用叠加定理来求~$U_{\rm ab}$：电流源单独作用时求得
-    ~$U_{\rm ab}^{(1)}=1\times 3/2\times 2/3=\unit{1}{\volt}$(3~分)；电压源
-    单独作用时的~$U_{\rm ab}^{(2)}=-3\times
-    4/(2+2+4)=\unit{-1.5}{\volt}$(3~分)；故开路电压
-    ~$U_{\rm ab}=U_{\rm ab}^{(1)}+U_{\rm ab}^{(2)}=\unit{－0.5}{\volt}$(1~分)。
-    \end{answer}
+    \examvspace*{6cm}
 \end{question}
 \begin{question}
-    求图中电路在~ab~端口的戴维宁或诺顿等效电路。
+电路如下图所示，求电路~$I$。
+    %\examvspace{12pt}\\
+    \begin{figure}[H]
+    \hfill
+    \includegraphics{fig3}
+    \end{figure}
+
+    \examvspace*{8cm}
+\end{question}
+\begin{question}
+如图示电路，求~ab~两端的输入电路~$R_{\mathrm{ab}}$。
+    %\examvspace{12pt}\\
+    \begin{figure}[H]
+    \hfill
+    \includegraphics{fig4}
+    \end{figure}
+
+    \examvspace*{8cm}
+\end{question}
+\begin{question}
+试列写以下电路的回路电流方程。
+    %\examvspace{12pt}\\
+    \begin{figure}[H]
+    \hfill
+    \includegraphics{fig5}
+    \end{figure}
+
+    \examvspace*{6cm}
+\end{question}
+\begin{question}
+用结点电压法求电压~$U$。
     \examvspace{12pt}\\
-    \includegraphics{fig-9.pdf}
+    \includegraphics{fig6}
+
+    \examvspace*{6cm}
+\end{question}
+\begin{question}
+求以下电路的诺顿或戴维宁等效电路。
+    \examvspace{12pt}\\
+    \includegraphics{fig7}
 
     \examvspace*{5cm}
-    \begin{answer}
-    内部独立源全部置零后，成为一简单串联电路，容易求得等效内阻为：
-    $R_{\rm eq}=\unit{10}{\ohm}$(5~分)；更容易解得开路电压~$u_{\rm
-    OC}=10-1\times 5=\unit{5}{\volt}$(5~分)。
-    \end{answer}
 \end{question}
 \end{shortanswer}
 
-\begin{shortanswer}[title={\begin{description}\item[三、]计算分析题~(每
+\begin{shortanswer}[title={\begin{description}\item[二、]计算分析题~(每
 题~15~分，共~30~分)\end{description}}]
 \begin{question}
-    求下图电路中的电流~$I$。
+    如下图所示电路，用叠加定理求电流~$I_x$。
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig-10.pdf}
+    \includegraphics{fig8}
     \end{figure}
     
     \examvspace*{12cm}
-	\begin{answer}
-	图略。当~\unit{5}{\ohm}~电阻开路时有方程
-	\begin{gather*}
-	I_1=I_{\rm x}+4 \,\,\,(3\mbox{~分})\\
-	4I_{\rm x}+5I_{\rm x}+1\times I_1=12\,\,\,(3\mbox{~分})
-	\end{gather*}
-	解得~$I_{\rm x}=\unit{0.8}{\ampere}$，故~$U_{\rm OC}=3\times
-	4+5I_{\rm x}=\unit{16}{\volt}$。(2~分)\\
-	当~\unit{5}{\ohm}~电阻短路时有方程
-	\begin{gather*}
-	I_1=I_{\rm x}+4 \,\,\,(2\mbox{~分})\\
-	4I_{\rm x}+5I_{\rm x}+1\times I_1=12\,\,\,(3\mbox{~分})
-	\end{gather*}
-	解得~$I_{\rm x}=\unit{0.8}{\ampere}$，故~$I_{\rm
-	SC}=I_2+4=\unit{16/3}{\ampere}$。(1~分)\\
-	可得~$R_{\rm eq}=\unit{3}{\ohm}$，$I=\unit{2}{\ampere}$。(1~分)
-	\end{answer}
 \end{question}
-    \begin{question}
-    下图所示电路中，已知~\unit{5}{\volt}~电压源~$U_{\rm S}$~支路电流
-    ~$I_0=\unit{10}{\ampere}$，试确定受控电流源的控制系数~$\alpha$。
+\begin{question}
+    如图示电路，负载~$R_L$~可任意改变，问~$R_L$~为何值时其上可获得最大功率，并求出该最大功率~$P_{L\mathrm{max}}$。
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig-11.pdf}
+    \includegraphics{fig9}
     \end{figure}
-
-    \examvspace*{12cm}
-	\begin{answer}
-	用网孔法。可得右下角网孔的方程为
-	\[
-	(R_1+R_3)I_3-R_1I_1+R_3I_3=U_{\rm S}\,\,\,\,(6\mbox{~分})
-	\]
-	将其他各网孔电流代入得
-	\[
-	I_3=\frac{10-15\alpha}{4-3\alpha}\,\,\,\,(6\mbox{~分})
-	\]
-	又因为~$I_3=I_0=\unit{10}{\ampere}$，得~$\alpha=2$。(3~分)
-	\end{answer}
-    \end{question}
+    
+    \examvspace*{6cm}
+\end{question}
 \end{shortanswer}
 \end{document}
 \end{CJK*}
