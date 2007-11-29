@@ -1,10 +1,10 @@
-\documentclass[a4paper,12pt]{exam}
-\usepackage{times}
-\usepackage{mathtime}
+\documentclass[a4paper,12pt]{examdesign}
+\usepackage{mathptmx}
 \usepackage{mathrsfs,pifont}
 \usepackage{amsmath}
 \usepackage[thinqspace,thinqspace]{SIunits}
 \usepackage[scale={.8,.85},footskip=12pt]{geometry}
+\usepackage[T1]{fontenc}
 \usepackage{lastpage,float}
 \NumberOfVersions{1}
 \usepackage{CJK}
@@ -15,6 +15,7 @@
 \fi
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{indentfirst}
+\usepackage{subfigure}
 %\usepackage{floatflt}
 \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
 \newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
@@ -38,6 +39,7 @@
 \DeclareGraphicsExtensions{.mps, .pdf}
 \renewcommand\figurename{图}
 \newcommand\AnswerLeading{解}
+\newcommand\jimag{\mathrm{j}}
 \SectionPrefix{}
 % \NoKey
 \NoRearrange
@@ -52,7 +54,7 @@
 \begin{center}
 \begin{tabular}{r}
 {\Large \bf苏州大学\underline{\examtype}课程试卷
-}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~6~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2007~年~1~月
+}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~5~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2008~年~1~月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -67,221 +69,172 @@
 \bigskip
 \end{keytop}
 
-\begin{shortanswer}[title={\begin{description}\item[一、]简单计算题~(每
-题~6~分，共~24~分)\end{description}}]
+\begin{shortanswer}[]
+%\begin{shortanswer}[title={\begin{description}\item[二、]计算题~(每
+%题~10~分，共~50~分)\end{description}}]
 \begin{question}
-    分别求当~$i_L =\unit{1}{\ampere}$~和
-    ~$i_L=\mathrm{e}^{-t}\unit{}{\ampere}$~时的~$i$。
-    \examvspace{12pt}\\
-    \includegraphics{fig1}
-    \examvspace*{3cm}
-    \begin{answer}
-    \unit{1}{\ampere} ($3'$)、$-17\mathrm{e}^{-t}\unit{}{\ampere}$ ($3'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    求图示电路中各元件的功率，并说明是发出功率还是吸收功率。
-    \examvspace{12pt}\\
-    \includegraphics{fig2}
-    \examvspace*{3cm}
-    \begin{answer}
-    电压源上的电流：$I_1=2-I_2=\unit{-8}{\ampere}$，
-    电阻吸收的功率~$P_1=U^2/R=\unit{100}{\watt}$ ($2'$)，
-    电压源的功率~$P_2=10I_1=\unit{-80}{\watt}$，发出~($2'$)。
-    电流源的功率~$P_3=10\times 2=\unit{20}{\watt}$，发出~($2'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    若已知两个同频正弦电压的相量分别为
-    ~$\dot{U}_1=-50\Varangle{30\degree}\unit{}{\volt}$，
-    $\dot{U}_2=100\Varangle{150\degree}\unit{}{\volt}$，其频率
-    ~$f=\unit{100}{\hertz}$。求：(1)~写出~$u_1$、$u_2$~的时域形式；(2)
-    $u_1$~与~$u_2$~的相位差。
-    \examvspace{12pt}\\
-    \examvspace*{3cm}
-    \begin{answer}
-    $u_1=50\sqrt{2}\cos(628t-150\degree)$ ($2'$)，
-    $u_2=100\sqrt{2}\cos(628t+150\degree)$。($3'$)\\相位差
-    ~$\varphi=180\degree$ ($1'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    求图示电路中电压~$U_1$，$U_2$~和电流~$I$。
-    \examvspace{12pt}\\
-    \includegraphics{fig3}
-    \examvspace*{3cm}
-    \begin{answer}
-    根据~KVL，$U_1=1\times 1+10=\unit{11}{\volt}$，$U_2=-1\times
-    2+10=\unit{8}{\volt}$ ($3'$)，
-    根据~KCL，$-1+10/2+I+2=0$，$I=\unit{-6}{\ampere}$ ($3'$)。
-    \end{answer}
-\end{question}
-\end{shortanswer}
-
-\begin{shortanswer}[title={\begin{description}\item[二、]计算题~(每
-题~10~分，共~50~分)\end{description}}]
-\begin{question}
-    求下图的戴维南等效电路。
-    \examvspace{12pt}\\
-    \includegraphics{fig4}
-    \examvspace*{7cm}
-    \begin{answer}
-    求开路电压~$U_{\mathrm{OC}}$：
-    $U_{\mathrm{OC}}=U_{\mathrm{ab}}=\unit{12}{\volt}$ ($4'$)；
-    求短路电流~$I_{\mathrm{SC}}$：$I_{\mathrm{SC}}=-I$；得到：
-    $I_{\mathrm{SC}}=\unit{0.375}{\ampere}$ ($3'$)；
-    求等效电阻~$R_0$：$R_0=
-    U_{\mathrm{OC}}/I_{\mathrm{SC}}=\unit{32}{\ohm}$ ($3'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    求图示电路的结点电压~$U_{n1}$、$U_{n2}$、$U_{n3}$。
+    电路如下图所示，试求其中受控源的功率。($5'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig5}
+    \hfill\includegraphics{fig01}
+    \end{figure}
+    \examvspace*{5cm}
+    \begin{answer}
+    列回路方程
+    \[
+    3I_1+2I_1=2
+    \]
+    解得~$I_1=-\unit{0.4}{\ampere}$ ($3'$)，受控源发出功率为~$3I_1
+    \times 1 \times 2I_1=-\unit{0.96}{\watt}$ ($2'$)。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    求下图所示电路的电压~$U_\mathrm{ab}$。($10'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig02}
     \end{figure}
     \examvspace*{6cm}
     \begin{answer}
-    \[
-    \begin{aligned}
-    (1/10+1/10)U_{n1}-1/10 U_{n2} & =-2 \\
-    -1/30 U_{n2}+(1/10+1/30)U_{n3} & =2 \\
-    U_{n2} & = 4
-    \end{aligned}
-    \]
-    解得：$U_{n1}=\unit{-8}{\volt}$、$U_{n2}=\unit{4}{\volt}$、
-    $U_{n3}=\unit{16}{\volt}$ (每式~$3'$，给出结果~$1'$)。
+    利用电源等效变换可求得~$U_\mathrm{ab}=\unit{30}{\volt}$ (每步~$2'$)。
     \end{answer}
 \end{question}
+
 \begin{question}
-    图示电路中，$R_1=\unit{15}{\ohm}$，$R_2=\unit{10}{\ohm}$，
-    $C=\unit{50}{\micro\farad}$，$t = 0$~时将开关~$S$~闭合，并且
-    ~$u_C(0_-) =\unit{9}{\volt}$，求电路的零输入响应~$u_C(t)$。
-    \examvspace{12pt}\\
-    \includegraphics{fig6}
-    \examvspace*{11cm}
-    \begin{answer}
-    由换路定则可得：$u_C(0_+)=u_C(0_-)=\unit{9}{\volt}$ ($2'$)，
-    开关s闭合后的等效电路图为：(略)。
-    可解得：$R_{\mathrm{i}}=\unit{3.6}{\ohm}$ ($5'$)，
-    $\tau=R_{\mathrm{i}}C=1.8\times 10^{-4}\unit{}{\second}$。
-    $u_C(t)=u_C(0_+)\mathrm{e}^{-t/\tau}=9\mathrm{e}^{-5555.56t}\unit{}{\volt}\;(t>0)$
-    ($3'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    电路如图所示，$\dot{I}_{\rm S}=2\Varangle{0\degree}\unit{}{\ampere}$。求最佳匹配时~$Z$~获得的最大功率及其此时的功率因数。
+    求下图所示电路中的电压~$U_\mathrm{o}$。($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig7}
-    \end{figure}
-    \examvspace*{9cm}
-    \begin{answer}
-    先求得一端口的诺顿等效电路，其中~($4'$)
-    \[
-    \dot{I}_{\rm SC}=\dot{I}_{\rm S}/2=1\Varangle{0\degree}\;\;Y_{\rm eq}=(0.25-{\rm j}0.25)\unit{}{\siemens}
-    \]
-    最大匹配时有：$Y=Y_{\rm eq}^*=(0.25+{\rm j}0.25)\unit{}{\siemens}$，
-    此时获得的最大功率为~$P_{\rm max}=(0.5)^2/0.25=\unit{1}{\watt}$ ($3'$)；复
-    功率
-    ~$\dot{S}=\dot{U}\dot{I}^*=\sqrt{2}\Varangle{-45\degree}\unit{}{\volt\usk\ampere}$，故功率因数~$\lambda=P/S=1/\sqrt{2}$
-    ($3'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    电路如下图所示，试求节点~A~的电位和电流源供给电路的有功功率、无功功率。
-    \begin{figure}[H]
-    \hfill\includegraphics{fig8}
+    \hfill\includegraphics{fig03}
     \end{figure}
     \examvspace*{7cm}
     \begin{answer}
-    $(\frac{1}{4}+\frac{1}{-\mathrm{j}4})\dot{U}_{\mathrm{A}}=\mathrm{j}10+20/4$，解得：$\dot{U}_{\mathrm{A}}=30+\mathrm{j}10=1031.62\Varangle{18.43\degree}\unit{}{\volt}$
-    ($4'$)，
-    $\dot{U}_1=-\dot{U}_{\mathrm{A}}-2\dot{I}_{\mathrm{S}}=-30-\mathrm{j}30\unit{}{\volt}$
-    ($3'$)，电流源的复功率
-    ~$\bar{S}=\dot{U}_1\dot{I}_{\mathrm{S}}^*=-300+\mathrm{j}300\unit{}{\volt\usk\ampere}$，电流源供给电路的有功功率为~$\unit{300}{\watt}$；无功功率为
-    ~$\unit{300}{var}$（感性）($3'$)。
+    应用节点法。取左下角节点为参考节点，右下边为节点~3，左上边为节点~1，
+    右上为节点~2 ($2'$)。则有方程
+    \[\begin{split}
+    0.2U_\mathrm{n1}-0.1U_\mathrm{n2} &=-2 \\
+    -0.1U_\mathrm{n1}+0.15U_\mathrm{n2}-0.05U_\mathrm{n3} &= 10 \\
+    -0.05U_\mathrm{n2}+0.15U\mathrm{n3} &=-2
+    \end{split}\] ($4'$)解得~$U_\mathrm{n1}=\unit{40}{\volt}$，
+    $U_\mathrm{n2}=\unit{100}{\volt}$，$U_\mathrm{n3}=\unit{20}{\volt}$
+    ($2'$)，因此
+    ~$U_\mathrm{o}=U_\mathrm{n2}-U_\mathrm{n3}=\unit{80}{\volt}$ ($2'$)。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    求下图所示电路中的~$U_3$。($10'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig04}
+    \end{figure}
+    \examvspace*{7cm}
+    \begin{answer}
+    本电路只有一个回路，有~$I_1=-6/(6+4)=\unit{-0.6}{\ampere}$ ($5'$)，
+    根据基尔霍夫定律可得到~$U_3=-10I_1+4I_1+6=\unit{9.6}{\volt}$ ($5'$)。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    求图示电路的戴维宁或诺顿等效电路。($10'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig05}
+    \end{figure}
+    \examvspace*{8cm}
+    \begin{answer}
+    用节点电压法可求得开路电压~$U_\mathrm{OC}=\unit{24}{\volt}$ ($4'$)。
+    同样可求得此电路短路电流为~$I_\mathrm{SC}=\unit{6}{\ampere}$ ($4'$)。故等效
+    电阻为~$R_\mathrm{eq}=U_\mathrm{OC}/I_\mathrm{SC}=\unit{4}{\ohm}$ ($2'$)。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    求下图中的电压~$\dot{U}$。($10'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig07}
+    \end{figure}
+    \examvspace*{8cm}
+    \begin{answer}
+    总导纳为~$Y=1+\jimag 2-\jimag 1=1+\jimag 1\unit{}{\ohm}$ ($5'$)，故
+    有
+    ~$\dot{U}=\dot{I}_\mathrm{S}/Y=\sqrt{2}\Varangle{-45\degree}\unit{}{\volt}$
+    （$5'$）。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    给出图中电路的结点电压方程和回路电流方程。($10'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig08}
+    \end{figure}
+    \examvspace*{7cm}
+    \begin{answer}
+    结点电压方程为
+    \[\left.\begin{aligned}
+    3\dot{U}_\mathrm{n1}-2\dot{I}-\dot{U}_\mathrm{n3} &= \dot{U}_\mathrm{S}
+    \\
+    -\dot{U}_\mathrm{n1}-\jimag
+    0.1\times 2\dot{I}+\dot{U}_\mathrm{n3} &= 0 \\
+    \dot{I} &= (\dot{U}_\mathrm{n3}-\dot{U}_\mathrm{n1})/1
+    \end{aligned}\right\}\]
+    网孔方程为~($\dot{I}_1$~和~$\dot{I}_2$~分别为下边两个网孔电流，顺时
+    针，上边网孔电流逆时针)
+    \[\left.\begin{aligned}
+    2 \dot{I}_1 + \dot{I} &= \dot{U}_\mathrm{S} - 2 \dot{I} \\
+    -\jimag 10 \dot{I} &= 2 \dot{I} \\
+    \dot{I}_1 - \jimag 10 \dot{I}_2 +(2-\jimag 10)\dot{I} &= 0
+    \end{aligned}\right\}\]
+    \end{answer}
+\end{question}
+
+\begin{question}
+    求下图中电流源发出的复功率。($10'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig09}
+    \end{figure}
+    \examvspace*{7cm}
+    \begin{answer}
+    各列一个~KCL~和~KVL~方程可解得
+    ~$\dot{I}_1=5\sqrt{2}\Varangle{-45\degree}$，
+    $\dot{I}_2=5\sqrt{2}\Varangle{45\degree}$。
+    电流源电压~$\dot{U}=50-\jimag 150\unit{}{\volt}$，于是~$S=
+    \dot{U}\dot{I}^*=(500-\jimag 1500)\unit{}{\volt\cdot\ampere}$。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    试求下列两电路的输入阻抗~$Z$~和导纳~$Y$。($10'$)
+    \begin{figure}[H]
+    \hfil
+    \subfigure[]{\includegraphics{fig10}}\hfil
+    \subfigure[]{\includegraphics{fig11}}
+    \end{figure}
+    \examvspace*{7cm}
+    \begin{answer}
+    (a) 容易求得~$Z=(2-\jimag 1)\unit{}{\ohm}$ ($3'$)，$Y=1/Z=(0.4+\jimag
+    0.2)\unit{}{\siemens}$ ($2'$)；
+
+    (b) $Z=\unit{40}{\ohm}$ ($3'$)，$Y=\unit{0.025}{\siemens}$ ($2'$)。
+    \end{answer}
+\end{question}
+
+\begin{question}
+    图示电路中，开关~S~动作前电路已达稳定状态，原合在位置~1，$t=0$~时
+    ~S~由位置~1~合向位置~2，求
+    ~$t\geq 0$~时电感电流~$i_L$~和电压~$u_L$~的响应。($15'$)
+    \begin{figure}[H]
+    \hfill\includegraphics{fig06}
+    \end{figure}
+    \examvspace*{10cm}
+    \begin{answer}
+    先求~$i_L(0_-)$，解得~$i_L(0_-)=\unit{5}{\ampere}$ ($3'$)。则
+    ~$i_L(0_+)=i_L(0_-)$，容易看出~$i_L(\infty)=0$ ($1'$)。利用外加
+    电源法可求得~$R_\mathrm{eq}=\unit{12}{\ohm}$ ($3'$)，因此~$\tau
+    =L/R_\mathrm{eq}=\unit{1/4}{\second}$ ($3'$)。套用三要素法可得
+    \[\begin{split}
+    i_L(t)&=i_L(\infty)+[i_L(0_+)-i_L(\infty)]\mathrm{e}^{-t/\tau} \\
+    &=5\mathrm{e}^{-4t}\unit{}{\ampere}\quad\quad (3')
+    \end{split}\]
+    $u_L(t)=-60\mathrm{e}^{-4t}\unit{}{\volt}$ ($2'$)。
     \end{answer}
 \end{question}
 \end{shortanswer}
 
-\begin{shortanswer}[title={\begin{description}\item[三、]计算分析题~(每
-题~13~分，共~26~分)\end{description}}]
-\begin{question}
-    图示电路中，开关合在~1~时已达稳态。$t=0$~时开关由~1~合向~2，求
-    ~$t>0$~时的~$u_L(t)$。
-    \begin{figure}[H]
-    \hfill\includegraphics{fig9}
-    \end{figure}
-    \examvspace*{15cm}
-    \begin{answer}
-    $i_L(0_+)=i_L(0_-)=\unit{-4}{\ampere}$ ($2'$)，换路后用叠加定理得到
-    ~$u_{\mathrm{OC}}=\unit{12}{\volt}$，
-    $R_{\mathrm{eq}}=\unit{10}{\ohm}$ ($3'$)。求得
-    ~$i_L(\infty)=\unit{1.2}{\ampere}$ ($2'$)，
-    $\tau=L/R_{\mathrm{eq}}=\unit{0.01}{\second}$ ($1'$)，所以
-    ~$i_L=[1.2+(-4-1.2)\mathrm{e}^{-100t}]\unit{}{\ampere}$，$u_L=L
-    \mathrm{d}i_L/\mathrm{d}t=52\mathrm{e}^{-100t}\unit{}{\volt}$ ($5'$)。
-    \end{answer}
-\end{question}
-\begin{question}
-    附图电路是阻容移相电路。(1)~如果要求~$\dot{U}_C$~滞后
-    ~$\dot{U}_{\mathrm{S}}$~的角度为~$\pi$，即反相，$R$、$C$~应如何选择
-    ？(2)~如果将~$R$、$C$~位置互换，又如何选择~$R$、$C$？
-    \begin{figure}[H]
-    \hfill\includegraphics{fig10}
-    \end{figure}
-    \examvspace*{9cm}
-    \begin{answer}
-    (1)~原图可看做三个~$RC$~双口网络级联，每级的~$\mathbf{T}$~参数矩阵可
-    求得
-    \[
-    \mathbf{T}=\begin{bmatrix}A&B\\ C&D\end{bmatrix}=\begin{bmatrix}
-    1+\mathrm{j}\omega RC & R \\ \mathrm{j}\omega C & 1\end{bmatrix},
-    \]
-    则三级级联的~$\mathbf{T}$~参数矩阵~$\mathbf{T'}$~为
-    \begin{align*}
-        \mathbf{T'}&=\mathbf{T}\mathbf{T}\mathbf{T}=\begin{bmatrix}
-        A^3+2ABC+BCD & B(A^2+BC+AD+D^2) \\
-        C(A^2+BC+AD+D^2) & ABC+2BCD+D^3
-        \end{bmatrix} \\ &=
-        \begin{bmatrix}
-        (1-5\omega^2 R^2 C^2)+\mathrm{j}\omega RC(6-\omega^2 R^2 C^2) &
-        R[(3-\omega^2 R^2 C^2)+\mathrm{j}4\omega RC] \\
-        \omega C[-4\omega RC+\mathrm{j}(3-\omega^2 R^2 C^2)] &
-        (1-\omega^2 R^2 C^2)+\mathrm{j}3\omega RC
-        \end{bmatrix}.
-    \end{align*}
-    得
-    \[
-    \dot{U}_{\mathrm{S}}/\dot{U}_C=(1-5\omega^2 R^2
-    C^2)+\mathrm{j}\omega RC(6-\omega^2 R^2 C^2).
-    \]
-    要使~$\dot{U}_C$~与~$\dot{U}_{\mathrm{S}}$~反相，须有
-    \[\left.
-    \begin{aligned}
-    1-5\omega^2 R^2 C^2&<0 \\
-    \omega RC(6-\omega^2 R^2 C^2)&=0
-    \end{aligned}\right\} .
-    \]
-    所以有~$RC=\sqrt{6}/\omega$。($7'$) \\
-    (2)~$RC$~位置互换，相当于阻抗、导纳的互换：
-    $R\leftrightarrow\frac{1}{\mathrm{j}\omega C}$~或~$\mathrm{j}\omega
-    C\leftrightarrow 1/R$，推得~$\omega^2 R^2 C^2 \leftrightarrow
-    \frac{1}{\omega^2 R^2 C^2}$，所以得
-    \[
-    \dot{U}_{\mathrm{S}}/\dot{U}_C=(1-\frac{5}{\omega^2 R^2
-    C^2})+\frac{1}{\mathrm{j}\omega RC}(6-\frac{1}{\omega^2 R^2 C^2}).
-    \]
-    要使~$\dot{U}_C$~与~$\dot{U}_{\mathrm{S}}$~反相，须有
-    \[\left.
-    \begin{aligned}
-    1-\frac{5}{\omega^2 R^2 C^2}&<0 \\
-    -\frac{1}{\omega RC}(6-\frac{1}{\omega^2 R^2 C^2})&=0
-    \end{aligned}\right\} .
-    \]
-    所以有~$RC=\frac{1}{\sqrt{6}\omega}$ 
-    ($6'$)。
-    \end{answer}
-\end{question}
-\end{shortanswer}
 \end{document}
 \end{CJK*}
