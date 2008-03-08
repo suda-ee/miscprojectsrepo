@@ -138,10 +138,9 @@ character*64 nrmfile, outfile
     allocate(e_s_rt(3,0:num_time))
     allocate(rcs(0:num_time, n_s_dir, n_i_dir, 2))
     do i_rank=max_rank, 0, -1
-        out_cni(:,:,i_rank)=out_cni(:,:,i_rank)*.25_DKIND
+        out_cni(:,:,i_rank)=out_cni(:,:,i_rank)*.5_DKIND
         do k_var=0, i_rank-1
-            out_cni(:,:,i_rank)=out_cni(:,:,i_rank)+(i_rank-k_var)* &
-                out_cni(:,:,k_var)
+            out_cni(:,:,i_rank)=out_cni(:,:,i_rank)+out_cni(:,:,k_var)
         end do
     end do
     if (mono) then

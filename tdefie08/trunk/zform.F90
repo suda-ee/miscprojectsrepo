@@ -124,8 +124,8 @@ type(t_triangle) triangle(:)
                 edge(col)%len/(144.*PI)
             bmnij(:, pack_position)=bmnij(:, pack_position)*edge(row)%len* &
                 edge(col)%len/(36.*PI)
-            z(pack_position)=.25*scaling_s*scaling_s* &
-                amnij(0,pack_position) + bmnij(0,pack_position)/EPSILON_R
+            z(pack_position)=.5*scaling_s* &
+                amnij(0,pack_position) + bmnij(0,pack_position)/scaling_s/EPSILON_R*2
             z(pack_position) = ETA_0 * z(pack_position)
             do ij_pos=max_rank, 1, -1
                 amnij(ij_pos, pack_position)=amnij(ij_pos, pack_position)- &

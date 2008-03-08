@@ -60,5 +60,5 @@ type(t_triangle) triangle(:)
             end do
         end do
     end do
-    cal_est=cal_est*scaling_s*scaling_s*ETA_0/(-4.*PI)
+    cal_est=cal_est*scaling_s*ETA_0/(-4.*PI)
 end function cal_est

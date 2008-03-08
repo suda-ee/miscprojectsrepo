@@ -47,17 +47,21 @@ type(t_triangle) triangle(:)
         mn_pos = n_var + m_offset
     end if
     do j_var=0, i_rank-1
-        v_rhs(row, :)=v_rhs(row, :)-(i_rank-j_var)*out_cni(n_var,:,j_var)* &
-            amnij(0,mn_pos)*ETA_0*scaling_s*scaling_s
-        temp=0.
+        v_rhs(row, :)=v_rhs(row, :)-out_cni(n_var,:,j_var)* &
+            (amnij(0,mn_pos)*scaling_s+4*(-1)**(i_rank+j_var)* &
+            bmnij(0,mn_pos)/scaling_s/EPSILON_R)*ETA_0
+        temp=out_cni(n_var,:,j_var)*0.5
         do k_var=0, j_var-1
-            temp=temp+(j_var-k_var)*out_cni(n_var,:,k_var)
+            temp=temp+out_cni(n_var,:,k_var)
         end do
-        temp=temp*ETA_0*scaling_s*scaling_s
-        temp=temp+out_cni(n_var,:,j_var)*ETA_0*scaling_s*scaling_s*.25
-        v_rhs(row, :)=v_rhs(row, :) - temp*amnij(i_rank-j_var, mn_pos) - &
-            out_cni(n_var,:,j_var)* &
-            bmnij(i_rank-j_var, mn_pos)/EPSILON_R*ETA_0
+        v_rhs(row, :)=v_rhs(row, :) - temp*amnij(i_rank-j_var, &
+            mn_pos)*scaling_s*ETA_0
+        temp=out_cni(n_var,:,j_var)
+        do k_var=0, j_var-1
+            temp=temp+out_cni(n_var,:,k_var)*(-1)**(j_var+k_var)
+        end do
+        v_rhs(row, :)=v_rhs(row, :) - temp*bmnij(i_rank-j_var, &
+            mn_pos)/scaling_s/EPSILON_R*ETA_0
     end do
     end do
     end do
