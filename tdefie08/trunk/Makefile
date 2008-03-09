@@ -1,11 +1,12 @@
 # $URL$
 # $Id$
 F90	=	ifort
-LARGS	=	-L/opt/intel/cmkl/9.0/lib/32 -lmkl_lapack -lmkl_ia32 -lmkl_lapack32 -lmkl -lsvml
+#LARGS	=	-lmkl_lapack -lmkl_ia32 -lmkl_core -lguide -lpthread -lsvml
+LARGS	=	-lmkl_intel -lmkl_intel_thread -lmkl_core -lguide -lpthread -lsvml
 #CARGS	=	-u -warn all -debug extended -inline-debug-info -g
-CARGS	=	-warn all -ftz -ip -ipo -O3 -xW -align all -prof-use #-prof-genx
+CARGS	=	-warn all -ftz -ip -ipo -O3 -xT -align all -parallel -prof-use #-prof-genx
 DEFS	=	define.F90
-OBJS	=	common.o ome_gen.o psi_func.o tran.o vform.o v_wave_gen.o zform.o Is_Same_Triangle.o tdemfie.o main.o cal_est.o mymod.o ilasrt.o
+OBJS	=	common.o ome_gen.o psi_func.o tran.o vform.o v_wave_gen.o zform.o tdemfie.o main.o cal_est.o mymod.o ilasrt.o
 MODS	=	mymod.mod
 EXES	=	tdemfie
 
