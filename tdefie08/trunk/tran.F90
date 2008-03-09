@@ -30,7 +30,7 @@ character :: dataname*64, outfilename*64;
     open(unit=1503,file=trim(dataname)//'.part',status='old', action='read')
     read(1503,*) num_edges
     allocate(edge(num_edges))
-    read(1503,*) (edge(iloop)%tri, edge(iloop)%poi(1), &
+    read(1503,*) (edge(iloop)%tri(2), edge(iloop)%tri(1), edge(iloop)%poi(1), &
         edge(iloop)%poi(3), nouse, iloop=1, num_edges)
     close(1503)
     ! 开始计算。
@@ -76,9 +76,4 @@ character :: dataname*64, outfilename*64;
     write(10) num_edges, num_triangles, num_points, &
         edge, triangle, point
     close(10)
-    open(unit=1645,file='qqq.ed')
-    ! 边数目；三角形数目；点数目
-    write(1645,100) (edge(iloop)%poi, iloop=1, num_edges)
-100 format(1x,4i4)
-    close(1645)
 end subroutine tran
