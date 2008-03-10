@@ -70,7 +70,7 @@ character*64 nrmfile, outfile
     open(unit=1445,file=nrmfile,form="unformatted",status='old', action='read')
     read(1445) num_edges, num_triangles, num_points, edge, triangle, point
     close(1445)
-    max_r=max(abs(maxval(point)),abs(minval(point)))
+    max_r=max(abs(maxval(point)),abs(minval(point)))*sqrt(3._DKIND)
     deallocate(point)
     ! z if packed stored.
     allocate(z(num_edges*(num_edges+1)/2))
@@ -128,8 +128,9 @@ character*64 nrmfile, outfile
     end if
     step=CC_0/(2.55234*freq)/TIME_STEP
     time_cut=CC_0*0.695324/freq
-    t0_delay = time_cut + max_r
-    maxtime=t0_delay+max_r+time_cut+WAIT_TIMES*2.*time_cut
+    t0_delay = 3. !time_cut + max_r
+    !maxtime=t0_delay+max_r+time_cut+WAIT_TIMES*2.*time_cut
+    maxtime=t0_delay+time_cut+WAIT_TIMES*2.*time_cut
     num_time=maxtime/step
     allocate(s_direction(3, n_s_dir))
     s_direction(1,:)= sin(thss)*cos(phss)

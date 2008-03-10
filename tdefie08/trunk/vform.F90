@@ -58,10 +58,10 @@ type(t_triangle) triangle(:)
             mn_pos)*scaling_s*ETA_0
         temp=out_cni(n_var,:,j_var)
         do k_var=0, j_var-1
-            temp=temp+out_cni(n_var,:,k_var)*(-1)**(j_var+k_var)
+            temp=temp+out_cni(n_var,:,k_var)*(-1)**(j_var+k_var)*2.
         end do
         v_rhs(row, :)=v_rhs(row, :) - temp*bmnij(i_rank-j_var, &
-            mn_pos)/scaling_s/EPSILON_R*ETA_0
+            mn_pos)/scaling_s/EPSILON_R*2.*ETA_0
     end do
     end do
     end do
