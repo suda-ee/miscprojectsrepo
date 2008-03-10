@@ -25,8 +25,7 @@ type(t_triangle) triangle(:)
     ! Local variables
     integer dim_z, row, col, col_offset, pack_position, p, q, p_p, p_q, &
         ij_pos
-    real rho_center_row(3), rho_center_col(3), R, DOT, dist, &
-        rhodot, gint, psi_vall, psi_valr, psi_val, sr
+    real R, DOT, dist, rhodot, gint, psi_vall, psi_valr, psi_val, sr
     ! Excutives
     dim_z=ubound(edge, 1)
     amnij=0._DKIND; bmnij=0._DKIND
@@ -50,6 +49,10 @@ type(t_triangle) triangle(:)
                     bmnij(ij_pos, pack_position)=bmnij(ij_pos, pack_position)- &
                         (.5_DKIND+ij_pos)*scaling_s
                     end do
+                    gint=3.545/sqrt(triangle(edge(row)%tri(p))%area/3._DKIND)
+                    amnij(:, pack_position)=amnij(:, pack_position)+ &
+                        rhodot*(3-2*p)*(3-2*q)*gint
+                    bmnij(:, pack_position)=bmnij(:, pack_position)+gint
                 else
                     R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
                         triangle(edge(col)%tri(q))%tri_point(:,p_q))
@@ -57,35 +60,26 @@ type(t_triangle) triangle(:)
                     psi_vall=exp(-sr/2._DKIND)
                     psi_valr=(1._DKIND-sr)*psi_vall
                     amnij(0, pack_position)=amnij(0, pack_position)+ &
-                        rhodot*(psi_vall-1.)*(3-2*p)*(3-2*q)/R
+                        rhodot*psi_vall*(3-2*p)*(3-2*q)/R
                     bmnij(0, pack_position)=bmnij(0, pack_position)+ &
-                        (psi_vall-1.)/R
+                        psi_vall/R
                     amnij(1, pack_position)=amnij(1, pack_position)+ &
-                        rhodot*(psi_valr-1.)*(3-2*p)*(3-2*q)/R
+                        rhodot*psi_valr*(3-2*p)*(3-2*q)/R
                     bmnij(1, pack_position)=bmnij(1, pack_position)+ &
-                        (psi_valr-1.)/R
+                        psi_valr/R
                     do ij_pos=2, max_rank
                     psi_val=((2*ij_pos-1-sr)*psi_valr-(ij_pos-1)* &
                         psi_vall)/ij_pos
                     amnij(ij_pos, pack_position)=amnij(ij_pos, pack_position)+ &
-                        rhodot*(psi_val-1._DKIND)*(3-2*p)*(3-2*q)/R
+                        rhodot*psi_val*(3-2*p)*(3-2*q)/R
                     bmnij(ij_pos, pack_position)=bmnij(ij_pos, pack_position)+ &
-                        (psi_val-1._DKIND)/R
+                        psi_val/R
                     psi_vall=psi_valr
                     psi_valr=psi_val
                     end do
                 end if
                 end do
                 end do
-                rho_center_row=(edge(row)%rho(:,1,p)+edge(row)%rho(:,2,p)+ &
-                    edge(row)%rho(:,3,p))/3.
-                rho_center_col=(edge(col)%rho(:,1,q)+edge(col)%rho(:,2,q)+ &
-                    edge(col)%rho(:,3,q))/3.
-                rhodot=DOT(3,rho_center_row, 1, rho_center_col, 1)
-                gint=3.545/sqrt(triangle(edge(row)%tri(p))%area)*9.
-                amnij(:, pack_position)=amnij(:, pack_position)+rhodot* &
-                    (3-2*p)*(3-2*q)*gint
-                bmnij(:, pack_position)=bmnij(:, pack_position)+gint
             else
                 do p_q=1,3
                 do p_p=1,3
