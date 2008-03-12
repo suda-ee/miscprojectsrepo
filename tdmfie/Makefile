@@ -1,5 +1,5 @@
-# $URL: svn://land/projects/tdefie08/trunk/Makefile $
-# $Id: Makefile 84 2008-03-10 10:38:12Z cai $
+# $URL$
+# $Id$
 F90	=	ifort
 #LARGS	=	-lmkl_lapack -lmkl_ia32 -lmkl_core -lguide -lpthread -lsvml
 LARGS	=	-lmkl_intel -lmkl_intel_thread -lmkl_core -lguide -lpthread -lsvml

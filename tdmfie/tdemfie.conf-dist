@@ -9,7 +9,7 @@ qiu          ! 数据文件名, .tri 和 .part 的数据文件，最多64个字符
 qiu.rcst        ! 生成的时域RCS信息存储文件
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! $URL: svn://land/projects/tdefie08/trunk/tdemfie.conf-dist $
-! $Id: tdemfie.conf-dist 80 2008-03-09 09:04:17Z cai $
+! $URL$
+! $Id$
 ! 单站时散射角不起作用，同入射角；其余情况最后结果为入射角度x散射角度数
 ! 入射角度数：nthi*nphi；散射角度数：nths*nphs；散射角先变

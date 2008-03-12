@@ -1,6 +1,6 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! $URL: svn://land/projects/tdefie08/trunk/defines.F90 $
-! $Id: defines.F90 84 2008-03-10 10:38:12Z cai $
+! $URL$
+! $Id$
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define VERBOSE
 ! define macro 'DOUBLE' if you want double precision default.
