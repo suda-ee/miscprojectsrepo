@@ -1,5 +1,5 @@
-# $URL: svn://emn001/projects/ptdemfie/Makefile $
-# $Id: Makefile 69 2007-07-18 05:15:54Z cai $
+# $URL$
+# $Id$
 F90	=	mpiifort
 #LARGS	=	-lmkl_scalapack -lmkl_blacs_intelmpi -lmkl_lapack -lmkl_ia32 -lmkl_core -lguide -lpthread -lsvml
 LARGS	=	-lmkl_scalapack -lmkl_blacs_intelmpi -lmkl_intel -lmkl_intel_thread -lmkl_core -lguide -lpthread -lsvml #-g

@@ -1,6 +1,6 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! $URL: svn://emn001/projects/ptdemfie/defines.F90 $
-! $Id: defines.F90 69 2007-07-18 05:15:54Z cai $
+! $URL$
+! $Id$
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #undef VERBOSE
 ! define macro 'DOUBLE' if you want double precision default.

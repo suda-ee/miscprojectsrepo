@@ -1,5 +1,5 @@
 * $Name:  $
-* $Id: plapro.for 69 2007-07-18 05:15:54Z cai $
+* $Id$
       SUBROUTINE PCLAFENFA( GLBA, A, DESCA, IRPUT, ICPUT )
 *
 * 
