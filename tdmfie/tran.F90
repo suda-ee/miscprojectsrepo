@@ -6,10 +6,10 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! transform the Hypermesh data to point(3, :) and edge(4, :), then save
 ! them in a file.
-subroutine tran(dataname, outfilename)
+subroutine tran(databasename)
 use mymod
 implicit none
-character :: dataname*64, outfilename*64;
+character :: databasename*64
     interface
         real function cross(x1,x2)
         implicit none
@@ -24,7 +24,7 @@ character :: dataname*64, outfilename*64;
     type(t_edge), allocatable :: edge(:)
     integer num_triangles, num_points, num_edges, nouse, iloop
     real, allocatable :: point(:,:)
-    open(unit=1455,file=trim(dataname)//'.tri',status='old', action='read')
+    open(unit=1455,file=trim(databasename)//'.tri',status='old', action='read')
     read(1455,*) num_triangles, num_points
     read(1455,*) nouse ! 这行为部件数，在本子程序中暂时无用，跳过
     read(1455,*) bujianming ! 部件名跳过
@@ -34,10 +34,10 @@ character :: dataname*64, outfilename*64;
     read(1455,*) (nouse, point(:,iloop), iloop=1, num_points)
     read(1455,*) (nouse,triangle(iloop)%poi, iloop=1, num_triangles)
     close(1455)
-    open(unit=1503,file=trim(dataname)//'.part',status='old', action='read')
+    open(unit=1503,file=trim(databasename)//'.part',status='old', action='read')
     read(1503,*) num_edges
     allocate(edge(num_edges))
-    read(1503,*) (edge(iloop)%tri(2), edge(iloop)%tri(1), edge(iloop)%poi(1), &
+    read(1503,*) (edge(iloop)%tri(1), edge(iloop)%tri(2), edge(iloop)%poi(1), &
         edge(iloop)%poi(3), nouse, iloop=1, num_edges)
     close(1503)
     ! 开始计算。
@@ -88,7 +88,7 @@ character :: dataname*64, outfilename*64;
         edge(iloop)%rho(:,3,2)=triangle(edge(iloop)%tri(2))%tri_point(:,3)- &
             point(:,edge(iloop)%poi(4))
     end do
-    open(unit=10,file=outfilename,form="unformatted")
+    open(unit=10,file=trim(databasename)//'.nrm',form="unformatted")
     ! 边数目；三角形数目；点数目
     write(10) num_edges, num_triangles, num_points, &
         edge, triangle, point

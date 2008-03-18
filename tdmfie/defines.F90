@@ -2,7 +2,7 @@
 ! $URL$
 ! $Id$
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#define VERBOSE
+#undef VERBOSE
 ! define macro 'DOUBLE' if you want double precision default.
 #undef DOUBLE
 ! Please always use lower-case letters in your source files but macros.
@@ -33,9 +33,12 @@
 ! 积分时的最大迭代步数
 #define MAX_STP 100
 ! TIME_STEP is used in the DFT, 最高频率信号周期划分几步
-#define TIME_STEP 20.
+#define TIME_STEP 30._DKIND
 ! 脉冲结束后的在等几个脉冲的时间
 #define WAIT_TIMES 5._DKIND
+! 高斯脉冲时域和频域截至 dB 数
+#define TPR -60._DKIND
+#define BWR -6._DKIND
 ! default configuration file name
 #define CONF 'tdemfie.conf'
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

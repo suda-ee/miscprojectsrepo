@@ -37,6 +37,7 @@ type(t_triangle) triangle(:)
     ! Excutives
     dim_z=ubound(edge, 1)
     amnij=0._DKIND; bmnij=0._DKIND
+    z=0._DKIND
     do col=1, dim_z
         col_offset=col*(col-1)/2
         do row=1, col

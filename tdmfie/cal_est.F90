@@ -36,8 +36,8 @@ type(t_triangle) triangle(:)
     end if
     cal_est=0.
     allocate(itmat(ubound(edge, 1), 3))
-    do j_var=0, max_rank
-        do time=0, num_time
+    do time=0, num_time
+        do j_var=0, max_rank
             itmat=0._DKIND
             do n_var=1, ubound(edge, 1)
                 do tri_idx=1,2
