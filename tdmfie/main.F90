@@ -23,7 +23,7 @@ implicit none
     real freq, scaling_s, s_thi, dthi, s_phi, dphi, s_ths, dths, s_phs, &
         dphs
     character*64 filebasename
-    logical re_tran, mono
+    logical mono
     ! k_uvec_wave(3, num_dir) 入射方向单位矢量
     real, allocatable :: this(:), phis(:), &
         thss(:), phss(:)
@@ -40,19 +40,11 @@ implicit none
     read(1602,*) s_phs, nphs, dphs
     read(1602,*) mono
     read(1602,*) filebasename
-    read(1602,*) re_tran
     close(1602)
     s_thi=s_thi*PI/180.; s_phi=s_phi*PI/180. ! 转为弧度，文件中为度
     dthi=dthi*PI/180.; dphi=dphi*PI/180.
     s_ths=s_ths*PI/180.; s_phs=s_phs*PI/180.
     dths=dths*PI/180.; dphs=dphs*PI/180.
-    if (re_tran) then
-        call tran(filebasename)
-#ifdef VERBOSE
-    call date_and_time(my_date, my_time)
-    write(*,*) my_time, ': tran data Finished!'
-#endif
-    end if
     allocate(this(nthi*nphi), phis(nthi*nphi), thss(nths*nphs), &
         phss(nths*nphs))
     this = (/ ((s_thi+dir_t*dthi, dir_p=0, nphi-1), dir_t=0,nthi-1) /)

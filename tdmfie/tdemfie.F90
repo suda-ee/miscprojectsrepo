@@ -10,13 +10,19 @@ subroutine tdemfie(freq, this, phis, scaling_s, max_rank, &
 use mymod
 implicit none
 ! subroutine arguments
-! nrmfile for: 已配对转换完毕的数据，或者本次转换要存储的文件名
 integer max_rank
 logical mono
 real freq, scaling_s, this(:), phis(:), thss(:), phss(:)
 character*64 filebasename
     ! interfaces
     interface
+        subroutine tran(point, triangle, edge)
+            use mymod
+            implicit none
+            real :: point(:,:)
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
+        end subroutine tran
         subroutine zform(z, amnij, bmnij, edge, triangle, scaling_s, &
             max_rank)
             use mymod
@@ -61,15 +67,30 @@ character*64 filebasename
     real, allocatable :: e_s_rt(:,:), rcs(:,:,:,:)
     type(t_edge), allocatable :: edge(:)
     type(t_triangle), allocatable :: triangle(:)
+    character*64 bujianming
     ! Excutives
     n_i_dir=ubound(phis, 1)
-    open(unit=1445,file=trim(filebasename)//'.nrm',form="unformatted",status='old', action='read')
-    read(1445) num_edges, num_triangles, num_points
-    close(1445)
-    allocate(point(3,num_points),edge(num_edges), triangle(num_triangles))
-    open(unit=1445,file=trim(filebasename)//'.nrm',form="unformatted",status='old', action='read')
-    read(1445) num_edges, num_triangles, num_points, edge, triangle, point
-    close(1445)
+    open(unit=1455,file=trim(filebasename)//'.tri',status='old', action='read')
+    read(1455,*) num_triangles, num_points
+    read(1455,*) max_r ! 这行为部件数，在本子程序中暂时无用，跳过
+    read(1455,*) bujianming ! 部件名跳过
+    !read(1455,*) bujianming ! 颜色索引跳过 新 emsys 程序要把这行删除
+    read(1455,*) bujianming ! 部件最后面元的总序号，跳过
+    allocate(point(3, num_points), triangle(num_triangles))
+    read(1455,*) (max_r, point(:,time), time=1, num_points)
+    read(1455,*) (max_r,triangle(time)%poi, time=1, num_triangles)
+    close(1455)
+    open(unit=1503,file=trim(filebasename)//'.part',status='old', action='read')
+    read(1503,*) num_edges
+    allocate(edge(num_edges))
+    read(1503,*) (edge(time)%tri(1), edge(time)%tri(2), edge(time)%poi(1), &
+        edge(time)%poi(3), max_r, time=1, num_edges)
+    close(1503)
+    call tran(point, triangle, edge)
+#ifdef VERBOSE
+    call date_and_time(my_date, my_time)
+    write(*,*) my_time, ': tran data have done.'
+#endif
     max_r=maxval(sqrt(point(1,:)*point(1,:)+point(2,:)*point(2,:)+ &
         point(3,:)*point(3,:)))
     deallocate(point)

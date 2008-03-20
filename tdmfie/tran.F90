@@ -6,10 +6,12 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! transform the Hypermesh data to point(3, :) and edge(4, :), then save
 ! them in a file.
-subroutine tran(databasename)
+subroutine tran(point, triangle, edge)
 use mymod
 implicit none
-character :: databasename*64
+real :: point(:,:)
+type(t_edge) edge(:)
+type(t_triangle) triangle(:)
     interface
         real function cross(x1,x2)
         implicit none
@@ -18,29 +20,12 @@ character :: databasename*64
         end function cross
     end interface
     ! local variables
-    character :: bujianming*64
     real NRM2
-    type(t_triangle), allocatable :: triangle(:)
-    type(t_edge), allocatable :: edge(:)
-    integer num_triangles, num_points, num_edges, nouse, iloop
-    real, allocatable :: point(:,:)
-    open(unit=1455,file=trim(databasename)//'.tri',status='old', action='read')
-    read(1455,*) num_triangles, num_points
-    read(1455,*) nouse ! 这行为部件数，在本子程序中暂时无用，跳过
-    read(1455,*) bujianming ! 部件名跳过
-    !read(10,*) bujianming ! 颜色索引跳过 新 emsys 程序要把这行删除
-    read(1455,*) bujianming ! 部件最后面元的总序号，跳过
-    allocate(point(3, num_points), triangle(num_triangles))
-    read(1455,*) (nouse, point(:,iloop), iloop=1, num_points)
-    read(1455,*) (nouse,triangle(iloop)%poi, iloop=1, num_triangles)
-    close(1455)
-    open(unit=1503,file=trim(databasename)//'.part',status='old', action='read')
-    read(1503,*) num_edges
-    allocate(edge(num_edges))
-    read(1503,*) (edge(iloop)%tri(1), edge(iloop)%tri(2), edge(iloop)%poi(1), &
-        edge(iloop)%poi(3), nouse, iloop=1, num_edges)
-    close(1503)
+    integer num_triangles, num_points, num_edges, iloop
     ! 开始计算。
+    num_points=ubound(point, 2)
+    num_triangles=ubound(triangle, 1)
+    num_edges=ubound(edge, 1)
     do iloop=1, num_triangles
         triangle(iloop)%center=(point(:,triangle(iloop)%poi(1))+ &
             point(:,triangle(iloop)%poi(2))+point(:,triangle(iloop)%poi(3)))/3.
@@ -88,9 +73,4 @@ character :: databasename*64
         edge(iloop)%rho(:,3,2)=triangle(edge(iloop)%tri(2))%tri_point(:,3)- &
             point(:,edge(iloop)%poi(4))
     end do
-    open(unit=10,file=trim(databasename)//'.nrm',form="unformatted")
-    ! 边数目；三角形数目；点数目
-    write(10) num_edges, num_triangles, num_points, &
-        edge, triangle, point
-    close(10)
 end subroutine tran
