@@ -33,7 +33,7 @@
 ! 积分时的最大迭代步数
 #define MAX_STP 100
 ! TIME_STEP is used in the DFT, 最高频率信号周期划分几步
-#define TIME_STEP 30._DKIND
+#define TIME_STEP 40._DKIND
 ! 脉冲结束后的在等几个脉冲的时间
 #define WAIT_TIMES 5._DKIND
 ! 高斯脉冲时域和频域截至 dB 数
