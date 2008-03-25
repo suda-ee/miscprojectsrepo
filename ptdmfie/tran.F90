@@ -40,6 +40,7 @@ type(t_triangle) triangle(:)
             point(:,triangle(iloop)%poi(3)))/2.
     end do
     do iloop=1, num_edges
+        edge(iloop)%res_angle=1._DKIND-edge(iloop)%res_angle/360._DKIND
         edge(iloop)%poi(2)=triangle(edge(iloop)%tri(1))%poi(1) + &
             triangle(edge(iloop)%tri(1))%poi(2) + &
             triangle(edge(iloop)%tri(1))%poi(3) - &

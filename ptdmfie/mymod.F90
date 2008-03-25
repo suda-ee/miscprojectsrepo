@@ -18,6 +18,7 @@ module mymod
         integer poi(4)  ! 四个点的编号
         real len        ! 边的长度
         real rho(3,3,2)
+        real res_angle ! relative external solid angle
     end type t_edge
     character*8 my_date
     character*10 my_time

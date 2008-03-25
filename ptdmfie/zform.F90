@@ -97,7 +97,7 @@ type(t_triangle) triangle(:)
             bmnij(lrow,lcol,:)=bmnij(lrow,lcol,:)*edge(row)%len* &
                 edge(col)%len/(144.*PI)
             z(lrow, lcol)=z(lrow, lcol)*edge(row)%len* &
-                edge(col)%len/8._DKIND
+                edge(col)%len/4._DKIND*edge(row)%res_angle
             z(lrow,lcol)=z(lrow, lcol) - &
                 amnij(lrow,lcol,0) - bmnij(lrow,lcol,0)*scaling_s*.5_DKIND
             do ij_pos=max_rank, 1, -1
