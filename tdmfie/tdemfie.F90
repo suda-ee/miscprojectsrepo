@@ -84,7 +84,7 @@ character*64 filebasename
     read(1503,*) num_edges
     allocate(edge(num_edges))
     read(1503,*) (edge(time)%tri(1), edge(time)%tri(2), edge(time)%poi(1), &
-        edge(time)%poi(3), max_r, time=1, num_edges)
+        edge(time)%poi(3), edge(time)%res_angle, time=1, num_edges)
     close(1503)
     call tran(point, triangle, edge)
 #ifdef VERBOSE

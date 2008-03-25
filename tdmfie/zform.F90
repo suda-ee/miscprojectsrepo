@@ -95,7 +95,7 @@ type(t_triangle) triangle(:)
             bmnij(:, pack_position)=bmnij(:, pack_position)*edge(row)%len* &
                 edge(col)%len/(144.*PI)
             z(pack_position)=z(pack_position)*edge(row)%len* &
-                edge(col)%len/8._DKIND
+                edge(col)%len/4._DKIND*edge(row)%res_angle
             z(pack_position)=z(pack_position) - &
                 amnij(0,pack_position) - &
                 bmnij(0,pack_position)*scaling_s*.5_DKIND
