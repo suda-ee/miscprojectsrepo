@@ -96,7 +96,7 @@ character*64 filebasename
     open(unit=1503+iam,file=trim(filebasename)//'.part',status='old', action='read')
     read(1503+iam,*) num_edges
     allocate(edge(num_edges))
-    read(1503+iam,*) (edge(time)%tri(1), edge(time)%tri(2), edge(time)%poi(1), &
+    read(1503+iam,*) (edge(time)%tri(2), edge(time)%tri(1), edge(time)%poi(1), &
         edge(time)%poi(3), edge(time)%res_angle, time=1, num_edges)
     close(1503+iam)
     call tran(point, triangle, edge)
