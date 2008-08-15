@@ -76,19 +76,15 @@ character*64 filebasename
         lccol, nqrhs, lcol, col, indxl2g
 !     .. parameters ..
     integer            descz( DLEN_ ), descv( DLEN_ ), descrcs(DLEN_)
-    character*64 bujianming
     ! Excutives
     !   get starting information
     call blacs_pinfo( iam, nprocs )
     call blacs_gridinfo( ictxt, nprow, npcol, myrow, mycol )
 
     n_i_dir=ubound(phis, 1)
-    open(unit=1455+iam,file=trim(filebasename)//'.tri',status='old', action='read')
-    read(1455+iam,*) num_triangles, num_points
-    read(1455+iam,*) max_r ! 这行为部件数，在本子程序中暂时无用，跳过
-    read(1455+iam,*) bujianming ! 部件名跳过
-    !read(1455+iam,*) bujianming ! 颜色索引跳过 新 emsys 程序要把这行删除
-    read(1455+iam,*) bujianming ! 部件最后面元的总序号，跳过
+    open(unit = 1455 + iam, file = trim(filebasename) // '.facet', &
+         status = 'old', action = 'read')
+    read(1455 + iam, *) num_points, num_triangles
     allocate(point(3, num_points), triangle(num_triangles))
     read(1455+iam,*) (max_r, point(:,time), time=1, num_points)
     read(1455+iam,*) (max_r,triangle(time)%poi, time=1, num_triangles)

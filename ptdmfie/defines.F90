@@ -2,7 +2,7 @@
 ! $URL$
 ! $Id$
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#undef VERBOSE
+#define VERBOSE
 ! define macro 'DOUBLE' if you want double precision default.
 #undef DOUBLE
 ! Please always use lower-case letters in your source files but macros.
