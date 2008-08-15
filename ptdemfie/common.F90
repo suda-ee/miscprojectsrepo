@@ -37,3 +37,13 @@ real point1(3), point2(3), point3(3), area
     p=(l1+l2+l3)/2.0
     area=sqrt(p*(p-l1)*(p-l2)*(p-l3))
 end subroutine cal_area
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!²æ³Ë
+    real function cross(x1,x2)
+    implicit none
+    dimension x1(3),x2(3),cross(3)
+    real x1,x2
+    cross(1)=x1(2)*x2(3)-x1(3)*x2(2)
+    cross(2)=x1(3)*x2(1)-x1(1)*x2(3)
+    cross(3)=x1(1)*x2(2)-x1(2)*x2(1)
+    end function cross

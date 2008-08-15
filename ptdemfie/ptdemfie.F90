@@ -5,18 +5,24 @@
 #include "defines.F90"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! to calculate the coefficients c_{nj} and the RCS in time domain.
-subroutine ptdemfie(freq, this, phis, scaling_s, max_rank, nrmfile, &
-    mono, thss, phss, outfile, ictxt)
+subroutine ptdemfie(freq, this, phis, scaling_s, max_rank, &
+    mono, thss, phss, filebasename, ictxt)
 use mymod
 implicit none
 ! subroutine arguments
-! nrmfile for: 已配对转换完毕的数据，或者本次转换要存储的文件名
 integer max_rank, ictxt
 logical mono
 real freq, scaling_s, this(:), phis(:), thss(:), phss(:)
-character*64 nrmfile, outfile
+character*64 filebasename
     ! interfaces
     interface
+        subroutine tran(point, triangle, edge)
+            use mymod
+            implicit none
+            real :: point(:,:)
+            type(t_edge) edge(:)
+            type(t_triangle) triangle(:)
+        end subroutine tran
         subroutine zform(z, amnij, bmnij, descz, edge, triangle, scaling_s, &
             max_rank, ictxt)
             use mymod
@@ -57,11 +63,10 @@ character*64 nrmfile, outfile
     end interface
     ! Local variables
     integer num_triangles, num_points, num_edges, info, i_rank, num_time
-    real max_r, maxtime, step, t0_delay, time_cut
+    real max_r, maxtime, step, t0_delay, time_cut, tv, p_dir(3)
     integer, allocatable :: ipiv(:)
     real, allocatable :: point(:,:), z(:,:), out_cni(:,:,:), &
-        inc_wave(:,:,:), s_direction(:,:), amnij(:,:,:), bmnij(:,:,:), &
-        p_dir(:,:)
+        inc_wave(:,:,:), s_direction(:,:), amnij(:,:,:), bmnij(:,:,:)
     integer i_dir, s_dir, n_i_dir, n_s_dir, time, k_var
     real, allocatable :: e_s_rt(:,:,:), rcs(:,:,:), grcs(:,:,:)
     type(t_edge), allocatable :: edge(:)
@@ -77,13 +82,26 @@ character*64 nrmfile, outfile
     call blacs_gridinfo( ictxt, nprow, npcol, myrow, mycol )
 
     n_i_dir=ubound(phis, 1)
-    open(unit=1445+iam,file=nrmfile,form="unformatted",status='old', action='read')
-    read(1445+iam) num_edges, num_triangles, num_points
-    close(1445+iam)
-    allocate(point(3,num_points),edge(num_edges), triangle(num_triangles))
-    open(unit=1445+iam,file=nrmfile,form="unformatted",status='old', action='read')
-    read(1445+iam) num_edges, num_triangles, num_points, edge, triangle, point
-    close(1445+iam)
+    open(unit = 1455 + iam, file = trim(filebasename) // '.facet', &
+         status = 'old', action = 'read')
+    read(1455 + iam, *) num_points, num_triangles
+    allocate(point(3, num_points), triangle(num_triangles))
+    read(1455+iam,*) (max_r, point(:,time), time=1, num_points)
+    read(1455+iam,*) (max_r,triangle(time)%poi, time=1, num_triangles)
+    close(1455+iam)
+    open(unit=1503+iam,file=trim(filebasename)//'.part',status='old', action='read')
+    read(1503+iam,*) num_edges
+    allocate(edge(num_edges))
+    read(1503+iam,*) (edge(time)%tri(2), edge(time)%tri(1), edge(time)%poi(1), &
+        edge(time)%poi(3), edge(time)%res_angle, time=1, num_edges)
+    close(1503+iam)
+    call tran(point, triangle, edge)
+#ifdef VERBOSE
+    if (iam == 0) then
+        call date_and_time(my_date, my_time)
+        write(*,*) my_time, ': tran data have done.'
+    end if
+#endif
     max_r=maxval(sqrt(point(1,:)*point(1,:)+point(2,:)*point(2,:)+ &
         point(3,:)*point(3,:)))
     deallocate(point)
@@ -158,15 +176,13 @@ character*64 nrmfile, outfile
     end do
     deallocate(z, amnij, bmnij)
     ! 下面开始计算时域的 RCS 信号
-    if (mono) then
-        n_s_dir=1
-    else
-        n_s_dir=ubound(phss,1)
-    end if
-    step=CC_0/(2.55234*freq)/TIME_STEP
-    time_cut=CC_0*0.695324/freq
+    n_s_dir=ubound(phss,1)
+    ! Determine corresponding time-domain parameters:
+    tv = -log(10.**(BWR/20.))/(2.*PI*freq)/(PI*freq)*CC_0*CC_0
+    time_cut = sqrt(-2.*tv*log(10.**(TPR/20.))); ! Pulse cutoff time
     t0_delay = time_cut + max_r
-    maxtime=t0_delay+max_r+time_cut+WAIT_TIMES*2.*time_cut
+    maxtime=t0_delay+time_cut+WAIT_TIMES*2.*time_cut
+    step=CC_0/freq/TIME_STEP
     num_time=maxtime/step
     allocate(s_direction(3, n_s_dir))
     s_direction(1,:)= sin(thss)*cos(phss)
@@ -174,7 +190,7 @@ character*64 nrmfile, outfile
     s_direction(3,:)= cos(thss)
     call descinit( descrcs, 1, 2*n_i_dir, BLOCKSIZE, max(int(2*n_i_dir/npcol),1), &
         0, 0, ictxt, 1, info )
-    allocate(e_s_rt(3,0:num_time,nqrhs), p_dir(3,nqrhs))
+    allocate(e_s_rt(3,0:num_time,nqrhs))
     allocate(rcs(0:num_time, n_s_dir, nqrhs))
     do i_rank=max_rank, 0, -1
         out_cni(:,:,i_rank)=out_cni(:,:,i_rank)*.25_DKIND
@@ -190,15 +206,15 @@ character*64 nrmfile, outfile
         do lcol=1, nqrhs
             col=indxl2g( lcol, descv(NB_), mycol, descv(CSRC_), npcol )
             if (col>n_i_dir) then
-                p_dir(1,lcol)=-sin(phss(s_dir))
-                p_dir(2,lcol)=cos(phss(s_dir))
-                p_dir(3,lcol)=0._DKIND
+                p_dir(1)=-sin(phss(s_dir))
+                p_dir(2)=cos(phss(s_dir))
+                p_dir(3)=0._DKIND
             else
-                p_dir(1,lcol)=cos(thss(s_dir))*cos(phss(s_dir))
-                p_dir(2,lcol)=cos(thss(s_dir))*sin(phss(s_dir))
-                p_dir(3,lcol)=-sin(thss(s_dir))
+                p_dir(1)=cos(thss(s_dir))*cos(phss(s_dir))
+                p_dir(2)=cos(thss(s_dir))*sin(phss(s_dir))
+                p_dir(3)=-sin(thss(s_dir))
             end if
-            rcs(:, s_dir, lcol)=one_multi_dot(3, p_dir(:,lcol), &
+            rcs(:, s_dir, lcol)=one_multi_dot(3, p_dir, &
                 e_s_rt(:,:,lcol), num_time+1)
         end do
     end do
@@ -213,48 +229,55 @@ character*64 nrmfile, outfile
     end do
     ! 写入时域 RCS 信号
     if (iam==0) then
-    open(unit=1552,file=outfile,form='formatted')
+    open(unit=1552,file=trim(filebasename)//'.rcst',form='formatted')
     if (mono) then
+        n_s_dir=1
+        do i_dir=2, n_i_dir
+            grcs(:,1,i_dir)=grcs(:,i_dir,i_dir)
+            grcs(:,1,i_dir+n_i_dir)=grcs(:,i_dir,i_dir+n_i_dir)
+        end do
     ! 头：列数；垂直极化；水平极化
-    write(1552,1937) 2*n_i_dir*n_s_dir+1, &
+    write(1552,1937) 2*n_i_dir*n_s_dir+1, 0._DKIND, &
         (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
         ! 0; 入射角 theta. 0; 入射角phi
-        0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/),(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
-        0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
         ! 散射角theta, phi
-        0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        (time*step/CC_0,grcs(time, :, :), time=0,num_time) ! 时间输出单位为 ns
+        (time*step/CC_0,exp(-(time*step-t0_delay)*(time*step-t0_delay)/ &
+        (tv*2._DKIND)),grcs(time, 1, :), time=0,num_time) ! 时间输出单位为 ns
     else
     ! 头：列数；垂直极化；水平极化
-    write(1552,1937) 2*n_i_dir*n_s_dir+1, &
+    write(1552,1937) 2*n_i_dir*n_s_dir+1, 0._DKIND, &
         (/(1, time=1,n_i_dir*n_s_dir)/), (/(2, time=1,n_i_dir*n_s_dir)/), &
         ! 0; 入射角 theta. 0; 入射角phi
-        0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/),(/((this(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
-        0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/),(/((phis(i_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
         i_dir=1,n_i_dir)/), &
         ! 散射角theta, phi
-        0._DKIND,(/((thss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((thss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((thss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        0._DKIND,(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
+        0._DKIND,0._DKIND,(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/),(/((phss(s_dir)*180._DKIND/PI,s_dir=1,n_s_dir), &
             i_dir=1,n_i_dir)/), &
-        (time*step/CC_0,grcs(time, :, :), time=0,num_time) ! 时间输出单位为 ns
+        (time*step/CC_0,exp(-(time*step-t0_delay)*(time*step-t0_delay)/ &
+        (tv*2._DKIND)),grcs(time, :, :), time=0,num_time) ! 时间输出单位为 ns
     end if
     close(1552)
-1937    format(<2*n_i_dir*n_s_dir+1>G15.7)
+1937    format(<2*n_i_dir*n_s_dir+2>G15.7)
     end if
     deallocate(rcs)
     call blacs_barrier( ictxt, 'All' )

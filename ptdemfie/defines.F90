@@ -4,7 +4,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define VERBOSE
 ! define macro 'DOUBLE' if you want double precision default.
-#define DOUBLE
+#undef DOUBLE
 ! Please always use lower-case letters in your source files but macros.
 #ifdef DOUBLE
 #define real real(8)
@@ -25,6 +25,7 @@
 #define LASRT slasrt
 #define PGETRF psgetrf
 #define PGETRS psgetrs
+#define PGEMM psgemm
 #define PGEMV psgemv
 #define PLAHEBING PSLAHEBING
 #endif
@@ -39,10 +40,13 @@
 #define ETA_0 376.730313461_DKIND
 ! 积分时的最大迭代步数
 #define MAX_STP 100
-! TIME_STEP is used in the DFT, 最高频率信号周期划分几步(3*sigma)
-#define TIME_STEP 20.
+! TIME_STEP is used in the DFT, 最高频率信号周期划分几步
+#define TIME_STEP 40._DKIND
 ! 脉冲结束后的在等几个脉冲的时间
 #define WAIT_TIMES 5._DKIND
+! 高斯脉冲时域和频域截至 dB 数
+#define TPR -60._DKIND
+#define BWR -6._DKIND
 ! default configuration file name
 #define CONF 'ptdemfie.conf'
 ! default block size for distributed matrix

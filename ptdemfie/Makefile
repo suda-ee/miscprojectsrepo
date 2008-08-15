@@ -1,11 +1,12 @@
 # $URL$
 # $Id$
 F90	=	mpiifort
-LARGS	=	-L/opt/intel/cmkl/9.0/lib/32 -lmkl_scalapack -lmkl_blacs_intelmpi20 -lmkl_lapack -lmkl_ia32 -lmkl_lapack32 -lmkl -lsvml
+#LARGS	=	-lmkl_scalapack -lmkl_blacs_intelmpi -lmkl_lapack -lmkl_ia32 -lmkl_core -lguide -lpthread -lsvml
+LARGS	=	-lmkl_scalapack -lmkl_blacs_intelmpi -lmkl_intel -lmkl_intel_thread -lmkl_core -lguide -lpthread -lsvml #-g
 #CARGS	=	-u -warn all -debug extended -inline-debug-info -g
-CARGS	=	-warn all -ftz -ip -ipo -O3 -xW -align all #-prof-use #-prof-genx
+CARGS	=	-warn all -ftz -ip -ipo -O3 -xT -align all -parallel #-prof-use #-prof-genx
 DEFS	=	define.F90
-OBJS	=	common.o ome_gen.o psi_func.o tran.o vform.o v_wave_gen.o zform.o Is_Same_Triangle.o ptdemfie.o main.o cal_est.o mymod.o ilasrt.o plapro.o
+OBJS	=	common.o ome_gen.o psi_func.o tran.o vform.o v_wave_gen.o zform.o ptdemfie.o main.o cal_est.o mymod.o plapro.o
 MODS	=	mymod.mod
 EXES	=	ptdemfie
 

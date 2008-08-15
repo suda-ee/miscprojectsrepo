@@ -39,8 +39,8 @@ type(t_triangle) triangle(:)
         0, 0, ictxt, max(itlcrow,1), info )
     cal_est=0.
     allocate(itmat(itlcrow, 3))
-    do j_var=0,max_rank
-        do time=0, num_time
+    do time=0, num_time
+        do j_var=0, max_rank
             itmat=0._DKIND
             do lcrow=1, itlcrow
                 n_var=indxl2g( lcrow, descit(MB_), myrow, descit(RSRC_), nprow )

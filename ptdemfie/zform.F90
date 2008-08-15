@@ -50,8 +50,9 @@ type(t_triangle) triangle(:)
                     do ij_pos=0, max_rank
                     amnij(lrow,lcol,ij_pos)=amnij(lrow,lcol,ij_pos)- &
                         rhodot*(3-2*p)*(3-2*q)*(.5_DKIND+ij_pos)*scaling_s
-                    bmnij(lrow,lcol,ij_pos)=bmnij(lrow,lcol,ij_pos)- &
-                        (.5_DKIND+ij_pos)*scaling_s
+                    bmnij(lrow, lcol, ij_pos) = bmnij(lrow, lcol, ij_pos) - &
+                        (.5_DKIND + ij_pos) * scaling_s * (3 - 2 * p) * (3 &
+                        - 2 * q)
                     end do
                 else
                     R=dist(triangle(edge(row)%tri(p))%tri_point(:,p_p), &
@@ -61,19 +62,22 @@ type(t_triangle) triangle(:)
                     psi_valr=(1._DKIND-sr)*psi_vall
                     amnij(lrow,lcol,0)=amnij(lrow,lcol,0)+ &
                         rhodot*(psi_vall-1.)*(3-2*p)*(3-2*q)/R
-                    bmnij(lrow,lcol,0)=bmnij(lrow,lcol,0)+ &
-                        (psi_vall-1.)/R
+                    bmnij(lrow, lcol, 0) = bmnij(lrow, lcol, 0) + &
+                        (psi_vall - 1.) / R * (3 - 2 * p) * (3 &
+                        - 2 * q)
                     amnij(lrow,lcol,1)=amnij(lrow,lcol,1)+ &
                         rhodot*(psi_valr-1.)*(3-2*p)*(3-2*q)/R
-                    bmnij(lrow,lcol,1)=bmnij(lrow,lcol,1)+ &
-                        (psi_valr-1.)/R
+                    bmnij(lrow, lcol, 1) = bmnij(lrow, lcol, 1) + &
+                        (psi_valr - 1.) / R * (3 - 2 * p) * (3 &
+                        - 2 * q)
                     do ij_pos=2, max_rank
                     psi_val=((2*ij_pos-1-sr)*psi_valr-(ij_pos-1)* &
                         psi_vall)/ij_pos
                     amnij(lrow,lcol,ij_pos)=amnij(lrow,lcol,ij_pos)+ &
                         rhodot*(psi_val-1._DKIND)*(3-2*p)*(3-2*q)/R
-                    bmnij(lrow,lcol,ij_pos)=bmnij(lrow,lcol,ij_pos)+ &
-                        (psi_val-1._DKIND)/R
+                    bmnij(lrow, lcol, ij_pos) = bmnij(lrow, lcol, ij_pos) + &
+                        (psi_val - 1._DKIND) / R * (3 - 2 * p) * (3 &
+                        - 2 * q)
                     psi_vall=psi_valr
                     psi_valr=psi_val
                     end do
@@ -88,7 +92,8 @@ type(t_triangle) triangle(:)
                 gint=3.545/sqrt(triangle(edge(row)%tri(p))%area)*9.
                 amnij(lrow,lcol,:)=amnij(lrow,lcol,:)+rhodot* &
                     (3-2*p)*(3-2*q)*gint
-                bmnij(lrow,lcol,:)=bmnij(lrow,lcol,:)+gint
+                bmnij(lrow, lcol, :) = bmnij(lrow, lcol, :) + gint * (3 &
+                    - 2 * p) * (3 - 2 * q)
             else
                 do p_q=1,3
                 do p_p=1,3
@@ -101,19 +106,19 @@ type(t_triangle) triangle(:)
                     psi_valr=(1._DKIND-sr)*psi_vall
                     amnij(lrow,lcol,0)=amnij(lrow,lcol,0)+ &
                         rhodot*psi_vall*(3-2*p)*(3-2*q)/R
-                    bmnij(lrow,lcol,0)=bmnij(lrow,lcol,0)+ &
-                        psi_vall/R
+                    bmnij(lrow, lcol, 0) = bmnij(lrow, lcol, 0) + psi_vall &
+                        / R * (3 - 2 * p) * (3 - 2 * q)
                     amnij(lrow,lcol,1)=amnij(lrow,lcol,1)+ &
                         rhodot*psi_valr*(3-2*p)*(3-2*q)/R
-                    bmnij(lrow,lcol,1)=bmnij(lrow,lcol,1)+ &
-                        psi_valr/R
+                    bmnij(lrow, lcol, 1) = bmnij(lrow, lcol, 1) + psi_valr &
+                        / R * (3 - 2 * p) * (3 - 2 * q)
                     do ij_pos=2, max_rank
                     psi_val=((2*ij_pos-1-sr)*psi_valr-(ij_pos-1)* &
                         psi_vall)/ij_pos
                     amnij(lrow,lcol,ij_pos)=amnij(lrow,lcol,ij_pos)+ &
                         rhodot*psi_val*(3-2*p)*(3-2*q)/R
-                    bmnij(lrow,lcol,ij_pos)=bmnij(lrow,lcol,ij_pos)+ &
-                        psi_val/R
+                    bmnij(lrow, lcol, ij_pos) = bmnij(lrow, lcol, ij_pos) &
+                        + psi_val / R * (3 - 2 * p) * (3 - 2 * q)
                     psi_vall=psi_valr
                     psi_valr=psi_val
                     end do
