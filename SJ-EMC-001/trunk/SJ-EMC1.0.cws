@@ -28,7 +28,7 @@ Hide Windows = False
 Global Hot Key = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 1
+Number of Opened Files = 0
 Window Confinement Region Enabled = True
 MainColumnWidth = 141
 FileDateColumnWidth = 70
@@ -52,21 +52,6 @@ Disk Date = 3290378400
 In Projects = "1,"
 
 [File 0002]
-Path = "/g/Program Files/National Instruments/CVI85/sdk/lib/msvc/ComDlg32.Lib"
-File Type = "Library"
-Disk Date = 3290378400
-In Projects = "1,"
-
-[File 0003]
-Path = "/d/cai/projects/SJ-EMC-1.0/pnlZW1402.c"
-File Type = "CSource"
-Disk Date = 3306294327
-In Projects = "1,"
-Window Top = 122
-Window Left = 58
-Source Window State = "1,40,40,40,12,23,12,0,0,0,0,0,0,0,0,0,33,0,41,12,315,690,1,0,"
-
-[File 0004]
 Path = "/d/cai/projects/SJ-EMC-1.0/pnlZW1402.h"
 File Type = "Include"
 Disk Date = 3306294553
@@ -75,7 +60,16 @@ Window Top = 146
 Window Left = 71
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,0,0,411,690,1,0,"
 
-[File 0005]
+[File 0003]
+Path = "/d/cai/projects/SJ-EMC-1.0/utilfunc.h"
+File Type = "Include"
+Disk Date = 3306307915
+In Projects = "1,"
+Window Top = 218
+Window Left = 110
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,411,690,1,0,"
+
+[File 0004]
 Path = "/d/cai/projects/SJ-EMC-1.0/pnlZW1402.uir"
 File Type = "User Interface Resource"
 Disk Date = 3306294553
@@ -84,16 +78,28 @@ Window Top = 26
 Window Left = 6
 Window Height = 323
 Window Width = 521
-Window Z-Order = 1
+
+[File 0005]
+Path = "/g/Program Files/National Instruments/CVI85/sdk/lib/msvc/ComDlg32.Lib"
+File Type = "Library"
+Disk Date = 3290378400
+In Projects = "1,"
 
 [File 0006]
-Path = "/d/cai/projects/SJ-EMC-1.0/utilfunc.h"
-File Type = "Include"
-Disk Date = 3306218174
+Path = "/d/cai/projects/SJ-EMC-1.0/pnlZW1402.c"
+File Type = "CSource"
+Disk Date = 3306308535
 In Projects = "1,"
-Window Top = 218
-Window Left = 110
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,411,690,1,0,"
+Window Top = 122
+Window Left = 58
+Source Window State = "1,40,40,40,12,23,12,0,0,102,0,0,0,0,0,30,48,0,97,36,315,690,1,0,"
+
+[File 0007]
+Path = "/d/cai/projects/SJ-EMC-1.0/utilfunc.c"
+File Type = "CSource"
+Disk Date = 3306308027
+In Projects = "1,"
+Source Window State = "1,0,0,0,0,0,0,0,0,102,0,0,0,0,0,30,0,0,16,4,0,0,0,0,"
 
 [Build Options 0001]
 Generate Browse Info = True

@@ -6,27 +6,7 @@
 // Licence:
 //////////////////////////////////////////////////////////////////////////////
 
-/*========================
-  公共变量
-  ==========================*/
-union
-{
-    unsigned char uc[4];
-    long lda;
-    unsigned long ul;
-    float fda;
-}un_4b;
-union
-{
-    unsigned char uc[2];
-    short sda;
-    unsigned short us;
-}un_2b;
-long lda;
-short sda;
-float real;
-unsigned char uca[4];
-unsigned char ucb[2];
+#include "utilfunc.h"
 
 /*=================================================
   浮点数据转换为字节数据
@@ -34,7 +14,14 @@ unsigned char ucb[2];
   出口数据：转换的四字节数据在uca[]中
   顺序是反序
   ===================================================*/
-void FtoBr(void);
+void FtoBr(void)
+{
+    un_4b.fda=real;
+    uca[0]=un_4b.uc[3];
+    uca[1]=un_4b.uc[2];
+    uca[2]=un_4b.uc[1];
+    uca[3]=un_4b.uc[0];
+}
 
 /*=================================================
   字节数据转换为浮点数据
@@ -42,7 +29,14 @@ void FtoBr(void);
   顺序是反序
   出口数据：real 存放的为已转换的浮点数据;
   ===================================================*/
-void BtoFr(void);
+void BtoFr(void)
+{
+    un_4b.uc[0]=uca[3];
+    un_4b.uc[1]=uca[2];
+    un_4b.uc[2]=uca[1];
+    un_4b.uc[3]=uca[0];
+    real=un_4b.fda;
+}
 
 /*===========================================================
   长整形数据转换为字节数据
@@ -50,7 +44,14 @@ void BtoFr(void);
   出口数据：转换完的四字节数据在uca[]中
   顺序是从反序
   ============================================================*/
-void LtoBr(void);
+void LtoBr(void)
+{
+    un_4b.lda=lda;
+    uca[0]=un_4b.uc[3];
+    uca[1]=un_4b.uc[2];
+    uca[2]=un_4b.uc[1];
+    uca[3]=un_4b.uc[0];
+}
 
 /*===========================================================
   字节数据换为长整形数据转
@@ -58,7 +59,14 @@ void LtoBr(void);
   顺序是反序
   出口数据：转换完毕的长整形放在lda 中
   ============================================================*/
-void BtoLr(void);
+void BtoLr(void)
+{
+    un_4b.uc[0]=uca[3];
+    un_4b.uc[1]=uca[2];
+    un_4b.uc[2]=uca[1];
+    un_4b.uc[3]=uca[0];
+    lda=un_4b.lda;
+}
 
 /*===========================================================
   整形数据换为字节数据
@@ -66,7 +74,12 @@ void BtoLr(void);
   出口数据：转换完的２字节数据在ucb[]中
   顺序是同序
   ============================================================*/
-void StoB(void);
+void StoB(void)
+{
+    un_2b.sda=sda;
+    ucb[0]=un_2b.uc[0];
+    ucb[1]=un_2b.uc[1];
+}
 
 /*===========================================================
   字节数据转换为整形数据
@@ -74,7 +87,35 @@ void StoB(void);
   顺序是同序
   出口数据：转换完毕的整形放在ida 中
   ============================================================*/
-void BtoS(void);
+void BtoS(void)
+{
+    un_2b.uc[0]=ucb[0];
+    un_2b.uc[1]=ucb[1];
+    sda=un_2b.sda;
+}
 
 /*CRC-16 check*/
-unsigned short CrcCal(unsigned char Buf[], unsigned short count);
+/*=========================
+  CrC 计算子程序
+  得出的字节序跟 modbus 总线里的相同
+  ==========================*/
+unsigned short CrcCal(unsigned char Buf[], unsigned short count)
+{
+    unsigned short CrcData = 0xffff, i;
+    unsigned short TmpI;
+    unsigned short Data, GenPoly = 0xa001;
+    for (i = 0; i < count; i++)
+    {
+        Data = Buf[i];
+        Data = Data << 1;
+        for(TmpI = 8; TmpI > 0; TmpI--)
+        {
+            Data = Data >> 1;
+            if((Data ^ CrcData) & 1)
+                CrcData = (CrcData >> 1) ^ GenPoly;
+            else
+                CrcData = CrcData >> 1;
+        }
+    }
+    return CrcData;
+}
