@@ -28,14 +28,13 @@
 #define  PNLZW1402_LOOPMEASURE            12      /* callback function: OnLoopSel */
 #define  PNLZW1402_LOOPTIME               13      /* callback function: OnLpVal */
 #define  PNLZW1402_TEXTMSG                14
-#define  PNLZW1402_LPTIMER                15      /* callback function: OnLpTime */
-#define  PNLZW1402_SPLITTER               16
-#define  PNLZW1402_TXTMSG                 17
-#define  PNLZW1402_LEDZONG                18
-#define  PNLZW1402_LEDJING                19
-#define  PNLZW1402_TBLRCRD                20
-#define  PNLZW1402_SVEXCEL                21      /* callback function: OnSaveExcel */
-#define  PNLZW1402_CLRLOG                 22      /* callback function: OnClrLog */
+#define  PNLZW1402_SPLITTER               15
+#define  PNLZW1402_TXTMSG                 16
+#define  PNLZW1402_LEDZONG                17
+#define  PNLZW1402_LEDJING                18
+#define  PNLZW1402_TBLRCRD                19
+#define  PNLZW1402_SVEXCEL                20      /* callback function: OnSaveExcel */
+#define  PNLZW1402_CLRLOG                 21      /* callback function: OnClrLog */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -48,7 +47,6 @@
 int  CVICALLBACK OnClrLog(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OnGetBgr(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OnLoopSel(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK OnLpTime(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OnLpVal(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OnPnl1402(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OnRelCurSel(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

@@ -1,25 +1,107 @@
 #include <ansi_c.h>
 #include <stdlib.h>
 #include <windows.h>
+#include "asynctmr.h"
 #include <formatio.h>
 #include <rs232.h>
 #include <cvirte.h>     
-#include <userint.h>
 #include <utility.h>
+#include <userint.h>
 #include "pnlZW1402.h"
 #include "utilfunc.h"
 
 static int pnlZw1402;
 int portNumber, relQ = 1;
+long baudRate=9600;
 float backvalue;
 unsigned char sendbuffer[512];
 unsigned char buffer[512];
 LPVOID lpParameter;
+int timeID = 0;
 
 DWORD WINAPI ShutLED(LPVOID lpParameter)
 {
     Delay(.3);
     SetCtrlVal(pnlZw1402, PNLZW1402_LED, 0);
+    return 0;
+}
+
+int CVICALLBACK OnLpTime (int reserved, int timerId, int event,
+        void *callbackData, int eventData1, int eventData2)
+{
+    unsigned short crccheck;
+    int numberOfRows, year, month, day;
+    Point cellp;
+    char date[11];
+
+    switch (event)
+    {
+        case EVENT_TIMER_TICK:
+            OpenComConfig (portNumber, NULL, baudRate, 0, 8, 1, 0, 0);
+            ComWrt (portNumber, sendbuffer, 8);
+            if (ComRd (portNumber, buffer, 9) <= 0)
+            {
+                SetCtrlVal(pnlZw1402, PNLZW1402_TXTMSG, "通讯超时，请正确设置仪表参数！");
+            }
+            else
+            {
+                crccheck = CrcCal(buffer, 7);
+                ucb[0] = buffer[7]; ucb[1] = buffer[8];
+                BtoS();
+                if (sda = crccheck)
+                {
+                    uca[0] = buffer[3];
+                    uca[1] = buffer[4];
+                    uca[2] = buffer[5];
+                    uca[3] = buffer[6];
+                    BtoFr();
+                    SetCtrlVal(pnlZw1402, PNLZW1402_LED, 1);
+
+                    CreateThread(NULL, 0, ShutLED, lpParameter, 0, NULL);
+
+                    SetCtrlVal(pnlZw1402, PNLZW1402_CURRENTNUM,
+                            real - relQ * backvalue);
+
+                    GetSystemDate (&month, &day, &year);
+                    GetNumTableRows (pnlZw1402, PNLZW1402_TBLRCRD, &numberOfRows);
+                    InsertTableRows (pnlZw1402, PNLZW1402_TBLRCRD, numberOfRows + 1,
+                            1, VAL_USE_MASTER_CELL_TYPE);
+                    cellp.x = 1; cellp.y = numberOfRows + 1;
+                    Fmt(date, "%i[w4]-%i[w2p0]-%i[w2p0]", year, month, day);
+                    SetTableCellVal (pnlZw1402, PNLZW1402_TBLRCRD, cellp,
+                            date);
+                    cellp.x++;
+                    SetTableCellVal (pnlZw1402, PNLZW1402_TBLRCRD, cellp,
+                            TimeStr ());
+                    cellp.x++;
+                    SetTableCellVal (pnlZw1402, PNLZW1402_TBLRCRD, cellp,
+                            real - backvalue);
+                    cellp.x++;
+                    SetTableCellVal (pnlZw1402, PNLZW1402_TBLRCRD, cellp,
+                            real);
+                }
+                else
+                {
+                    SetCtrlVal(pnlZw1402, PNLZW1402_TXTMSG, "CRC校验错误！");
+                }
+            }
+            CloseCom (portNumber);
+            break;
+    }
+    return 0;
+}
+
+int CVICALLBACK OnLpVal (int panel, int control, int event,
+        void *callbackData, int eventData1, int eventData2)
+{
+    float timeinterv;
+    switch (event)
+    {
+        case EVENT_VAL_CHANGED:
+            GetCtrlVal(panel, control, &timeinterv);
+            SetAsyncTimerAttribute (timeID, ASYNC_ATTR_INTERVAL, (double) timeinterv);
+            break;
+    }
     return 0;
 }
 
@@ -41,8 +123,8 @@ int CVICALLBACK QuitCallback (int panel, int control, int event,
     switch (event)
     {
         case EVENT_COMMIT:
-            GetCtrlVal (panel, PNLZW1402_COMSEL, &portNumber);
-            CloseCom (portNumber);
+            if (timeID > 0)
+                DiscardAsyncTimer (timeID);
             QuitUserInterface (0);
             break;
     }
@@ -53,14 +135,20 @@ int CVICALLBACK OnLoopSel (int panel, int control, int event,
         void *callbackData, int eventData1, int eventData2)
 {
     int value=0;
+    float interval;
     switch (event)
     {
         case EVENT_VAL_CHANGED:
             GetCtrlVal (panel, control, &value);
             SetCtrlAttribute (panel, PNLZW1402_LOOPTIME, ATTR_VISIBLE, value);
+            GetCtrlVal (panel, PNLZW1402_LOOPTIME, &interval);
+            if (timeID <= 0)
+                timeID = NewAsyncTimer ((double) interval, -1, 0, OnLpTime,
+                        callbackData);
             if (value == 0)
-                SetCtrlAttribute (panel, PNLZW1402_LPTIMER, ATTR_ENABLED,
-                        value);
+                SetAsyncTimerAttribute (timeID, ASYNC_ATTR_ENABLED, value);
+
+            SetCtrlAttribute (panel, PNLZW1402_SVEXCEL, ATTR_DIMMED, value);
             break;
     }
     return 0;
@@ -111,8 +199,8 @@ int CVICALLBACK OnPnl1402 (int panel, int event, void *callbackData,
 
             break;
         case EVENT_CLOSE:
-            GetCtrlVal (panel, PNLZW1402_COMSEL, &portNumber);
-            CloseCom (portNumber);
+            if (timeID > 0)
+                DiscardAsyncTimer (timeID);
             QuitUserInterface (0);
             break;
     }
@@ -122,7 +210,6 @@ int CVICALLBACK OnPnl1402 (int panel, int event, void *callbackData,
 int CVICALLBACK OnTest (int panel, int control, int event,
         void *callbackData, int eventData1, int eventData2)
 {
-    long baudRate;
     int loopit;
     unsigned int instadd;
     unsigned short crccheck;
@@ -146,7 +233,7 @@ int CVICALLBACK OnTest (int panel, int control, int event,
             sendbuffer[6] = ucb[0]; sendbuffer[7] = ucb[1];
 
             GetCtrlVal (panel, PNLZW1402_LOOPMEASURE, &loopit);
-            SetCtrlAttribute (panel, PNLZW1402_LPTIMER, ATTR_ENABLED, loopit);
+            SetAsyncTimerAttribute (timeID, ASYNC_ATTR_ENABLED, loopit);
             if (loopit == 0)
             {
                 ComWrt (portNumber, sendbuffer, 8);
@@ -178,67 +265,8 @@ int CVICALLBACK OnTest (int panel, int control, int event,
                     }
                 }
             }
+            CloseCom (portNumber);
             SetCtrlAttribute (panel, control, ATTR_DIMMED, 0);
-            break;
-    }
-    return 0;
-}
-
-int CVICALLBACK OnLpTime (int panel, int control, int event,
-        void *callbackData, int eventData1, int eventData2)
-{
-    unsigned short crccheck;
-    int numberOfRows, year, month, day;
-    Point cellp;
-    char date[11];
-    switch (event)
-    {
-        case EVENT_TIMER_TICK:
-            ComWrt (portNumber, sendbuffer, 8);
-            if (ComRd (portNumber, buffer, 9) <= 0)
-            {
-                SetCtrlVal(panel, PNLZW1402_TXTMSG, "通讯超时，请正确设置仪表参数！");
-            }
-            else
-            {
-                crccheck = CrcCal(buffer, 7);
-                ucb[0] = buffer[7]; ucb[1] = buffer[8];
-                BtoS();
-                if (sda = crccheck)
-                {
-                    uca[0] = buffer[3];
-                    uca[1] = buffer[4];
-                    uca[2] = buffer[5];
-                    uca[3] = buffer[6];
-                    BtoFr();
-                    SetCtrlVal(panel, PNLZW1402_LED, 1);
-                    CreateThread(NULL, 0, ShutLED, lpParameter, 0, NULL);
-                    SetCtrlVal(panel, PNLZW1402_CURRENTNUM,
-                            real - relQ * backvalue);
-
-                    GetSystemDate (&month, &day, &year);
-                    GetNumTableRows (panel, PNLZW1402_TBLRCRD, &numberOfRows);
-                    InsertTableRows (panel, PNLZW1402_TBLRCRD, numberOfRows + 1,
-                            1, VAL_USE_MASTER_CELL_TYPE);
-                    cellp.x = 1; cellp.y = numberOfRows + 1;
-                    Fmt(date, "%i[w4]-%i[w2p0]-%i[w2p0]", year, month, day);
-                    SetTableCellVal (panel, PNLZW1402_TBLRCRD, cellp,
-                            date);
-                    cellp.x++;
-                    SetTableCellVal (panel, PNLZW1402_TBLRCRD, cellp,
-                            TimeStr ());
-                    cellp.x++;
-                    SetTableCellVal (panel, PNLZW1402_TBLRCRD, cellp,
-                            real - backvalue);
-                    cellp.x++;
-                    SetTableCellVal (panel, PNLZW1402_TBLRCRD, cellp,
-                            real);
-                }
-                else
-                {
-                    SetCtrlVal(panel, PNLZW1402_TXTMSG, "CRC校验错误！");
-                }
-            }
             break;
     }
     return 0;
@@ -247,9 +275,9 @@ int CVICALLBACK OnLpTime (int panel, int control, int event,
 int CVICALLBACK OnGetBgr (int panel, int control, int event,
         void *callbackData, int eventData1, int eventData2)
 {
-    long baudRate;
     unsigned int instadd;
     unsigned short crccheck;
+
     switch (event)
     {
         case EVENT_COMMIT:
@@ -293,23 +321,9 @@ int CVICALLBACK OnGetBgr (int panel, int control, int event,
                     SetCtrlVal(panel, PNLZW1402_TXTMSG, "CRC校验错误！");
                 }
             }
+            CloseCom (portNumber);
             SetCtrlAttribute (panel, control, ATTR_DIMMED, 0);
 
-            break;
-    }
-    return 0;
-}
-
-int CVICALLBACK OnLpVal (int panel, int control, int event,
-        void *callbackData, int eventData1, int eventData2)
-{
-    float timeinterv;
-    switch (event)
-    {
-        case EVENT_VAL_CHANGED:
-            GetCtrlVal(panel, control, &timeinterv);
-            SetCtrlAttribute (panel, PNLZW1402_LPTIMER, ATTR_INTERVAL,
-                    timeinterv);
             break;
     }
     return 0;
@@ -324,7 +338,6 @@ int CVICALLBACK OnSaveExcel (int panel, int control, int event,
     char *logtime[2];
     float curval[2];
     //获取用户选择保存的文件名称。
-    //蔡军生 2007/12/25 QQ:9073204 深圳
     //
     OPENFILENAME ofn;       // 公共对话框结构。
     TCHAR szFile[MAX_PATH]; // 保存获取文件名称的缓冲区。          

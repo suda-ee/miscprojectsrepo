@@ -1,6 +1,7 @@
 /*CRC-16 check*/
 /*=========================
-  CrC 计算子程序 (??不知是本函数的问题还是青智的问题，竟然不用倒字节序了)
+  CrC 计算子程序
+ 来自青智资料  得出的字节序跟 modbus 总线里的相同
   ==========================*/
 unsigned short CrcCal(unsigned char Buf[], unsigned short count)
 {
