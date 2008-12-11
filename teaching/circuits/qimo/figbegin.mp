@@ -17,6 +17,11 @@ verbatimtex
 \usepackage[T1]{fontenc}
 \usepackage{CJK}
 \def\Varangle#1{\kern0.0625em\vtop{\hbox{\kern-0.0625em$/{#1}$}\kern-0.067829ex\hrule}}
+\newcommand\phase[1]
+        % Phase angle
+{\setbox0=\hbox{$\mskip 7mu minus 4mu#1$}
+\raise.21ex\hbox{$/$}\hskip-0.95ex
+\underline{\raise\dp0\hbox{\box0}}}
 \def\RSquote{'}
 \begin{document}
 \begin{CJK}{GBK}{song}
