@@ -2,7 +2,6 @@
 #define RESULTTABLEMODEL_H
 
 #include <QtCore/QAbstractTableModel>
-#include <QtCore/QTime>
 
 QT_BEGIN_NAMESPACE
 
@@ -31,14 +30,14 @@ public:
     bool removeColumns(int column, int count, const QModelIndex & parent
             = QModelIndex());
 
-    QList<int> getAllTime();
+    QList<float> getAllTime();
     QList<float> * getAllData();
 
 public slots:
-    int appendData(int num, QTime & tTime, float *filteredData);
+    int appendData(int num, float mTime, float *filteredData);
 
 private:
-    QList<QTime> testTime;
+    QList<float> testTime;
     QList<float> dataArray[6];
     QString hHeader[7];
     

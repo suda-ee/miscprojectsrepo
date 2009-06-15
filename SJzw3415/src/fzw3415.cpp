@@ -7,6 +7,13 @@
 #include <QtCore/QtEndian>
 #include "fzw3415.h"
 
+FZW3415 * gzw3415;
+
+#ifdef Q_WS_WIN
+void CALLBACK TimerOut(UINT wTimerID, UINT msg, 
+    DWORD dwUser, DWORD dw1, DWORD dw2);
+#endif
+
 FZW3415::FZW3415(QObject * parent, int slave, QString port, int baudRate) :
     QObject(parent),
     m_mbParam(NULL)
@@ -14,13 +21,13 @@ FZW3415::FZW3415(QObject * parent, int slave, QString port, int baudRate) :
     filteredData[5] = 0.;
     slaveAddr = slave;
     setSerialPort(port, baudRate);
-    timer = new QTimer(this);
-    timer->setInterval(200);
-    connect(timer, SIGNAL(timeout()), this, SLOT(timerOut()));
 }
 
 FZW3415::~FZW3415()
 {
+#ifdef Q_WS_WIN
+    timeKillEvent(timerId);
+#endif
 }
 
 int FZW3415::setSerialPort(QString port, int baudRate)
@@ -52,10 +59,9 @@ int FZW3415::readBundleVals()
 
     int ret = -1;
     int i;
-
     ret = read_holding_registers( m_mbParam, slaveAddr, addr,
                                             num, dest16 );
-    tTime = QTime::currentTime();
+    mTime = mTime + tTime.restart() * 1000;
     if( m_mbParam == NULL )
     {
         return ret;
@@ -82,13 +88,20 @@ int FZW3415::readBundleVals()
 
 void FZW3415::startRead_Filter()
 {
+    DWORD_PTR dwUser;
     filteredData[5] = 0.;
-    timer->start();
+#ifdef Q_WS_WIN
+    timerId = timeSetEvent(200, 0, TimerOut, dwUser, TIME_PERIODIC);
+    tTime.start();
+#endif
+    mTime = 0;
 }
 
 void FZW3415::stopRead_Filter()
 {
-    timer->stop();
+#ifdef Q_WS_WIN
+    timeKillEvent(timerId);
+#endif
 }
 
 int FZW3415::getBundleVals(float vals[])
@@ -110,11 +123,18 @@ void FZW3415::timerOut()
 {
     readBundleVals();
     filter();
-    emit filteredBundleDataReady(6, tTime, filteredData);
+    emit filteredBundleDataReady(6, mTime, filteredData);
 }
 
-extern "C" {
+#ifdef Q_WS_WIN
+void CALLBACK TimerOut(UINT wTimerID, UINT msg, 
+    DWORD dwUser, DWORD dw1, DWORD dw2) 
+{ 
+    gzw3415->timerOut();
+}
+#endif
 
+extern "C" {
 void busMonitorAddItem( uint8_t isRequest, uint8_t slave, uint8_t func, uint16_t addr, uint16_t nb, uint16_t crc )
 {
 }

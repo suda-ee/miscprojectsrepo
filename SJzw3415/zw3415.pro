@@ -2,6 +2,7 @@ TARGET = SJzw3415
 TEMPLATE = app
 VERSION = 0.1.0
 CONFIG += windows
+CONFIG += debug_and_release
 
 # CONFIG += embed_manifest_exe
 SOURCES += src/main.cpp \
@@ -28,7 +29,7 @@ unix:DEFINES += _TTY_POSIX_
 win32:HEADERS += 3rdparty/qextserialport/win_qextserialport.h
 win32:SOURCES += 3rdparty/qextserialport/win_qextserialport.cpp
 win32:DEFINES += _TTY_WIN_
-win32:LIBS += -lsetupapi
+win32:LIBS += -lsetupapi -lwinmm
 
 FORMS += forms/mainwindow.ui \
     forms/about.ui

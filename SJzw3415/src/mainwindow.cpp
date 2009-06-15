@@ -14,6 +14,7 @@
 
 
 extern MainWindow * globalMainWin;
+extern FZW3415 * gzw3415;
 static inline QString embracedString( const QString & s );
 
 
@@ -49,6 +50,7 @@ MainWindow::MainWindow( QWidget * parent ) :
 
         m_zw3415Meter = new FZW3415(this, slaveID->value(), portName.toAscii(), 
                 baud->currentText().toInt());
+        gzw3415 = m_zw3415Meter;
 
 	connect( slaveID, SIGNAL( valueChanged( int ) ),
 			m_zw3415Meter, SLOT( setSlaveAddr(int) ) );
@@ -56,8 +58,8 @@ MainWindow::MainWindow( QWidget * parent ) :
 			this, SLOT( changePortInfo() ) );
 	connect( baud, SIGNAL(  currentIndexChanged ( int ) ),
 			this, SLOT( changePortInfo() ) );
-        connect(m_zw3415Meter, SIGNAL( filteredBundleDataReady(int, QTime&, float*) ),
-                resultData, SLOT( appendData(int, QTime &, float*) ));
+        connect(m_zw3415Meter, SIGNAL( filteredBundleDataReady(int, float, float*) ),
+                resultData, SLOT( appendData(int, float, float*) ));
         connect(resultData, SIGNAL(rowsInserted(QModelIndex, int, int)),
                 resultTable, SLOT(scrollToBottom()));
     }
@@ -117,7 +119,7 @@ void MainWindow::exportToFile()
     QFile file(filename);
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
-    QList<int> tTime = resultData->getAllTime();
+    QList<float> tTime = resultData->getAllTime();
     QList<float> *data = resultData->getAllData();
     out<<trUtf8("时间 (ms)")<<", "<<trUtf8("电压 (V)")<<", "
             <<trUtf8("电流 (A)")<<", "<<trUtf8("平均功率 (W)")<<", "

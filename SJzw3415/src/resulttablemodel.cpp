@@ -38,7 +38,7 @@ QVariant resulttablemodel::data(const QModelIndex & index, int role) const
     if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
         if (index.column() == 0)
-            return testTime.at(0).msecsTo(testTime.at(index.row())) ;
+            return testTime.at(index.row()) - testTime.at(0);
         else
             return dataArray[index.column() - 1].at(index.row());
     }
@@ -72,7 +72,7 @@ bool resulttablemodel::setData(const QModelIndex & index,
     {
         if (index.column() == 0)
         {
-            testTime[index.row()] = value.toTime();
+            testTime[index.row()] = value.toDouble();
             emit dataChanged(index, index);
             return true;
         }
@@ -106,7 +106,7 @@ bool resulttablemodel::insertRows(int row, int count, const QModelIndex & parent
     beginInsertRows(parent, row, row + count - 1);
     for (i = count; i > 0; i--)
     {
-        testTime.insert(row, QTime::currentTime());
+        testTime.insert(row, 0);
         for (j = 0; j < 6; j++)
             dataArray[j].insert(row, 0.);
     }
@@ -134,6 +134,8 @@ bool resulttablemodel::insertColumns(int column, int count, const QModelIndex & 
 bool resulttablemodel::removeRows(int row, int count, const QModelIndex & parent)
 {
     int i, j;
+    if (count < 1)
+        return false;
     beginRemoveRows(parent, row, row + count - 1);
     for (i = 0; i < count; i++)
     {
@@ -150,13 +152,13 @@ bool resulttablemodel::removeColumns(int column, int count, const QModelIndex & 
     return false;
 }
 
-int resulttablemodel::appendData(int num, QTime & tTime, float *filteredData)
+int resulttablemodel::appendData(int num, float mTime, float *filteredData)
 {
     int row;
     int i;
     row = dataArray[0].size();
     insertRows(row, 1);
-    setData(index(row, 0), tTime, Qt::DisplayRole);
+    setData(index(row, 0), mTime, Qt::DisplayRole);
     for (i = 0; i < num; i++)
     {
         setData(index(row, i + 1), filteredData[i], Qt::DisplayRole);
@@ -164,12 +166,12 @@ int resulttablemodel::appendData(int num, QTime & tTime, float *filteredData)
     return num;
 }
 
-QList<int> resulttablemodel::getAllTime()
+QList<float> resulttablemodel::getAllTime()
 {
-    QList<int> tmsecs;
+    QList<float> tmsecs;
     int i;
     for (i = 0; i < testTime.size(); i++)
-        tmsecs.append(testTime.at(0).msecsTo(testTime.at(i)));
+        tmsecs.append(testTime.at(i) - testTime.at(0));
     return tmsecs;
 }
 
