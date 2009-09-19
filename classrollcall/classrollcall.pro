@@ -4,7 +4,8 @@
 QT += opengl xml
 TARGET = classrollcall
 TEMPLATE = app
-CONFIG += windows
+CONFIG += windows mmx sse sse2
+#CONFIG += console
 
 # CONFIG += embed_manifest_exe
 SOURCES += main.cpp \
@@ -21,4 +22,5 @@ RESOURCES += resources/resources.qrc
 # TRANSLATIONS += rzpctrl_zh_CN.ts
 win32:RC_FILE = classrollcall.rc
 win32:INCLUDEPATH += "d:/Program Files/Tegesoft/gics/include" "d:/Program Files/Tegesoft/camp/include" "d:/boost_1_40_0"
-win32:LIBS += "d:\Program Files\Tegesoft\gics\lib\libgics.dll.a" "d:\Program Files\Tegesoft\camp\lib\libcamp.dll.a" -lAdvapi32
+win32:LIBS += "d:\Program Files\Tegesoft\gics\lib\gics.lib" "d:\Program Files\Tegesoft\camp\lib\camp.lib" -lAdvapi32
+#win32:LIBS += "d:\Program Files\Tegesoft\gics\lib\libgics.dll.a" "d:\Program Files\Tegesoft\camp\lib\libcamp.dll.a" -lAdvapi32
