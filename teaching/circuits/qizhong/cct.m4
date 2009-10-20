@@ -1,9 +1,8 @@
-include(/usr/local/lib/m4/circuit_macros/mpost.m4)
 include(/usr/local/lib/m4/circuit_macros/libcct.m4)
 define(`dimen_', (dimen_*.8))
 define(`elen_', (elen_*1.25))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 1 æ±‚å—æ§æºå¸æ”¶çš„åŠŸç‡ã€‚
+% fig 1 ÇóÊÜ¿ØÔ´ÎüÊÕµÄ¹¦ÂÊ¡£
 .PS
     cct_init
     elen = elen_
@@ -17,7 +16,7 @@ define(`elen_', (elen_*1.25))
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 2 å›¾ç¤ºç”µè·¯ä¸­ï¼Œå·²çŸ¥~$U=\unit{3}{\volt}$ï¼Œæ±‚~$R$ã€‚
+% fig 2 Í¼Ê¾µçÂ·ÖĞ£¬ÒÑÖª~$U=\unit{3}{\volt}$£¬Çó~$R$¡£
 .PS
     cct_init
     elen = elen_
@@ -38,7 +37,7 @@ define(`elen_', (elen_*1.25))
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 3 ç”µè·¯å¦‚ä¸‹å›¾æ‰€ç¤ºï¼Œæ±‚ç”µè·¯~$I$ã€‚
+% fig 3 µçÂ·ÈçÏÂÍ¼ËùÊ¾£¬ÇóµçÂ·~$I$¡£
 .PS
     cct_init
     elen = elen_
@@ -59,7 +58,7 @@ define(`elen_', (elen_*1.25))
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 4 å¦‚å›¾ç¤ºç”µè·¯ï¼Œæ±‚~ab~ä¸¤ç«¯çš„è¾“å…¥ç”µè·¯~$R_{\mathrm{ab}}$ã€‚
+% fig 4 ÈçÍ¼Ê¾µçÂ·£¬Çó~ab~Á½¶ËµÄÊäÈëµçÂ·~$R_{\mathrm{ab}}$¡£
 .PS
     cct_init
     elen = elen_
@@ -77,7 +76,7 @@ define(`elen_', (elen_*1.25))
     gap(down_ elen*1.4, 1); "b" ljust
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 5 è¯•åˆ—å†™ä»¥ä¸‹ç”µè·¯çš„å›è·¯ç”µæµæ–¹ç¨‹ã€‚
+% fig 5 ÊÔÁĞĞ´ÒÔÏÂµçÂ·µÄ»ØÂ·µçÁ÷·½³Ì¡£
 .PS
     cct_init
     elen = elen_
@@ -105,7 +104,7 @@ define(`elen_', (elen_*1.25))
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 6 ç”¨ç»“ç‚¹ç”µå‹æ³•æ±‚ç”µå‹~$U$ã€‚
+% fig 6 ÓÃ½áµãµçÑ¹·¨ÇóµçÑ¹~$U$¡£
 .PS
     cct_init
     elen = elen_
@@ -127,7 +126,7 @@ define(`elen_', (elen_*1.25))
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 7 æ±‚ä»¥ä¸‹ç”µè·¯çš„è¯ºé¡¿æˆ–æˆ´ç»´å®ç­‰æ•ˆç”µè·¯ã€‚
+% fig 7 ÇóÒÔÏÂµçÂ·µÄÅµ¶Ù»ò´÷Î¬ÄşµÈĞ§µçÂ·¡£
 .PS
     cct_init
     elen = elen_
@@ -151,7 +150,7 @@ define(`elen_', (elen_*1.25))
     gap(up_ elen*.9, 1); "a" ljust
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 8 å¦‚ä¸‹å›¾æ‰€ç¤ºç”µè·¯ï¼Œç”¨å åŠ å®šç†æ±‚ç”µæµ~$I_x$ã€‚
+% fig 8 ÈçÏÂÍ¼ËùÊ¾µçÂ·£¬ÓÃµş¼Ó¶¨ÀíÇóµçÁ÷~$I_x$¡£
 .PS
     cct_init
     elen = elen_
@@ -173,8 +172,8 @@ define(`elen_', (elen_*1.25))
     line to Origin
 .PE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fig 9 å¦‚å›¾ç¤ºç”µè·¯ï¼Œè´Ÿè½½~$R_L$~å¯ä»»æ„æ”¹å˜ï¼Œé—®~$R_L$~ä¸ºä½•å€¼æ—¶å…¶ä¸Šå¯è·å¾—
-% æœ€å¤§åŠŸç‡ï¼Œå¹¶æ±‚å‡ºè¯¥æœ€å¤§åŠŸç‡~$P_{L\mathrm{max}}$ã€‚
+% fig 9 ÈçÍ¼Ê¾µçÂ·£¬¸ºÔØ~$R_L$~¿ÉÈÎÒâ¸Ä±ä£¬ÎÊ~$R_L$~ÎªºÎÖµÊ±ÆäÉÏ¿É»ñµÃ
+% ×î´ó¹¦ÂÊ£¬²¢Çó³ö¸Ã×î´ó¹¦ÂÊ~$P_{L\mathrm{max}}$¡£
 .PS
     cct_init
     elen = elen_
@@ -191,5 +190,171 @@ define(`elen_', (elen_*1.25))
     }
     line right_ elen*.6
     resistor(down_ elen, E); llabel(,R_L,); variable()
+    line to Origin
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 10
+% ÓÃÍø¿×µçÁ÷·¨Çó½âÍ¼ÖĞµÄµçÁ÷ $I_2$¡£
+
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    arrowline(right_ elen); rlabel(,I_1,); dot
+    {
+        source(down_ .75*elen,v); b_current(I_2,,O); rlabel(+,\unit{2}{\volt},-)
+        resistor(down_ .75*elen,E); llabel(,\unit{1}{\ohm},)
+        dot
+    }
+    line right_ elen
+    resistor(down_ 1.5*elen,E); b_current(I_3,,); llabel(,\unit{3}{\ohm},)
+    line left_ 2*elen
+    resistor(up_ .75*elen,E); llabel(,\unit{3}{\ohm},)
+    source(up_ .75*elen,v); llabel(-,\unit{9}{\volt},+)
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 11
+% ÓÃ½áµãµçÑ¹·¨ÇóÍ¼ÖĞ a¡¢b Á½µãµÄµçÑ¹¡£
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    line right_ elen; dot; {move up .1; "a" rjust}
+    {
+        resistor(down_ 1.5*elen,E); llabel(,\unit{3}{\ohm},)
+        dot
+    }
+    {
+        line up_ elen/2; source(right_ elen,i); b_current(,,O,E)
+        llabel(,\unit{2}{\ampere},); line down_ elen/2; dot
+        {move up .1; "b" ljust}
+    }
+    resistor(right_ elen, E); rlabel(,\unit{1}{\ohm},)
+    {
+        resistor(down_ .75*elen,E); llabel(,\unit{2}{\ohm},)
+        source(down_ .75*elen,v); llabel(+,\unit{4}{\volt},-)
+        dot
+    }
+    line right_ elen; source(down_ 1.5*elen,i)
+    b_current(,,O,E); llabel(,\unit{4}{\ampere},)
+    line left_ 2*elen; ground(,,E); line left_ elen
+    source(up_ 1.5*elen,i); b_current(,,O,E); llabel(,\unit{4}{\ampere},)
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 12
+% ÈçÏÂÍ¼ËùÊ¾µçÂ·£¬ÀûÓÃµş¼Ó¶¨ÀíÇóµçÑ¹ $U$¡£
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    line right_ elen; dot
+    {
+        resistor(down_ .75*elen,E); rlabel(,\unit{4}{\ohm},); dot
+        {
+            source(right_ elen,i); b_current(,,O,E)
+            llabel(,\unit{3}{\ampere},); dot
+        }
+        resistor(down_ .75*elen,E); rlabel(,\unit{2}{\ohm},); dot
+        dot
+    }
+    line right_ elen; resistor(down_ .75*elen,E); llabel(,\unit{6}{\ohm},)
+    resistor(down_ .75*elen,E); llabel(+,U,-); rlabel(,\unit{3}{\ohm},)
+    line left_ 2*elen; source(up_ 1.5*elen,v); llabel(+,\unit{12}{\volt},-)
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 13
+% ÇóÍ¼Ê¾µçÂ·µÄ´÷Î¬Äş»òÅµ¶ÙµÈĞ§µçÂ·¡£
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    dot; resistor(right_ elen,E); llabel(,\unit{2}{\ohm},)
+    source(right_ elen,v); llabel(+,\unit{3}{\volt},-)
+    dot; {line right_ elen/2}
+    resistor(down_ elen,E); rlabel(,\unit{4}{\ohm},)
+    dot
+    {
+        line right_ elen/2; "b" above; gap(up_ elen, 1); "a" below
+    }
+    line left_ 2*elen; dot
+    {resistor(up_ elen,E); rlabel(,\unit{2}{\ohm},)}
+    line left_ elen/2
+    source(up_ elen,i); b_current(,,O,E); llabel(,,\unit{1}{\ampere})
+    line to Origin
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 14
+% ÇóÍ¼ÖĞµçÂ·ÔÚ ab ¶Ë¿ÚµÄ´÷Î¬Äş»òÅµ¶ÙµÈĞ§µçÂ·¡£
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    resistor(right_ elen,E); llabel(,\unit{5}{\ohm},); dot
+    {
+        source(down_ .75*elen,i); b_current(\unit{3}{\ampere},,O); dot
+        {
+            line right_ 1.5*elen; dot
+        }
+        resistor(down_ .75*elen,E); rlabel(,\unit{0.2}{\siemens},); dot
+    }
+    line right_ 1.5*elen
+    source(down_ .75*elen,v); llabel(+,\unit{10}{\volt},-)
+    resistor(down_ .75*elen,E); llabel(,\unit{5}{\ohm},)
+    source(left_ .75*elen,v); llabel(+,\unit{6}{\volt},-)
+    source(left_ .75*elen,i); b_current(\unit{1}{\ampere},,O,E)
+    line left_ elen; "b" above; gap(up_ 1.5*elen, 1); "a" below
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 15
+% ÇóÏÂÍ¼µçÂ·ÖĞµÄµçÁ÷ $I$¡£
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    source(up_ .75*elen,v); llabel(-,\unit{12}{\volt},+)
+    resistor(up_ .75*elen,E); llabel(,\unit{1}{\ohm},); dot
+    {
+        line up_ 2*elen/3
+        source(right_ 1.25*elen,i); b_current(\unit{4}{\ampere},,O,E)
+        resistor(right_ 1.25*elen,E); llabel(,\unit{2}{\ohm},)
+        line down_ 2*elen/3
+    }
+    resistor(right_ elen,E); b_current(I_{\mathrm{x}},,O,E); rlabel(,\unit{4}{\ohm},)
+    dot
+    {
+        consource(down_ 1.5*elen,v); rlabel(+,5I_{\mathrm{x}},-); dot
+    }
+    line right_ elen/2; dot
+    {
+        resistor(down_ 1.5*elen,E); llabel(,\unit{6}{\ohm},); dot
+    }
+    resistor(right_ elen,E); llabel(,\unit{3}{\ohm},); dot
+    resistor(down_ 1.5*elen,E); b_current(I,,); llabel(,\unit{5}{\ohm},)
+    line to Origin
+.PE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% fig 16
+% ÏÂÍ¼ËùÊ¾µçÂ·ÖĞ£¬ÒÑÖª \unit{5}{\volt} µçÑ¹Ô´ $U_{\rm S}$ Ö§Â·µçÁ÷
+% $I_0=\unit{10}{\ampere}$£¬ÊÔÈ·¶¨ÊÜ¿ØµçÁ÷Ô´µÄ¿ØÖÆÏµÊı $\alpha$¡£
+.PS
+    cct_init
+    elen = elen_
+    Origin: Here
+    source(up_ elen,i); b_current(\unit{5}{\ampere},,O,E)
+    llabel(I_{\mathrm{S}},,)
+    dot
+    {
+        line up_ 2*elen/3 then right_ .75*elen
+        consource(right_ elen,i); b_current(\alpha I,,O)
+        line right_ .75*elen then down_ 2*elen/3
+    }
+    resistor(right_ elen,E); llabel(,R_2,); rlabel(,\unit{2}{\ohm},); dot
+    {
+        resistor(down_ elen,E); b_current(I,,)
+        llabel(,\unit{1}{\ohm},); rlabel(,R_1,); dot
+    }
+    resistor(right_ 1.5*elen,E); llabel(,R_3,); rlabel(,\unit{3}{\ohm},); dot
+    source(down_ elen,v); b_current(I_0,below_,O,E)
+    llabel(-,\unit{5}{\volt},+); rlabel(,U_{\mathrm{S}},)
     line to Origin
 .PE

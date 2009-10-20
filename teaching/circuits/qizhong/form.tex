@@ -1,5 +1,7 @@
+% -*- coding: GBK -*-
+\XeTeXinputencoding "GBK"
 \documentclass[a4paper,12pt]{examdesign}
-\usepackage{ccmap}
+\usepackage{tikz}
 \usepackage{mathptmx}
 \usepackage{mathrsfs,pifont}
 \usepackage{stmaryrd}
@@ -8,14 +10,12 @@
 \usepackage[scale={.8,.85},footskip=12pt]{geometry}
 \usepackage{lastpage,float}
 \NumberOfVersions{1}
-\usepackage{CJK}
-\ifx\pdfoutput\undefined
-\usepackage[dvipdfm]{graphicx}
-\else
-\usepackage[pdftex]{graphicx}
-\fi
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{indentfirst}
+\usepackage[BoldFont, SlantFont, CJKnormalspaces]{xeCJK}
+\setCJKmainfont{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{SimSun}
+\punctstyle{kaiming}
+\usepackage{graphicx}
 %\usepackage{floatflt}
 \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
 \newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
@@ -33,16 +33,13 @@
 \def\Varangle#1{\kern.75pt\vtop{\hbox{\kern-.75pt$/{#1}$}\kern-.35pt\hrule}}
 
 \begin{document}
-\begin{CJK*}{GBK}{song}
-\CJKtilde
-%\CJKcaption{GB}
-\DeclareGraphicsExtensions{.mps, .pdf}
+\DeclareGraphicsExtensions{.pdf}
 \renewcommand\figurename{图}
 \newcommand\AnswerLeading{解}
 \SectionPrefix{}
-% \NoKey
+\NoKey
 \NoRearrange
-\ShortKey
+% \ShortKey
 \SectionFont{\large\em}
 \examname{电路分析期中考试}
 \DefineAnswerWrapper{\begin{description}\item [\AnswerLeading:]}{\end{description}}
@@ -51,8 +48,8 @@
 \begin{examtop}
 \begin{center}
 \begin{tabular}{r}
-{\Large \bf苏州大学\underline{\examtype}课程试卷
-}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~5~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2007~年~11~月
+{\Large \bf 苏州大学\underline{\examtype}课程试卷
+}\hspace{17pt}(\textsf{\Alph{version}}) 卷\hspace{17pt}共 \pageref{LastPage} 页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2009 年 11 月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -61,49 +58,48 @@
 \end{examtop}
 \begin{keytop}
 \begin{center}
-{\bf\Large 苏州大学\underline{\examtype}课程}\hspace{17pt}(\textsf{\Alph{version}})~卷参考答案\hspace{17pt}共~\pageref{LastPage}~页\bigskip\\
+{\bf\Large 苏州大学\underline{\examtype}课程}\hspace{17pt}(\textsf{\Alph{version}}) 卷参考答案\hspace{17pt}共 \pageref{LastPage} 页\bigskip\\
 院系：\underline{\hspace{51pt}}\hspace{17pt}专业：\underline{\hspace{51pt}}
 \end{center}
 \bigskip
 \end{keytop}
 
-\begin{shortanswer}[title={\begin{description}\item[一、]计算题~(每
-题~10~分，共~70~分)\end{description}}]
+\begin{shortanswer}[title={计算题 (每题 10 分，共 100 分)}]
 \begin{question}
 求下图中受控源的功率。
     %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig1}
+    \input fig01
     \end{figure}
     \examvspace*{5cm}
 \end{question}
 \begin{question}
-图示电路中，已知~$U=\unit{3}{\volt}$，求~$R$。
+图示电路中，已知 $U=\unit{3}{\volt}$，求 $R$。
     %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig2}
+    \input fig02
     \end{figure}
 
     \examvspace*{6cm}
 \end{question}
 \begin{question}
-电路如下图所示，求电路~$I$。
+电路如下图所示，求电路 $I$。
     %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig3}
+    \input fig03
     \end{figure}
 
     \examvspace*{8cm}
 \end{question}
 \begin{question}
-如图示电路，求~ab~两端的输入电路~$R_{\mathrm{ab}}$。
+如图示电路，求 ab 两端的输入电路 $R_{\mathrm{ab}}$。
     %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig4}
+    \input fig04
     \end{figure}
 
     \examvspace*{8cm}
@@ -113,47 +109,106 @@
     %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig5}
+    \input fig05
     \end{figure}
 
     \examvspace*{6cm}
 \end{question}
 \begin{question}
-用结点电压法求电压~$U$。
-    \examvspace{12pt}\\
-    \includegraphics{fig6}
+用结点电压法求电压 $U$。
+    \begin{figure}[H]
+    \hfill\input fig06
+    \end{figure}
 
     \examvspace*{6cm}
 \end{question}
 \begin{question}
 求以下电路的诺顿或戴维宁等效电路。
-    \examvspace{12pt}\\
-    \includegraphics{fig7}
+    \begin{figure}[H]
+    \hfill
+    \input fig07
+    \end{figure}
 
     \examvspace*{5cm}
 \end{question}
-\end{shortanswer}
 
-\begin{shortanswer}[title={\begin{description}\item[二、]计算分析题~(每
-题~15~分，共~30~分)\end{description}}]
 \begin{question}
-    如下图所示电路，用叠加定理求电流~$I_x$。
+用网孔电流法求解图中的电流 $I_2$。
+    \begin{figure}[H]
+        \hfill
+        \input fig10
+    \end{figure}
+    \examvspace*{8cm}
+\end{question}
+\begin{question}
+    用结点电压法求图中 a、b 两点的电压。
+    \begin{figure}[H]
+        \hfill
+        \input fig11
+    \end{figure}
+    \examvspace*{8cm}
+\end{question}
+\begin{question}
+    如下图所示电路，利用叠加定理求电压 $U$。
+    \begin{figure}[H]
+        \hfill
+        \input fig12
+    \end{figure}
+    \examvspace*{8cm}
+\end{question}
+\begin{question}
+    求图示电路的戴维宁或诺顿等效电路。
+    \begin{figure}[H]
+        \hfill
+        \input fig13
+    \end{figure}
+    \examvspace*{8cm}
+\end{question}
+\begin{question}
+    求图中电路在 ab 端口的戴维宁或诺顿等效电路。
+    \begin{figure}[H]
+        \hfill
+        \input fig14
+    \end{figure}
+    \examvspace*{8cm}
+\end{question}
+
+\begin{question}
+    如下图所示电路，用叠加定理求电流 $I_x$。
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig8}
+    \input fig08
     \end{figure}
     
     \examvspace*{12cm}
 \end{question}
 \begin{question}
-    如图示电路，负载~$R_L$~可任意改变，问~$R_L$~为何值时其上可获得最大功率，并求出该最大功率~$P_{L\mathrm{max}}$。
+    如图示电路，负载 $R_L$ 可任意改变，问 $R_L$ 为何值时其上可获得最大功率，并求出该最大功率 $P_{L\mathrm{max}}$。
     \begin{figure}[H]
     \hfill
-    \includegraphics{fig9}
+    \input fig09
     \end{figure}
     
     \examvspace*{6cm}
 \end{question}
+
+\begin{question}
+    求下图电路中的电流 $I$。
+	\begin{figure}[H]
+	  \hfill
+        \input fig15
+	\end{figure}
+\examvspace*{18cm}
+\end{question}
+    \begin{question}
+    下图所示电路中，已知 \unit{5}{\volt} 电压源 $U_{\rm S}$ 支路电流
+    $I_0=\unit{10}{\ampere}$，试确定受控电流源的控制系数 $\alpha$。
+	\begin{figure}[H]
+	  \hfill
+        \input fig16
+	  %\includegraphics{fig-11.pdf}
+	\end{figure}
+\examvspace*{18cm}
+    \end{question}
 \end{shortanswer}
 \end{document}
-\end{CJK*}
