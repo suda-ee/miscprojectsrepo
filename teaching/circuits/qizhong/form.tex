@@ -38,7 +38,7 @@
 \newcommand\AnswerLeading{解}
 \SectionPrefix{}
 \NoKey
-\NoRearrange
+%\NoRearrange
 % \ShortKey
 \SectionFont{\large\em}
 \examname{电路分析期中考试}
@@ -65,6 +65,35 @@
 \end{keytop}
 
 \begin{shortanswer}[title={计算题 (每题 10 分，共 100 分)}]
+
+\begin{question}
+用网孔电流法求解图中的电流 $I_2$。
+    \begin{figure}[H]
+        \hfill
+        \input fig10
+    \end{figure}
+    \examvspace*{5cm}
+\end{question}
+
+\begin{question}
+电路如下图所示，求电路 $I$。
+    %\examvspace{12pt}\\
+    \begin{figure}[H]
+    \hfill
+    \input fig03
+    \end{figure}
+    \examvspace*{5cm}
+\end{question}
+
+\begin{question}
+    用结点电压法求图中 a、b 两点的电压。
+    \begin{figure}[H]
+        \hfill
+        \input fig11
+    \end{figure}
+    \examvspace*{5cm}
+\end{question}
+
 \begin{question}
 求下图中受控源的功率。
     %\examvspace{12pt}\\
@@ -74,103 +103,15 @@
     \end{figure}
     \examvspace*{5cm}
 \end{question}
+
 \begin{question}
 图示电路中，已知 $U=\unit{3}{\volt}$，求 $R$。
-    %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
     \input fig02
     \end{figure}
 
     \examvspace*{6cm}
-\end{question}
-\begin{question}
-电路如下图所示，求电路 $I$。
-    %\examvspace{12pt}\\
-    \begin{figure}[H]
-    \hfill
-    \input fig03
-    \end{figure}
-
-    \examvspace*{8cm}
-\end{question}
-\begin{question}
-如图示电路，求 ab 两端的输入电路 $R_{\mathrm{ab}}$。
-    %\examvspace{12pt}\\
-    \begin{figure}[H]
-    \hfill
-    \input fig04
-    \end{figure}
-
-    \examvspace*{8cm}
-\end{question}
-\begin{question}
-试列写以下电路的回路电流方程。
-    %\examvspace{12pt}\\
-    \begin{figure}[H]
-    \hfill
-    \input fig05
-    \end{figure}
-
-    \examvspace*{6cm}
-\end{question}
-\begin{question}
-用结点电压法求电压 $U$。
-    \begin{figure}[H]
-    \hfill\input fig06
-    \end{figure}
-
-    \examvspace*{6cm}
-\end{question}
-\begin{question}
-求以下电路的诺顿或戴维宁等效电路。
-    \begin{figure}[H]
-    \hfill
-    \input fig07
-    \end{figure}
-
-    \examvspace*{5cm}
-\end{question}
-
-\begin{question}
-用网孔电流法求解图中的电流 $I_2$。
-    \begin{figure}[H]
-        \hfill
-        \input fig10
-    \end{figure}
-    \examvspace*{8cm}
-\end{question}
-\begin{question}
-    用结点电压法求图中 a、b 两点的电压。
-    \begin{figure}[H]
-        \hfill
-        \input fig11
-    \end{figure}
-    \examvspace*{8cm}
-\end{question}
-\begin{question}
-    如下图所示电路，利用叠加定理求电压 $U$。
-    \begin{figure}[H]
-        \hfill
-        \input fig12
-    \end{figure}
-    \examvspace*{8cm}
-\end{question}
-\begin{question}
-    求图示电路的戴维宁或诺顿等效电路。
-    \begin{figure}[H]
-        \hfill
-        \input fig13
-    \end{figure}
-    \examvspace*{8cm}
-\end{question}
-\begin{question}
-    求图中电路在 ab 端口的戴维宁或诺顿等效电路。
-    \begin{figure}[H]
-        \hfill
-        \input fig14
-    \end{figure}
-    \examvspace*{8cm}
 \end{question}
 
 \begin{question}
@@ -180,16 +121,7 @@
     \input fig08
     \end{figure}
     
-    \examvspace*{12cm}
-\end{question}
-\begin{question}
-    如图示电路，负载 $R_L$ 可任意改变，问 $R_L$ 为何值时其上可获得最大功率，并求出该最大功率 $P_{L\mathrm{max}}$。
-    \begin{figure}[H]
-    \hfill
-    \input fig09
-    \end{figure}
-    
-    \examvspace*{6cm}
+    \examvspace*{8cm}
 \end{question}
 
 \begin{question}
@@ -198,17 +130,34 @@
 	  \hfill
         \input fig15
 	\end{figure}
-\examvspace*{18cm}
+\examvspace*{8cm}
 \end{question}
-    \begin{question}
-    下图所示电路中，已知 \unit{5}{\volt} 电压源 $U_{\rm S}$ 支路电流
-    $I_0=\unit{10}{\ampere}$，试确定受控电流源的控制系数 $\alpha$。
-	\begin{figure}[H]
-	  \hfill
-        \input fig16
-	  %\includegraphics{fig-11.pdf}
-	\end{figure}
-\examvspace*{18cm}
-    \end{question}
+
+\begin{question}
+    求图示电路的戴维宁或诺顿等效电路。
+    \begin{figure}[H]
+        \hfill
+        \input fig13
+    \end{figure}
+    \examvspace*{8cm}
+\end{question}
+
+\begin{question}
+试列写以下电路的回路电流方程。
+    \begin{figure}[H]
+    \hfill
+    \input fig05
+    \end{figure}
+    \examvspace*{5cm}
+\end{question}
+
+\begin{question}
+如图示电路，求 ab 两端的输入电路 $R_{\mathrm{ab}}$。
+    \begin{figure}[H]
+    \hfill
+    \input fig04
+    \end{figure}
+    \examvspace*{6cm}
+\end{question}
 \end{shortanswer}
 \end{document}
