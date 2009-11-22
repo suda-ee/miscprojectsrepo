@@ -1,4 +1,7 @@
+% -*- coding: GBK -*-
+\XeTeXinputencoding "GBK"
 \documentclass[a4paper,12pt]{examdesign}
+\usepackage{tikz}
 \usepackage{mathptmx}
 \usepackage{mathrsfs,pifont}
 \usepackage{amsmath}
@@ -13,7 +16,6 @@
 \setCJKmonofont{SimSun}
 \punctstyle{kaiming}
 \usepackage{graphicx}
-\usepackage{subfigure}
 %\usepackage{floatflt}
 \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
 \newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
@@ -47,7 +49,7 @@
 \begin{examtop}
 \begin{center}
 \begin{tabular}{r}
-{\Large \bf 苏州大学 \underline{\examtype}课程试卷
+{\Large \bf 苏州大学\underline{\examtype}课程试卷
 }\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~5~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2009~年~1~月
 \end{tabular}
 \\\bigskip
@@ -63,13 +65,16 @@
 \bigskip
 \end{keytop}
 
+\newcommand\mathdot[1]{\dot#1}
+
 \begin{shortanswer}[]
 %\begin{shortanswer}[title={\begin{description}\item[二、]计算题~(每
 %题~10~分，共~50~分)\end{description}}]
 \begin{question} % 01
     求图示电路中独立电流源和电压源的功率。($7'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig01}
+    \hfill
+    \input fig01
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
@@ -82,7 +87,8 @@
 \begin{question} % 02
     电路如下图所示，试求~$I_1$~与~$U_{\mathrm{ab}}$。($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig02}
+    \hfill
+    \input fig02
     \end{figure}
     \examvspace*{7cm}
     \begin{answer}
@@ -95,7 +101,8 @@
 \begin{question} % 03
     求下图所示电路的电流~$I$。($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig03}
+    \hfill
+    \input fig03
     \end{figure}
     \examvspace*{7cm}
     \begin{answer}
@@ -107,7 +114,8 @@
     分别求当~$u = \unit{12}{\volt}$~和~$u = 4 \sin 2t \unit{}{\volt}$~时
     的~$i$。($8'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig04}
+    \hfill
+    \input fig04
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
@@ -123,7 +131,8 @@
     ~$i_\mathrm{s} = \unit{2}{\ampere}$，$u_\mathrm{s} =
     \unit{6}{\volt}$~时的电压~$u$。 ($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig05}
+    \hfill
+    \input fig05
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
@@ -135,7 +144,8 @@
 \begin{question} %06
     求图中的~$U_x$。 ($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig06}
+    \hfill
+    \input fig06
     \end{figure}
     \examvspace*{5cm}
     \begin{answer}
@@ -154,7 +164,8 @@
 \begin{question} % 07
     求~ab~端口的戴维宁或诺顿等效电路。($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig07}
+    \hfill
+    \input fig07
     \end{figure}
     \examvspace*{7cm}
     \begin{answer}
@@ -168,7 +179,8 @@
     ~$Z_\mathrm{L}$~获得最大功率，求负载阻抗~$Z_\mathrm{L}$~和吸收的功率
     ~$P_\mathrm{Lmax}$。($10'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig08}
+    \hfill
+    \input fig08
     \end{figure}
     \examvspace*{8cm}
     \begin{answer}
@@ -185,7 +197,8 @@
     ~S~由位置~1~合向位置~2，求
     ~$t\geq 0$~时电感电流~$i_L$~和电压~$u_L$~的响应。($15'$)
     \begin{figure}[H]
-    \hfill\includegraphics{fig09}
+    \hfill
+    \input fig09
     \end{figure}
     \examvspace*{14cm}
     \begin{answer}
@@ -193,10 +206,10 @@
     ~$i_L(0_+)=i_L(0_-)$，容易看出~$i_L(\infty)=0$ ($1'$)。利用外加
     电源法可求得~$R_\mathrm{eq}=\unit{12}{\ohm}$ ($3'$)，因此~$\tau
     =L/R_\mathrm{eq}=\unit{1/4}{\second}$ ($3'$)。套用三要素法可得
-    \[\begin{split}
+    \[\begin{aligned}
     i_L(t)&=i_L(\infty)+[i_L(0_+)-i_L(\infty)]\mathrm{e}^{-t/\tau} \\
     &=5\mathrm{e}^{-4t}\unit{}{\ampere}\quad\quad (3')
-    \end{split}\]
+    \end{aligned}\]
     $u_L(t)=-60\mathrm{e}^{-4t}\unit{}{\volt}$ ($2'$)。
     \end{answer}
 \end{question}
@@ -205,7 +218,7 @@
     给出图中电路的回路电流方程。($10'$)
     \begin{figure}[H]
         \hfill
-        \includegraphics{fig10}
+        \input fig10
     \end{figure}
     \examvspace*{4cm}
     \begin{answer}
