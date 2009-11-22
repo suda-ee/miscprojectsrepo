@@ -7,14 +7,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{lastpage,float}
 \NumberOfVersions{1}
-\usepackage{CJK}
-\ifx\pdfoutput\undefined
-\usepackage[dvipdfm]{graphicx}
-\else
-\usepackage[pdftex]{graphicx}
-\fi
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{indentfirst}
+\usepackage[BoldFont, SlantFont, CJKnormalspaces]{xeCJK}
+\setCJKmainfont{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{SimSun}
+\punctstyle{kaiming}
+\usepackage{graphicx}
 \usepackage{subfigure}
 %\usepackage{floatflt}
 \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
@@ -33,10 +31,7 @@
 \def\Varangle#1{\kern.75pt\vtop{\hbox{\kern-.75pt$/{#1}$}\kern-.35pt\hrule}}
 
 \begin{document}
-\begin{CJK*}{GBK}{song}
-\CJKtilde
-%\CJKcaption{GB}
-\DeclareGraphicsExtensions{.mps, .pdf}
+\DeclareGraphicsExtensions{.pdf}
 \renewcommand\figurename{图}
 \newcommand\AnswerLeading{解}
 \newcommand\jimag{\mathrm{j}}
@@ -52,7 +47,7 @@
 \begin{examtop}
 \begin{center}
 \begin{tabular}{r}
-{\Large \bf苏州大学\underline{\examtype}课程试卷
+{\Large \bf 苏州大学 \underline{\examtype}课程试卷
 }\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~5~页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2009~年~1~月
 \end{tabular}
 \\\bigskip
@@ -224,4 +219,3 @@
 \end{shortanswer}
 
 \end{document}
-\end{CJK*}
