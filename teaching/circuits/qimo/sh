@@ -1,19 +1,5 @@
 #!/bin/sh
-m4 cct.m4 | dpic -s > cct.mp
-cp figbegin.mp fig.mp
-cat cct.mp >> fig.mp
-cat figend.mp >> fig.mp
-mpost -tex latex fig.mp
-for epsbympost in fig.?; do
-    destfile=fig0`expr $epsbympost : 'fig.\([1-9]\)'`.mps
-    if (test $destfile != fig0.mps); then
-        mv $epsbympost $destfile
-    fi
-done
-for epsbympost in fig.*; do
-    destfile=fig`expr $epsbympost : 'fig.\([1-9][0-9]\+\)'`.mps
-    if (test $destfile != fig.mps); then
-        mv $epsbympost $destfile
-    fi
-done
-pdflatex form
+m4 cct.m4 | dpic -g > cct.tex
+csplit -f fig cct.tex /^%%%%/ {*}
+xelatex form
+acroread form.pdf &
