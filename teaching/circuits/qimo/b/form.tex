@@ -9,14 +9,19 @@
 \usepackage[scale={.8,.85},footskip=12pt]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{lastpage,float}
-\NumberOfVersions{1}
+\usepackage{graphicx}
+%\usepackage{floatflt}
 \usepackage[BoldFont, SlantFont, CJKnormalspaces]{xeCJK}
+\defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
+\setmainfont[]{Minion Pro}
+\setsansfont{Lucida Sans}
+\setmonofont{Lucida Sans Typewriter}
+%\setmathrm{}
+%\setboldmathrm{}
 \setCJKmainfont{SimSun}
 \setCJKsansfont{SimHei}
 \setCJKmonofont{SimSun}
 \punctstyle{kaiming}
-\usepackage{graphicx}
-%\usepackage{floatflt}
 \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
 \newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
 \newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
@@ -31,6 +36,8 @@
 \newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
 
 \def\Varangle#1{\kern.75pt\vtop{\hbox{\kern-.75pt$/{#1}$}\kern-.35pt\hrule}}
+
+\NumberOfVersions{1}
 
 \begin{document}
 \DeclareGraphicsExtensions{.pdf}
@@ -51,8 +58,8 @@
 \begin{center}
 \begin{tabular}{r}
 {\Large \bf 苏州大学\underline{\examtype}课程试卷
-}\hspace{17pt}(\textsf{\Alph{version}})~卷\hspace{17pt}共~5~页\medskip\\
-考试形式\underline{闭}卷\hspace{17pt}2009~年~1~月
+}\hspace{17pt}(\textsf{\Alph{version}}) 卷\hspace{17pt}共 4 页\medskip\\
+考试形式\underline{闭}卷\hspace{17pt}2010 年 1 月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -61,7 +68,7 @@
 \end{examtop}
 \begin{keytop}
 \begin{center}
-{\bf\Large 苏州大学\underline{\examtype}课程}\hspace{17pt}(\textsf{\Alph{version}})~卷参考答案\hspace{17pt}共~\pageref{LastPage}~页\bigskip\\
+{\bf\Large 苏州大学\underline{\examtype}课程}\hspace{17pt}(\textsf{\Alph{version}}) 卷参考答案\hspace{17pt}共 \pageref{LastPage} 页\bigskip\\
 院系：\underline{\hspace{51pt}}\hspace{17pt}专业：\underline{\hspace{51pt}}
 \end{center}
 \bigskip
@@ -70,31 +77,28 @@
 \newcommand\mathdot[1]{\dot#1}
 
 \begin{shortanswer}[]
-%\begin{shortanswer}[title={\begin{description}\item[二、]计算题~(每
-%题~10~分，共~50~分)\end{description}}]
+%\begin{shortanswer}[title={\begin{description}\item[二、]计算题 (每
+%题 10 分，共 50 分)\end{description}}]
 \begin{question} % 01
-    电路如下图所示，试求其中受控源的功率。($5'$)
+    求图示电路中的电压 $U$ 和电流源的功率 $P_\mathrm{S}$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig01
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
-    列回路方程
-    \[
-    2 \times 0.5 + 2U-U=0
-    \]
-    解得~$U=-\unit{1}{\volt}$ ($3'$)，受控源吸收功率为~$2U \times 0.5=-\unit{1}{\watt}$ ($2'$)。
+    $U = 5 I + 15 = \unit{5}{\volt}$，$P_\mathrm{S} = U \times 2 =
+    \unit{10}{\watt}$ (吸收)。
     \end{answer}
 \end{question}
 
 \begin{question} %02
-    求下图所示电路的电压~$U_\mathrm{cb}$。($8'$)
+    求图中的电压 $U_\mathrm{cb}$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig02
     \end{figure}
-    \examvspace*{4cm}
+    \examvspace*{3cm}
     \begin{answer}
     $U_1 = 2 \times 5 = \unit{10}{\volt}$，$20 \times 0.05 U_1 +
     U_\mathrm{cb} + 3 = 0$，$\therefore U_\mathrm{cb} = -
@@ -103,159 +107,122 @@
 \end{question}
 
 \begin{question} % 03
-    求下图所示电路中的电压比~$U_\mathrm{o} / U_\mathrm{s}$。($12'$)
+    求图所示电路中控制量 $U_1$ 及电压 $U$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig03
     \end{figure}
-    \examvspace*{7cm}
+    \examvspace*{4cm}
     \begin{answer}
     \[\begin{aligned}
-    U_\mathrm{o} &= 3 U_\mathrm{s} \\
-    (U_\mathrm{s} / 2 - U_3) \times 1 &= U_\mathrm{s} + U_\mathrm{o} \\
-    2 U_3 + U_\mathrm{o} &= 5 U_3
+    U &= 10 U_1 \\
+    2 &= \frac{U_1 - U}{10\mathrm{k}}\mathrm{1k} + U_1
     \end{aligned}\]
-    $\therefore U_\mathrm{s} = 10 U_3$，$U_\mathrm{o} / U_\mathrm{s} =
-    0.3$。
+    解得 $U_1 = \unit{20}{\volt}$，$U = \unit{200}{\volt}$。
     \end{answer}
 \end{question}
 
 \begin{question} % 04
-    分别求当~$i_L = \unit{1}{\ampere}$~和~$i_L = e ^ {-t}$~时的~$i$。($8'$)
+    求输入电阻 $R_\mathrm{ab}$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig04
     \end{figure}
-    \examvspace*{3cm}
+    \examvspace*{4cm}
     \begin{answer}
-    $\unit{1}{\ampere}$，$-17 e ^ {-t}\unit{}{\ampere}$。
+    \[
+        R_\mathrm{ab} = u / i = \frac{i_1 R_1 + (i_1 + \beta
+        i_1)R_2}{i_1}
+    \]
+    $\therefore R_\mathrm{ab} = R_1 + (1 + \beta) R_2$。
     \end{answer}
 \end{question}
 
 \begin{question} % 05
-    图示电路中，当电流源~$i_\mathrm{s1}$~和电压源~$u_\mathrm{s1}$~反向时
-    ~($u_\mathrm{s2}$~不变)，电压~$u_\mathrm{ab}$~是原来~0.5~倍；当
-    ~$i_\mathrm{s1}$~和~$u_\mathrm{s2}$~反向时~($u_\mathrm{s1}$~不变)，
-电压~$u_\mathrm{ab}$~是原来的~0.3~倍。问：仅~$i_\mathrm{s1}$~反向
-~($u_\mathrm{s1}$、$u_\mathrm{s2}$~均不变)~时，电压~$u_\mathrm{ab}$~应
-为原来的几倍？($10'$)
+    求图中电路在 ab 端口的戴维宁或诺顿等效电路。($10'$)
     \begin{figure}[H]
-    \hfill
-    \input fig05
+        \hfill
+        \input fig05
     \end{figure}
-    \examvspace*{4cm}
+    \examvspace*{6cm}
     \begin{answer}
-    \[ \left \{
-    \begin{aligned}
-    u_\mathrm{ab} &= k_1 u_\mathrm{s1} + k_2 u_\mathrm{s2} + k_3 i_\mathrm{s1} \\
-    0.5 u_\mathrm{ab} &= - k_1 u_\mathrm{s1} + k_2 u_\mathrm{s2} - k_3 i_\mathrm{s1} \\
-    0.3 u_\mathrm{ab} &= k_1 u_\mathrm{s1} - k_2 u_\mathrm{s2} - k_3 i_\mathrm{s1} \\
-    x u_\mathrm{ab} &= k_1 u_\mathrm{s1} + k_2 u_\mathrm{s2} - k_3 i_\mathrm{s1} \\
-    \end{aligned}
-    \right .
-    \]
-    解得~$x = 1.8$。
+    内部独立源全部置零后，成为一简单串联电路，容易求得等效内阻为：
+    $R_{\rm eq}=\unit{10}{\ohm}$(5 分)；更容易解得开路电压 $u_{\rm
+    OC}=10-1\times 5=\unit{5}{\volt}$(5 分)。
     \end{answer}
 \end{question}
 
 \begin{question} % 06
-    求下图中的电流~$I_\mathrm{x}$。($12'$)
+    求 $i = \unit{1}{\ampere}$ 和 $i = \mathrm{e}^{-t}\unit{}{\ampere}$
+    时两种情况下的 $u$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig06
     \end{figure}
-    \examvspace*{5cm}
+    \examvspace*{3cm}
     \begin{answer}
-    取回路为网孔，顺时针方向，则
-    \[\left \{
-    \begin{aligned}
-    I_{l1} &= \unit{5}{\ampere} \\
-    10 I_{l2} - 10 I_{l3} &= -10 I_\mathrm{x} + 50 \\
-    -20 I_{l1} - 10 I_{l2} + 40 I_{l3} &= -30 \\
-    I_\mathrm{x} &= I_{l3}
-    \end{aligned}
-    \right . \]
-    解得~$I_\mathrm{x} = \unit{3}{\ampere}$。
+    (1) $u = u_L + u_R = 1 + 1 \times 1 = \unit{1}{v}$；(2) $u = u_L +
+    u_R = 1 \times (-\mathrm{e}^{-t}) + \mathrm{e}^{-t} \times 1 =
+    \unit{0}{\volt}$。
     \end{answer}
 \end{question}
 
 \begin{question} % 07
-    求图中电路在~ab~端口的戴维宁或诺顿等效电路。($10'$)
+    图示电路中，开关 S 动作前电路已达稳定状态，原合在位置 1，$t=0$ 时
+    S 由位置 1 合向位置 2，求
+    $t\geq 0$ 时电压 $u_L$ 的响应。($15'$)
     \begin{figure}[H]
-        \hfill
-        \input fig07
+    \hfill
+    \input fig07
     \end{figure}
-    \examvspace*{7cm}
+    \examvspace*{8cm}
     \begin{answer}
-    内部独立源全部置零后，成为一简单串联电路，容易求得等效内阻为：
-    $R_{\rm eq}=\unit{10}{\ohm}$(5~分)；更容易解得开路电压~$u_{\rm
-    OC}=10-1\times 5=\unit{5}{\volt}$(5~分)。
+    先求 $i_L(0_-)$，解得 $i_L(0_-)=\unit{5}{\ampere}$ ($3'$)。则
+    $i_L(0_+)=i_L(0_-)$，容易看出 $i_L(\infty)=0$ ($1'$)。利用外加
+    电源法可求得 $R_\mathrm{eq}=\unit{12}{\ohm}$ ($3'$)，因此 $\tau
+    =L/R_\mathrm{eq}=\unit{1/4}{\second}$ ($3'$)。套用三要素法可得
+    \[\begin{aligned}
+    i_L(t)&=i_L(\infty)+[i_L(0_+)-i_L(\infty)]\mathrm{e}^{-t/\tau} \\
+    &=5\mathrm{e}^{-4t}\unit{}{\ampere}\quad\quad (3')
+    \end{aligned}\]
+    $u_L(t)=-60\mathrm{e}^{-4t}\unit{}{\volt}$ ($2'$)。
     \end{answer}
 \end{question}
 
 \begin{question} % 08
-    求下图电路中~$Z_\mathrm{L}$~能够获得的最大功率。($10'$)
+    求下图电路中的输入阻抗 $Z$ 和导纳 $Y$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig08
     \end{figure}
-    \examvspace*{11cm}
+    \examvspace*{4cm}
     \begin{answer}
-    根据最大功率传输定理可以求得~$Z_\mathrm{L}$~获得最大功率的条件为
-    ~$Z_\mathrm{L}=Z_\mathrm{eq}^*=\unit{10\sqrt{2}\Varangle{45\degree}}{\ohm}$ ($3'$)。
-    $Z_\mathrm{L}$~开路时用节点电压法易求得开路电压满足
-    ~$(1/20-\frac{1}{\jimag 10}+\frac{1}{\jimag 20})\dot{U}_\mathrm{OC}=5\Varangle{0\degree}+100\Varangle{90\degree}/20$，解得~$\dot{U}_\mathrm{OC}=100\Varangle{0\degree}\unit{}{\volt}$
-    ($4'$)。$Z_\mathrm{L}$~可获得的最大功率为
-    ~$P_\mathrm{Lmax}=\frac{U_\mathrm{OC}^2}{4R_\mathrm{eq}}=\unit{250}{\watt}$
-    ($3'$)。
+    \[
+    Z = 1 + \frac{1}{1 / 2\jimag + 1 / (-\jimag)} = 1 -2 \jimag
+    \unit{}{\ohm}
+    \]
+    $Y = 1 / Z = \frac{1}{5} + \frac{2}{5}\jimag \unit{}{\siemens}$。
     \end{answer}
 \end{question}
 
 \begin{question} %09
-图示电路中~$t=0$~时开关~$S_1$~打开，$S_2$~闭合，在开关动作前，电路已达
-稳定。试求~$t\geq 0$~时的~$u_L(t)$、$i_L(t)$。($10'$)
+    列出下图电路的回路电流方程和结点电压方程。($15'$)
     \begin{figure}[H]
         \hfill
         \input fig09
     \end{figure}
-    \examvspace*{15cm}
+    \examvspace*{7cm}
     \begin{answer}
-    先求~$0_-$~时刻的~$i_L$。(以下图略
-    )~此时电路稳定，电感相当于短路，$i_L(0_-)=10/1=\unit{10}{\ampere}$，开关动作后，由于换路时电感电流
-    不跃变，故~$i_L(0_+)=i_L(0_-)=\unit{10}{\ampere}$。当~$t=\infty$~时
-    ，电感相当于短路，可解得~$i_(\infty)=\unit{3}{\ampere}$。$R_{\rm
-    eq}=6\parallel 3=\unit{2}{\ohm}$，$\tau=L/R_{\rm
-    eq}=\unit{0.1}{\second}$，套用三要素法公式有
-    \[\begin{aligned}
-    i_L(t)&=i_L(\infty)+[i_L(0_+)-i_L(\infty)]{\rm e}^{-t/\tau}\\
-    &=3+7{\rm e}^{-10t}\unit{}{\ampere}
-    \end{aligned}\]
+    结点电压方程如下，回路电流方程略。取最下端结点为参考结点。
     \[
-    u_L(t)=L\frac{{\rm d}i_L(t)}{{\rm d}t}=-14{\rm
-    e}^{-10t}\unit{}{\volt}
-    \]
-    (每式~3~分)
-    \end{answer}
-\end{question}
-
-\begin{question} % 10
-    列出下图电路的结点电压方程。($10'$)
-    \begin{figure}[H]
-    \hfill
-        \input fig10
-    \end{figure}
-    \examvspace*{5cm}
-    \begin{answer}
-    \[ \left \{
     \begin{aligned}
-    \dot{U}_\mathrm{n1} &= \dot{U}_\mathrm{s} \\
-    -\dot{U}_\mathrm{n1} + (1 + 1 + \frac{1}{1 + \jimag 8}) \dot{U}_\mathrm{n2} -
-        \dot{U}_\mathrm{n3} &= 0 \\
-    \jimag 8 \dot{U}_\mathrm{n1} - \dot{U}_\mathrm{n2} + (1 +
-        1 + \jimag 8) \dot{U}_\mathrm{n3} &=
-          \dot{I}_\mathrm{s}
+    (1 + 1)\dot{U}_\mathrm{n1} - 1 \dot{U}_\mathrm{n2} &=
+    \dot{U}_\mathrm{S} - \dot{I} \\
+    - 1 \dot{U}_\mathrm{n1} + (1 + 1 / 2)\dot{U}_\mathrm{n2} - 1/2
+    \dot{U}_\mathrm{n3} &= - \beta \dot{I} \\
+    - 1/2 \dot{U}_\mathrm{n2} + (1/2 + 1 /\jimag 4)\dot{U}_\mathrm{n3} &= \dot{I} \\
+    \dot{U}_\mathrm{n1} &= \dot{U}_\mathrm{n3}
     \end{aligned}
-    \right .
     \]
     \end{answer}
 \end{question}
