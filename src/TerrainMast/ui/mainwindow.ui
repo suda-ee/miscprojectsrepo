@@ -1,0 +1,1282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../../resources/main.qrc">
+    <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="spgTrans">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QStackedWidget" name="stkdWgtTrans">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="pgTransFromLib">
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="0,1">
+              <item>
+               <widget class="QLabel" name="label_20">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../../resources/main.qrc">:/images/tablogo.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_21">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Transform From Data Lib</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>Select Lib:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="tableWidget">
+              <row>
+               <property name="text">
+                <string>lib 1</string>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string>lib 2</string>
+               </property>
+              </row>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_36" stretch="2,0,1">
+              <item>
+               <widget class="QGroupBox" name="groupBox_5">
+                <property name="title">
+                 <string>Cut Center</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="0,1">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_71">
+                   <property name="text">
+                    <string>Latitude:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>doubleSpinBox_18</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox_18">
+                   <property name="suffix">
+                    <string>°</string>
+                   </property>
+                   <property name="decimals">
+                    <number>6</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-90.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>90.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_72">
+                   <property name="text">
+                    <string>Longitude:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>doubleSpinBox_19</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox_19">
+                   <property name="suffix">
+                    <string>°</string>
+                   </property>
+                   <property name="decimals">
+                    <number>6</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-180.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>180.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_70">
+                <property name="text">
+                 <string>distance:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>spinBox_17</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBox_17">
+                <property name="suffix">
+                 <string>m</string>
+                </property>
+                <property name="maximum">
+                 <number>1000000</number>
+                </property>
+                <property name="value">
+                 <number>1000</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_19">
+                <property name="text">
+                 <string>Output File:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="buddy">
+                 <cstring>lineEdit_4</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_4"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QToolButton" name="toolButton_4">
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string>local coordinate origin</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0,1,0,1">
+                 <property name="spacing">
+                  <number>8</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_22">
+                   <property name="text">
+                    <string>Latitude:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buddy">
+                    <cstring>doubleSpinBox_5</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_9">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1">
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="decimals">
+                        <number>6</number>
+                       </property>
+                       <property name="minimum">
+                        <double>-90.000000000000000</double>
+                       </property>
+                       <property name="maximum">
+                        <double>90.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="1,1,1">
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_6">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="minimum">
+                        <number>-90</number>
+                       </property>
+                       <property name="maximum">
+                        <number>90</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_7">
+                       <property name="suffix">
+                        <string>′</string>
+                       </property>
+                       <property name="maximum">
+                        <number>59</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_6">
+                       <property name="suffix">
+                        <string>″</string>
+                       </property>
+                       <property name="decimals">
+                        <number>3</number>
+                       </property>
+                       <property name="maximum">
+                        <double>60.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_27">
+                   <property name="text">
+                    <string>Longitude:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buddy">
+                    <cstring>doubleSpinBox_7</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_10">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1">
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_7">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="decimals">
+                        <number>6</number>
+                       </property>
+                       <property name="minimum">
+                        <double>-180.000000000000000</double>
+                       </property>
+                       <property name="maximum">
+                        <double>180.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="1,1,1">
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_8">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="minimum">
+                        <number>-180</number>
+                       </property>
+                       <property name="maximum">
+                        <number>180</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_9">
+                       <property name="suffix">
+                        <string>′</string>
+                       </property>
+                       <property name="maximum">
+                        <number>59</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_8">
+                       <property name="suffix">
+                        <string>″</string>
+                       </property>
+                       <property name="decimals">
+                        <number>3</number>
+                       </property>
+                       <property name="maximum">
+                        <double>60.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="0,0,0,0">
+                 <item>
+                  <widget class="QLabel" name="label_32">
+                   <property name="text">
+                    <string>Vertical Shift:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buddy">
+                    <cstring>spinBox_10</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="spinBox_10">
+                   <property name="minimum">
+                    <number>-13000</number>
+                   </property>
+                   <property name="maximum">
+                    <number>10000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_33">
+                   <property name="text">
+                    <string>meters</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_34">
+              <property name="text">
+               <string>Ready.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QProgressBar" name="progressBar_2">
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_4">
+                <property name="text">
+                 <string>Start</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="pgTransFromFile">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../../resources/main.qrc">:/images/tablogo.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Transform From a DEM File</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Input File:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="buddy">
+                 <cstring>lineEdit</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Output File:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="buddy">
+                 <cstring>lineEdit_2</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEdit_2"/>
+              </item>
+              <item row="0" column="2">
+               <widget class="QToolButton" name="toolButton">
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QToolButton" name="toolButton_2">
+                <property name="text">
+                 <string>...</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>local coordinate origin</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1,0,1">
+                 <property name="spacing">
+                  <number>8</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_9">
+                   <property name="text">
+                    <string>Latitude:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buddy">
+                    <cstring>doubleSpinBox</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1">
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="decimals">
+                        <number>6</number>
+                       </property>
+                       <property name="minimum">
+                        <double>-90.000000000000000</double>
+                       </property>
+                       <property name="maximum">
+                        <double>90.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="1,1,1">
+                     <item>
+                      <widget class="QSpinBox" name="spinBox">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="minimum">
+                        <number>-90</number>
+                       </property>
+                       <property name="maximum">
+                        <number>90</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_2">
+                       <property name="suffix">
+                        <string>′</string>
+                       </property>
+                       <property name="maximum">
+                        <number>59</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+                       <property name="suffix">
+                        <string>″</string>
+                       </property>
+                       <property name="decimals">
+                        <number>3</number>
+                       </property>
+                       <property name="maximum">
+                        <double>60.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_8">
+                   <property name="text">
+                    <string>Longitude:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buddy">
+                    <cstring>doubleSpinBox_3</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_7">
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1">
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="decimals">
+                        <number>6</number>
+                       </property>
+                       <property name="minimum">
+                        <double>-180.000000000000000</double>
+                       </property>
+                       <property name="maximum">
+                        <double>180.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="1,1,1">
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_3">
+                       <property name="suffix">
+                        <string>°</string>
+                       </property>
+                       <property name="minimum">
+                        <number>-180</number>
+                       </property>
+                       <property name="maximum">
+                        <number>180</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QSpinBox" name="spinBox_4">
+                       <property name="suffix">
+                        <string>′</string>
+                       </property>
+                       <property name="maximum">
+                        <number>59</number>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+                       <property name="suffix">
+                        <string>″</string>
+                       </property>
+                       <property name="decimals">
+                        <number>3</number>
+                       </property>
+                       <property name="maximum">
+                        <double>60.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,0">
+                 <item>
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>Vertical Shift:</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buddy">
+                    <cstring>spinBox_5</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="spinBox_5">
+                   <property name="minimum">
+                    <number>-13000</number>
+                   </property>
+                   <property name="maximum">
+                    <number>10000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>meters</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Ready.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QProgressBar" name="progressBar">
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <spacer name="horizontalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_3">
+                <property name="text">
+                 <string>Start</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="spgManage">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QStackedWidget" name="stkdWgtManage">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="pgManageSysLib">
+           <layout class="QVBoxLayout" name="verticalLayout_15">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="0,1">
+              <item>
+               <widget class="QLabel" name="label_37">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../../resources/main.qrc">:/images/tablogo.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_38">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>System Lib management</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_22">
+              <item>
+               <widget class="QTableWidget" name="tableWidget_2">
+                <row>
+                 <property name="text">
+                  <string>lib 1</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>lib 2</string>
+                 </property>
+                </row>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_12">
+                <item>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="text">
+                   <string>Modify</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="pgManageUserLib">
+           <layout class="QVBoxLayout" name="verticalLayout_19">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="0,1">
+              <item>
+               <widget class="QLabel" name="label_66">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../../resources/main.qrc">:/images/tablogo.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_67">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>User's Lib management</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_20">
+              <item>
+               <widget class="QTableWidget" name="tableWidget_3">
+                <row>
+                 <property name="text">
+                  <string>User lib 1</string>
+                 </property>
+                </row>
+                <row>
+                 <property name="text">
+                  <string>User lib 2</string>
+                 </property>
+                </row>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_13">
+                <item>
+                 <widget class="QPushButton" name="pushButton_2">
+                  <property name="text">
+                   <string>New</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_6">
+                  <property name="text">
+                   <string>Modify</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_5">
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About"/>
+   </widget>
+   <widget class="QMenu" name="menu_Tools">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="action_Options"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Tools"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dockWidget">
+   <property name="minimumSize">
+    <size>
+     <width>200</width>
+     <height>169</height>
+    </size>
+   </property>
+   <property name="windowIcon">
+    <iconset resource="../../../resources/main.qrc">
+     <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+   </property>
+   <property name="features">
+    <set>QDockWidget::NoDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Action Select</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QToolBox" name="toolBox">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="pg_Trans">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>230</width>
+          <height>464</height>
+         </rect>
+        </property>
+        <attribute name="icon">
+         <iconset resource="../../../resources/main.qrc">
+          <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+        </attribute>
+        <attribute name="label">
+         <string>DataTransform</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QListWidget" name="listTrans">
+           <property name="iconSize">
+            <size>
+             <width>48</width>
+             <height>48</height>
+            </size>
+           </property>
+           <property name="movement">
+            <enum>QListView::Static</enum>
+           </property>
+           <property name="flow">
+            <enum>QListView::TopToBottom</enum>
+           </property>
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::ListMode</enum>
+           </property>
+           <property name="uniformItemSizes">
+            <bool>false</bool>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="currentRow">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>From Data Lib</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../resources/main.qrc">
+              <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>From File</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../resources/main.qrc">
+              <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="pg_Manage">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>96</width>
+          <height>79</height>
+         </rect>
+        </property>
+        <attribute name="icon">
+         <iconset resource="../../../resources/main.qrc">
+          <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+        </attribute>
+        <attribute name="label">
+         <string>DataManagement</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QListWidget" name="listManage">
+           <property name="iconSize">
+            <size>
+             <width>48</width>
+             <height>48</height>
+            </size>
+           </property>
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <property name="currentRow">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>System Lib</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../resources/main.qrc">
+              <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>User's Lib</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../../../resources/main.qrc">
+              <normaloff>:/images/tablogo.png</normaloff>:/images/tablogo.png</iconset>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="action_Exit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="action_Options">
+   <property name="text">
+    <string>&amp;Options</string>
+   </property>
+  </action>
+  <action name="action_English">
+   <property name="text">
+    <string>&amp;English</string>
+   </property>
+  </action>
+  <action name="actionSimplified_Chinese">
+   <property name="text">
+    <string>Simplified &amp;Chinese</string>
+   </property>
+  </action>
+  <action name="action_English_2">
+   <property name="text">
+    <string>&amp;English</string>
+   </property>
+  </action>
+  <action name="actionSimplified_Chinese_2">
+   <property name="text">
+    <string>Simplified &amp;Chinese</string>
+   </property>
+  </action>
+  <action name="actionWindows">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>windows</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>toolBox</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>223</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listTrans</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>stkdWgtTrans</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listManage</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>stkdWgtManage</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>147</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Exit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
