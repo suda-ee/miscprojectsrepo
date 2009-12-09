@@ -10,17 +10,20 @@
 #define TRANS2CART_H
 
 #include <QObject>
+#include <QProcess>
 
 class Trans2Cart : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	Trans2Cart(QObject *parent = 0);
-	~Trans2Cart();
+    Trans2Cart(QObject *parent = 0);
+    ~Trans2Cart();
 
-public slots:
-	QByteArray trans2WGS84(const QString &filename);
+    void trans2WGS84(const QString &srcfilename, const QString &mdfilename);
+
+private:
+    QProcess *transprocGeo;
 
 };
 
