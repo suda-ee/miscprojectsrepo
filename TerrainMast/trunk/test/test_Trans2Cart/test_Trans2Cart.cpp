@@ -18,13 +18,12 @@ private slots:
 
 void test_Trans2Cart::test_trans2WGS84()
 {
+    qDebug() << QTime::currentTime();
     QString iptfilename = qApp->applicationDirPath()
-	.append("/../../../test/testData/njCleR30kmRast.tif");
+	.append("/../../../test/testData/nj30kmWGS84.tif");
     Trans2Cart trans;
-    QFile fd("outdata.txt");
-    fd.open(QIODevice::WriteOnly);
-    fd.write(trans.trans2WGS84(iptfilename));
-    fd.close();
+    trans.trans2WGS84(iptfilename, "outdata.txt");
+    qDebug() << QTime::currentTime();
 }
 
 QTEST_MAIN(test_Trans2Cart)
