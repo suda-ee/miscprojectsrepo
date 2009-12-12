@@ -5,13 +5,15 @@
 # $URL$
 # Purpose: 
 ########################################################################
-
+include(../../trncommon.pri)
 TEMPLATE = app
 TARGET = TerrainMast
-VERSION = 0.1.0
+FILE_VERSION=0,1,1,0
+DEFINES += FILE_VERSION=$${FILE_VERSION}
+DEFINES += FILE_VERSION_STR=\\\"$$FILE_VERSION\\\"
 win32 {
-    CONFIG += embed_manifest_exe windows 
-    #CONFIG += embed_manifest_exe console
+    #CONFIG += embed_manifest_exe windows 
+    CONFIG += embed_manifest_exe console
 }
 #QT +=
 
@@ -42,3 +44,5 @@ CONFIG(debug, debug|release) {
     RCC_DIR = ../../build/$${TARGET}/release
     UI_DIR = ../../build/$${TARGET}/release
 }
+
+include(../../3rdparty/gdal/gdal.pri)

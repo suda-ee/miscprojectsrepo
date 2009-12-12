@@ -20,7 +20,11 @@ public:
 	OptionsDialog(QWidget *parent = 0, Qt::WFlags flags = 0);
 	~OptionsDialog();
 
-public:
+public slots:
+	void changeStyle(const QString & styleName);
+	void accept();
+
+private:
 	Ui::OptionsDialog ui;
 };
 

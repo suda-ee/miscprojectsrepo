@@ -41,7 +41,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="lblLang">
          <property name="text">
           <string>Language:</string>
          </property>
@@ -54,51 +54,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="cmbStyle">
-         <property name="currentIndex">
-          <number>1</number>
-         </property>
-         <item>
-          <property name="text">
-           <string>Windows</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>WindowsXP</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>WindowsVista</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Motif</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>CDE</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Plastique</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Cleanlooks</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Macintosh</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="cmbStyle"/>
        </item>
        <item row="1" column="1">
         <widget class="QComboBox" name="cmbLanguage"/>

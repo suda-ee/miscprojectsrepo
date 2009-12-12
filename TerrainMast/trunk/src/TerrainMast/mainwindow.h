@@ -11,6 +11,7 @@
 
 #include <QMainWindow>
 #include "ui_mainwindow.h"
+#include <QCompleter>
 
 class mainwindow : public QMainWindow
 {
@@ -23,10 +24,14 @@ public:
 private slots:
 	void aboutSoftware( void );
 	void showOptionsDialog( void );
-	void changeStyle(const QString &stylename);
+	void selectInputFile();
+	void selectOutputFile();
+	void transDecToDMS();
+	void transDMSToDec(const QString & text);
 
 private:
 	Ui::MainWindow ui;
+	QCompleter *completer;
 };
 
 #endif // MAINWINDOW_H

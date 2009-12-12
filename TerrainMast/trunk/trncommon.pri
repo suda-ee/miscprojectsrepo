@@ -1,16 +1,9 @@
 ########################################################################
 # Copyright 2009 Hertz Laboratory.
 # Copyright 2009 Hollywell Corporation.
-# $Id$
-# $URL$
 # Purpose: 
 ########################################################################
 
-include(../../3rdparty/gdal/gdal.pri)
-include(../gdaltransform/gdaltransform.pri)
-
-INCLUDEPATH += $$PWD
-
-SOURCES += $$PWD/Trans2Cart.cpp
-
-HEADERS += $$PWD/Trans2Cart.h
+PRODUCT_VERSION=0,1,1,0
+DEFINES += PRODUCT_VERSION=$${PRODUCT_VERSION}
+DEFINES += PRODUCT_VERSION_STR=\\\"$$PRODUCT_VERSION\\\"
