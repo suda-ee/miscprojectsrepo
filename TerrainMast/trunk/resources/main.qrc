@@ -1,5 +1,14 @@
 <RCC>
-  <qresource prefix="/" >
+  <qresource prefix="/">
+    <file>images/threeballs_blocked-128.png</file>
+    <file>images/Configuration Settings.png</file>
+    <file>images/db.png</file>
+    <file>images/earth_send-128.png</file>
+    <file>images/Linkuj-grunge.png</file>
+    <file>images/Mallette.png</file>
+    <file>images/Burn.png</file>
+    <file>images/display64.png</file>
     <file>images/tablogo.png</file>
+    <file>images/e256r.png</file>
   </qresource>
 </RCC>

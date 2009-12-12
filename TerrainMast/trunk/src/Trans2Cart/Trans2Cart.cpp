@@ -7,14 +7,14 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include <QDebug>
-#include <QVarLengthArray>
 #include "Trans2Cart.h"
 #include "gdal_priv.h"
+
+extern int gdaltransform( int argc, char ** argv, int nCount, double *dfX, double *dfY, double *dfZ );
 
 Trans2Cart::Trans2Cart(QObject *parent)
 	: QObject(parent)
 {
-    transprocGeo = new QProcess(this);
 }
 
 void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilename)
@@ -32,7 +32,9 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilena
     int             bGotMin, bGotMax;
     double          adfMinMax[2];
     
+    // default to read 1st band
     poBand = poDataset->GetRasterBand( 1 );
+
     adfMinMax[0] = poBand->GetMinimum( &bGotMin );
     adfMinMax[1] = poBand->GetMaximum( &bGotMax );
     if( ! (bGotMin && bGotMax) )
@@ -52,108 +54,38 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilena
     }
     double scale = poBand->GetScale(&pbSuccess);
     double offset = poBand->GetOffset(&pbSuccess);
-    // Make sure the unit is meter todo:
+    // Make sure the unit is meter todo: !
     QString unitName = QString::fromAscii(poBand->GetUnitType());
-
-    int        nXBlocks, nYBlocks, nXBlockSize, nYBlockSize;
-    int        iXBlock, iYBlock;
-
-    poBand->GetBlockSize( &nXBlockSize, &nYBlockSize );
-    // nXSize = 10; // for test
-    // nYSize = 3;
-    nXBlocks = (nXSize + nXBlockSize - 1) / nXBlockSize;
-    nYBlocks = (nYSize + nYBlockSize - 1) / nYBlockSize;
-
-    GByte *pafData;
-    pafData = (GByte *) CPLMalloc(GDALGetDataTypeSize(poBand->GetRasterDataType())*nXBlockSize * nYBlockSize);
-
-    QString procInput;
-    QStringList arguments;
-    arguments << "-t_srs" << "WGS84" << srcfilename;
-    transprocGeo->setStandardOutputFile(mdfilename);
-    transprocGeo->start("gdaltransform", arguments);
-
-    /* this isn't the fastest way to do this, but is easier for now */
-    const char* pszPixelType = poBand->GetMetadataItem("PIXELTYPE", "IMAGE_STRUCTURE");
-    int bSignedByte = (pszPixelType != NULL && EQUAL(pszPixelType, "SIGNEDBYTE"));
-    for( iYBlock = 0; iYBlock < nYBlocks; iYBlock++ )
+    
+    double *dfX = new double[nXSize * nYSize];
+    double *dfY = new double[nXSize * nYSize];
+    double *dfZ = new double[nXSize * nYSize];
+    for (int j = 0; j < nYSize; j++)
     {
-        for( iXBlock = 0; iXBlock < nXBlocks; iXBlock++ )
-        {
-            int        nXValid, nYValid;
-	    double dfValue = 0.0;
-            
-            poBand->ReadBlock( iXBlock, iYBlock, pafData );
+	for (int i = 0; i < nXSize; i++)
+	{
+	    dfX[j * nXSize + i] = i;
+	    dfY[j * nXSize + i] = j;
+	}
 
-            // Compute the portion of the block that is valid
-            // for partial edge blocks.
-            if( (iXBlock+1) * nXBlockSize > nXSize )
-                nXValid = nXSize - iXBlock * nXBlockSize;
-            else
-                nXValid = nXBlockSize;
-
-            if( (iYBlock+1) * nYBlockSize > nYSize )
-                nYValid = nYSize - iYBlock * nYBlockSize;
-            else
-                nYValid = nYBlockSize;
-
-            // processing now
-            for( int iY = 0; iY < nYValid; iY++ )
-            {
-                for( int iX = 0; iX < nXValid; iX++ )
-                {
-		    //
-		    int iOffset;
-		    iOffset = iY * nXBlockSize + iX;
-                    switch( poBand->GetRasterDataType() )
-                    {
-			case GDT_Byte:
-			{
-			    if (bSignedByte)
-				dfValue = ((signed char *) pafData)[iOffset];
-			    else
-				dfValue = ((GByte *) pafData)[iOffset];
-			    break;
-			}
-			case GDT_UInt16:
-			    dfValue = ((GUInt16 *) pafData)[iOffset];
-			    break;
-			case GDT_Int16:
-			    dfValue = ((GInt16 *) pafData)[iOffset];
-			    break;
-			case GDT_UInt32:
-			    dfValue = ((GUInt32 *) pafData)[iOffset];
-			    break;
-			case GDT_Int32:
-			    dfValue = ((GInt32 *) pafData)[iOffset];
-			    break;
-			case GDT_Float32:
-			    dfValue = ((float *) pafData)[iOffset];
-			    break;
-			case GDT_Float64:
-			    dfValue = ((double *) pafData)[iOffset];
-			    break;
-			default:
-			    CPLAssert( FALSE );
-		    }
-		    //if (dfValue != noData)
-		    {
-			transprocGeo->write(QString("%1 %2 %3\n")
-				.arg(iXBlock * nXBlockSize + iX)
-				.arg(iYBlock * nYBlockSize + iY)
-				.arg(dfValue * scale + offset)
-				.toAscii());
-		    }
-                }
-            }
-        }
     }
 
+    poBand->RasterIO( GF_Read, 0, 0, nXSize, nYSize, 
+		      dfZ, nXSize, nYSize, GDT_Float64, 
+		      0, 0 );
 
-    free(pafData);
     GDALClose(poDataset);
-    transprocGeo->closeWriteChannel();
-    transprocGeo->waitForFinished(-1);
+    GDALDestroyDriverManager();
+    QByteArray fname = srcfilename.toAscii();
+    char *argvSet[4];
+    argvSet[0] = "gdaltransform";
+    argvSet[1] = "-t_srs";
+    argvSet[2] = "WGS84";
+    argvSet[3] = fname.data();
+    qDebug() << gdaltransform(4, argvSet,
+	    nXSize * nYSize, dfX, dfY, dfZ);
+    qDebug() << dfX[1] << dfY[1] << dfZ[1];
+    delete[] dfX, dfY, dfZ;
 
 }
 
@@ -161,3 +93,4 @@ Trans2Cart::~Trans2Cart()
 {
 
 }
+

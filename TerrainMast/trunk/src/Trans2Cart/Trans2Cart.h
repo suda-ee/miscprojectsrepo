@@ -22,9 +22,6 @@ public:
 
     void trans2WGS84(const QString &srcfilename, const QString &mdfilename);
 
-private:
-    QProcess *transprocGeo;
-
 };
 
 #endif // TRANS2CART_H

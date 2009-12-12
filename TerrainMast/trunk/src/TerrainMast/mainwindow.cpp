@@ -9,35 +9,121 @@
 #include "mainwindow.h"
 #include "aboutdialog.h"
 #include "optionsdialog.h"
+#include <QDirModel>
+#include <QFileDialog>
+#include "cpl_conv.h"
 
 mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
+	completer = new QCompleter(this);
+	completer->setCompletionMode(QCompleter::PopupCompletion);
+	QDirModel *dirModel = new QDirModel(completer);
+        completer->setModel(dirModel);
+	ui.lnInputFile->setCompleter(completer);
+	ui.lnOutputFile->setCompleter(completer);
+	ui.lnOutputFile2->setCompleter(completer);
 
         connect(ui.action_About, SIGNAL(triggered()), this,
 	       SLOT(aboutSoftware()));
         connect(ui.action_Options, SIGNAL(triggered()), this,
 	       SLOT(showOptionsDialog()));
+
+        connect(ui.btSelectInputFile, SIGNAL(clicked()), this,
+	       SLOT(selectInputFile()));
+        connect(ui.btSelectOutputFile, SIGNAL(clicked()), this,
+	       SLOT(selectOutputFile()));
+        connect(ui.btSelectOutputFile2, SIGNAL(clicked()), this,
+	       SLOT(selectOutputFile()));
+
+        connect(ui.dspnLongOri, SIGNAL(editingFinished()), this,
+	       SLOT(transDecToDMS()));
+        connect(ui.dspnLongOri2, SIGNAL(editingFinished()), this,
+	       SLOT(transDecToDMS()));
+        connect(ui.dspnLatOri, SIGNAL(editingFinished()), this,
+	       SLOT(transDecToDMS()));
+        connect(ui.dspnLatOri2, SIGNAL(editingFinished()), this,
+	       SLOT(transDecToDMS()));
+        connect(ui.lnLongOri, SIGNAL(textEdited(const QString &)), this,
+	       SLOT(transDMSToDec(const QString &)));
+        connect(ui.lnLongOri2, SIGNAL(textEdited(const QString &)), this,
+	       SLOT(transDMSToDec(const QString &)));
+        connect(ui.lnLatOri, SIGNAL(textEdited(const QString &)), this,
+	       SLOT(transDMSToDec(const QString &)));
+        connect(ui.lnLatOri2, SIGNAL(textEdited(const QString &)), this,
+	       SLOT(transDMSToDec(const QString &)));
 }
 
 void mainwindow::showOptionsDialog( void )
 {
     OptionsDialog *optionsdialog;
     optionsdialog = new OptionsDialog(this);
-    connect(optionsdialog->ui.cmbStyle, SIGNAL(activated(const QString&)),
-	   this, SLOT(changeStyle(const QString &)));
     optionsdialog->exec();
-}
-
-void mainwindow::changeStyle(const QString &stylename)
-{
-     QApplication::setStyle(stylename);
 }
 
 void mainwindow::aboutSoftware( void )
 {
 	AboutDialog( this ).exec();
+}
+
+void mainwindow::selectInputFile()
+{
+    ui.lnInputFile->setText(QFileDialog::getOpenFileName(this));
+}
+
+void mainwindow::selectOutputFile()
+{
+    if (sender() == ui.btSelectOutputFile2)
+    {
+	ui.lnOutputFile2->setText(QFileDialog::getSaveFileName(this, QString(),
+		    QString(), tr("Terrain File (*.trn)")));
+    }
+    else
+    {
+	ui.lnOutputFile2->setText(QFileDialog::getSaveFileName(this, QString(),
+		    QString(), tr("Terrain File (*.trn)")));
+    }
+}
+
+void mainwindow::transDecToDMS()
+{
+    if (sender() == ui.dspnLongOri)
+    {
+	ui.lnLongOri->setText(CPLDecToDMS(ui.dspnLongOri->value(), "Long", 3));
+    }
+    else if (sender() == ui.dspnLongOri2)
+    {
+	ui.lnLongOri2->setText(CPLDecToDMS(ui.dspnLongOri2->value(), "Long", 3));
+    }
+    else if (sender() == ui.dspnLatOri)
+    {
+	ui.lnLatOri->setText(CPLDecToDMS(ui.dspnLatOri->value(), "Lat", 3));
+    }
+    else if (sender() == ui.dspnLatOri2)
+    {
+	ui.lnLatOri2->setText(CPLDecToDMS(ui.dspnLatOri2->value(), "Lat", 3));
+    }
+}
+
+void mainwindow::transDMSToDec(const QString & text)
+{
+    if (sender() == ui.lnLongOri)
+    {
+	ui.dspnLongOri->setValue(CPLDMSToDec(text.toAscii().data()));
+    }
+    else if (sender() == ui.lnLongOri2)
+    {
+	ui.dspnLongOri2->setValue(CPLDMSToDec(text.toAscii().data()));
+    }
+    else if (sender() == ui.lnLatOri)
+    {
+	ui.dspnLatOri->setValue(CPLDMSToDec(text.toAscii().data()));
+    }
+    else if (sender() == ui.lnLatOri2)
+    {
+	ui.dspnLatOri2->setValue(CPLDMSToDec(text.toAscii().data()));
+    }
 }
 
 mainwindow::~mainwindow()

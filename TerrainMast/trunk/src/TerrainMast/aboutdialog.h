@@ -15,11 +15,12 @@ class AboutDialog : public QDialog, public Ui::AboutDialog
 {
 public:
 	AboutDialog( QWidget * _parent ) :
-		QDialog( _parent )
+		QDialog( _parent,  Qt::WindowTitleHint | Qt::WindowSystemMenuHint )
 	{
 		setupUi( this );
 		aboutTextLabel->setText(
-			aboutTextLabel->text().arg( "0.1.0" ) );
+			aboutTextLabel->text().arg( QString(PRODUCT_VERSION_STR)
+			    .remove(QRegExp(",\\d+$")).replace(QRegExp(","), ".") ));
 	}
 } ;
 
