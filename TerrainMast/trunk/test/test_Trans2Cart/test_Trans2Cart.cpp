@@ -2,7 +2,7 @@
 // Copyright 2009 Hertz Laboratory.
 // Copyright 2009 Hollywell Corporation.
 // $Id$
-// $URL$
+// $URL: F:\CAI\TerrainMast-hg/test/test_Trans2Cart/test_Trans2Cart.cpp,v bfb6c31ac4dc 2009/12/10 20:06:44 > $
 // Purpose: 
 ////////////////////////////////////////////////////////////////////////
 

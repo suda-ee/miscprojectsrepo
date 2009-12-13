@@ -1,5 +1,5 @@
 /******************************************************************************
- * $Id: cpl_vsi.h 16079 2009-01-14 06:26:56Z warmerdam $
+ * $Id: cpl_vsi.h 15217 2008-08-25 20:34:50Z rouault $
  *
  * Project:  CPL - Common Portability Library
  * Author:   Frank Warmerdam, warmerdam@pobox.com
@@ -190,7 +190,6 @@ char CPL_DLL *VSIStrerror( int );
 /* ==================================================================== */
 void CPL_DLL VSIInstallMemFileHandler(void);
 void CPL_DLL VSIInstallLargeFileHandler(void);
-void CPL_DLL VSIInstallSubFileHandler(void);
 void VSIInstallGZipFileHandler(void); /* No reason to export that */
 void VSIInstallZipFileHandler(void); /* No reason to export that */
 void CPL_DLL VSICleanupFileManager(void);

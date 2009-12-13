@@ -2,7 +2,6 @@
 // Copyright 2009 Hertz Laboratory.
 // Copyright 2009 Hollywell Corporation.
 // $Id$
-// $URL$
 // Purpose: 
 ////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +18,6 @@ class mainwindow : public QMainWindow
 
 public:
 	mainwindow(QWidget *parent = 0, Qt::WFlags flags = 0);
-	~mainwindow();
 
 private slots:
 	void aboutSoftware( void );
@@ -28,6 +26,7 @@ private slots:
 	void selectOutputFile();
 	void transDecToDMS();
 	void transDMSToDec(const QString & text);
+	void showSrcFileMetaData();
 
 private:
 	Ui::MainWindow ui;
