@@ -460,7 +460,7 @@ It can be used as a DMS to Dec convertor.</string>
            </layout>
           </widget>
           <widget class="QWidget" name="pgTransFromFile">
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0,0">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
               <item>
@@ -497,6 +497,20 @@ It can be used as a DMS to Dec convertor.</string>
                </widget>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Source MetaInfo:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPlainTextEdit" name="ptxtSrcMeta">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
@@ -802,19 +816,6 @@ It can be used as a DMS to Dec convertor.</string>
                </widget>
               </item>
              </layout>
-            </item>
-            <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -1126,8 +1127,8 @@ It can be used as a DMS to Dec convertor.</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>96</width>
-          <height>79</height>
+          <width>274</width>
+          <height>466</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -1209,6 +1210,7 @@ It can be used as a DMS to Dec convertor.</string>
   </action>
  </widget>
  <resources>
+  <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>

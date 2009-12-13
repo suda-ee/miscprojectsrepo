@@ -2,7 +2,6 @@
 // Copyright 2009 Hertz Laboratory.
 // Copyright 2009 Hollywell Corporation.
 // $Id$
-// $URL$
 // Purpose: 
 ////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +10,7 @@
 #include "optionsdialog.h"
 #include <QDirModel>
 #include <QFileDialog>
+#include <QProcess>
 #include "cpl_conv.h"
 
 mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
@@ -53,6 +53,9 @@ mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 	       SLOT(transDMSToDec(const QString &)));
         connect(ui.lnLatOri2, SIGNAL(textEdited(const QString &)), this,
 	       SLOT(transDMSToDec(const QString &)));
+
+        connect(ui.lnInputFile, SIGNAL(editingFinished()), this,
+	       SLOT(showSrcFileMetaData()));
 }
 
 void mainwindow::showOptionsDialog( void )
@@ -70,6 +73,7 @@ void mainwindow::aboutSoftware( void )
 void mainwindow::selectInputFile()
 {
     ui.lnInputFile->setText(QFileDialog::getOpenFileName(this));
+    showSrcFileMetaData();
 }
 
 void mainwindow::selectOutputFile()
@@ -77,12 +81,12 @@ void mainwindow::selectOutputFile()
     if (sender() == ui.btSelectOutputFile2)
     {
 	ui.lnOutputFile2->setText(QFileDialog::getSaveFileName(this, QString(),
-		    QString(), tr("Terrain File (*.trn)")));
+		    QString(), tr("EMCube Terrain File (*.trn)")));
     }
     else
     {
 	ui.lnOutputFile2->setText(QFileDialog::getSaveFileName(this, QString(),
-		    QString(), tr("Terrain File (*.trn)")));
+		    QString(), tr("EMCube Terrain File (*.trn)")));
     }
 }
 
@@ -126,7 +130,17 @@ void mainwindow::transDMSToDec(const QString & text)
     }
 }
 
-mainwindow::~mainwindow()
+void mainwindow::showSrcFileMetaData()
 {
-
+    QProcess process;
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    if (env.value("GDAL_DATA").isEmpty())
+	env.insert("GDAL_DATA", qApp->applicationDirPath() + "/gdal-data"); // Add an environment variable
+    env.insert("PATH", env.value("PATH") + ";" + qApp->applicationDirPath() + "/bin");
+    process.setProcessEnvironment(env);
+    QStringList arguments;
+    arguments << ui.lnInputFile->text();
+    process.start("gdalinfo", arguments);
+    process.waitForFinished();
+    ui.ptxtSrcMeta->setPlainText(process.readAllStandardOutput());
 }
