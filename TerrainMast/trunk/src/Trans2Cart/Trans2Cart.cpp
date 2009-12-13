@@ -6,9 +6,13 @@
 // Purpose: 
 ////////////////////////////////////////////////////////////////////////
 
-#include <QDebug>
 #include "Trans2Cart.h"
+#include <QProcessEnvironment>
 #include "gdal_priv.h"
+#include <QDebug>
+#include <QFile>
+#include <QTime>
+#include <QApplication>
 
 extern int gdaltransform( int argc, char ** argv, int nCount, double *dfX, double *dfY, double *dfZ );
 
@@ -19,6 +23,11 @@ Trans2Cart::Trans2Cart(QObject *parent)
 
 void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilename)
 {
+    // test if GDAL_DATA environment variable exist
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QString gdalDatadir = qApp->applicationDirPath() + "/gdal-data";
+    if (env.value("GDAL_DATA").isEmpty())
+	CPLSetConfigOption("GDAL_DATA", gdalDatadir.toLocal8Bit().data());
     // Opening the File
     GDALDataset  *poDataset;
     GDALAllRegister();
@@ -57,22 +66,30 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilena
     // Make sure the unit is meter todo: !
     QString unitName = QString::fromAscii(poBand->GetUnitType());
     
+    double *dfOZ = new double[nXSize * nYSize];
+    poBand->RasterIO( GF_Read, 0, 0, nXSize, nYSize, 
+		      dfOZ, nXSize, nYSize, GDT_Float64, 
+		      0, 0 );
+    
     double *dfX = new double[nXSize * nYSize];
     double *dfY = new double[nXSize * nYSize];
     double *dfZ = new double[nXSize * nYSize];
+    int nCountValidPoint = 0;
     for (int j = 0; j < nYSize; j++)
     {
 	for (int i = 0; i < nXSize; i++)
 	{
-	    dfX[j * nXSize + i] = i;
-	    dfY[j * nXSize + i] = j;
+	    if (dfOZ[j * nXSize + i] != noData)
+	    {
+		dfX[nCountValidPoint] = i;
+		dfY[nCountValidPoint] = j;
+		dfZ[nCountValidPoint] = dfOZ[j * nXSize + i] * scale + offset;
+		nCountValidPoint++;
+	    }
 	}
 
     }
-
-    poBand->RasterIO( GF_Read, 0, 0, nXSize, nYSize, 
-		      dfZ, nXSize, nYSize, GDT_Float64, 
-		      0, 0 );
+    delete[] dfOZ;
 
     GDALClose(poDataset);
     GDALDestroyDriverManager();
@@ -82,15 +99,21 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilena
     argvSet[1] = "-t_srs";
     argvSet[2] = "WGS84";
     argvSet[3] = fname.data();
-    qDebug() << gdaltransform(4, argvSet,
-	    nXSize * nYSize, dfX, dfY, dfZ);
-    qDebug() << dfX[1] << dfY[1] << dfZ[1];
+    gdaltransform(4, argvSet, nCountValidPoint, dfX, dfY, dfZ);
+    // write out file
+    // is it possible a more efficient method?
+    qDebug() << "to file";
+    qDebug() << QTime::currentTime();
+    QFile data(mdfilename);
+    if (data.open(QFile::WriteOnly | QFile::Truncate))
+    {
+	QTextStream out(&data);
+	out.setRealNumberPrecision(10);
+	for (int i = 0; i < nCountValidPoint; i++)
+	    out << dfX[i] << " " << dfY[i] << " " << dfZ[i] << "\n";
+	data.close();
+    }
+    
     delete[] dfX, dfY, dfZ;
 
 }
-
-Trans2Cart::~Trans2Cart()
-{
-
-}
-
