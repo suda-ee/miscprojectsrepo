@@ -10,7 +10,6 @@
 #define TRANS2CART_H
 
 #include <QObject>
-#include <QProcess>
 
 class Trans2Cart : public QObject
 {
@@ -18,7 +17,6 @@ class Trans2Cart : public QObject
 
 public:
     Trans2Cart(QObject *parent = 0);
-    ~Trans2Cart();
 
     void trans2WGS84(const QString &srcfilename, const QString &mdfilename);
 

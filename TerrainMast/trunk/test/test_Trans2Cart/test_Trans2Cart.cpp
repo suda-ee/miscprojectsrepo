@@ -20,7 +20,7 @@ void test_Trans2Cart::test_trans2WGS84()
 {
     qDebug() << QTime::currentTime();
     QString iptfilename = qApp->applicationDirPath()
-	.append("/../../../test/testData/nj30kmWGS84.tif");
+	.append("/../../../test/testData/njCleR30kmRast.img");
     Trans2Cart trans;
     trans.trans2WGS84(iptfilename, "outdata.txt");
     qDebug() << QTime::currentTime();
