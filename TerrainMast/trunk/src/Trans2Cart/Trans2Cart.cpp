@@ -90,12 +90,11 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename)
     {
 	for (int i = 0; i < nXSize; i++)
 	{
-	    //if (dfOZ[j * nXSize + i] != noData)
+	    if (dfOZ[j * nXSize + i] != noData)
 	    {
 		dfX[nCountValidPoint] = i;
 		dfY[nCountValidPoint] = j;
-		//dfZ[nCountValidPoint] = dfOZ[j * nXSize + i] * scale + offset;
-		dfZ[nCountValidPoint] = dfOZ[j * nXSize + i];
+		dfZ[nCountValidPoint] = dfOZ[j * nXSize + i] * scale + offset;
 		nCountValidPoint++;
 	    }
 	}
