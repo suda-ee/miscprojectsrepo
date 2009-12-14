@@ -27,6 +27,7 @@ private slots:
 	void transDecToDMS();
 	void transDMSToDec(const QString & text);
 	void showSrcFileMetaData();
+	void startTransFile(bool checked = false);
 
 private:
 	Ui::MainWindow ui;

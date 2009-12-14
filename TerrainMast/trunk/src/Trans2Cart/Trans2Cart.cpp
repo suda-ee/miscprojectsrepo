@@ -13,6 +13,7 @@
 #include <QFile>
 #include <QTime>
 #include <QApplication>
+#include "GeographicLib/LocalCartesian.hpp"
 
 extern int gdaltransform( int argc, char ** argv, int nCount, double *dfX, double *dfY, double *dfZ );
 
@@ -21,7 +22,7 @@ Trans2Cart::Trans2Cart(QObject *parent)
 {
 }
 
-void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilename)
+void Trans2Cart::trans2WGS84(const QString &srcfilename)
 {
     // test if GDAL_DATA environment variable exist
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
@@ -67,26 +68,38 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilena
     QString unitName = QString::fromAscii(poBand->GetUnitType());
     
     double *dfOZ = new double[nXSize * nYSize];
+
+    emit progressMsg(tr("Prepare Data Reading..."));
+    emit progressNum(0);
+
     poBand->RasterIO( GF_Read, 0, 0, nXSize, nYSize, 
 		      dfOZ, nXSize, nYSize, GDT_Float64, 
 		      0, 0 );
     
-    double *dfX = new double[nXSize * nYSize];
-    double *dfY = new double[nXSize * nYSize];
-    double *dfZ = new double[nXSize * nYSize];
-    int nCountValidPoint = 0;
+    emit progressMsg(tr("Data Readed."));
+    emit progressNum(100);
+
+    dfX = new double[nXSize * nYSize];
+    dfY = new double[nXSize * nYSize];
+    dfZ = new double[nXSize * nYSize];
+    nCountValidPoint = 0;
+
+    emit progressMsg(tr("Transforming Data to WGS84..."));
+
     for (int j = 0; j < nYSize; j++)
     {
 	for (int i = 0; i < nXSize; i++)
 	{
-	    if (dfOZ[j * nXSize + i] != noData)
+	    //if (dfOZ[j * nXSize + i] != noData)
 	    {
 		dfX[nCountValidPoint] = i;
 		dfY[nCountValidPoint] = j;
-		dfZ[nCountValidPoint] = dfOZ[j * nXSize + i] * scale + offset;
+		//dfZ[nCountValidPoint] = dfOZ[j * nXSize + i] * scale + offset;
+		dfZ[nCountValidPoint] = dfOZ[j * nXSize + i];
 		nCountValidPoint++;
 	    }
 	}
+	emit progressNum(50.0 * j / nYSize);
 
     }
     delete[] dfOZ;
@@ -100,20 +113,59 @@ void Trans2Cart::trans2WGS84(const QString &srcfilename, const QString &mdfilena
     argvSet[2] = "WGS84";
     argvSet[3] = fname.data();
     gdaltransform(4, argvSet, nCountValidPoint, dfX, dfY, dfZ);
+
+    emit progressNum(100);
+}
+
+void Trans2Cart::transDEM2Cartesian(const QString &srcfilename, const QString &destFilename,
+	double OriLong, double OriLat, double OriZ)
+{
+    trans2WGS84(srcfilename);
+
+    emit progressMsg(tr("Transforming Data to local Cartesian coordinates..."));
+    emit progressNum(0);
+
+    const GeographicLib::LocalCartesian lc(OriLat, OriLong, OriZ);
+    
+    double x, y, z;
+    for (int i = 0; i < nCountValidPoint; i++)
+    {
+	lc.Forward(dfY[i], dfX[i], dfZ[i], x, y, z);
+	dfX[i] = x;
+	dfY[i] = y;
+	dfZ[i] = z;
+    }
+    emit progressNum(100);
     // write out file
     // is it possible a more efficient method?
-    qDebug() << "to file";
-    qDebug() << QTime::currentTime();
-    QFile data(mdfilename);
+    QFile data(destFilename);
     if (data.open(QFile::WriteOnly | QFile::Truncate))
     {
+	emit progressMsg(tr("Writting final data to file..."));
+
 	QTextStream out(&data);
 	out.setRealNumberPrecision(10);
+	// writting file headers
+	out << "#TERRAIN\n";
+	out << "#STEPS     10.000000     10.000000\n";
+	out << "#LONGITUDES     0     0\n";
+	out << "#LATITUDES     0     0\n";
+	out << "#ZONES     0     0\n";
+	out << "#RAWSTEPX     0.000000\n";
 	for (int i = 0; i < nCountValidPoint; i++)
+	{
 	    out << dfX[i] << " " << dfY[i] << " " << dfZ[i] << "\n";
+	    if (i % (nCountValidPoint / 100) == 0)
+	    {
+		emit progressNum(100. * i / nCountValidPoint + 1);
+	    }
+	}
 	data.close();
+	emit progressMsg(tr("All finished."));
     }
-    
-    delete[] dfX, dfY, dfZ;
+}
 
+Trans2Cart::~Trans2Cart()
+{
+    delete[] dfX, dfY, dfZ;
 }

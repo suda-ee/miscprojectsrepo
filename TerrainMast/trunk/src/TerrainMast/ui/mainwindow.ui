@@ -274,7 +274,7 @@
                         <string>°</string>
                        </property>
                        <property name="decimals">
-                        <number>7</number>
+                        <number>10</number>
                        </property>
                        <property name="minimum">
                         <double>-180.000000000000000</double>
@@ -332,7 +332,7 @@ It can be used as a DMS to Dec convertor.</string>
                         <string>°</string>
                        </property>
                        <property name="decimals">
-                        <number>7</number>
+                        <number>10</number>
                        </property>
                        <property name="minimum">
                         <double>-90.000000000000000</double>
@@ -371,7 +371,7 @@ It can be used as a DMS to Dec convertor.</string>
                  <item>
                   <widget class="QLabel" name="label_32">
                    <property name="text">
-                    <string>Vertical Shift:</string>
+                    <string>Height:</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -631,7 +631,7 @@ It can be used as a DMS to Dec convertor.</string>
                         <string>°</string>
                        </property>
                        <property name="decimals">
-                        <number>7</number>
+                        <number>10</number>
                        </property>
                        <property name="minimum">
                         <double>-180.000000000000000</double>
@@ -692,7 +692,7 @@ It can be used as a DMS to Dec convertor.</string>
                         <string>°</string>
                        </property>
                        <property name="decimals">
-                        <number>7</number>
+                        <number>10</number>
                        </property>
                        <property name="minimum">
                         <double>-90.000000000000000</double>
@@ -731,7 +731,7 @@ It can be used as a DMS to Dec convertor.</string>
                  <item>
                   <widget class="QLabel" name="label_6">
                    <property name="text">
-                    <string>Vertical Shift:</string>
+                    <string>Height:</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -777,7 +777,7 @@ It can be used as a DMS to Dec convertor.</string>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="lbMsgProgress">
               <property name="text">
                <string>Ready.</string>
               </property>
@@ -1127,8 +1127,8 @@ It can be used as a DMS to Dec convertor.</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>96</width>
-          <height>79</height>
+          <width>274</width>
+          <height>466</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -1210,6 +1210,8 @@ It can be used as a DMS to Dec convertor.</string>
   </action>
  </widget>
  <resources>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
