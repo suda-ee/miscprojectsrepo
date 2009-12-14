@@ -14,6 +14,7 @@ class test_Trans2Cart: public QObject
     Q_OBJECT
 private slots:
     void test_trans2WGS84();
+    void test_transDEM2Cartesian();
 };
 
 void test_Trans2Cart::test_trans2WGS84()
@@ -22,7 +23,18 @@ void test_Trans2Cart::test_trans2WGS84()
     QString iptfilename = qApp->applicationDirPath()
 	.append("/../../../test/testData/njCleR30kmRast.img");
     Trans2Cart trans;
-    trans.trans2WGS84(iptfilename, "outdata.txt");
+    trans.trans2WGS84(iptfilename);
+    qDebug() << QTime::currentTime();
+}
+
+void test_Trans2Cart::test_transDEM2Cartesian()
+{
+    qDebug() << QTime::currentTime();
+    QString iptfilename = qApp->applicationDirPath()
+	.append("/../../../test/testData/njCleR30kmRast.img");
+    Trans2Cart trans;
+    trans.transDEM2Cartesian(iptfilename, "catout.txt",
+	118.6533215, 32.13585526, 0);
     qDebug() << QTime::currentTime();
 }
 

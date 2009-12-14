@@ -12,6 +12,7 @@
 #include <QFileDialog>
 #include <QProcess>
 #include "cpl_conv.h"
+#include "Trans2Cart.h"
 
 mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -56,6 +57,9 @@ mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 
         connect(ui.lnInputFile, SIGNAL(editingFinished()), this,
 	       SLOT(showSrcFileMetaData()));
+
+        connect(ui.btStartTransFile, SIGNAL(clicked(bool)), this,
+	       SLOT(startTransFile(bool)));
 }
 
 void mainwindow::showOptionsDialog( void )
@@ -85,7 +89,7 @@ void mainwindow::selectOutputFile()
     }
     else
     {
-	ui.lnOutputFile2->setText(QFileDialog::getSaveFileName(this, QString(),
+	ui.lnOutputFile->setText(QFileDialog::getSaveFileName(this, QString(),
 		    QString(), tr("EMCube Terrain File (*.trn)")));
     }
 }
@@ -143,4 +147,21 @@ void mainwindow::showSrcFileMetaData()
     process.start("gdalinfo", arguments);
     process.waitForFinished();
     ui.ptxtSrcMeta->setPlainText(process.readAllStandardOutput());
+}
+
+void mainwindow::startTransFile(bool checked)
+{
+    ui.btStartTransFile->setEnabled(false);
+    Trans2Cart *transobj = new Trans2Cart(this);
+
+    connect(transobj, SIGNAL(progressMsg(const QString &)), ui.lbMsgProgress,
+	   SLOT(setText(const QString &)));
+    connect(transobj, SIGNAL(progressNum(int)), ui.transFileProgressBar,
+	   SLOT(setValue(int)));
+
+    transobj->transDEM2Cartesian(ui.lnInputFile->text(), ui.lnOutputFile->text(),
+	ui.dspnLongOri->value(), ui.dspnLatOri->value(), ui.spnVerticalShift->value());
+
+    ui.btStartTransFile->setEnabled(true);
+    delete transobj;
 }

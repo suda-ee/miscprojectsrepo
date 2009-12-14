@@ -17,9 +17,22 @@ class Trans2Cart : public QObject
 
 public:
     Trans2Cart(QObject *parent = 0);
+    ~Trans2Cart();
 
-    void trans2WGS84(const QString &srcfilename, const QString &mdfilename);
+    void trans2WGS84(const QString &srcfilename);
+    void transDEM2Cartesian(const QString &srcfilename, const QString &destFilename,
+	    double OriLong, double OriLat, double OriZ);
 
+signals:
+    void progressNum(int progress);
+    void progressMsg(const QString & message);
+
+
+private:
+    int nCountValidPoint;
+    double *dfX;
+    double *dfY;
+    double *dfZ;
 };
 
 #endif // TRANS2CART_H

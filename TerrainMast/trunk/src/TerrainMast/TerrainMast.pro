@@ -45,4 +45,4 @@ CONFIG(debug, debug|release) {
     UI_DIR = ../../build/$${TARGET}/release
 }
 
-include(../../3rdparty/gdal/gdal.pri)
+include(../Trans2Cart/Trans2Cart.pri)

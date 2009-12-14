@@ -4,7 +4,7 @@
  * Project:  GDAL
  * Purpose:  Commandline point transformer.
  * Author:   Frank Warmerdam <warmerdam@pobox.com>
- *
+ * Comments: Modified to transform data array. Wenfeng CAI.
  ******************************************************************************
  * Copyright (c) 2007, Frank Warmerdam <warmerdam@pobox.com>
  *
