@@ -12,8 +12,8 @@ FILE_VERSION=0,1,1,0
 DEFINES += FILE_VERSION=$${FILE_VERSION}
 DEFINES += FILE_VERSION_STR=\\\"$$FILE_VERSION\\\"
 win32 {
-    #CONFIG += embed_manifest_exe windows 
-    CONFIG += embed_manifest_exe console
+    CONFIG += embed_manifest_exe windows 
+    #CONFIG += embed_manifest_exe console
 }
 #QT +=
 
