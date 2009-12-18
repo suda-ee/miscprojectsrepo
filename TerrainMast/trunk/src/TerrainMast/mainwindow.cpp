@@ -13,6 +13,7 @@
 #include <QProcess>
 #include "cpl_conv.h"
 #include "Trans2Cart.h"
+#include <QDebug>
 
 mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -116,21 +117,23 @@ void mainwindow::transDecToDMS()
 
 void mainwindow::transDMSToDec(const QString & text)
 {
+    QString intext = text;
+    intext = intext.remove(" ");
     if (sender() == ui.lnLongOri)
     {
-	ui.dspnLongOri->setValue(CPLDMSToDec(text.toAscii().data()));
+	ui.dspnLongOri->setValue(CPLDMSToDec(intext.toAscii().data()));
     }
     else if (sender() == ui.lnLongOri2)
     {
-	ui.dspnLongOri2->setValue(CPLDMSToDec(text.toAscii().data()));
+	ui.dspnLongOri2->setValue(CPLDMSToDec(intext.toAscii().data()));
     }
     else if (sender() == ui.lnLatOri)
     {
-	ui.dspnLatOri->setValue(CPLDMSToDec(text.toAscii().data()));
+	ui.dspnLatOri->setValue(CPLDMSToDec(intext.toAscii().data()));
     }
     else if (sender() == ui.lnLatOri2)
     {
-	ui.dspnLatOri2->setValue(CPLDMSToDec(text.toAscii().data()));
+	ui.dspnLatOri2->setValue(CPLDMSToDec(intext.toAscii().data()));
     }
 }
 
@@ -140,11 +143,12 @@ void mainwindow::showSrcFileMetaData()
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     if (env.value("GDAL_DATA").isEmpty())
 	env.insert("GDAL_DATA", qApp->applicationDirPath() + "/gdal-data"); // Add an environment variable
+    env.insert("PATH", env.value("PATH") + ";" + qApp->applicationDirPath());
     env.insert("PATH", env.value("PATH") + ";" + qApp->applicationDirPath() + "/bin");
     process.setProcessEnvironment(env);
     QStringList arguments;
     arguments << ui.lnInputFile->text();
-    process.start("gdalinfo", arguments);
+    process.start(qApp->applicationDirPath() + "/bin/gdalinfo", arguments);
     process.waitForFinished();
     ui.ptxtSrcMeta->setPlainText(process.readAllStandardOutput());
 }

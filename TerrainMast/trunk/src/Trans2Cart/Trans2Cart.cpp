@@ -146,7 +146,7 @@ void Trans2Cart::transDEM2Cartesian(const QString &srcfilename, const QString &d
 	out.setRealNumberPrecision(10);
 	// writting file headers
 	out << "#TERRAIN\n";
-	out << "#STEPS     10.000000     10.000000\n";
+	out << "#STEPS     90.000000     90.000000\n";
 	out << "#LONGITUDES     0     0\n";
 	out << "#LATITUDES     0     0\n";
 	out << "#ZONES     0     0\n";
@@ -166,5 +166,6 @@ void Trans2Cart::transDEM2Cartesian(const QString &srcfilename, const QString &d
 
 Trans2Cart::~Trans2Cart()
 {
-    delete[] dfX, dfY, dfZ;
+    if (dfZ)
+	delete[] dfX, dfY, dfZ;
 }
