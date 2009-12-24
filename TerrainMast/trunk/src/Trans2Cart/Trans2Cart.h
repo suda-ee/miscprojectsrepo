@@ -2,14 +2,13 @@
 // Copyright 2009 Hertz Laboratory.
 // Copyright 2009 Hollywell Corporation.
 // $Id$
-// $URL: svn://land.rf/projects/TerrainMast/trunk/src/Trans2Cart/Trans2Cart.h $
 // Purpose: Transform GDAL src image to Local Cartesian Coordinate
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef TRANS2CART_H
 #define TRANS2CART_H
 
-#include <QObject>
+#include <QTextStream>
 
 class Trans2Cart : public QObject
 {
@@ -18,10 +17,11 @@ class Trans2Cart : public QObject
 public:
     Trans2Cart(QObject *parent = 0);
     ~Trans2Cart();
-
-    void trans2WGS84(const QString &srcfilename);
-    void transDEM2Cartesian(const QString &srcfilename, const QString &destFilename,
-	    double OriLong, double OriLat, double OriZ);
+    void initSingleFileTrans(const QString &srcfilename, double cutCenterLong,
+	double cutCenterLat, double cutWidth, double cutHeight, bool cutFlag);
+    void transDEM2Terrain(const QString &destFilename, double OriLong,
+       	double OriLat, double OriZ);
+    double getDimensionInMeters(const QString &srcfilename, const QString &flagLongLat);
 
 signals:
     void progressNum(int progress);
@@ -29,10 +29,25 @@ signals:
 
 
 private:
+    void trans2WGS84(const QString &srcfilename, int topLeftPixel, int topLeftLine, int width, int height);
+    void transSingleDomain2Cartesian(const QString &srcfilename, QTextStream &out,
+	int topLeftPixel, int topLeftLine, int width, int height);
+    
+    typedef struct SrcInfo {
+	QString filename;
+	int topLeftPixel;
+	int topLeftLine;
+	int width;
+	int height;
+    } tSrcInfo;				/* ----------  end of struct SrcInfo  ---------- */
+
+    typedef struct SrcInfo SrcInfo;
     int nCountValidPoint;
     double *dfX;
     double *dfY;
     double *dfZ;
+    double m_OriLat, m_OriLong, m_OriZ;
+    QList<tSrcInfo> m_domains;
 };
 
 #endif // TRANS2CART_H
