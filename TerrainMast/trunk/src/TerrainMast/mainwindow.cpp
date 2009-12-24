@@ -79,6 +79,10 @@ void mainwindow::selectInputFile()
 {
     ui.lnInputFile->setText(QFileDialog::getOpenFileName(this));
     showSrcFileMetaData();
+    Trans2Cart *transobj = new Trans2Cart(this);
+    ui.spinCutWidth->setValue(transobj->getDimensionInMeters(ui.lnInputFile->text(), "Long"));
+    ui.spinCutHeight->setValue(transobj->getDimensionInMeters(ui.lnInputFile->text(), "Lat"));
+    delete transobj;
 }
 
 void mainwindow::selectOutputFile()
@@ -162,8 +166,10 @@ void mainwindow::startTransFile(bool checked)
 	   SLOT(setText(const QString &)));
     connect(transobj, SIGNAL(progressNum(int)), ui.transFileProgressBar,
 	   SLOT(setValue(int)));
-
-    transobj->transDEM2Cartesian(ui.lnInputFile->text(), ui.lnOutputFile->text(),
+    
+    transobj->initSingleFileTrans(ui.lnInputFile->text(), ui.dspnLongOri->value(),
+        ui.dspnLatOri->value(), ui.spinCutWidth->value(), ui.spinCutHeight->value(), ui.grpCut->isChecked());
+    transobj->transDEM2Terrain(ui.lnOutputFile->text(),
 	ui.dspnLongOri->value(), ui.dspnLatOri->value(), ui.spnVerticalShift->value());
 
     ui.btStartTransFile->setEnabled(true);

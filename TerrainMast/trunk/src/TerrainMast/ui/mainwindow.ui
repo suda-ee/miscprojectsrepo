@@ -460,7 +460,7 @@ It can be used as a DMS to Dec convertor.</string>
            </layout>
           </widget>
           <widget class="QWidget" name="pgTransFromFile">
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0,0">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0,0,0">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
               <item>
@@ -772,6 +772,79 @@ It can be used as a DMS to Dec convertor.</string>
                   </spacer>
                  </item>
                 </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="grpCut">
+              <property name="title">
+               <string>Cut Parameters</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="0,1,0,1">
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Width:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinCutWidth</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinCutWidth">
+                 <property name="toolTip">
+                  <string>the width of the cut rectangle</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Input the width of the cut rectangle with the center at Origin.</string>
+                 </property>
+                 <property name="suffix">
+                  <string> m</string>
+                 </property>
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <double>40000000.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>Height:</string>
+                 </property>
+                 <property name="buddy">
+                  <cstring>spinCutHeight</cstring>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinCutHeight">
+                 <property name="toolTip">
+                  <string>the height of the cut rectangle</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Input the height of the cut rectangle with the center at Origin.</string>
+                 </property>
+                 <property name="suffix">
+                  <string> m</string>
+                 </property>
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <double>40000000.000000000000000</double>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>
@@ -1127,8 +1200,8 @@ It can be used as a DMS to Dec convertor.</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>96</width>
-          <height>79</height>
+          <width>274</width>
+          <height>466</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -1210,6 +1283,7 @@ It can be used as a DMS to Dec convertor.</string>
   </action>
  </widget>
  <resources>
+  <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
