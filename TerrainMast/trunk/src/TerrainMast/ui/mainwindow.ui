@@ -67,7 +67,7 @@
             <item>
              <widget class="QLabel" name="label_18">
               <property name="text">
-               <string>Select Lib:</string>
+               <string>Select lib:</string>
               </property>
              </widget>
             </item>
@@ -166,7 +166,7 @@
               <item>
                <widget class="QLabel" name="label_70">
                 <property name="text">
-                 <string>distance:</string>
+                 <string>Distance:</string>
                 </property>
                 <property name="buddy">
                  <cstring>spnCutDistance</cstring>
@@ -193,7 +193,7 @@
               <item row="0" column="0">
                <widget class="QLabel" name="label_19">
                 <property name="text">
-                 <string>Output File:</string>
+                 <string>Output file:</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -237,7 +237,7 @@
             <item>
              <widget class="QGroupBox" name="groupBox_2">
               <property name="title">
-               <string>local coordinate origin</string>
+               <string>Local Coordinate Origin</string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_8">
                <item>
@@ -501,7 +501,7 @@ It can be used as a DMS to Dec convertor.</string>
             <item>
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>Source MetaInfo:</string>
+               <string>Source metaInfo:</string>
               </property>
              </widget>
             </item>
@@ -517,7 +517,7 @@ It can be used as a DMS to Dec convertor.</string>
               <item row="0" column="0">
                <widget class="QLabel" name="label_3">
                 <property name="text">
-                 <string>Input File:</string>
+                 <string>Input file:</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -540,7 +540,7 @@ It can be used as a DMS to Dec convertor.</string>
               <item row="1" column="0">
                <widget class="QLabel" name="label_4">
                 <property name="text">
-                 <string>Output File:</string>
+                 <string>Output file:</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -594,7 +594,7 @@ It can be used as a DMS to Dec convertor.</string>
             <item>
              <widget class="QGroupBox" name="groupBox">
               <property name="title">
-               <string>local coordinate origin</string>
+               <string>Local Coordinate Origin</string>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
@@ -1200,8 +1200,8 @@ It can be used as a DMS to Dec convertor.</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>274</width>
-          <height>466</height>
+          <width>96</width>
+          <height>79</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -1283,6 +1283,7 @@ It can be used as a DMS to Dec convertor.</string>
   </action>
  </widget>
  <resources>
+  <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>

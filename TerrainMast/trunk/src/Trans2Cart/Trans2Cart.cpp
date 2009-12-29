@@ -8,6 +8,8 @@
 #include "Trans2Cart.h"
 #include <QProcessEnvironment>
 #include "gdal_priv.h"
+#include "gdal_alg.h"
+#include "ogr_spatialref.h"
 #include <QDebug>
 #include <QFile>
 #include <QTime>
@@ -151,9 +153,11 @@ void Trans2Cart::transDEM2Terrain(const QString &destFilename, double OriLong,
     {
         QTextStream out(&data);
         out.setRealNumberPrecision(10);
+        double resX, resY;
+        getResSize(m_domains.at(0).filename, resX, resY);
         // writing file headers
         out << "#TERRAIN\n";
-        out << "#STEPS     90.000000     90.000000\n";
+        out << "#STEPS " << resX << " " << resY << "\n";
         out << "#LONGITUDES     0     0\n";
         out << "#LATITUDES     0     0\n";
         out << "#ZONES     0     0\n";
@@ -302,6 +306,75 @@ double Trans2Cart::getDimensionInMeters(const QString &srcfilename, const QStrin
         return y - yLR;
     else
         return -1.;
+}
+
+/**
+ * @brief  
+ * @param  double &resX: X resolution, used as output
+ *         double &resY: Y resolution, used as output
+ * @return 0 if success
+ */
+int Trans2Cart::getResSize(const QString &srcfilename, double &resX, double &resY)
+{
+
+    OGRSpatialReference oSRS;
+    char *pszSRS;
+    char              **papszTO = NULL;
+    void               *hTransformArg;
+    QByteArray srcFilenameByte = srcfilename.toLocal8Bit();
+    char *pszSrcFilename = srcFilenameByte.data();
+    GDALAllRegister();
+    oSRS.importFromEPSGA(54032);
+    oSRS.SetProjParm("Central_Meridian", m_OriLong);
+    oSRS.SetProjParm("Latitude_Of_Origin", m_OriLat);
+    oSRS.exportToWkt(&pszSRS);
+
+    papszTO = CSLSetNameValue( papszTO, "DST_SRS", pszSRS );
+    CPLFree( pszSRS );
+/* -------------------------------------------------------------------- */
+/*      Open src and destination file, if appropriate.                  */
+/* -------------------------------------------------------------------- */
+    GDALDatasetH hSrcDS = NULL, hDstDS = NULL;
+
+    if( pszSrcFilename != NULL )
+    {
+        hSrcDS = GDALOpen( pszSrcFilename, GA_ReadOnly );
+        if( hSrcDS == NULL )
+            exit( 1 );
+    }
+
+/* -------------------------------------------------------------------- */
+/*      Create a transformation object from the source to               */
+/*      destination coordinate system.                                  */
+/* -------------------------------------------------------------------- */
+    hTransformArg = 
+        GDALCreateGenImgProjTransformer2( hSrcDS, hDstDS, papszTO );
+
+    CSLDestroy( papszTO );
+
+    if( hTransformArg == NULL )
+    {
+        exit( 1 );
+    }
+
+    double adfThisGeoTransform[6];
+    int    nThisPixels, nThisLines;
+    GDALSuggestedWarpOutput(hSrcDS, GDALGenImgProjTransform, hTransformArg,
+            adfThisGeoTransform, &nThisPixels, &nThisLines);
+    resX = adfThisGeoTransform[1];
+    resY = ABS(adfThisGeoTransform[5]);
+    GDALDestroyGenImgProjTransformer(hTransformArg);
+
+    if (hSrcDS)
+        GDALClose(hSrcDS);
+
+    if (hDstDS)
+        GDALClose(hDstDS);
+
+    GDALDestroyDriverManager();
+
+    return 0;
+    
 }
 
 Trans2Cart::~Trans2Cart()

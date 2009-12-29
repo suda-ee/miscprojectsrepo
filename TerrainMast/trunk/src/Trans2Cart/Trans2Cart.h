@@ -32,6 +32,7 @@ private:
     void trans2WGS84(const QString &srcfilename, int topLeftPixel, int topLeftLine, int width, int height);
     void transSingleDomain2Cartesian(const QString &srcfilename, QTextStream &out,
 	int topLeftPixel, int topLeftLine, int width, int height);
+    int getResSize(const QString &srcfilename, double &resX, double &resY);
     
     typedef struct SrcInfo {
 	QString filename;
