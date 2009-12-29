@@ -79,10 +79,6 @@ void mainwindow::selectInputFile()
 {
     ui.lnInputFile->setText(QFileDialog::getOpenFileName(this));
     showSrcFileMetaData();
-    Trans2Cart *transobj = new Trans2Cart(this);
-    ui.spinCutWidth->setValue(transobj->getDimensionInMeters(ui.lnInputFile->text(), "Long"));
-    ui.spinCutHeight->setValue(transobj->getDimensionInMeters(ui.lnInputFile->text(), "Lat"));
-    delete transobj;
 }
 
 void mainwindow::selectOutputFile()
@@ -155,6 +151,20 @@ void mainwindow::showSrcFileMetaData()
     process.start(qApp->applicationDirPath() + "/bin/gdalinfo", arguments);
     process.waitForFinished();
     ui.ptxtSrcMeta->setPlainText(process.readAllStandardOutput());
+
+    Trans2Cart *transobj = new Trans2Cart(this);
+
+    try {
+        if (!QFile(ui.lnInputFile->text()).exists())
+            throw false;
+        ui.spinCutWidth->setValue(transobj->getDimensionInMeters(ui.lnInputFile->text(), "Long"));
+        ui.spinCutHeight->setValue(transobj->getDimensionInMeters(ui.lnInputFile->text(), "Lat"));
+    }
+    catch ( const bool &doNotExist ) {
+        ui.lbMsgProgress->setText("Error: Input file doesn't exist.");
+    }
+
+    delete transobj;
 }
 
 void mainwindow::startTransFile(bool checked)
