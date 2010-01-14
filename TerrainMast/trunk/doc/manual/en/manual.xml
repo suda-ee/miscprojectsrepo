@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                      "http://www.docbook.org/xml/4.4/docbookx.dtd"
+[ <!ENTITY % xinclude SYSTEM "http://www.docbook.org/xml/4.4/xinclude.mod">
+%xinclude;
+<!ENTITY HZproductname "TerrainMast">
+<!ENTITY HZcompany "Hollywell Corporation">
+<!ENTITY HZproductversion "0.2.1">
+]>
+<book lang="en">
+    <bookinfo>
+        <title>&HZproductname; User Manual</title>
+        <corpauthor>&HZcompany;</corpauthor>
+        <copyright>
+            <year>2010</year>
+            <holder>&HZcompany;</holder>
+        </copyright>
+        <legalnotice>
+            <para>If this document is distributed with software that includes an end-user agreement,
+                this document, as well as the software described in it, is furnished under license
+                and may be used or copied only in accordance with the terms of such license. Except
+                as permitted by any such license, no part of this document may be reproduced, stored
+                in a retrieval system, or transmitted, in any form or by any means, electronic,
+                mechanical, recording, or otherwise, without the prior written permission of
+                &HZcompany;. Please note that the content in this document is protected under
+                copyright law even if it is not distributed with software that includes an end-user
+                license agreement.</para>
+            <para>The content of this document is furnished for informational use only, is subject
+                to change without notice, and should not be construed as a commitment by
+                &HZcompany;. &HZcompany; assumes no responsibility or liability for any errors or
+                inaccuracies that may appear in the informational content contained in this
+                document.</para>
+            <para>Microsoft, Windows, XP, and Windows Vista are either registered trademarks or
+                trademarks of Microsoft Corporation in the United States and/or other countries.
+                Nokia and Qt are trademarks of Nokia Corporation and/or its subsidiaries in Finland
+                and other countries. Intel and Pentium are trademarks of Intel Corporation in the
+                United States, other countries, or both. em.CUBE is trademark of EMAGWARE.com or
+                EMAG Technologies Inc. in the United States, other countries, or both. All other
+                trademarks are the property of their respective owners.</para>
+            <para>This product includes Qt software from Nokia Corporation under the <ulink
+                    url="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">LGPL
+                    license</ulink>.</para>
+            <para>This product contains <ulink url="http://www.gdal.org/">Geospatial Data
+                    Abstraction Library</ulink> from <ulink url="http://www.osgeo.org/"
+                    >OSGeo</ulink>.</para>
+            <para>This product contains <ulink url="http://geographiclib.sourceforge.net/"
+                    >GeographicLib</ulink> Written by Charles Karney and licensed under the
+                LGPL.</para>
+            <para>This product includes <ulink url="http://trac.osgeo.org/proj/">PROJ.4 -
+                    Cartographic Projections Library</ulink>.</para>
+        </legalnotice>
+    </bookinfo>
+    <chapter>
+        <title>Introduction</title>
+        <para>Welcome to the User Manual of &HZproductname; &HZproductversion;! This book explains
+            how to use the &HZproductversion; version of the &HZproductname; effectively to
+            transform different type of raster <glossterm linkend="gloss-DEM">DEM</glossterm> data
+            to the terrain file format of <ulink url="http://emagware.com/">EMCUBE</ulink> quickly
+            and easily. Please note that this manual assumes that you are familiar with the basic
+            concepts of <glossterm linkend="gloss-GIS">GIS</glossterm> and its related
+            technologies.</para>
+        <para>The &HZproductname; is a transforming application for terrain modelling. Raster
+                <glossterm linkend="gloss-DEM">DEM</glossterm> data can be imported and translated
+            to the terrain file format of <ulink url="http://emagware.com/">EMCUBE</ulink>, with
+            targeted local cartesian coordinates. Based on proven Qt4 technology the intuitive
+            Graphical User Interface of the &HZproductname; is easy-to-use and provides robust
+            functionality for cutting and transforming of <glossterm linkend="gloss-DEM"
+                >DEM</glossterm> data.</para>
+        <para>&HZproductname; is the electromagnetic(EM) professionals' choice that demand flexible
+            terrains for <ulink url="http://emagware.com/">EMCUBE</ulink> and make it a more
+            practical EM propagation modeling toolkit.</para>
+        <section>
+            <title>Key Features and Benefits</title>
+            <para>The &HZproductname; offers the following key features and benefits.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Multiple raster <glossterm linkend="gloss-DEM">DEM</glossterm> data
+                        import, see detailed list in <xref linkend="secSupportedFormat" xrefstyle=""
+                        />.</para>
+                </listitem>
+                <listitem>
+                    <para>Detailed source file information display.</para>
+                </listitem>
+                <listitem>
+                    <para>The origin of local cartesian coordinate is acceptable both in decimal
+                        degree or DMS (Degree Minute Second) form.</para>
+                </listitem>
+                <listitem>
+                    <para>User selectable rectangular area.</para>
+                </listitem>
+                <listitem>
+                    <para>Detailed processing indicator.</para>
+                </listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>About This User Manual</title>
+            <para>This User Manual gives a complete overview of the &HZproductname; and describes
+                the basic process of transformation of <glossterm linkend="gloss-DEM"
+                    >DEM</glossterm> to EMCUBE terrain file target outputs. In this manual it is
+                assumed that you are familiar with the use of your operating system and the concepts
+                related to <glossterm linkend="gloss-GIS">GIS</glossterm>.</para>
+        </section>
+    </chapter>
+    <chapter>
+        <title>Installation</title>
+        <para>This section explains platform requirements and installation procedures. It also
+            provides instructions on how to perform uninstall the application if required.</para>
+        <para>If you need help at any point during these procedures please send email to
+                <email>support@holl-well.com</email>.</para>
+        <section>
+            <title>Installation Requirements</title>
+            <section>
+                <title>Platform Requirements</title>
+                <para>Minimum run-time requirements are listed below.<itemizedlist>
+                        <listitem>
+                            <para>Intel Pentium 4 1GHz</para>
+                        </listitem>
+                        <listitem>
+                            <para>512MB RAM</para>
+                        </listitem>
+                        <listitem>
+                            <para>60 MB free disk space</para>
+                        </listitem>
+                        <listitem>
+                            <para>SVGA (1024 x 768) 96 DPI</para>
+                        </listitem>
+                    </itemizedlist></para>
+            </section>
+            <section>
+                <title>Operating System and Tools</title>
+                <para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Windows XP SP2 x86/x64 or later</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </section>
+        </section>
+        <section>
+            <title>Installation Instructions</title>
+            <para>Prior to proceeding with the following instructions, please ensure that your
+                system complies with the prerequisites detailed in the installation
+                requirements.</para>
+            <procedure>
+                <title>Windows Installation</title>
+                <step>
+                    <para>Insert the installation disc into your drive or download the installation
+                        kit.</para>
+                </step>
+                <step>
+                    <para>Follow the onscreen instructions presented in the installation
+                        program.</para>
+                    <caution>
+                        <para>The installer creates or updates a system variable
+                                <envar>GDAL_DATA</envar>. If there are already other applications
+                            using it, this action may cause version incompatibility. Please report
+                            this to <email>support@holl-well.com</email>.</para>
+                    </caution>
+                </step>
+            </procedure>
+        </section>
+        <section>
+            <title>Uninstalling the Application</title>
+            <caution>
+                <para>The following procedure will remove &HZproductname; from your system.
+                        <emphasis>Please ensure that all valuable data is saved to another location
+                        prior to performing this procedure.</emphasis></para>
+            </caution>
+            <procedure>
+                <title>Uninstall Procedure</title>
+                <step>
+                    <para>Backup all valuable data from the installation folder. </para>
+                </step>
+                <step>
+                    <para>On Windows use the appropriate uninstaller shortcut provided with your
+                        OS.</para>
+                    <caution>
+                        <para>All related <envar>APPDATA</envar> data and <envar>GDAL_DATA</envar>
+                            variable will be removed.</para>
+                    </caution>
+                </step>
+            </procedure>
+        </section>
+    </chapter>
+    <chapter>
+        <title>Getting Started</title>
+        <section id="secSupportedFormat">
+            <title>Supported Types of Source File</title>
+            <para>Although GeoTIFF (<filename>.tiff</filename>) and Erdas Imagine Images
+                    (<filename>.img</filename>) formats are recommended, &HZproductname; can support
+                the following types of raster <glossterm>DEM</glossterm> data:</para>
+            <variablelist id="FormatSurportList">
+                <varlistentry>
+                    <term>VRT</term>
+                    <listitem>
+                        <para>Virtual Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GTiff</term>
+                    <listitem>
+                        <para>GeoTIFF</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>NITF</term>
+                    <listitem>
+                        <para>National Imagery Transmission Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>RPFTOC</term>
+                    <listitem>
+                        <para>Raster Product Format TOC format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>HFA</term>
+                    <listitem>
+                        <para>Erdas Imagine Images (.img)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>SAR_CEOS</term>
+                    <listitem>
+                        <para>CEOS SAR Image</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>CEOS</term>
+                    <listitem>
+                        <para>CEOS Image</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>JAXAPALSAR</term>
+                    <listitem>
+                        <para>JAXA PALSAR Product Reader (Level 1.1/1.5)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GFF</term>
+                    <listitem>
+                        <para>Ground-based SAR Applications Testbed File Format (.gff)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ELAS</term>
+                    <listitem>
+                        <para>ELAS</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>AIG</term>
+                    <listitem>
+                        <para>Arc/Info Binary Grid</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>AAIGrid</term>
+                    <listitem>
+                        <para>Arc/Info ASCII Grid</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>SDTS</term>
+                    <listitem>
+                        <para>SDTS Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>DTED</term>
+                    <listitem>
+                        <para>DTED Elevation Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>PNG</term>
+                    <listitem>
+                        <para>Portable Network Graphics</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>JPEG</term>
+                    <listitem>
+                        <para>JPEG JFIF</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>MEM</term>
+                    <listitem>
+                        <para>In Memory Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>JDEM</term>
+                    <listitem>
+                        <para>Japanese DEM (.mem)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GIF</term>
+                    <listitem>
+                        <para>Graphics Interchange Format (.gif)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>BIGGIF</term>
+                    <listitem>
+                        <para>Graphics Interchange Format (.gif)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ESAT</term>
+                    <listitem>
+                        <para>Envisat Image Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>BSB</term>
+                    <listitem>
+                        <para>Maptech BSB Nautical Charts</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>XPM</term>
+                    <listitem>
+                        <para>X11 PixMap Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>BMP</term>
+                    <listitem>
+                        <para>MS Windows Device Independent Bitmap</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>DIMAP</term>
+                    <listitem>
+                        <para>SPOT DIMAP</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>AirSAR</term>
+                    <listitem>
+                        <para>AirSAR Polarimetric Image</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>RS2</term>
+                    <listitem>
+                        <para>RadarSat 2 XML Product</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>PCIDSK</term>
+                    <listitem>
+                        <para>PCIDSK Database File</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>PCRaster</term>
+                    <listitem>
+                        <para>PCRaster Raster File</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ILWIS</term>
+                    <listitem>
+                        <para>ILWIS Raster Map</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>SGI</term>
+                    <listitem>
+                        <para>SGI Image File Format 1.0</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>SRTMHGT</term>
+                    <listitem>
+                        <para>SRTMHGT File Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>Leveller</term>
+                    <listitem>
+                        <para>Leveller heightfield</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>Terragen</term>
+                    <listitem>
+                        <para>Terragen heightfield</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ISIS3</term>
+                    <listitem>
+                        <para>USGS Astrogeology ISIS cube (Version 3)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ISIS2</term>
+                    <listitem>
+                        <para>USGS Astrogeology ISIS cube (Version 2)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>PDS</term>
+                    <listitem>
+                        <para>NASA Planetary Data System</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ERS</term>
+                    <listitem>
+                        <para>ERMapper .ers Labelled</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>L1B</term>
+                    <listitem>
+                        <para>NOAA Polar Orbiter Level 1b Data Set</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>FIT</term>
+                    <listitem>
+                        <para>FIT Image</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GRIB</term>
+                    <listitem>
+                        <para>GRIdded Binary (.grb)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>RMF</term>
+                    <listitem>
+                        <para>Raster Matrix Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>MSGN</term>
+                    <listitem>
+                        <para>EUMETSAT Archive native (.nat)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>RST</term>
+                    <listitem>
+                        <para>Idrisi Raster A.1</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>INGR</term>
+                    <listitem>
+                        <para>Intergraph Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GSAG</term>
+                    <listitem>
+                        <para>Golden Software ASCII Grid (.grd)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GSBG</term>
+                    <listitem>
+                        <para>Golden Software Binary Grid (.grd)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GS7BG</term>
+                    <listitem>
+                        <para>Golden Software 7 Binary Grid (.grd)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>COSAR</term>
+                    <listitem>
+                        <para>COSAR Annotated Binary Matrix (TerraSAR-X)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>TSX</term>
+                    <listitem>
+                        <para>TerraSAR-X Product</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>COASP</term>
+                    <listitem>
+                        <para>DRDC COASP SAR Processor Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>PNM</term>
+                    <listitem>
+                        <para>Portable Pixmap Format (netpbm)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>DOQ1</term>
+                    <listitem>
+                        <para>USGS DOQ (Old Style)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>DOQ2</term>
+                    <listitem>
+                        <para>USGS DOQ (New Style)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ENVI</term>
+                    <listitem>
+                        <para>ENVI .hdr Labelled</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>EHdr</term>
+                    <listitem>
+                        <para>ESRI .hdr Labelled</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GenBin</term>
+                    <listitem>
+                        <para>Generic Binary (.hdr Labelled)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>PAux</term>
+                    <listitem>
+                        <para>PCI .aux Labelled</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>MFF</term>
+                    <listitem>
+                        <para>Vexcel MFF Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>MFF2</term>
+                    <listitem>
+                        <para>Vexcel MFF2 (HKV) Raster</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>FujiBAS</term>
+                    <listitem>
+                        <para>Fuji BAS Scanner Image</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GSC</term>
+                    <listitem>
+                        <para>GSC Geogrid</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>FAST</term>
+                    <listitem>
+                        <para>EOSAT FAST Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>BT</term>
+                    <listitem>
+                        <para>VTP .bt (Binary Terrain) 1.3 Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>LAN</term>
+                    <listitem>
+                        <para>Erdas .LAN/.GIS</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>CPG</term>
+                    <listitem>
+                        <para>Convair PolGASP</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>IDA</term>
+                    <listitem>
+                        <para>Image Data and Analysis</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>NDF</term>
+                    <listitem>
+                        <para>NLAPS Data Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>EIR</term>
+                    <listitem>
+                        <para>Erdas Imagine Raw</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>DIPEx</term>
+                    <listitem>
+                        <para>DIPEx</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>LCP</term>
+                    <listitem>
+                        <para>FARSITE v.4 Landscape File (.lcp)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>RIK</term>
+                    <listitem>
+                        <para>Swedish Grid RIK (.rik)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>USGSDEM</term>
+                    <listitem>
+                        <para>USGS Optional ASCII DEM (and CDED)</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>GXF</term>
+                    <listitem>
+                        <para>GeoSoft Grid Exchange Format</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>ADRG</term>
+                    <listitem>
+                        <para>ARC Digitized Raster Graphics</para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term>BLX</term>
+                    <listitem>
+                        <para>Magellan topo (.blx)</para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </section>
+        <section>
+            <title>Getting Help</title>
+            <para>Online help is available at any time while working in &HZproductname; by going to
+                menu <menuchoice>
+                    <guimenu>Help</guimenu>
+                    <guimenuitem>Help ...</guimenuitem>
+                </menuchoice> which opens the Help dialog.</para>
+        </section>
+        <section>
+            <title>Quick Guide</title>
+            <para>To keep it simple and stupid, &HZproductname; dose not include some complicated
+                    <glossterm>GIS</glossterm> functions but the transformation from raster
+                    <glossterm>DEM</glossterm> data. The common procedure of file transformation is
+                as follows:</para>
+            <procedure>
+                <title>Transform a File to <productname>EMCUBE</productname> Terrain Format</title>
+                <step>
+                    <para>Select the input file by click the button on the right side of the input
+                        field, the file path can also be manually typed in.</para>
+                    <note>
+                        <para>After the proper input file is selected, a brief description of this
+                            file is displayed literally in the metainfo filed. The description gives
+                            some information that maybe helpful in setting parameters of
+                            transformation. See the detailed explanation in <xref
+                                linkend="sec-MetaInfo"/>.</para>
+                    </note>
+                </step>
+                <step>
+                    <para>Select the output file by click the button on the right side of the output
+                        field, the file path can also be manually typed in.</para>
+                    <note>
+                        <para>The output file format is <productname>EMCUBE</productname> Terrain
+                            Format which has a <filename>.trn</filename> extension.</para>
+                    </note>
+                </step>
+                <step>
+                    <para>In the local coordinate orgin setting area, input the longitude, latitude
+                        and height for the local coordinate orgin. </para>
+                    <note>
+                        <para>The longitude and latitude are in <ulink
+                                url="http://en.wikipedia.org/wiki/World_Geodetic_System"
+                                >WGS84</ulink>
+                            <ulink url="http://en.wikipedia.org/wiki/Geographic_coordinate_system"
+                                >geographic coordinate system</ulink>. Both accept decimal formats
+                            or <glossterm linkend="gloss-DMS"><acronym>DMS</acronym></glossterm>
+                            formats. See <xref linkend="sec-DecDMS"/> for the details. The height of
+                            the orgin is also based on <ulink
+                                url="http://en.wikipedia.org/wiki/World_Geodetic_System"
+                                >WGS84</ulink> vertical cooridinate.</para>
+                    </note>
+                </step>
+                <step performance="optional">
+                    <para>Set the cut parameters if you want a chopped interested area. Input the
+                        width and height of the target area in meters.</para>
+                    <note>
+                        <para>If not set, the whole image will be transformed. The cut shape is a
+                            rectangular in the XY plane of local coordinate, which has width and
+                            height as input with the center at the orgin. For more information about
+                            the local coordinate see <xref linkend="sec-LocCoor"/>.</para>
+                    </note>
+                </step>
+                <step>
+                    <para>Click <guibutton>Start</guibutton> button, the transforming process will
+                        begin. Just wait awhile to get the results. The indicating message and
+                        progress bar may give you some information about the process.</para>
+                </step>
+            </procedure>
+            <para>The main screen is as follows:<informalfigure>
+                    <screenshot>
+                        <graphic fileref="resources/mainshot.png"/>
+                    </screenshot>
+                </informalfigure></para>
+        </section>
+    </chapter>
+    <chapter>
+        <title>Technical Details</title>
+        <section id="sec-MetaInfo">
+            <title>About Source Meta Information</title>
+            <para>Here is an example of a brief source file description displayed when an input file
+                is selected.
+                <screen>Driver: HFA/Erdas Imagine Images (.img)<co id="co-FileFormat"/>
+Files: F:/TerrainMast/test/testData/utm_srtm_60_06.img<co id="co-FileName"/>
+Size is 5453, 6310<co id="co-ImageSize"/>
+Coordinate System is:<co id="co-Coordinate"/>
+PROJCS["UTM Zone 50, Northern Hemisphere",
+    GEOGCS["WGS_1984",
+        DATUM["WGS_1984",
+            SPHEROID["WGS 84",6378137,298.2572235630016],
+            TOWGS84[0,0,0,0,0,0,0]],
+        PRIMEM["Greenwich",0],
+        UNIT["degree",0.0174532925199433],
+        AUTHORITY["EPSG","4326"]],
+    PROJECTION["Transverse_Mercator"],
+    PARAMETER["latitude_of_origin",0],
+    PARAMETER["central_meridian",117],
+    PARAMETER["scale_factor",0.9996],
+    PARAMETER["false_easting",500000],
+    PARAMETER["false_northing",0],
+    UNIT["Meter",1],
+    AUTHORITY["EPSG","32650"]]
+Origin = (306923.819348259130000,3877451.402614032800000)<co id="co-TopLeft"/>
+Pixel Size = (90.000000000000000,-90.000000000000000)<co id="co-pixelSize"/>
+Corner Coordinates:<co id="co-cornerPoints"/>
+Upper Left  (  306923.819, 3877451.403) (114d53'1.51"E, 35d 1'16.66"N)
+Lower Left  (  306923.819, 3309551.403) (115d 0'1.09"E, 29d54'5.42"N)
+Upper Right (  797693.819, 3877451.403) (120d15'41.65"E, 34d59'45.25"N)
+Lower Right (  797693.819, 3309551.403) (120d 4'55.73"E, 29d52'50.32"N)
+Center      (  552308.819, 3593501.403) (117d33'24.10"E, 32d28'39.00"N)
+Band 1 Block=64x64 Type=Int16, ColorInterp=Undefined<co id="co-bandInfo"/>
+  Description = Band_1
+  Min=-92.000 Max=1807.000 
+  Minimum=-92.000, Maximum=1807.000, Mean=89.634, StdDev=164.730
+  NoData Value=-32768
+...</screen></para>
+            <calloutlist>
+                <callout arearefs="co-FileFormat">
+                    <para>The file format</para>
+                </callout>
+                <callout arearefs="co-FileName">
+                    <para>The input file name</para>
+                </callout>
+                <callout arearefs="co-ImageSize">
+                    <para>The size of the image in pixel/line</para>
+                </callout>
+                <callout arearefs="co-Coordinate">
+                    <para>The coordinate system information</para>
+                </callout>
+                <callout arearefs="co-TopLeft">
+                    <para>The location of the top left pixel in current coordinate system</para>
+                </callout>
+                <callout arearefs="co-pixelSize">
+                    <para>The pixel width and pixel height</para>
+                </callout>
+                <callout arearefs="co-bandInfo">
+                    <para>Information about raster bands. the minimum, maximum, No Data and other
+                        meaningful values are displayed.</para>
+                </callout>
+            </calloutlist>
+            <important>
+                <para>If the selected file is a <glossterm linkend="gloss-DEM"
+                            ><acronym>DEM</acronym></glossterm> raster file, the pixel value is
+                    usually digital elevation value. Currently the only supported unit type of pixel
+                    values by &HZproductname; is meter (m). <glossterm linkend="gloss-DEM"
+                            ><acronym>DEM</acronym></glossterm> data without NoData Value or without
+                    meter unit type may consequent unexpected results.</para>
+                <para>Only the first band of the raster file is read and transformed.</para>
+            </important>
+        </section>
+        <section>
+            <title>Transforming Details</title>
+            <section id="sec-DecDMS">
+                <title>Decimal Degrees and DMS Form</title>
+                <para>Two types of geographic coordinate form are acceptable.<orderedlist>
+                        <listitem>
+                            <para>Coordinate containing only degrees (real number) (DegDec).</para>
+                        </listitem>
+                        <listitem>
+                            <para>Coordinate containing degrees (integer), minutes (integer), and
+                                seconds (integer, or real number) (DMS).</para>
+                        </listitem>
+                    </orderedlist></para>
+                <para>For example:<itemizedlist>
+                        <listitem>
+                            <para>40d 26' 47" N 79d 58' 36" W</para>
+                        </listitem>
+                        <listitem>
+                            <para>40.446195, -79.948862</para>
+                        </listitem>
+                    </itemizedlist></para>
+                <para>For further reading, see <ulink
+                        url="http://en.wikipedia.org/wiki/Geographic_coordinate_conversion"
+                        >Geographic coordinate conversion</ulink>.</para>
+                <note>
+                    <para>Users may find that 0.000&deg; is converted to 0d0'0.001"N, which is a
+                        tolerence to differ "North" to "South" or "East" to "West". The actual
+                        computing is not tampered.</para>
+                </note>
+            </section>
+            <section id="sec-LocCoor">
+                <title>Local Cartesian Coordinates</title>
+                <para>&HZproductname; convert between geodetic coordinates latitude, longitude,
+                    height (measured vertically from the surface of the <glossterm
+                        linkend="gloss-WGS84"><acronym>WGS84</acronym></glossterm> ellipsoid) to
+                    local cartesian coordinates (x, y, z). The origin of local cartesian coordinate
+                    system is set with user's input. The z axis is normal to the ellipsoid; the y
+                    axis points due north. The plane z = <constant>constant</constant> tangent to
+                    the ellipsoid. The <glossterm linkend="gloss-WGS84"
+                        ><acronym>WGS84</acronym></glossterm> model of the earth is used.</para>
+                <note>
+                    <para>The geoid height is not used, and the input
+                                <glossterm><acronym>DEM</acronym></glossterm> data values are
+                        assumed as height above the surface of the <glossterm linkend="gloss-WGS84"
+                                ><acronym>WGS84</acronym></glossterm> ellipsoid.</para>
+                    <para>The gravitational equipotential surface approximately coinciding with mean
+                        sea level is called the geoid. Because the normal to the ellipsoid differs
+                        from the normal to the geoid (the direction of a plumb line) there is a
+                        slight ambiguity in the measurement of heights; however for heights up to
+                        10km this ambiguity is only 1mm.</para>
+                </note>
+            </section>
+            <section>
+                <title>The Terrain File Format</title>
+                <para>EM.CUBE uses a very simple ASCII data file format for .trn terrain file that
+                    is described in the EMCUBE Manual. For the reader's convenient who may not
+                    nesecaryly using EMCUBE, a small sample is listed here. The resolution of the
+                    terrain map in the X and Y directions is specified in meters as STEPS which is
+                    computed based on the pixel size of source raster file. The (x, y, z)
+                    coordinates of the terrain points are then listed one point per line.</para>
+                <screen>#TERRAIN
+#STEPS 1.0 1.0
+#LONGITUDES 0 0
+#LATITUDES 0 0
+#ZONES 0 0
+#RAWSTEPX 0.0
+0.0 0.0 0
+0.0 1.0 0
+0.0 2.0 0
+0.0 3.0 0</screen>
+            </section>
+        </section>
+    </chapter>
+    <glossary>
+        <glossentry id="gloss-DEM">
+            <glossterm><acronym>DEM</acronym></glossterm>
+            <glossdef>
+                <para>A digital elevation model (DEM) is a digital representation of ground surface
+                    topography or terrain. It is also widely known as a digital terrain model (DTM).
+                    A DEM can be represented as a raster (a grid of squares) or as a triangular
+                    irregular network. See <ulink
+                        url="http://en.wikipedia.org/wiki/Digital_elevation_model"
+                        >http://en.wikipedia.org/wiki/Digital_elevation_model</ulink></para>
+            </glossdef>
+        </glossentry>
+        <glossentry id="gloss-GIS">
+            <glossterm><acronym>GIS</acronym></glossterm>
+            <glossdef>
+                <para>A Geographic Information System (GIS), or Geographical Information System is
+                    any system that captures, stores, analyzes, manages, and presents data that is
+                    linked to location. Technically, a GIS is a system that includes mapping
+                    software and its application to remote sensing, land surveying, aerial
+                    photography, mathematics, photogrammetry, geography, and tools that can be
+                    implemented with GIS software.</para>
+            </glossdef>
+        </glossentry>
+        <glossentry id="gloss-DMS">
+            <glossterm><acronym>DMS</acronym></glossterm>
+            <glossdef>
+                <para>Degrees, Minutes, Seconds</para>
+            </glossdef>
+        </glossentry>
+        <glossentry id="gloss-WGS84">
+            <glossterm>WGS84</glossterm>
+            <glossdef>
+                <para>See <ulink url="http://en.wikipedia.org/wiki/World_Geodetic_System">World
+                        Geodetic System</ulink>.</para>
+            </glossdef>
+        </glossentry>
+    </glossary>
+</book>
