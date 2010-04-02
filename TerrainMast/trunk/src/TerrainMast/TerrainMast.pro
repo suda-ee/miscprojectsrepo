@@ -8,7 +8,7 @@
 include(../../trncommon.pri)
 TEMPLATE = app
 TARGET = TerrainMast
-FILE_VERSION=0,1,1,0
+FILE_VERSION=0,2,0,0
 DEFINES += FILE_VERSION=$${FILE_VERSION}
 DEFINES += FILE_VERSION_STR=\\\"$$FILE_VERSION\\\"
 win32 {

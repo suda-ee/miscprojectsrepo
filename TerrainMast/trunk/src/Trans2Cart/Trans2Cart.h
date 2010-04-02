@@ -19,6 +19,8 @@ public:
     ~Trans2Cart();
     void initSingleFileTrans(const QString &srcfilename, double cutCenterLong,
 	double cutCenterLat, double cutWidth, double cutHeight, bool cutFlag);
+    void initSRTMTrans(const QString &srcDirName, double cutCenterLong,
+            double cutCenterLat, double cutWidth, double cutHeight);
     void transDEM2Terrain(const QString &destFilename, double OriLong,
        	double OriLat, double OriZ);
     double getDimensionInMeters(const QString &srcfilename, const QString &flagLongLat);
@@ -42,7 +44,6 @@ private:
 	int height;
     } tSrcInfo;				/* ----------  end of struct SrcInfo  ---------- */
 
-    typedef struct SrcInfo SrcInfo;
     int nCountValidPoint;
     double *dfX;
     double *dfY;

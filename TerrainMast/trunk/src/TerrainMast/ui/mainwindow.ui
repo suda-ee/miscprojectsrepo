@@ -37,6 +37,12 @@
              <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="0,1">
               <item>
                <widget class="QLabel" name="label_20">
+                <property name="maximumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -58,135 +64,146 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Transform From Data Lib</string>
+                 <string>Transform From SRTM Data</string>
                 </property>
                </widget>
               </item>
              </layout>
             </item>
             <item>
-             <widget class="QLabel" name="label_18">
-              <property name="text">
-               <string>Select lib:</string>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="title">
+               <string>Cut Parameters</string>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTableWidget" name="tableWidget">
-              <row>
-               <property name="text">
-                <string>lib 1</string>
-               </property>
-              </row>
-              <row>
-               <property name="text">
-                <string>lib 2</string>
-               </property>
-              </row>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_36" stretch="0,0,1">
-              <item>
-               <widget class="QGroupBox" name="groupBox_5">
-                <property name="title">
-                 <string>Cut Center</string>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="0,1">
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_71">
-                   <property name="text">
-                    <string>Latitude:</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>doubleSpinBox_18</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QDoubleSpinBox" name="doubleSpinBox_18">
-                   <property name="toolTip">
-                    <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
-                   </property>
-                   <property name="statusTip">
-                    <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
-                   </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_24">
+               <item>
+                <widget class="QGroupBox" name="groupBox_5">
+                 <property name="title">
+                  <string>Center</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="0,1">
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_71">
+                    <property name="text">
+                     <string>Latitude:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>dspnCutCenterLat</cstring>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QDoubleSpinBox" name="dspnCutCenterLat">
+                    <property name="toolTip">
+                     <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
+                    </property>
+                    <property name="suffix">
+                     <string>°</string>
+                    </property>
+                    <property name="decimals">
+                     <number>10</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-60.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>60.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_72">
+                    <property name="text">
+                     <string>Longitude:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>dspnCutCenterLong</cstring>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QDoubleSpinBox" name="dspnCutCenterLong">
+                    <property name="toolTip">
+                     <string>&quot;+&quot; for East, &quot;-&quot; for West.</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string/>
+                    </property>
+                    <property name="suffix">
+                     <string>°</string>
+                    </property>
+                    <property name="decimals">
+                     <number>10</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-180.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>180.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1">
+                 <item row="0" column="1">
+                  <widget class="QSpinBox" name="spnCutSRTMWd">
                    <property name="suffix">
-                    <string>°</string>
-                   </property>
-                   <property name="decimals">
-                    <number>10</number>
-                   </property>
-                   <property name="minimum">
-                    <double>-90.000000000000000</double>
+                    <string> m</string>
                    </property>
                    <property name="maximum">
-                    <double>90.000000000000000</double>
+                    <number>1000000</number>
+                   </property>
+                   <property name="value">
+                    <number>1000</number>
                    </property>
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QLabel" name="label_72">
+                  <widget class="QLabel" name="label_70">
                    <property name="text">
-                    <string>Longitude:</string>
+                    <string>Width:</string>
                    </property>
                    <property name="buddy">
-                    <cstring>dspnCutCenterLong</cstring>
+                    <cstring>spnCutSRTMWd</cstring>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <widget class="QDoubleSpinBox" name="dspnCutCenterLong">
-                   <property name="toolTip">
-                    <string>&quot;+&quot; for East, &quot;-&quot; for West.</string>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_12">
+                   <property name="text">
+                    <string>Height:</string>
                    </property>
-                   <property name="statusTip">
-                    <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
+                   <property name="buddy">
+                    <cstring>spnCutSRTMHt</cstring>
                    </property>
-                   <property name="whatsThis">
-                    <string/>
-                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSpinBox" name="spnCutSRTMHt">
                    <property name="suffix">
-                    <string>°</string>
-                   </property>
-                   <property name="decimals">
-                    <number>10</number>
-                   </property>
-                   <property name="minimum">
-                    <double>-180.000000000000000</double>
+                    <string> m</string>
                    </property>
                    <property name="maximum">
-                    <double>180.000000000000000</double>
+                    <number>1000000</number>
+                   </property>
+                   <property name="value">
+                    <number>1000</number>
                    </property>
                   </widget>
                  </item>
                 </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_70">
-                <property name="text">
-                 <string>Distance:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>spnCutDistance</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spnCutDistance">
-                <property name="suffix">
-                 <string>m</string>
-                </property>
-                <property name="maximum">
-                 <number>1000000</number>
-                </property>
-                <property name="value">
-                 <number>1000</number>
-                </property>
-               </widget>
-              </item>
-             </layout>
+               </item>
+              </layout>
+             </widget>
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
@@ -235,9 +252,15 @@
              </layout>
             </item>
             <item>
-             <widget class="QGroupBox" name="groupBox_2">
+             <widget class="QGroupBox" name="grpSRTMOrigin">
               <property name="title">
                <string>Local Coordinate Origin</string>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_8">
                <item>
@@ -417,14 +440,20 @@ It can be used as a DMS to Dec convertor.</string>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_34">
+             <widget class="QLabel" name="lblMsgSRTM">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Ready.</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QProgressBar" name="transFileProgressBar2">
+             <widget class="QProgressBar" name="transSRTMProgressBar">
               <property name="value">
                <number>0</number>
               </property>
@@ -456,6 +485,19 @@ It can be used as a DMS to Dec convertor.</string>
                </widget>
               </item>
              </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </widget>
@@ -1175,7 +1217,7 @@ It can be used as a DMS to Dec convertor.</string>
            </property>
            <item>
             <property name="text">
-             <string>From Data Lib</string>
+             <string>SRTM Data</string>
             </property>
             <property name="icon">
              <iconset resource="../../../resources/main.qrc">
@@ -1200,8 +1242,8 @@ It can be used as a DMS to Dec convertor.</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>96</width>
-          <height>79</height>
+          <width>274</width>
+          <height>466</height>
          </rect>
         </property>
         <attribute name="icon">
@@ -1283,6 +1325,11 @@ It can be used as a DMS to Dec convertor.</string>
   </action>
  </widget>
  <resources>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
