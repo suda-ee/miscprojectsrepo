@@ -8,10 +8,10 @@
     <ROW Property="BannerBitmap" MultiBuildValue="DefaultBuild:default_banner.bmp" Type="1"/>
     <ROW Property="DialogBitmap" MultiBuildValue="DefaultBuild:default_dialog.bmp" Type="1"/>
     <ROW Property="Manufacturer" Value="Hollywell Co." ValueLocId="*"/>
-    <ROW Property="ProductCode" Value="1033:{0678F7C8-9711-4597-8335-13B08CA4093B} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{B2272D82-5F08-49A4-916D-F758EF92CCB0} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="TerrainMast" ValueLocId="*"/>
-    <ROW Property="ProductVersion" Value="0.1.1"/>
+    <ROW Property="ProductVersion" Value="0.2.0"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{FB4A7E8C-6EED-41E7-937A-16BDB129B5F2}"/>
     <ROW Property="WindowsFamily9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

@@ -10,6 +10,7 @@
 #include <QStyleFactory>
 #include <QSettings>
 #include <QDir>
+#include <QFileDialog>
 
 OptionsDialog::OptionsDialog(QWidget *parent, Qt::WFlags flags) 
     : QDialog(parent, flags)
@@ -40,6 +41,12 @@ OptionsDialog::OptionsDialog(QWidget *parent, Qt::WFlags flags)
     // hide lang select now
     ui.lblLang->hide();
     ui.cmbLanguage->hide();
+
+    QSettings settings;
+    ui.lnSRTMDir->setText(settings.value("SRTM/dir").toString());
+
+    connect(ui.btSRTMDir, SIGNAL(clicked()), this,
+           SLOT(selectSRTMDir()));
     
 }
 
@@ -57,8 +64,15 @@ void OptionsDialog::accept()
 {
     QSettings settings;
     settings.setValue("Appearance/style", ui.cmbStyle->currentText());
+    settings.setValue("SRTM/dir", ui.lnSRTMDir->text());
     //QLocale::setDefault(QLocale::c());
     //QEvent ev(QEvent::LanguageChange);
     //qApp->sendEvent(qApp, &ev);
     QDialog::accept();
+}
+
+void OptionsDialog::selectSRTMDir()
+{
+    ui.lnSRTMDir->setText(QFileDialog::getExistingDirectory(this, QString(),
+              ui.lnSRTMDir->text()));
 }

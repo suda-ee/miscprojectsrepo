@@ -22,6 +22,7 @@ public:
 
 public slots:
 	void changeStyle(const QString & styleName);
+        void selectSRTMDir();
 	void accept();
 
 private:

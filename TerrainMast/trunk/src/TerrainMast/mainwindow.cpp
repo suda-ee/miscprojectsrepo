@@ -14,6 +14,7 @@
 #include "cpl_conv.h"
 #include "Trans2Cart.h"
 #include <QDebug>
+#include <QSettings>
 
 mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
@@ -61,6 +62,8 @@ mainwindow::mainwindow(QWidget *parent, Qt::WFlags flags)
 
         connect(ui.btStartTransFile, SIGNAL(clicked(bool)), this,
 	       SLOT(startTransFile(bool)));
+        connect(ui.btStartTransLib, SIGNAL(clicked(bool)), this,
+	       SLOT(startTransSRTM(bool)));
 }
 
 void mainwindow::showOptionsDialog( void )
@@ -77,7 +80,8 @@ void mainwindow::aboutSoftware( void )
 
 void mainwindow::selectInputFile()
 {
-    ui.lnInputFile->setText(QFileDialog::getOpenFileName(this));
+    ui.lnInputFile->setText(QFileDialog::getOpenFileName(this, QString(),
+                ui.lnInputFile->text()));
     showSrcFileMetaData();
 }
 
@@ -86,12 +90,14 @@ void mainwindow::selectOutputFile()
     if (sender() == ui.btSelectOutputFile2)
     {
 	ui.lnOutputFile2->setText(QFileDialog::getSaveFileName(this, QString(),
-		    QString(), tr("EMCube Terrain File (*.trn)")));
+		    ui.lnOutputFile2->text(),
+                    tr("EMCube Terrain File (*.trn)")));
     }
     else
     {
 	ui.lnOutputFile->setText(QFileDialog::getSaveFileName(this, QString(),
-		    QString(), tr("EMCube Terrain File (*.trn)")));
+		    ui.lnOutputFile->text(),
+                    tr("EMCube Terrain File (*.trn)")));
     }
 }
 
@@ -177,11 +183,41 @@ void mainwindow::startTransFile(bool checked)
     connect(transobj, SIGNAL(progressNum(int)), ui.transFileProgressBar,
 	   SLOT(setValue(int)));
     
-    transobj->initSingleFileTrans(ui.lnInputFile->text(), ui.dspnLongOri->value(),
-        ui.dspnLatOri->value(), ui.spinCutWidth->value(), ui.spinCutHeight->value(), ui.grpCut->isChecked());
-    transobj->transDEM2Terrain(ui.lnOutputFile->text(),
-	ui.dspnLongOri->value(), ui.dspnLatOri->value(), ui.spnVerticalShift->value());
+    try {
+        if (!QFile(ui.lnInputFile->text()).exists())
+            throw false;
+        transobj->initSingleFileTrans(ui.lnInputFile->text(), ui.dspnLongOri->value(),
+            ui.dspnLatOri->value(), ui.spinCutWidth->value(), ui.spinCutHeight->value(),
+            ui.grpCut->isChecked());
+        transobj->transDEM2Terrain(ui.lnOutputFile->text(),
+            ui.dspnLongOri->value(), ui.dspnLatOri->value(), ui.spnVerticalShift->value());
+    }
+    catch ( const bool &doNotExist ) {
+        ui.lbMsgProgress->setText("Error: Input file doesn't exist.");
+    }
 
     ui.btStartTransFile->setEnabled(true);
+    delete transobj;
+}
+
+void mainwindow::startTransSRTM(bool checked)
+{
+    ui.btStartTransLib->setEnabled(false);
+    Trans2Cart *transobj = new Trans2Cart(this);
+
+    connect(transobj, SIGNAL(progressMsg(const QString &)), ui.lblMsgSRTM,
+	   SLOT(setText(const QString &)));
+    connect(transobj, SIGNAL(progressNum(int)), ui.transSRTMProgressBar,
+	   SLOT(setValue(int)));
+
+    QSettings settings;
+    transobj->initSRTMTrans(settings.value("SRTM/dir").toString(),
+            ui.dspnCutCenterLong->value(), ui.dspnCutCenterLat->value(),
+            ui.spnCutSRTMWd->value(), ui.spnCutSRTMHt->value());
+    transobj->transDEM2Terrain(ui.lnOutputFile2->text(),
+            ui.dspnLongOri2->value(), ui.dspnLatOri2->value(),
+            ui.spnVerticalShift2->value());
+
+    ui.btStartTransLib->setEnabled(true);
     delete transobj;
 }

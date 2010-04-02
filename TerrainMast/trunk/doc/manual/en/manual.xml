@@ -686,8 +686,8 @@
                     </note>
                 </step>
                 <step>
-                    <para>In the local coordinate orgin setting area, input the longitude, latitude
-                        and height for the local coordinate orgin. </para>
+                    <para>In the local coordinate origin setting area, input the longitude, latitude
+                        and height for the local coordinate origin. </para>
                     <note>
                         <para>The longitude and latitude are in <ulink
                                 url="http://en.wikipedia.org/wiki/World_Geodetic_System"
@@ -696,9 +696,9 @@
                                 >geographic coordinate system</ulink>. Both accept decimal formats
                             or <glossterm linkend="gloss-DMS"><acronym>DMS</acronym></glossterm>
                             formats. See <xref linkend="sec-DecDMS"/> for the details. The height of
-                            the orgin is also based on <ulink
+                            the origin is also based on <ulink
                                 url="http://en.wikipedia.org/wiki/World_Geodetic_System"
-                                >WGS84</ulink> vertical cooridinate.</para>
+                                >WGS84</ulink> vertical coordinate.</para>
                     </note>
                 </step>
                 <step performance="optional">
@@ -707,8 +707,8 @@
                     <note>
                         <para>If not set, the whole image will be transformed. The cut shape is a
                             rectangular in the XY plane of local coordinate, which has width and
-                            height as input with the center at the orgin. For more information about
-                            the local coordinate see <xref linkend="sec-LocCoor"/>.</para>
+                            height as input with the center at the origin. For more information
+                            about the local coordinate see <xref linkend="sec-LocCoor"/>.</para>
                     </note>
                 </step>
                 <step>
@@ -824,7 +824,7 @@ Band 1 Block=64x64 Type=Int16, ColorInterp=Undefined<co id="co-bandInfo"/>
                         >Geographic coordinate conversion</ulink>.</para>
                 <note>
                     <para>Users may find that 0.000&deg; is converted to 0d0'0.001"N, which is a
-                        tolerence to differ "North" to "South" or "East" to "West". The actual
+                        tolerance to differ "North" to "South" or "East" to "West". The actual
                         computing is not tampered.</para>
                 </note>
             </section>
@@ -854,7 +854,7 @@ Band 1 Block=64x64 Type=Int16, ColorInterp=Undefined<co id="co-bandInfo"/>
                 <title>The Terrain File Format</title>
                 <para>EM.CUBE uses a very simple ASCII data file format for .trn terrain file that
                     is described in the EMCUBE Manual. For the reader's convenient who may not
-                    nesecaryly using EMCUBE, a small sample is listed here. The resolution of the
+                    necessarily using EMCUBE, a small sample is listed here. The resolution of the
                     terrain map in the X and Y directions is specified in meters as STEPS which is
                     computed based on the pixel size of source raster file. The (x, y, z)
                     coordinates of the terrain points are then listed one point per line.</para>
