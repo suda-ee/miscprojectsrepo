@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>442</width>
-    <height>253</height>
+    <height>189</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,19 +46,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="../../../resources/main.qrc">:/images/display64.png</pixmap>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
      <item>
@@ -91,7 +78,7 @@
          <property name="text">
           <string>TerrainMast %1.
 
-Copyright (c) 2009 Hollywell Co.</string>
+Copyright (c) 2010 EasiTech USA Inc.</string>
          </property>
         </widget>
        </item>
@@ -155,6 +142,7 @@ Copyright (c) 2009 Hollywell Co.</string>
   </layout>
  </widget>
  <resources>
+  <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>

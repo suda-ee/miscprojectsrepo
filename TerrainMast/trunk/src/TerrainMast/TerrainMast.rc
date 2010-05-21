@@ -21,15 +21,6 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
 #endif //_WIN32
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDI_ICON1               ICON                    "displayicon64.ico"
-
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -44,6 +35,11 @@ END
 3 TEXTINCLUDE 
 BEGIN
     "\r\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\0"
 END
 
 #endif    // APSTUDIO_INVOKED
@@ -71,11 +67,11 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "CompanyName", "Hollywell Co."
+            VALUE "CompanyName", "EasiTech USA Inc."
             VALUE "FileDescription", "Terrain Application"
             VALUE "FileVersion", FILE_VERSION_STR
             VALUE "InternalName", "TerrainMast"
-            VALUE "LegalCopyright", "Copyright (C) 2009"
+            VALUE "LegalCopyright", "Copyright (C) 2010"
             VALUE "OriginalFilename", "TerrainMast.exe"
             VALUE "ProductName", "Terrain Master"
             VALUE "ProductVersion", PRODUCT_VERSION_STR
@@ -87,6 +83,15 @@ BEGIN
     END
 END
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON24              ICON                    "..\\..\\resources\\images\\e256r.ico"
 #endif    // Chinese (P.R.C.) resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	a.setApplicationName("TerrainMast");
 	a.setApplicationVersion(PRODUCT_VERSION_STR);
-	a.setOrganizationName("Hollywell");
-	a.setOrganizationDomain("holly-well.com");
+	a.setOrganizationName("EasiTechUSA");
+	//a.setOrganizationDomain("holly-well.com");
 	QSettings settings;
 	//QTranslator qtTranslator;
 	//qtTranslator.load("qt_" + settings.value("Appearance/lang").toString(),

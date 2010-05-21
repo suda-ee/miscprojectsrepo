@@ -3,15 +3,15 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="ALLUSERS" Value="2"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
-    <ROW Property="ARPHELPLINK" Value="http://www.holly-well.com/"/>
-    <ROW Property="ARPPRODUCTICON" Value="TerrainMast.exe" Type="8"/>
+    <ROW Property="ARPPRODUCTICON" Value="msiexec.exe" Type="8"/>
     <ROW Property="BannerBitmap" MultiBuildValue="DefaultBuild:default_banner.bmp" Type="1"/>
     <ROW Property="DialogBitmap" MultiBuildValue="DefaultBuild:default_dialog.bmp" Type="1"/>
-    <ROW Property="Manufacturer" Value="Hollywell Co." ValueLocId="*"/>
-    <ROW Property="ProductCode" Value="1033:{B2272D82-5F08-49A4-916D-F758EF92CCB0} " Type="16"/>
+    <ROW Property="Manufacturer" Value="EasiTech USA Inc." ValueLocId="*"/>
+    <ROW Property="Manufacturer_AC" Value="EasiTechUSA"/>
+    <ROW Property="ProductCode" Value="1033:{21FE6635-9940-4555-B64F-5865FE23B75A} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="TerrainMast" ValueLocId="*"/>
-    <ROW Property="ProductVersion" Value="0.2.0"/>
+    <ROW Property="ProductVersion" Value="0.3.0"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{FB4A7E8C-6EED-41E7-937A-16BDB129B5F2}"/>
     <ROW Property="WindowsFamily9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -19,6 +19,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="bin_DIR" Directory_Parent="APPDIR" DefaultDir="bin"/>
@@ -139,7 +140,7 @@
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
-    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[ProgramFilesFolder][Manufacturer_AC]\[ProductName]"/>
     <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
   </COMPONENT>
@@ -147,7 +148,7 @@
     <ROW Environment="GDAL_DATA" Name="=*GDAL_DATA" Value="[APPDIR]gdal-data" Component_="gdaldata"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="TerrainMast.exe" SourcePath="..\dist\TerrainMast.exe" Index="0"/>
+    <ROW Name="msiexec.exe" SourcePath="C:\WINDOWS\system32\msiexec.exe" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -167,9 +168,10 @@
     <ROW Module="Microsoft_VC90_CRT_x86.msm" Path="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC90_CRT_x86.msm" Feature="MainFeature" Directory="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRemoveRegComponent">
-    <ROW RemoveRegistry="_" Root="-1" Key="Software\Hollywell\[ProductName]" Name="-" Component_="TerrainMast.exe"/>
+    <ROW RemoveRegistry="_" Root="-1" Key="Software\[Manufacturer_AC]\[ProductName]" Name="-" Component_="TerrainMast.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="TerrainMast" Directory_="DesktopFolder" Name="Terrai~1|TerrainMast" Component_="TerrainMast.exe" Target="[#TerrainMast.exe]" Description="TerrainMast.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
     <ROW Shortcut="TerrainMast.exe" Directory_="SHORTCUTDIR" Name="Terrai~1|TerrainMast" Component_="TerrainMast.exe" Target="[#TerrainMast.exe]" Description="TerrainMast.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
