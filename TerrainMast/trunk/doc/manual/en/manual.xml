@@ -4,8 +4,9 @@
 [ <!ENTITY % xinclude SYSTEM "http://www.docbook.org/xml/4.4/xinclude.mod">
 %xinclude;
 <!ENTITY HZproductname "TerrainMast">
-<!ENTITY HZcompany "Hollywell Corporation">
-<!ENTITY HZproductversion "0.2.1">
+<!ENTITY HZcompany "EasiTech USA Inc.">
+<!ENTITY HZproductversion "0.3.0">
+<!ENTITY HZsupportemail "support@easi-tech.com">
 ]>
 <book lang="en">
     <bookinfo>
@@ -107,7 +108,7 @@
         <para>This section explains platform requirements and installation procedures. It also
             provides instructions on how to perform uninstall the application if required.</para>
         <para>If you need help at any point during these procedures please send email to
-                <email>support@holl-well.com</email>.</para>
+                <email>&HZsupportemail;</email>.</para>
         <section>
             <title>Installation Requirements</title>
             <section>
@@ -156,7 +157,7 @@
                         <para>The installer creates or updates a system variable
                                 <envar>GDAL_DATA</envar>. If there are already other applications
                             using it, this action may cause version incompatibility. Please report
-                            this to <email>support@holl-well.com</email>.</para>
+                            this to <email>&HZsupportemail;</email>.</para>
                     </caution>
                 </step>
             </procedure>
