@@ -20,1086 +20,910 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QStackedWidget" name="stkdWgtTrans">
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="spgTrans">
-       <layout class="QHBoxLayout" name="horizontalLayout">
+      <widget class="QWidget" name="pgTransFromFile">
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0,0,0">
         <item>
-         <widget class="QStackedWidget" name="stkdWgtTrans">
-          <property name="currentIndex">
+         <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="../../../resources/main.qrc">:/images/Burn.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Transform From a DEM File</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Source metaInfo:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPlainTextEdit" name="ptxtSrcMeta">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Input file:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lnInputFile</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lnInputFile">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Output file:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lnOutputFile</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lnOutputFile">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="btSelectOutputFile">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>24</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="btSelectInputFile">
+            <property name="maximumSize">
+             <size>
+              <width>24</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Local Coordinate Origin</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1,0,1">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Longitude:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>dspnLongOri</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="dspnLongOri">
+                   <property name="toolTip">
+                    <string>&quot;+&quot; for East, &quot;-&quot; for west.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>°</string>
+                   </property>
+                   <property name="decimals">
+                    <number>10</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-180.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>180.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0">
+                 <item>
+                  <widget class="QLineEdit" name="lnLongOri">
+                   <property name="toolTip">
+                    <string>Format: 000d00'00.000&quot;E
+It can be used as a DMS to Dec convertor.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input Longitude here in Degrees Minutes Seconds.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Latitude:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>dspnLatOri</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="dspnLatOri">
+                   <property name="toolTip">
+                    <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>°</string>
+                   </property>
+                   <property name="decimals">
+                    <number>10</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-90.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>90.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0">
+                 <item>
+                  <widget class="QLineEdit" name="lnLatOri">
+                   <property name="toolTip">
+                    <string>Format: 000d00'00.000&quot;N
+It can be used as a DMS to Dec convertor.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input Latitude here in Degrees Minutes Seconds.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,0">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Height:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>spnVerticalShift</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spnVerticalShift">
+               <property name="minimum">
+                <number>-13000</number>
+               </property>
+               <property name="maximum">
+                <number>10000</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>meters</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="grpCut">
+          <property name="title">
+           <string>Cut Parameters</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="0,1,0,1">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Width:</string>
+             </property>
+             <property name="buddy">
+              <cstring>spinCutWidth</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinCutWidth">
+             <property name="toolTip">
+              <string>the width of the cut rectangle</string>
+             </property>
+             <property name="statusTip">
+              <string>Input the width of the cut rectangle with the center at Origin.</string>
+             </property>
+             <property name="suffix">
+              <string> m</string>
+             </property>
+             <property name="decimals">
+              <number>0</number>
+             </property>
+             <property name="maximum">
+              <double>40000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>Height:</string>
+             </property>
+             <property name="buddy">
+              <cstring>spinCutHeight</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinCutHeight">
+             <property name="toolTip">
+              <string>the height of the cut rectangle</string>
+             </property>
+             <property name="statusTip">
+              <string>Input the height of the cut rectangle with the center at Origin.</string>
+             </property>
+             <property name="suffix">
+              <string> m</string>
+             </property>
+             <property name="decimals">
+              <number>0</number>
+             </property>
+             <property name="maximum">
+              <double>40000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbMsgProgress">
+          <property name="text">
+           <string>Ready.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="transFileProgressBar">
+          <property name="value">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="pgTransFromLib">
-           <layout class="QVBoxLayout" name="verticalLayout_11">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="0,1">
-              <item>
-               <widget class="QLabel" name="label_20">
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../../resources/main.qrc">:/images/Linkuj-grunge.png</pixmap>
-                </property>
-                <property name="scaledContents">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_21">
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Transform From SRTM Data</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_3">
-              <property name="title">
-               <string>Cut Parameters</string>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_24">
-               <item>
-                <widget class="QGroupBox" name="groupBox_5">
-                 <property name="title">
-                  <string>Center</string>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="0,1">
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_71">
-                    <property name="text">
-                     <string>Latitude:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>dspnCutCenterLat</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QDoubleSpinBox" name="dspnCutCenterLat">
-                    <property name="toolTip">
-                     <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
-                    </property>
-                    <property name="statusTip">
-                     <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
-                    </property>
-                    <property name="suffix">
-                     <string>°</string>
-                    </property>
-                    <property name="decimals">
-                     <number>10</number>
-                    </property>
-                    <property name="minimum">
-                     <double>-60.000000000000000</double>
-                    </property>
-                    <property name="maximum">
-                     <double>60.000000000000000</double>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_72">
-                    <property name="text">
-                     <string>Longitude:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>dspnCutCenterLong</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QDoubleSpinBox" name="dspnCutCenterLong">
-                    <property name="toolTip">
-                     <string>&quot;+&quot; for East, &quot;-&quot; for West.</string>
-                    </property>
-                    <property name="statusTip">
-                     <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
-                    </property>
-                    <property name="whatsThis">
-                     <string/>
-                    </property>
-                    <property name="suffix">
-                     <string>°</string>
-                    </property>
-                    <property name="decimals">
-                     <number>10</number>
-                    </property>
-                    <property name="minimum">
-                     <double>-180.000000000000000</double>
-                    </property>
-                    <property name="maximum">
-                     <double>180.000000000000000</double>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1">
-                 <item row="0" column="1">
-                  <widget class="QSpinBox" name="spnCutSRTMWd">
-                   <property name="suffix">
-                    <string> m</string>
-                   </property>
-                   <property name="maximum">
-                    <number>1000000</number>
-                   </property>
-                   <property name="value">
-                    <number>1000</number>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_70">
-                   <property name="text">
-                    <string>Width:</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>spnCutSRTMWd</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_12">
-                   <property name="text">
-                    <string>Height:</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>spnCutSRTMHt</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QSpinBox" name="spnCutSRTMHt">
-                   <property name="suffix">
-                    <string> m</string>
-                   </property>
-                   <property name="maximum">
-                    <number>1000000</number>
-                   </property>
-                   <property name="value">
-                    <number>1000</number>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_19">
-                <property name="text">
-                 <string>Output file:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="buddy">
-                 <cstring>lnOutputFile2</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="lnOutputFile2">
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="btSelectOutputFile2">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>24</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>...</string>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="grpSRTMOrigin">
-              <property name="title">
-               <string>Local Coordinate Origin</string>
-              </property>
-              <property name="checkable">
-               <bool>false</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_8">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0,1,0,1">
-                 <property name="spacing">
-                  <number>8</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_27">
-                   <property name="text">
-                    <string>Longitude:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="buddy">
-                    <cstring>dspnLongOri2</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_10">
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1">
-                     <item>
-                      <widget class="QDoubleSpinBox" name="dspnLongOri2">
-                       <property name="toolTip">
-                        <string>&quot;+&quot; for East, &quot;-&quot; for West.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
-                       </property>
-                       <property name="suffix">
-                        <string>°</string>
-                       </property>
-                       <property name="decimals">
-                        <number>10</number>
-                       </property>
-                       <property name="minimum">
-                        <double>-180.000000000000000</double>
-                       </property>
-                       <property name="maximum">
-                        <double>180.000000000000000</double>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="0">
-                     <item>
-                      <widget class="QLineEdit" name="lnLongOri2">
-                       <property name="toolTip">
-                        <string>Format: 000d00'00.000&quot;E
-It can be used as a DMS to Dec convertor.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input Longitude here in Degrees Minutes Seconds.</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_22">
-                   <property name="text">
-                    <string>Latitude:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="buddy">
-                    <cstring>dspnLatOri2</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_9">
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1">
-                     <item>
-                      <widget class="QDoubleSpinBox" name="dspnLatOri2">
-                       <property name="toolTip">
-                        <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
-                       </property>
-                       <property name="suffix">
-                        <string>°</string>
-                       </property>
-                       <property name="decimals">
-                        <number>10</number>
-                       </property>
-                       <property name="minimum">
-                        <double>-90.000000000000000</double>
-                       </property>
-                       <property name="maximum">
-                        <double>90.000000000000000</double>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="0">
-                     <item>
-                      <widget class="QLineEdit" name="lnLatOri2">
-                       <property name="toolTip">
-                        <string>Format: 000d00'00.000&quot;N
-It can be used as a DMS to Dec convertor.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input Latitude here in Degrees Minutes Seconds.</string>
-                       </property>
-                       <property name="text">
-                        <string notr="true"/>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="0,0,0,0">
-                 <item>
-                  <widget class="QLabel" name="label_32">
-                   <property name="text">
-                    <string>Height:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="buddy">
-                    <cstring>spnVerticalShift2</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QSpinBox" name="spnVerticalShift2">
-                   <property name="minimum">
-                    <number>-13000</number>
-                   </property>
-                   <property name="maximum">
-                    <number>10000</number>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_33">
-                   <property name="text">
-                    <string>meters</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_4">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lblMsgSRTM">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Ready.</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QProgressBar" name="transSRTMProgressBar">
-              <property name="value">
-               <number>0</number>
-              </property>
-              <property name="textVisible">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <item>
-               <spacer name="horizontalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btStartTransLib">
-                <property name="text">
-                 <string>Start</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="pgTransFromFile">
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,0,0,0,0,0">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../../resources/main.qrc">:/images/Burn.png</pixmap>
-                </property>
-                <property name="scaledContents">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Transform From a DEM File</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>Source metaInfo:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPlainTextEdit" name="ptxtSrcMeta">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>Input file:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-                <property name="buddy">
-                 <cstring>lnInputFile</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="lnInputFile">
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-                <property name="dragEnabled">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btStartTransFile">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgTransFromLib">
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="0,1">
+          <item>
+           <widget class="QLabel" name="label_20">
+            <property name="maximumSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="../../../resources/main.qrc">:/images/Linkuj-grunge.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Transform From SRTM Data</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Cut Parameters</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_24">
+           <item>
+            <widget class="QGroupBox" name="groupBox_5">
+             <property name="title">
+              <string>Center</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_5" rowstretch="0,0" columnstretch="0,1">
               <item row="1" column="0">
-               <widget class="QLabel" name="label_4">
+               <widget class="QLabel" name="label_71">
                 <property name="text">
-                 <string>Output file:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <string>Latitude:</string>
                 </property>
                 <property name="buddy">
-                 <cstring>lnOutputFile</cstring>
+                 <cstring>dspnCutCenterLat</cstring>
                 </property>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="lnOutputFile">
-                <property name="text">
-                 <string notr="true"/>
+               <widget class="QDoubleSpinBox" name="dspnCutCenterLat">
+                <property name="toolTip">
+                 <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
+                </property>
+                <property name="statusTip">
+                 <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
+                </property>
+                <property name="suffix">
+                 <string>°</string>
+                </property>
+                <property name="decimals">
+                 <number>10</number>
+                </property>
+                <property name="minimum">
+                 <double>-60.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>60.000000000000000</double>
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
-               <widget class="QPushButton" name="btSelectOutputFile">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>24</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_72">
                 <property name="text">
-                 <string>...</string>
+                 <string>Longitude:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>dspnCutCenterLong</cstring>
                 </property>
                </widget>
               </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="btSelectInputFile">
-                <property name="maximumSize">
-                 <size>
-                  <width>24</width>
-                  <height>16777215</height>
-                 </size>
+              <item row="0" column="1">
+               <widget class="QDoubleSpinBox" name="dspnCutCenterLong">
+                <property name="toolTip">
+                 <string>&quot;+&quot; for East, &quot;-&quot; for West.</string>
                 </property>
-                <property name="text">
-                 <string>...</string>
+                <property name="statusTip">
+                 <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
                 </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox">
-              <property name="title">
-               <string>Local Coordinate Origin</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1,0,1">
-                 <property name="spacing">
-                  <number>8</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_8">
-                   <property name="text">
-                    <string>Longitude:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="buddy">
-                    <cstring>dspnLongOri</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_7">
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1">
-                     <item>
-                      <widget class="QDoubleSpinBox" name="dspnLongOri">
-                       <property name="toolTip">
-                        <string>&quot;+&quot; for East, &quot;-&quot; for west.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
-                       </property>
-                       <property name="suffix">
-                        <string>°</string>
-                       </property>
-                       <property name="decimals">
-                        <number>10</number>
-                       </property>
-                       <property name="minimum">
-                        <double>-180.000000000000000</double>
-                       </property>
-                       <property name="maximum">
-                        <double>180.000000000000000</double>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0">
-                     <item>
-                      <widget class="QLineEdit" name="lnLongOri">
-                       <property name="toolTip">
-                        <string>Format: 000d00'00.000&quot;E
-It can be used as a DMS to Dec convertor.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input Longitude here in Degrees Minutes Seconds.</string>
-                       </property>
-                       <property name="text">
-                        <string notr="true"/>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_9">
-                   <property name="text">
-                    <string>Latitude:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="buddy">
-                    <cstring>dspnLatOri</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_6">
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1">
-                     <item>
-                      <widget class="QDoubleSpinBox" name="dspnLatOri">
-                       <property name="toolTip">
-                        <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
-                       </property>
-                       <property name="suffix">
-                        <string>°</string>
-                       </property>
-                       <property name="decimals">
-                        <number>10</number>
-                       </property>
-                       <property name="minimum">
-                        <double>-90.000000000000000</double>
-                       </property>
-                       <property name="maximum">
-                        <double>90.000000000000000</double>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0">
-                     <item>
-                      <widget class="QLineEdit" name="lnLatOri">
-                       <property name="toolTip">
-                        <string>Format: 000d00'00.000&quot;N
-It can be used as a DMS to Dec convertor.</string>
-                       </property>
-                       <property name="statusTip">
-                        <string>Input Latitude here in Degrees Minutes Seconds.</string>
-                       </property>
-                       <property name="text">
-                        <string notr="true"/>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0,0">
-                 <item>
-                  <widget class="QLabel" name="label_6">
-                   <property name="text">
-                    <string>Height:</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                   </property>
-                   <property name="buddy">
-                    <cstring>spnVerticalShift</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QSpinBox" name="spnVerticalShift">
-                   <property name="minimum">
-                    <number>-13000</number>
-                   </property>
-                   <property name="maximum">
-                    <number>10000</number>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_7">
-                   <property name="text">
-                    <string>meters</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_2">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="grpCut">
-              <property name="title">
-               <string>Cut Parameters</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="0,1,0,1">
-               <item>
-                <widget class="QLabel" name="label_5">
-                 <property name="text">
-                  <string>Width:</string>
-                 </property>
-                 <property name="buddy">
-                  <cstring>spinCutWidth</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="spinCutWidth">
-                 <property name="toolTip">
-                  <string>the width of the cut rectangle</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Input the width of the cut rectangle with the center at Origin.</string>
-                 </property>
-                 <property name="suffix">
-                  <string> m</string>
-                 </property>
-                 <property name="decimals">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <double>40000000.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_11">
-                 <property name="text">
-                  <string>Height:</string>
-                 </property>
-                 <property name="buddy">
-                  <cstring>spinCutHeight</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="spinCutHeight">
-                 <property name="toolTip">
-                  <string>the height of the cut rectangle</string>
-                 </property>
-                 <property name="statusTip">
-                  <string>Input the height of the cut rectangle with the center at Origin.</string>
-                 </property>
-                 <property name="suffix">
-                  <string> m</string>
-                 </property>
-                 <property name="decimals">
-                  <number>0</number>
-                 </property>
-                 <property name="maximum">
-                  <double>40000000.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="lbMsgProgress">
-              <property name="text">
-               <string>Ready.</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QProgressBar" name="transFileProgressBar">
-              <property name="value">
-               <number>0</number>
-              </property>
-              <property name="textVisible">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                <property name="whatsThis">
+                 <string/>
                 </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
+                <property name="suffix">
+                 <string>°</string>
                 </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btStartTransFile">
-                <property name="text">
-                 <string>Start</string>
+                <property name="decimals">
+                 <number>10</number>
+                </property>
+                <property name="minimum">
+                 <double>-180.000000000000000</double>
+                </property>
+                <property name="maximum">
+                 <double>180.000000000000000</double>
                 </property>
                </widget>
               </item>
              </layout>
-            </item>
-           </layout>
-          </widget>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1">
+             <item row="0" column="1">
+              <widget class="QSpinBox" name="spnCutSRTMWd">
+               <property name="suffix">
+                <string> m</string>
+               </property>
+               <property name="maximum">
+                <number>1000000</number>
+               </property>
+               <property name="value">
+                <number>1000</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_70">
+               <property name="text">
+                <string>Width:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spnCutSRTMWd</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Height:</string>
+               </property>
+               <property name="buddy">
+                <cstring>spnCutSRTMHt</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spnCutSRTMHt">
+               <property name="suffix">
+                <string> m</string>
+               </property>
+               <property name="maximum">
+                <number>1000000</number>
+               </property>
+               <property name="value">
+                <number>1000</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="spgManage">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QStackedWidget" name="stkdWgtManage">
-          <property name="currentIndex">
+         <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>Output file:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lnOutputFile2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lnOutputFile2">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="btSelectOutputFile2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>24</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="grpSRTMOrigin">
+          <property name="title">
+           <string>Local Coordinate Origin</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0,1,0,1">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_27">
+               <property name="text">
+                <string>Longitude:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>dspnLongOri2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="dspnLongOri2">
+                   <property name="toolTip">
+                    <string>&quot;+&quot; for East, &quot;-&quot; for West.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input decimal degrees here. &quot;+&quot; for East, &quot;-&quot; for West.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>°</string>
+                   </property>
+                   <property name="decimals">
+                    <number>10</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-180.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>180.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="0">
+                 <item>
+                  <widget class="QLineEdit" name="lnLongOri2">
+                   <property name="toolTip">
+                    <string>Format: 000d00'00.000&quot;E
+It can be used as a DMS to Dec convertor.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input Longitude here in Degrees Minutes Seconds.</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_22">
+               <property name="text">
+                <string>Latitude:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>dspnLatOri2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_9">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="dspnLatOri2">
+                   <property name="toolTip">
+                    <string>&quot;+&quot; for North, &quot;-&quot; for South.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input decimal degrees here. &quot;+&quot; for North, &quot;-&quot; for South.</string>
+                   </property>
+                   <property name="suffix">
+                    <string>°</string>
+                   </property>
+                   <property name="decimals">
+                    <number>10</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-90.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>90.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="0">
+                 <item>
+                  <widget class="QLineEdit" name="lnLatOri2">
+                   <property name="toolTip">
+                    <string>Format: 000d00'00.000&quot;N
+It can be used as a DMS to Dec convertor.</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Input Latitude here in Degrees Minutes Seconds.</string>
+                   </property>
+                   <property name="text">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="0,0,0,0">
+             <item>
+              <widget class="QLabel" name="label_32">
+               <property name="text">
+                <string>Height:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="buddy">
+                <cstring>spnVerticalShift2</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spnVerticalShift2">
+               <property name="minimum">
+                <number>-13000</number>
+               </property>
+               <property name="maximum">
+                <number>10000</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_33">
+               <property name="text">
+                <string>meters</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblMsgSRTM">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Ready.</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="transSRTMProgressBar">
+          <property name="value">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="pgManageSysLib">
-           <layout class="QVBoxLayout" name="verticalLayout_15">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="0,1">
-              <item>
-               <widget class="QLabel" name="label_37">
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../../resources/main.qrc">:/images/threeballs_blocked-128.png</pixmap>
-                </property>
-                <property name="scaledContents">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_38">
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>System Lib management</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_22">
-              <item>
-               <widget class="QTableWidget" name="tableWidget_2">
-                <row>
-                 <property name="text">
-                  <string>lib 1</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>lib 2</string>
-                 </property>
-                </row>
-               </widget>
-              </item>
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_12">
-                <item>
-                 <widget class="QPushButton" name="pushButton">
-                  <property name="text">
-                   <string>Modify</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="pgManageUserLib">
-           <layout class="QVBoxLayout" name="verticalLayout_19">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_35" stretch="0,1">
-              <item>
-               <widget class="QLabel" name="label_66">
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../../resources/main.qrc">:/images/Mallette.png</pixmap>
-                </property>
-                <property name="scaledContents">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_67">
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>User's Lib management</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_20">
-              <item>
-               <widget class="QTableWidget" name="tableWidget_3">
-                <row>
-                 <property name="text">
-                  <string>User lib 1</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>User lib 2</string>
-                 </property>
-                </row>
-               </widget>
-              </item>
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_13">
-                <item>
-                 <widget class="QPushButton" name="pushButton_2">
-                  <property name="text">
-                   <string>New</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_6">
-                  <property name="text">
-                   <string>Modify</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_5">
-                  <property name="text">
-                   <string>Delete</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btStartTransLib">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -1165,131 +989,52 @@ It can be used as a DMS to Dec convertor.</string>
    <widget class="QWidget" name="dockWidgetContents_3">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QToolBox" name="toolBox">
-       <property name="currentIndex">
-        <number>0</number>
+      <widget class="QListWidget" name="listTrans">
+       <property name="iconSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
        </property>
-       <widget class="QWidget" name="pg_Trans">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>274</width>
-          <height>466</height>
-         </rect>
+       <property name="movement">
+        <enum>QListView::Static</enum>
+       </property>
+       <property name="flow">
+        <enum>QListView::TopToBottom</enum>
+       </property>
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ListMode</enum>
+       </property>
+       <property name="uniformItemSizes">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="currentRow">
+        <number>-1</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>From File</string>
         </property>
-        <attribute name="icon">
+        <property name="icon">
          <iconset resource="../../../resources/main.qrc">
-          <normaloff>:/images/earth_send-128.png</normaloff>:/images/earth_send-128.png</iconset>
-        </attribute>
-        <attribute name="label">
-         <string>DataTransform</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QListWidget" name="listTrans">
-           <property name="iconSize">
-            <size>
-             <width>48</width>
-             <height>48</height>
-            </size>
-           </property>
-           <property name="movement">
-            <enum>QListView::Static</enum>
-           </property>
-           <property name="flow">
-            <enum>QListView::TopToBottom</enum>
-           </property>
-           <property name="spacing">
-            <number>12</number>
-           </property>
-           <property name="viewMode">
-            <enum>QListView::ListMode</enum>
-           </property>
-           <property name="uniformItemSizes">
-            <bool>false</bool>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-           <property name="currentRow">
-            <number>-1</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>SRTM Data</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../../../resources/main.qrc">
-              <normaloff>:/images/Linkuj-grunge.png</normaloff>:/images/Linkuj-grunge.png</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>From File</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../../../resources/main.qrc">
-              <normaloff>:/images/Burn.png</normaloff>:/images/Burn.png</iconset>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="pg_Manage">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>274</width>
-          <height>466</height>
-         </rect>
+          <normaloff>:/images/Burn.png</normaloff>:/images/Burn.png</iconset>
         </property>
-        <attribute name="icon">
+       </item>
+       <item>
+        <property name="text">
+         <string>SRTM Data</string>
+        </property>
+        <property name="icon">
          <iconset resource="../../../resources/main.qrc">
-          <normaloff>:/images/db.png</normaloff>:/images/db.png</iconset>
-        </attribute>
-        <attribute name="label">
-         <string>DataManagement</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QListWidget" name="listManage">
-           <property name="iconSize">
-            <size>
-             <width>48</width>
-             <height>48</height>
-            </size>
-           </property>
-           <property name="spacing">
-            <number>12</number>
-           </property>
-           <property name="currentRow">
-            <number>-1</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>System Lib</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../../../resources/main.qrc">
-              <normaloff>:/images/threeballs_blocked-128.png</normaloff>:/images/threeballs_blocked-128.png</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>User's Lib</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../../../resources/main.qrc">
-              <normaloff>:/images/Mallette.png</normaloff>:/images/Mallette.png</iconset>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+          <normaloff>:/images/Linkuj-grunge.png</normaloff>:/images/Linkuj-grunge.png</iconset>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>
@@ -1327,21 +1072,22 @@ It can be used as a DMS to Dec convertor.</string>
  <resources>
   <include location="../../../resources/main.qrc"/>
   <include location="../../../resources/main.qrc"/>
+  <include location="../../../resources/main.qrc"/>
  </resources>
  <connections>
   <connection>
-   <sender>toolBox</sender>
-   <signal>currentChanged(int)</signal>
-   <receiver>stackedWidget</receiver>
-   <slot>setCurrentIndex(int)</slot>
+   <sender>action_Exit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>185</x>
-     <y>65</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>486</x>
-     <y>92</y>
+     <x>399</x>
+     <y>299</y>
     </hint>
    </hints>
   </connection>
@@ -1358,38 +1104,6 @@ It can be used as a DMS to Dec convertor.</string>
     <hint type="destinationlabel">
      <x>492</x>
      <y>190</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>listManage</sender>
-   <signal>currentRowChanged(int)</signal>
-   <receiver>stkdWgtManage</receiver>
-   <slot>setCurrentIndex(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>147</x>
-     <y>265</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>362</x>
-     <y>56</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_Exit</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
     </hint>
    </hints>
   </connection>

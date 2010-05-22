@@ -211,12 +211,13 @@ void mainwindow::startTransSRTM(bool checked)
 	   SLOT(setValue(int)));
 
     QSettings settings;
-    transobj->initSRTMTrans(settings.value("SRTM/dir").toString(),
+    if ( transobj->initSRTMTrans(settings.value("SRTM/dir").toString(),
             ui.dspnCutCenterLong->value(), ui.dspnCutCenterLat->value(),
-            ui.spnCutSRTMWd->value(), ui.spnCutSRTMHt->value());
-    transobj->transDEM2Terrain(ui.lnOutputFile2->text(),
-            ui.dspnLongOri2->value(), ui.dspnLatOri2->value(),
-            ui.spnVerticalShift2->value());
+            ui.spnCutSRTMWd->value(), ui.spnCutSRTMHt->value()) ) {
+        transobj->transDEM2Terrain(ui.lnOutputFile2->text(),
+                ui.dspnLongOri2->value(), ui.dspnLatOri2->value(),
+                ui.spnVerticalShift2->value());
+    }
 
     ui.btStartTransLib->setEnabled(true);
     delete transobj;

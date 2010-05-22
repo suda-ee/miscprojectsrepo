@@ -19,7 +19,7 @@ public:
     ~Trans2Cart();
     void initSingleFileTrans(const QString &srcfilename, double cutCenterLong,
 	double cutCenterLat, double cutWidth, double cutHeight, bool cutFlag);
-    void initSRTMTrans(const QString &srcDirName, double cutCenterLong,
+    bool initSRTMTrans(const QString &srcDirName, double cutCenterLong,
             double cutCenterLat, double cutWidth, double cutHeight);
     void transDEM2Terrain(const QString &destFilename, double OriLong,
        	double OriLat, double OriZ);
