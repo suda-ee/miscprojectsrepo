@@ -411,7 +411,7 @@ int Trans2Cart::getResSize(const QString &srcfilename, double &resX, double &res
  * @param  
  * @return 
  */
-void Trans2Cart::initSRTMTrans(const QString &srcDirName, double cutCenterLong,
+bool Trans2Cart::initSRTMTrans(const QString &srcDirName, double cutCenterLong,
         double cutCenterLat, double cutWidth, double cutHeight)
 {
     // test if GDAL_DATA environment variable exist
@@ -537,7 +537,9 @@ void Trans2Cart::initSRTMTrans(const QString &srcDirName, double cutCenterLong,
     {
         emit progressMsg(QString(tr("Error: missing file %1")).arg(filename));
         qCritical()<<"Error: missing file"<<filename;
+        return false;
     }
+    return true;
 }
 
 Trans2Cart::~Trans2Cart()
