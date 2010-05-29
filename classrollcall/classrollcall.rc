@@ -53,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,1,0
- PRODUCTVERSION 0,1,1,0
+ FILEVERSION 0,2,2,0
+ PRODUCTVERSION 0,2,2,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -71,12 +71,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "苏州大学"
             VALUE "FileDescription", "点名程序"
-            VALUE "FileVersion", "0, 1, 1, 0"
+            VALUE "FileVersion", "0, 2, 2, 0"
             VALUE "InternalName", "classrol"
-            VALUE "LegalCopyright", "Copyright (C) 2009"
+            VALUE "LegalCopyright", "Copyright (C) 2010"
             VALUE "OriginalFilename", "classrol.exe"
             VALUE "ProductName", "classrol Application"
-            VALUE "ProductVersion", "0, 1, 1, 0"
+            VALUE "ProductVersion", "0, 2, 2, 0"
         END
     END
     BLOCK "VarFileInfo"
