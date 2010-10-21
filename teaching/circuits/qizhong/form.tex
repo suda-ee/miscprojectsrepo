@@ -6,11 +6,15 @@
 \usepackage{mathrsfs,pifont}
 \usepackage{stmaryrd}
 \usepackage{amsmath}
-\usepackage[thinqspace,thinqspace]{SIunits}
+\usepackage[thinspace,thinqspace]{SIunits}
 \usepackage[scale={.8,.85},footskip=12pt]{geometry}
 \usepackage{lastpage,float}
 \NumberOfVersions{1}
 \usepackage[BoldFont, SlantFont, CJKnormalspaces]{xeCJK}
+\defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
+\setmainfont[]{Minion Pro}
+\setsansfont{Lucida Sans}
+\setmonofont{Lucida Sans Typewriter}
 \setCJKmainfont{SimSun}
 \setCJKsansfont{SimHei}
 \setCJKmonofont{SimSun}
@@ -38,7 +42,7 @@
 \newcommand\AnswerLeading{解}
 \SectionPrefix{}
 \NoKey
-%\NoRearrange
+\NoRearrange
 % \ShortKey
 \SectionFont{\large\em}
 \examname{电路分析期中考试}
@@ -49,7 +53,7 @@
 \begin{center}
 \begin{tabular}{r}
 {\Large \bf 苏州大学\underline{\examtype}课程试卷
-}\hspace{17pt}(\textsf{\Alph{version}}) 卷\hspace{17pt}共 \pageref{LastPage} 页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2009 年 11 月
+}\hspace{17pt}(\textsf{\Alph{version}}) 卷\hspace{17pt}共 \pageref{LastPage} 页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2010 年 11 月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -67,95 +71,95 @@
 \begin{shortanswer}[title={计算题 (每题 10 分，共 100 分)}]
 
 \begin{question}
-用网孔电流法求解图中的电流 $I_2$。
+按图示电路计算一端口电路 N1 和 N2 的功率。
     \begin{figure}[H]
         \hfill
-        \input fig10
+        \input fig01
     \end{figure}
-    \examvspace*{5cm}
+    \examvspace*{3cm}
 \end{question}
 
 \begin{question}
-电路如下图所示，求电路 $I$。
+求图示电路中电压 $U$ 和电流 $I$。
     %\examvspace{12pt}\\
-    \begin{figure}[H]
-    \hfill
-    \input fig03
-    \end{figure}
-    \examvspace*{5cm}
-\end{question}
-
-\begin{question}
-    用结点电压法求图中 a、b 两点的电压。
-    \begin{figure}[H]
-        \hfill
-        \input fig11
-    \end{figure}
-    \examvspace*{5cm}
-\end{question}
-
-\begin{question}
-求下图中受控源的功率。
-    %\examvspace{12pt}\\
-    \begin{figure}[H]
-    \hfill
-    \input fig01
-    \end{figure}
-    \examvspace*{5cm}
-\end{question}
-
-\begin{question}
-图示电路中，已知 $U=\unit{3}{\volt}$，求 $R$。
     \begin{figure}[H]
     \hfill
     \input fig02
     \end{figure}
+    \examvspace*{5cm}
+\end{question}
 
-    \examvspace*{6cm}
+\begin{question}
+    求图示电路的输入电阻 $R_\mathrm{in}$。
+    \begin{figure}[H]
+        \hfill
+        \input fig03
+    \end{figure}
+    \examvspace*{5cm}
 \end{question}
 
 \begin{question}
     如下图所示电路，用叠加定理求电流 $I_x$。
     \begin{figure}[H]
     \hfill
-    \input fig08
+    \input fig04
     \end{figure}
     
-    \examvspace*{8cm}
+    \examvspace*{9cm}
 \end{question}
 
 \begin{question}
-    求下图电路中的电流 $I$。
-	\begin{figure}[H]
-	  \hfill
-        \input fig15
-	\end{figure}
-\examvspace*{8cm}
-\end{question}
-
-\begin{question}
-    求图示电路的戴维宁或诺顿等效电路。
-    \begin{figure}[H]
-        \hfill
-        \input fig13
-    \end{figure}
-    \examvspace*{8cm}
-\end{question}
-
-\begin{question}
-试列写以下电路的回路电流方程。
+如图所示电路，求电流 $I$ 和电压 $U$。
     \begin{figure}[H]
     \hfill
     \input fig05
     \end{figure}
+
     \examvspace*{5cm}
 \end{question}
 
 \begin{question}
-如图示电路，求 ab 两端的输入电路 $R_{\mathrm{ab}}$。
+列出图中电路的结点电压方程，并化简。
     \begin{figure}[H]
     \hfill
-    \input fig04
+    \input fig06
+    \end{figure}
+    
+    \examvspace*{3cm}
+\end{question}
+
+\begin{question}
+如图所示电路，$R_\mathrm{L}$ 可变，问 $R_\mathrm{L}$ 取何值时可获得最大功率，并求出该最大功率。
+	\begin{figure}[H]
+	  \hfill
+        \input fig07
+	\end{figure}
+\examvspace*{6cm}
+\end{question}
+
+\begin{question}
+    用回路法求解如图所示电路中 $I_\mathrm{x}$ 以及受控源的功率。
+    \begin{figure}[H]
+        \hfill
+        \input fig08
+    \end{figure}
+    \examvspace*{6cm}
+\end{question}
+
+\begin{question}
+求下图电路的诺顿或戴维宁等效电路。
+    \begin{figure}[H]
+    \hfill
+    \input fig09
+    \end{figure}
+    \examvspace*{9cm}
+\end{question}
+
+\begin{question}
+求所示电路中的电流 $I$。
+    \begin{figure}[H]
+    \hfill
+    \input fig10
     \end{figure}
     \examvspace*{6cm}
 \end{question}
