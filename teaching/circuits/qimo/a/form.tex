@@ -55,7 +55,7 @@
 \begin{center}
 \begin{tabular}{r}
 {\Large \bf 苏州大学\underline{\examtype}课程试卷
-}\hspace{17pt}(\textsf{\Alph{version}})卷\hspace{17pt}共 4 页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2010 年 1 月
+}\hspace{17pt}(\textsf{\Alph{version}})卷\hspace{17pt}共 4 页\medskip\\考试形式\underline{闭}卷\hspace{17pt}2011 年 1 月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -76,99 +76,117 @@
 %\begin{shortanswer}[title={\begin{description}\item[二、]计算题(每
 %题10分，共50分)\end{description}}]
 \begin{question} % 01
-    求电压 $U$，电流源 $I_{\mathrm{S}}$ 吸收的功率 $P_{\mathrm{S}}$。($10'$)
+    求图中各器件的功率(须说明是吸收还是发出)。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig01
     \end{figure}
-    \examvspace*{3cm}
+    \examvspace*{2cm}
     \begin{answer}
-        $U =I \times 2 + 6 = \unit{8}{\volt}$；$P_{\mathrm{S}} =
-        -I_{\mathrm{S}} \times U = \unit{-8}{\watt}$，吸收
-        $\unit{-8}{\watt}$ 功率。
+    $P_{\unit{2}{\ampere}} = 15 \times 2 = \unit{30}{\watt}$，发出。$P_{\unit{5}{\ohm}} = 15^2/5 = \unit{45}{\watt}$，吸收。$P_{\unit{15}{\volt}} = \unit{15}{\watt}$，发出。
     \end{answer}
 \end{question}
 
 \begin{question} % 02
-    求下图电路中控制量 $I_1$ 及电压 $U_0$。($10'$)
+    求图示电路中的 $I_1$ 和 $U_\mathrm{ab}$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig02
     \end{figure}
-    \examvspace*{4cm}
+    \examvspace*{3cm}
     \begin{answer}
-        \[ \left \{
-            \begin{aligned}
-                20 &= 1000 \times I_1 + 6000 \times (I_1 + U_0 / 5000) +
-                   600 I_1 \\
-                20 &= 1000 \times I_1 + U_0
-            \end{aligned} \right .
-        \]
-        解得 $I_1 = \unit{5}{\milli\ampere}$，$U_0 = \unit{15}{\volt}$。
+    $I = 10 /5 = \unit{2}{\ampere}$，$0.9I_1 = I$，$\therefore I_1 = I /
+    0.9 = \unit{2.22}{\ampere}$，$\therefore U_\mathrm{ab} = 4 \times
+      (I_1 - I) = \unit{0.889}{\volt}$。
     \end{answer}
 \end{question}
 
-\begin{question} % 03
-    求输入电阻 $R_{\mathrm{ab}}$。($10'$)
+\begin{question} %03
+求图示电路中电压 $U$ 和电流 $I$。($10'$)
+    %\examvspace{12pt}\\
     \begin{figure}[H]
     \hfill
     \input fig03
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
-        外加电流源 $I$ 求电压 $U$，有
-        \[ \left \{
-            \begin{aligned}
-                U &= I R_2 - \mu U_1 + U_1 \\
-                U_1 &= I \cdot R_1
-            \end{aligned} \right .
-        \]
-        所以 $R_\mathrm{ab} = U / I = (1 - \mu)R_1 + R_2$。
+    列节点法方程。$(1/3 + 1/1)U = 10 - 2I$，$I = U / 3$。解得：$U = \unit{5}{\volt}$，$I = \unit{5/3}{\ampere}$。
     \end{answer}
 \end{question}
 
 \begin{question} % 04
-    分别求 (1) 开路电压 $U_\mathrm{OC}|_\mathrm{ab}$；
-    (2) 短路电流 $I_\mathrm{SC}|_\mathrm{ab}$；
-    (3) ab 间接 $\unit{\frac{8}{3}}{\ohm}$ 电阻时的 $U_\mathrm{ab}$。($12'$)
+    求图中的 $U_\mathrm{x}$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig04
     \end{figure}
-    \examvspace*{10cm}
+    \examvspace*{3cm}
     \begin{answer}
-    (1) $U_\mathrm{a} = \unit{8}{\volt}$，$U_\mathrm{b} =
-    \unit{4}{\volt}$，$U_\mathrm{OC} = U_\mathrm{a} - U_\mathrm{b} =
-    \unit{4}{\volt}$。(2) $I_\mathrm{SC}|_\mathrm{ab} =
-    \unit{1.5}{\ampere}$。(3) ab 一端口网络的戴维宁等效电路为
-    $U_\mathrm{OC} = \unit{4}{\volt}$，$R_\mathrm{eq} =
-    \unit{\frac{8}{3}}{\ohm}$，则若 ab 间接 $\unit{\frac{8}{3}}{\ohm}$ 电
-    阻时，$U_\mathrm{ab} = \unit{2}{\volt}$。
+    列节点电压方程，$(24 + 32)I - 24 \times 0.15 - 32 \times 0.05 U_\mathrm{x}
+    = 20$，$U_\mathrm{x} = 32(I - 0.05 U_\mathrm{x}$。解得 $U_\mathrm{x} = \unit{8}{\volt}$。
     \end{answer}
 \end{question}
 
 \begin{question} % 05
-    当 (1) $u = \unit{1}{\volt}$，(2) $u = \mathrm{e}^t \unit{}{\volt}$ 
-    时，分别求 $i$。($10'$)
+    求图中的电压 $U_2$。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig05
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
-    (1) $i = i_R + i_C = \unit{1}{\ampere}$；(2) $i = i_R + i_C =
-    \unit{0}{\ampere}$。
+    列节点方程。$1/3 U_2 - 1/3 \times 2 = 3 - 2 I_1$，$I_1 = 2 /4$，解得 $U_2 = \unit{8}{\volt}$。
     \end{answer}
 \end{question}
 
 \begin{question} %06
-    下图所示电路，开关合在位置 1 时已达稳定状态，$t = 0$ 时开关由位置 1
-    合向位置 2，求 $t \ge 0$ 时的电压 $u_L$。 ($15'$)
+    下图中负载电阻 $R_\mathrm{L}$ 可变，问 $R_\mathrm{L}$ 等于何值时可吸收最大功率，并求此功率。 ($10'$)
     \begin{figure}[H]
     \hfill
     \input fig06
     \end{figure}
-    \examvspace*{11cm}
+    \examvspace*{6cm}
+    \begin{answer}
+    $(2 + 2)I_1 + 8 I_1 = 6$，$U_\mathrm{OC} = 2 I_1 + 2I_1 + 8 I_1 = \unit{6}{\volt}$，易解得 $I_\mathrm{SC} = \unit{3/2}{\ampere}$。$R_\mathrm{eq} = U_\mathrm{OC} / I_\mathrm{SC} = \unit{4}{\ohm}$。$P_\mathrm{max} = \frac{U_\mathrm{OC}^2}{4 R_\mathrm{eq}} = \unit{2.25}{\watt}$。
+    \end{answer}
+\end{question}
+
+\begin{question} % 07
+    求下图电路中的输入阻抗 $Z$ 和导纳 $Y$。($10'$)
+    \begin{figure}[H]
+    \hfill
+    \input fig07
+    \end{figure}
+    \examvspace*{2cm}
+    \begin{answer}
+    \[
+    Z = 1 + \frac{1}{1 / 2\jimag + 1 / (-\jimag)} = 1 -2 \jimag
+    \unit{}{\ohm}
+    \]
+    $Y = 1 / Z = \frac{1}{5} + \frac{2}{5}\jimag \unit{}{\siemens}$。
+    \end{answer}
+\end{question}
+
+\begin{question} % 08
+    列写下图电路的回路电流方程和节点电压方程。($15'$)
+    \begin{figure}[H]
+    \hfill
+    \input fig08
+    \end{figure}
+    \examvspace*{4cm}
+    \begin{answer}
+    略。教材习题9-17。
+    \end{answer}
+\end{question}
+
+\begin{question} %09
+    下图所示电路，开关合在位置 1 时已达稳定状态，$t = 0$ 时开关由位置 1
+    合向位置 2，求 $t \ge 0$ 时的电压 $u_L$。 ($15'$)
+    \begin{figure}[H]
+    \hfill
+    \input fig09
+    \end{figure}
+    \examvspace*{10cm}
     \begin{answer}
     三要素法：$i_L = i_L(\infty) + [i_L(0_+) -
     i_L(\infty)]\mathrm{e}^{-t/\tau}$，$i_L(0_+) = i_L(0_-) =
@@ -176,49 +194,6 @@
     L/R_\mathrm{eq} = \unit{0.01}{\second}$，所以 $i_L(t) = 1.2 - 5.2
     \mathrm{e}^{-100t}$，$u_L(t) = L \frac{\mathrm{d}i_L}{\mathrm{d}t} =
     52 \mathrm{e}^{-100t},\, t\ge 0$。
-    \end{answer}
-\end{question}
-
-\begin{question} % 07
-    求下图电路的输入阻抗 $Z$ 和导纳 $Y$。($10'$)
-    \begin{figure}[H]
-    \hfill
-    \input fig07
-    \end{figure}
-    \examvspace*{3cm}
-    \begin{answer}
-    $Z = 1 + 1 / [1 / -\jimag + 1 / (1 + \jimag)] = 2 - \jimag
-    \unit{}{\ohm}$，$Y = 1 / Z = \frac{2}{5} + \frac{1}{5}\jimag
-    \unit{}{\siemens}$。
-    \end{answer}
-\end{question}
-
-\begin{question} % 08
-    已知 $I_\mathrm{S} = \unit{10}{\ampere}$，求电流源发出的复功率。($13'$)
-    \begin{figure}[H]
-    \hfill
-    \input fig08
-    \end{figure}
-    \examvspace*{5cm}
-    \begin{answer}
-    设 $\dot{I}_\mathrm{S}$ 初相位为 $\unit{0}{\degree}$，列写回路方程可
-    解，又有 $\dot{U} = \dot{U}_C + \dot{I}_1 R_1 - 0.5 \dot{U}_C$，因此
-    复功率 $\bar{S} = \dot{U} \cdot \dot{I}_\mathrm{S} = (500 - \jimag
-    1500)\unit{}{\volt\cdot\ampere}$。
-    \end{answer}
-\end{question}
-
-\begin{question} % 09
-    求图示电路中的 $I_1$ 和 $U_\mathrm{ab}$。($10'$)
-    \begin{figure}[H]
-    \hfill
-    \input fig09
-    \end{figure}
-    \examvspace*{4cm}
-    \begin{answer}
-    $I = 10 /5 = \unit{2}{\ampere}$，$0.9I_1 = I$，$\therefore I_1 = I /
-    0.9 = \unit{2.22}{\ampere}$，$\therefore U_\mathrm{ab} = 4 \times
-      (I_1 - I) = \unit{0.889}{\volt}$。
     \end{answer}
 \end{question}
 \end{shortanswer}
