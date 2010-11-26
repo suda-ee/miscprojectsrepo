@@ -59,7 +59,7 @@
 \begin{tabular}{r}
 {\Large \bf 苏州大学\underline{\examtype}课程试卷
 }\hspace{17pt}(\textsf{\Alph{version}}) 卷\hspace{17pt}共 4 页\medskip\\
-考试形式\underline{闭}卷\hspace{17pt}2010 年 1 月
+考试形式\underline{闭}卷\hspace{17pt}2011 年 1 月
 \end{tabular}
 \\\bigskip
 \classdata\\ \namedata
@@ -80,15 +80,14 @@
 %\begin{shortanswer}[title={\begin{description}\item[二、]计算题 (每
 %题 10 分，共 50 分)\end{description}}]
 \begin{question} % 01
-    求图示电路中的电压 $U$ 和电流源的功率 $P_\mathrm{S}$。($10'$)
+    求图中各器件的功率(须说明是吸收还是发出)。($10'$)
     \begin{figure}[H]
     \hfill
     \input fig01
     \end{figure}
     \examvspace*{3cm}
     \begin{answer}
-    $U = 5 I + 15 = \unit{5}{\volt}$，$P_\mathrm{S} = U \times 2 =
-    \unit{10}{\watt}$ (吸收)。
+    $P_{\unit{2}{\ampere}} = 15 \times 2 = \unit{30}{\watt}$，吸收。$P_{\unit{5}{\ohm}} = 15^2/5 = \unit{45}{\watt}$，吸收。$P_{\unit{15}{\volt}} = \unit{75}{\watt}$，发出。
     \end{answer}
 \end{question}
 
@@ -98,7 +97,7 @@
     \hfill
     \input fig02
     \end{figure}
-    \examvspace*{3cm}
+    \examvspace*{4cm}
     \begin{answer}
     $U_1 = 2 \times 5 = \unit{10}{\volt}$，$20 \times 0.05 U_1 +
     U_\mathrm{cb} + 3 = 0$，$\therefore U_\mathrm{cb} = -
@@ -107,44 +106,12 @@
 \end{question}
 
 \begin{question} % 03
-    求图所示电路中控制量 $U_1$ 及电压 $U$。($10'$)
-    \begin{figure}[H]
-    \hfill
-    \input fig03
-    \end{figure}
-    \examvspace*{4cm}
-    \begin{answer}
-    \[\begin{aligned}
-    U &= 10 U_1 \\
-    2 &= \frac{U_1 - U}{10\mathrm{k}}\mathrm{1k} + U_1
-    \end{aligned}\]
-    解得 $U_1 = \unit{20}{\volt}$，$U = \unit{200}{\volt}$。
-    \end{answer}
-\end{question}
-
-\begin{question} % 04
-    求输入电阻 $R_\mathrm{ab}$。($10'$)
-    \begin{figure}[H]
-    \hfill
-    \input fig04
-    \end{figure}
-    \examvspace*{4cm}
-    \begin{answer}
-    \[
-        R_\mathrm{ab} = u / i = \frac{i_1 R_1 + (i_1 + \beta
-        i_1)R_2}{i_1}
-    \]
-    $\therefore R_\mathrm{ab} = R_1 + (1 + \beta) R_2$。
-    \end{answer}
-\end{question}
-
-\begin{question} % 05
-    求图中电路在 ab 端口的戴维宁或诺顿等效电路。($10'$)
+    利用电源等效变换求图中电路在 ab 端口的最简等效电路。($10'$)
     \begin{figure}[H]
         \hfill
-        \input fig05
+        \input fig03
     \end{figure}
-    \examvspace*{6cm}
+    \examvspace*{5cm}
     \begin{answer}
     内部独立源全部置零后，成为一简单串联电路，容易求得等效内阻为：
     $R_{\rm eq}=\unit{10}{\ohm}$(5 分)；更容易解得开路电压 $u_{\rm
@@ -152,30 +119,75 @@
     \end{answer}
 \end{question}
 
-\begin{question} % 06
-    求 $i = \unit{1}{\ampere}$ 和 $i = \mathrm{e}^{-t}\unit{}{\ampere}$
-    时两种情况下的 $u$。($10'$)
+\begin{question} % 04
+    求电流 $I$。($10'$)
     \begin{figure}[H]
     \hfill
-    \input fig06
+    \input fig04
     \end{figure}
-    \examvspace*{3cm}
+    \examvspace*{4cm}
     \begin{answer}
-    (1) $u = u_L + u_R = 1 + 1 \times 1 = \unit{1}{v}$；(2) $u = u_L +
-    u_R = 1 \times (-\mathrm{e}^{-t}) + \mathrm{e}^{-t} \times 1 =
-    \unit{0}{\volt}$。
+    用回路电流法易解得 $I = \unit{1}{\ampere}$。
+    \end{answer}
+\end{question}
+
+\begin{question} % 05
+如图所示电路，求电流 $I$ 和电压 $U$。($10'$)
+    \begin{figure}[H]
+    \hfill
+    \input fig05
+    \end{figure}
+    \examvspace*{4cm}
+    \begin{answer}
+    用节点电压法易解得 $I = \unit{1}{\ampere}$，$U = \unit{8}{\volt}$。
+    \end{answer}
+\end{question}
+
+\begin{question} % 06
+如图所示电路，$R_\mathrm{L}$ 可变，问 $R_\mathrm{L}$ 取何值时可获得最大功率，并求出该最大功率。($10'$)
+	\begin{figure}[H]
+	  \hfill
+        \input fig06
+	\end{figure}
+\examvspace*{6cm}
+    \begin{answer}
+    可求得 $U_\mathrm{OC} = \unit{40}{\volt}$，$I_\mathrm{SC} = \unit{4}{\ampere}$，$R_\mathrm{eq} = \unit{10}{\ohm}$，最大功率的条件是 $R_\mathrm{L} = R_\mathrm{eq}$，最大功率为 $P_\mathrm{max} = \frac{U_\mathrm{OC}^2}{4R_\mathrm{eq}} = \unit{40}{\watt}$。
     \end{answer}
 \end{question}
 
 \begin{question} % 07
+    求下图电路中的输入阻抗 $Z$ 和导纳 $Y$。($10'$)
+    \begin{figure}[H]
+    \hfill
+    \input fig07
+    \end{figure}
+    \examvspace*{2cm}
+    \begin{answer}
+    $Z = \unit{(2-\jimag 1)}{\ohm}$，$Y = \unit{(0.4+\jimag 0.2)}{\siemens}$。
+    \end{answer}
+\end{question}
+
+\begin{question} %08
+    列出下图电路的回路电流方程和结点电压方程。($15'$)
+    \begin{figure}[H]
+        \hfill
+        \input fig08
+    \end{figure}
+    \examvspace*{4cm}
+    \begin{answer}
+    结点电压方程，回路电流方程略。教材习题9-17(c)。
+    \end{answer}
+\end{question}
+
+\begin{question} % 09
     图示电路中，开关 S 动作前电路已达稳定状态，原合在位置 1，$t=0$ 时
     S 由位置 1 合向位置 2，求
     $t\geq 0$ 时电压 $u_L$ 的响应。($15'$)
     \begin{figure}[H]
     \hfill
-    \input fig07
+    \input fig09
     \end{figure}
-    \examvspace*{8cm}
+    \examvspace*{6cm}
     \begin{answer}
     先求 $i_L(0_-)$，解得 $i_L(0_-)=\unit{5}{\ampere}$ ($3'$)。则
     $i_L(0_+)=i_L(0_-)$，容易看出 $i_L(\infty)=0$ ($1'$)。利用外加
@@ -189,43 +201,6 @@
     \end{answer}
 \end{question}
 
-\begin{question} % 08
-    求下图电路中的输入阻抗 $Z$ 和导纳 $Y$。($10'$)
-    \begin{figure}[H]
-    \hfill
-    \input fig08
-    \end{figure}
-    \examvspace*{4cm}
-    \begin{answer}
-    \[
-    Z = 1 + \frac{1}{1 / 2\jimag + 1 / (-\jimag)} = 1 -2 \jimag
-    \unit{}{\ohm}
-    \]
-    $Y = 1 / Z = \frac{1}{5} + \frac{2}{5}\jimag \unit{}{\siemens}$。
-    \end{answer}
-\end{question}
-
-\begin{question} %09
-    列出下图电路的回路电流方程和结点电压方程。($15'$)
-    \begin{figure}[H]
-        \hfill
-        \input fig09
-    \end{figure}
-    \examvspace*{7cm}
-    \begin{answer}
-    结点电压方程如下，回路电流方程略。取最下端结点为参考结点。
-    \[
-    \begin{aligned}
-    (1 + 1)\dot{U}_\mathrm{n1} - 1 \dot{U}_\mathrm{n2} &=
-    \dot{U}_\mathrm{S} - \dot{I} \\
-    - 1 \dot{U}_\mathrm{n1} + (1 + 1 / 2)\dot{U}_\mathrm{n2} - 1/2
-    \dot{U}_\mathrm{n3} &= - \beta \dot{I} \\
-    - 1/2 \dot{U}_\mathrm{n2} + (1/2 + 1 /\jimag 4)\dot{U}_\mathrm{n3} &= \dot{I} \\
-    \dot{U}_\mathrm{n1} &= \dot{U}_\mathrm{n3}
-    \end{aligned}
-    \]
-    \end{answer}
-\end{question}
 \end{shortanswer}
 
 \end{document}
