@@ -89,7 +89,7 @@ define(`elen_', (elen_*1.25))
     cct_init
     elen = elen_
     Origin: Here
-    source(up_ elen, v); llabel(, \unit{2}{\volt},)
+    source(up_ elen, v); llabel(-, \unit{2}{\volt}, +)
     line right_ elen*.6; dot
     {
         resistor(down_ elen, E); llabel(,\unit{4}{\ohm},)
@@ -158,7 +158,7 @@ define(`elen_', (elen_*1.25))
     cct_init
     elen = elen_
     Origin: Here
-    source(up_ elen, i); llabel(-, \mathdot{U}_\mathrm{S}, +)
+    source(up_ elen, v); llabel(-, \mathdot{U}_\mathrm{S}, +)
     dot
     {
         inductor(right_ elen, W); rlabel(, \unit{\jimag 5}{\ohm},); dot
